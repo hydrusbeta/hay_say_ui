@@ -1,0 +1,39 @@
+/* This CSS code was taken from the following URL and modified:
+   https://community.plotly.com/t/dash-bootstrap-components-dropdownmenu-value/22011/7
+
+   The author of that post goes by the name tcbegley and states that they took their code from the
+   following project on github which is also authored by a tcbegley. I assume they are the same person:
+   https://github.com/tcbegley/dash-bootstrap-css/blob/main/dist/darkly/bootstrap.css#L9888-L9978
+
+   That github project was distributed under the Apache License Version 2.0, the same license that Hay Say is
+   distributed under. A copy of the license is available in the file LICENSE.
+*/
+
+.dash-dropdown .Select-control {
+  height: calc(1.5em + 0.75rem + 2px);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  background-color: rgba(0,0,0,0.125);
+  background-clip: padding-box;
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.dash-dropdown .has-value.Select--single > .Select-control .Select-value .Select-value-label,
+.dash-dropdown .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+  color: #ddd;
+}
+
+.dash-dropdown .Select-menu-outer {
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  background-color: #222;
+  background-clip: padding-box;
+  border: 1px solid #444;
+  border-top-color: transparent;
+  box-shadow: none;
+  color: #fff;
+}

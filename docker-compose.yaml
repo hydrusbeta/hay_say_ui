@@ -1,0 +1,101 @@
+# This is a static docker-compose file intended for the Early Release version of Hay Say.
+# In the future, the docker-compose file will be dynamically generated according to user selections 
+# in a launcher UI.
+
+services:
+  # The sole purpose of all the model_pack services is to populate Docker volumes with model files.
+  controllable_talknet_model_pack_0:
+    image: hydrusbeta/hay_say:controllable_talknet_model_pack_0
+    volumes:
+      - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
+  so_vits_svc_3_model_pack_0:
+    image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_0
+    volumes:
+      - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+  so_vits_svc_4_model_pack_0:
+    image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_0
+    volumes:
+      - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
+
+  # This container runs the main UI
+  hay_say_ui:
+    image: hydrusbeta/hay_say:hay_say_ui
+    ports:
+      - 6573:6573
+    working_dir: /root/hay_say/hay_say_ui
+    volumes:
+      # The container needs access to all the volumes so it can display the available characters in dropdown menus.
+      - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+      - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
+      - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+
+  # This container provides a web service interface to so-vits-svc 3.0.
+  so_vits_svc_3_server:
+    image: hydrusbeta/hay_say:so_vits_svc_3_server
+    working_dir: /root/hay_say/so_vits_svc_3
+    volumes:
+      - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    # Enabling GPU for so-vits-svc results in out-of-memory errors for even moderate-length (~2 minutes) audio files,
+    # so it is disabled here by default. Uncomment the lines below to enable it if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # This container provides a web service interface to so-vits-svc 4.0.
+  so_vits_svc_4_server:
+    image: hydrusbeta/so_vits_svc_4_server
+    working_dir: /root/hay_say/so_vits_svc_4
+    volumes:
+      - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    # Enabling GPU for so-vits-svc results in out-of-memory errors for even moderate-length (~2 minutes) audio files,
+    # so it is disabled here by default. Uncomment the lines below to enable it if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # This container provides a web service interface to Controllable TalkNet.
+  controllable_talknet_server:
+    image: hydrusbeta/controllable_talknet_server
+    ports:
+      # Map port 8050 in case someone want to use the original Controllable TalkNet UI.
+      # Note: The original UI does not start up automatically. It can be manually started by executing 2 commands:
+      # docker exec haysaydockercompose-controllable_talknet_server-1 mkdir -p /talknet/is_docker
+      # docker exec haysaydockercompose-controllable_talknet_server-1 /root/hay_say/.venvs/controllable_talknet/bin/python /root/hay_say/controllable_talknet/talknet_offline.py
+      - 8050:8050
+    working_dir: /root/hay_say/controllable_talknet
+    volumes:
+      - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    # GPU is currently required for Controllable TalkNet.
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  so_vits_svc_3_model_pack_0:
+  so_vits_svc_4_model_pack_0:
+  controllable_talknet_model_pack_0:
+  custom_models:
+    external: true
+  audio_cache:
+    external: true
+
