@@ -65,25 +65,25 @@ app.layout = \
         # dcc.Checklist(['Debug pitch', 'Reduce noise', 'Crop Silence'], ['Debug pitch'], id='test', labelStyle={'display': 'block', 'margin': '20px'}),
         html.Table([
             html.Tr(
-                html.Td("Note: these options currently don't do anything. Implementing them is on the to-do list!",
+                html.Td("Note: There are currently no options available. Adding pre-processing options is on the to-do list!",
                         colSpan=2, className='centered')
             ),
             html.Tr([
                 html.Td('Adjust pitch of voice recording (semitones)', className='option-label'),
                 html.Td(dcc.Input(id='semitone-pitch', type='number', min=-25, max=25, step=1, value=0))
-            ]),
+            ], hidden=True),
             html.Tr([
                 html.Td('Debug pitch', className='option-label'),
                 html.Td(dcc.Checklist([''], id='debug-pitch'))
-            ]),
+            ], hidden=True),
             html.Tr([
                 html.Td('Reduce noise', className='option-label'),
                 html.Td(dcc.Checklist([''], id='reduce-noise'))
-            ]),
+            ], hidden=True),
             html.Tr([
                 html.Td('Crop silence at beginning and end', className='option-label'),
                 html.Td(dcc.Checklist([''], id='crop-silence'))
-            ]),
+            ], hidden=True),
             html.Tr(
                 html.Td(
                     html.Button("Preview", id='preview'),
@@ -95,7 +95,7 @@ app.layout = \
                         html.Audio(src=None, controls=True, id='preprocess_playback'),
                         className='centered'),
                     colSpan=2
-                )
+                ), hidden=True
             )], id='preprocessing-options', className='spaced-table'
         ),
         html.Br(),
@@ -118,22 +118,22 @@ app.layout = \
         ),
         html.Table([
             html.Tr(
-                html.Td("Note: these options currently don't do anything. Implementing them is on the to-do list!",
+                html.Td("Note: There are currently no options available. Adding post-processing options is on the to-do list!",
                         colSpan=2, className='centered')
             ),
             html.Tr([
                 html.Td('Reduce Metallic Sound', className='option-label'),
                 html.Td(dcc.Checklist([''], id='reduce-metallic-sound'), colSpan=2)
-            ]),
+            ], hidden=True),
             html.Tr([
                 html.Td('Auto-tune output', className='option-label'),
                 html.Td(dcc.Checklist([''], id='auto-tune-output'), colSpan=2)
-            ]),
+            ], hidden=True),
             html.Tr([
                 html.Td('Adjust speed of output', className='option-label'),
                 html.Td(html.Div('20', id='output-speed-adjustment')),
                 html.Td(dcc.Input(type='range', min=0.25, max=4, value="1", id='adjust-output-speed', step='0.01')),
-            ])],
+            ], hidden=True)],
             id='postprocessing-options',
             className='box box-middle spaced-table'
         ),
