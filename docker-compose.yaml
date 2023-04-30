@@ -4,18 +4,43 @@
 
 services:
   # The sole purpose of all the model_pack services is to populate Docker volumes with model files.
+
+  # All current models for Controllable TalkNet
   controllable_talknet_model_pack_0:
     image: hydrusbeta/hay_say:controllable_talknet_model_pack_0
     volumes:
       - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
+
+  # Talking models for so-vits-svc 3.0
   so_vits_svc_3_model_pack_0:
     image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_0
     volumes:
       - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+
+  # Singing models for so-vits-svc 3.0. They are not included by default. Uncomment this section to download them.
+  #so_vits_svc_3_model_pack_1:
+  #  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1
+  #  volumes:
+  #    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
+
+  # Talking models for so-vits-svc 4.0.
   so_vits_svc_4_model_pack_0:
     image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_0
     volumes:
       - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
+
+  # Singing models for so-vits-svc 4.0. They are not included by default. Uncomment this section to download them.
+  #so_vits_svc_4_model_pack_1:
+  #  image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_1
+  #  volumes:
+  #    - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
+
+  # Multi-speaker so-vits-svc 4.0 model for Pinkie Pie's various emotions. It is not included by default. Uncomment
+  # this section to download it.
+  #so_vits_svc_4_model_pack_2:
+  #  image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_2
+  #  volumes:
+  #    - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
 
   # This container runs the main UI
   hay_say_ui:
@@ -26,7 +51,10 @@ services:
     volumes:
       # The container needs access to all the volumes so it can display the available characters in dropdown menus.
       - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+      - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
       - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
+      - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
+      - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
       - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
@@ -37,9 +65,10 @@ services:
     working_dir: /root/hay_say/so_vits_svc_3
     volumes:
       - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+      - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
-    # Enabling GPU for so-vits-svc results in out-of-memory errors for even moderate-length (~2 minutes) audio files,
+    # Enabling GPU for so-vits-svc results in out-of-memory errors for even moderate-length (~2 minute) audio files,
     # so it is disabled here by default. Uncomment the lines below to enable it if you wish.
     # deploy:
     #   resources:
@@ -55,9 +84,11 @@ services:
     working_dir: /root/hay_say/so_vits_svc_4
     volumes:
       - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
+      - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
+      - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
-    # Enabling GPU for so-vits-svc results in out-of-memory errors for even moderate-length (~2 minutes) audio files,
+    # Enabling GPU for so-vits-svc results in out-of-memory errors for even moderate-length (~2 minute) audio files,
     # so it is disabled here by default. Uncomment the lines below to enable it if you wish.
     # deploy:
     #   resources:
@@ -92,7 +123,10 @@ services:
 
 volumes:
   so_vits_svc_3_model_pack_0:
+  so_vits_svc_3_model_pack_1:
   so_vits_svc_4_model_pack_0:
+  so_vits_svc_4_model_pack_1:
+  so_vits_svc_4_model_pack_2:
   controllable_talknet_model_pack_0:
   custom_models:
     external: true
