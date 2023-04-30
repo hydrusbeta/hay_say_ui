@@ -130,4 +130,4 @@ class AbstractTab(ABC):
     def character_dropdown(self):
         return dcc.Dropdown(options=self.characters,
                             value=None if len(self.characters) == 0 else self.characters[0],
-                            clearable=False, id=self.input_ids[0], className='dropdown')
+                            clearable=False, id=self.input_ids[0], className='option-dropdown')

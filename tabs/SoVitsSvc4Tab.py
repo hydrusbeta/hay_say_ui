@@ -41,6 +41,10 @@ class SoVitsSvc4Tab(AbstractTab):
     def options(self):
         return html.Table([
             html.Tr([
+                html.Td(),
+                html.Td("Note: \"PS1\" = PonySinger1 model")
+            ]),
+            html.Tr([
                 html.Td('Character', className='option-label'),
                 html.Td(self.character_dropdown)
             ]),
