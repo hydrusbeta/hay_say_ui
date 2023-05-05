@@ -36,6 +36,3 @@ class SampleTab(AbstractTab):
 
     def construct_input_dict(self, *args):
         return super().construct_input_dict
-
-    def pretty_input(self, *args):
-        return super().pretty_input

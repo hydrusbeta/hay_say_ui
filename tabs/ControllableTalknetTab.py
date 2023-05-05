@@ -51,21 +51,44 @@ class ControllableTalknetTab(AbstractTab):
             ],
                 title='Instruct Controllable Talknet to ignore \n'
                       'the audio file you selected above, if any, \n'
-                      'and only use the text you have entered.')
+                      'and only use the text you have entered.'),
+            html.Tr([
+                # todo: understand this option better. Does it make sense to be able to adjust outside the range [-11,11]?
+                html.Td('Adjust Input Pitch', className='option-label'),
+                html.Td(dcc.Input(id=self.input_ids[2], type='number', min=-25, max=25, step=1, value=0))
+            ],
+                # todo: Does this option have any effect if the input audio is disabled? If not, mention it here
+                title='Changes the input, in semitones'),
+            html.Tr([
+                html.Td('Auto Tune Output', className='option-label'),
+                html.Td(dcc.Checklist([''], id=self.input_ids[3]))
+            ],
+                title='Auto tune the output'),
+            html.Tr([
+                html.Td('Reduce Metallic Sound', className='option-label'),
+                html.Td(dcc.Checklist([''], id=self.input_ids[4]))
+            ],
+                # todo: understand what this option actually does and put a useful description in the title
+                title=''),
         ], className='spaced-table')
 
     @property
     def input_ids(self):
-        return [self.id+'-character', self.id+'-disable-text']
+        return [self.id + '-character',
+                self.id + '-disable-text',
+                self.id + '-pitch-factor',
+                self.id + '-auto-tune',
+                self.id + '-reduce-metallic-sound']
 
     def construct_input_dict(self, *args):
         return {
             'Architecture': self.id,
             'Character': args[0],
-            # Note: args[1] is initially None, but if you toggle it on and then back off, it becomes an empty list, [].
-            'Disable Text': True if args[1] else False  # None and [] map to False, [''] maps to True
+            # Note: A checklist option is initially None, but if you toggle it on and then back off, it becomes an empty
+            # list, []. The expression "True if args[x] else False" maps both None and [] to False and [''] to True.
+            'Disable Reference Audio': True if args[1] else False,
+            'Pitch Factor': args[2],
+            'Auto Tune': True if args[3] else False,
+            'Reduce Metallic Sound': True if args[4] else False
         }
-
-    def pretty_input(self, *args):
-        return args[0] + (' | Disable Text' if args[1] is not None else '')
 

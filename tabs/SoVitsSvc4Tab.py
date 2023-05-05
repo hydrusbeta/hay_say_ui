@@ -65,6 +65,3 @@ class SoVitsSvc4Tab(AbstractTab):
             'Character': args[0],
             'Semitone Pitch': args[1]
         }
-
-    def pretty_input(self, *args):
-        return args[0] + ' | ' + 'Semitone Pitch Adjustment: ' + str(args[1])

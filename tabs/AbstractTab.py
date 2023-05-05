@@ -98,12 +98,6 @@ class AbstractTab(ABC):
         # *args will be a list of values the same length of input_ids, in the respective order.
         return dict()
 
-    @abstractmethod
-    def pretty_input(self, *args):
-        # Construct a user-displayable string containing the input selections to be displayed under the output playback.
-        # *args will be a list of values the same length of input_ids, in the respective order.
-        return ''
-
     @property
     def tab_contents(self):
         return html.Tr([
