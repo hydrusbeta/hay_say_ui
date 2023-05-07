@@ -146,21 +146,19 @@ body {
     width: 40%;
 }
 
-.box{
-    width: 100%;
+.box-div{
+    padding-left: 15px;
+    padding-right: 15px;
     border-style: solid;
-    border-width: 1px;
+    border-top-width: 0px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
 }
 
-.box-middle{
-    border-top: none;
-    border-bottom: none;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-.box-bottom{
-    border-top: none;
+.generate-table{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .generate-cell{

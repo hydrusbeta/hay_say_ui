@@ -87,7 +87,8 @@ app.layout = \
             html.Tr(
                 html.Td(
                     html.Button("Preview", id='preview'),
-                    colSpan=2, className='centered')
+                    colSpan=2, className='centered'),
+                hidden=True
             ),
             html.Tr(
                 html.Td(
@@ -106,49 +107,49 @@ app.layout = \
             [dcc.Tab(value=tab.id, label=tab.label, selected_className='tab--selected') for tab in available_tabs],
             id='tabs', className='tabs', parent_className='tabs-parent'
         ),
-        html.Table(
-            [tab.tab_contents for tab in available_tabs],
-            className='tab-table box box-middle'
-        ),
-        html.Table([
-            html.H2('Postprocessing'),
-            dcc.Checklist([SHOW_OUTPUT_OPTIONS_LABEL], id='show-output-options', value=[])
-            ],
-            className='box box-middle'
-        ),
-        html.Table([
-            html.Tr(
-                html.Td("Note: There are currently no options available. Adding post-processing options is on the to-do list!",
-                        colSpan=2, className='centered')
+        html.Div([
+            html.Table(
+                [tab.tab_contents for tab in available_tabs],
+                className='tab-table'
             ),
-            html.Tr([
-                html.Td('Reduce Metallic Sound', className='option-label'),
-                html.Td(dcc.Checklist([''], id='reduce-metallic-sound'), colSpan=2)
-            ], hidden=True),
-            html.Tr([
-                html.Td('Auto-tune output', className='option-label'),
-                html.Td(dcc.Checklist([''], id='auto-tune-output'), colSpan=2)
-            ], hidden=True),
-            html.Tr([
-                html.Td('Adjust speed of output', className='option-label'),
-                html.Td(html.Div('20', id='output-speed-adjustment')),
-                html.Td(dcc.Input(type='range', min=0.25, max=4, value="1", id='adjust-output-speed', step='0.01')),
-            ], hidden=True)],
-            id='postprocessing-options',
-            className='box box-middle spaced-table'
-        ),
-        html.Table(
-            html.Tr(
-                html.Td(
-                    dcc.Loading(
-                        html.Button(id='generate-button'),
-                        type='default'  # circle, graph, cube, circle, dot, default
-                    ),
-                    className='centered'
+            html.Table([
+                html.H2('Postprocessing'),
+                dcc.Checklist([SHOW_OUTPUT_OPTIONS_LABEL], id='show-output-options', value=[])
+                ],
+            ),
+            html.Table([
+                html.Tr(
+                    html.Td("Note: There are currently no options available. Adding post-processing options is on the to-do list!",
+                            colSpan=2, className='centered')
                 ),
+                html.Tr([
+                    html.Td('Reduce Metallic Sound', className='option-label'),
+                    html.Td(dcc.Checklist([''], id='reduce-metallic-sound'), colSpan=2)
+                ], hidden=True),
+                html.Tr([
+                    html.Td('Auto-tune output', className='option-label'),
+                    html.Td(dcc.Checklist([''], id='auto-tune-output'), colSpan=2)
+                ], hidden=True),
+                html.Tr([
+                    html.Td('Adjust speed of output', className='option-label'),
+                    html.Td(html.Div('20', id='output-speed-adjustment')),
+                    html.Td(dcc.Input(type='range', min=0.25, max=4, value="1", id='adjust-output-speed', step='0.01')),
+                ], hidden=True)],
+                id='postprocessing-options',
+                className='spaced-table'
             ),
-            className='box box-bottom'
-        ),
+            html.Table(
+                html.Tr(
+                    html.Td(
+                        dcc.Loading(
+                            html.Button(id='generate-button'),
+                            type='default'  # circle, graph, cube, circle, dot, default
+                        ),
+                    ),
+                ),
+                className='generate-table'
+            ),
+        ], className='box-div'),
         html.Br(),
         html.Hr(),
         html.H2('Output'),

@@ -46,8 +46,8 @@ class SoVitsSvc3Tab(AbstractTab):
             ]),
             # todo: can this be totally replaced with the preprocessing option?
             html.Tr([
-                html.Td('Transform', className='option-label'),
-                html.Td(dcc.Input(id=self.input_ids[1], type='number', min=-25, max=25, step=1, value=0))
+                html.Td('Shift Pitch (semitones)', className='option-label'),
+                html.Td(dcc.Input(id=self.input_ids[1], type='number', min=-36, max=36, step=1, value=0))
             ], title='Adjusts the pitch of the generated audio in semitones'),  # todo: is this technically accurate?
         ], className='spaced-table')
 
@@ -59,5 +59,5 @@ class SoVitsSvc3Tab(AbstractTab):
         return {
             'Architecture': self.id,
             'Character': args[0],
-            'Semitone Pitch': args[1]
+            'Pitch Shift': args[1]
         }
