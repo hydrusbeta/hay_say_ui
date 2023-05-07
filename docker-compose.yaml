@@ -68,8 +68,8 @@ services:
       - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
-    # Enabling GPU for so-vits-svc results in out-of-memory errors for even moderate-length (~2 minute) audio files,
-    # so it is disabled here by default. Uncomment the lines below to enable it if you wish.
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for so-vits-svc 3.0 if you wish.
     # deploy:
     #   resources:
     #     reservations:
@@ -88,8 +88,8 @@ services:
       - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
-    # Enabling GPU for so-vits-svc results in out-of-memory errors for even moderate-length (~2 minute) audio files,
-    # so it is disabled here by default. Uncomment the lines below to enable it if you wish.
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for so-vits-svc 4.0 if you wish.
     # deploy:
     #   resources:
     #     reservations:
@@ -112,14 +112,15 @@ services:
       - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
-    # GPU is currently required for Controllable TalkNet.
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for Controllable TalkNet if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
 
 volumes:
   so_vits_svc_3_model_pack_0:
