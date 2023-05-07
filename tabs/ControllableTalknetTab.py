@@ -6,6 +6,9 @@ class ControllableTalknetTab(AbstractTab):
 
     def __init__(self, app, root_dir):
         super().__init__(app, root_dir)
+        app.callback(Output('autotune-cell', 'children'),
+                     [Input(self.input_ids[1], 'value'),
+                      Input('file-dropdown', 'value')])(self.disable_autotune)
 
     @property
     def id(self):
@@ -49,28 +52,36 @@ class ControllableTalknetTab(AbstractTab):
                 html.Td('Disable Audio Input', className='option-label'),
                 html.Td(dcc.Checklist([''], id=self.input_ids[1]))
             ],
-                title='Instruct Controllable Talknet to ignore \n'
+                title='Instructs Controllable Talknet to ignore \n'
                       'the audio file you selected above, if any, \n'
                       'and only use the text you have entered.'),
             html.Tr([
-                # todo: understand this option better. Does it make sense to be able to adjust outside the range [-11,11]?
-                html.Td('Adjust Input Pitch', className='option-label'),
+                html.Td('Adjust Input Pitch (semitones)', className='option-label'),
                 html.Td(dcc.Input(id=self.input_ids[2], type='number', min=-25, max=25, step=1, value=0))
             ],
-                # todo: Does this option have any effect if the input audio is disabled? If not, mention it here
-                title='Changes the input, in semitones'),
+                title='Adjusts the pitch of the input audio, in semitones'),
             html.Tr([
                 html.Td('Auto Tune Output', className='option-label'),
-                html.Td(dcc.Checklist([''], id=self.input_ids[3]))
+                html.Td(dcc.Checklist([''], id=self.input_ids[3]), id='autotune-cell')
             ],
-                title='Auto tune the output'),
+                title='Auto tunes the output using the pitch of the audio reference.'),
             html.Tr([
                 html.Td('Reduce Metallic Sound', className='option-label'),
                 html.Td(dcc.Checklist([''], id=self.input_ids[4]))
             ],
-                # todo: understand what this option actually does and put a useful description in the title
-                title=''),
+                title='Runs the generated spectrogram through the "vq" GAN network - and then reconstructs the audio '
+                      'from the spectrogram using the "hifirec" GAN network - to reduce metallic noise.'),
         ], className='spaced-table')
+
+    # Pretend this is annotated like so:
+    # @app.callback(
+    #     Output('autotune-cell', 'children'),
+    #     [Input(self.input_ids[1], 'value'),
+    #      Input('file-dropdown', 'value')]
+    # )
+    def disable_autotune(self, disable_audio_input, selected_file):
+        disabled = True if disable_audio_input else selected_file is None
+        return dcc.Checklist(options=[{'label': '', 'value': '', 'disabled': disabled}], id=self.input_ids[3])
 
     @property
     def input_ids(self):

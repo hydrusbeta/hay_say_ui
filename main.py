@@ -335,9 +335,14 @@ def prepare_postprocessed_display(hash_postprocessed, highlight=False):
     metadata = read_metadata(POSTPROCESSED_DIR)[hash_postprocessed]
     selected_file = metadata['Inputs']['User File']
     user_text = metadata['Inputs']['User Text']
-    semitone_pitch = metadata['Preprocessing Options']['Semitone Pitch']
-    reduce_noise = metadata['Preprocessing Options']['Reduce Noise']
-    crop_silence = metadata['Preprocessing Options']['Crop Silence']
+    if metadata['Preprocessing Options']:
+        semitone_pitch = metadata['Preprocessing Options']['Semitone Pitch']
+        reduce_noise = metadata['Preprocessing Options']['Reduce Noise']
+        crop_silence = metadata['Preprocessing Options']['Crop Silence']
+    else:  # i.e. There was no input audio to preprocess
+        semitone_pitch = 'N/A'
+        reduce_noise = False
+        crop_silence = False
     inputs = metadata['Processing Options']
     output_speed_adjustment = metadata['Postprocessing Options']['Adjust Output Speed']
     reduce_metallic_noise = metadata['Postprocessing Options']['Reduce Metallic Noise']
@@ -352,12 +357,12 @@ def prepare_postprocessed_display(hash_postprocessed, highlight=False):
             ),
             html.Tr([
                 html.Td('Inputs:', className='output-label'),
-                html.Td(selected_file
+                html.Td((selected_file or 'None')
                         + ((' | ' + user_text[0:20]) if user_text is not None else ''), className='output-value')
             ]),
             html.Tr([
                 html.Td('Pre-processing Options:', className='output-label'),
-                html.Td('Pitch adjustment = ' + str(semitone_pitch) + (' semitone' if (semitone_pitch == 1 or semitone_pitch == -1) else ' semitones')
+                html.Td('Pitch adjustment = ' + str(semitone_pitch) + (' semitone(s)' if semitone_pitch != 'N/A' else '')
                         + (' | Reduce Noise' if reduce_noise else '')
                         + (' | Crop Silence' if crop_silence else ''), className='output-value')
             ]),
@@ -466,7 +471,7 @@ def write_postprocessed_metadata(hash_output, hash_postprocessed, reduce_metalli
 def get_preprocess_info(hash_preprocessed):
     if hash_preprocessed is None:
         selected_file = None
-        preprocess_options= None
+        preprocess_options = None
     else:
         preprocess_metadata = read_metadata(PREPROCESSED_DIR)
         preprocess_options = preprocess_metadata.get(hash_preprocessed).get('Options')
