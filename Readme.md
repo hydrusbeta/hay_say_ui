@@ -267,7 +267,8 @@ generations, even with a different character selected.
 | Aspire TC-895         |            2            |   10th gen i5    | 12 GB (2600 MHz) |                      3                       |                   26.5                   |                30.5                 |                27.5                 |
 | Dell XPS 13 9380      |            4            |    8th gen i7    | 16 GB (1200 MHz) |                      1                       |                    44                    |                 38                  |                 41                  |
 | Toshiba Qosmio laptop |           10            |    4th gen i7    | 16 GB (1600 MHz) |                      10                      |                   198                    |                 174                 |                 227                 |
-| Mac Mini              |            0            | M2 Apple Silicon |       8 GB       |                      27                      |                 N/A [1]                  |                 589                 |                 575                 |
+| Mac Mini              |            0            | M2 Apple Silicon |       8 GB       |                      27                      |                 N/A [1]                  |                 589                 |                 575                 |  
+
 [1] Test failed with an error. Unable to generate audio.
 
 	
