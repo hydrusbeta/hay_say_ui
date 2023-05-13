@@ -216,6 +216,7 @@ Weights for the neural networks are stored in Docker volumes that are named like
 
 Hay say also has an "audio_cache" volume for maintaining a small cache of audio files. Any time the user uploads an audio file to Hay Say, the file is saved to audio_cache/raw. When a file is preprocessed, the result is saved to audio_cache/preprocessed. When an audio file is generated, the result is saved to audio_cache/output and, finally, when an output audio is postprocessed, the result is saved in audio_cache/postprocessed. Up to 25 files can be stored in each subfolder before Hay Say begins to automatically delete the oldest files. The purpose of the caching system is twofold. First, by storing the file at various stages of production, Hay Say will be able to present a playback button at each stage, so users can compare the "before" and "after" of a particular step. For example, the user can play back the raw audio and also play back the preprocessed audio to compare them. Second, some operations take a lot of computational power to complete, such as generating output from one of the AI architectures. By caching that output, Hay Say can allow the user to tweak the post-processing options and listen to the results over and over without needing to invoke the AI architecture each time. 
 
+The code for the main UI is in this repository. Code for the Flask servers for the other containers can be found in various other code repositories on hydrusbeta's account. See https://github.com/hydrusbeta?tab=repositories.
 
 ## "Roadmap"
 
