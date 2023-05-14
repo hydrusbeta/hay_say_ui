@@ -202,6 +202,28 @@ resources:
 ```
 for each architecture.
 
+### Installing Only Specific Architectures
+You can edit the docker-compose.yaml file so that only specific architecutres are downloaded. The UI will still show tabs for all architectures, but will throw an error if you try to generate audio for an architecture which you didn't download. 
+
+If you don't want to install so-vits-svc 3.0, for example, comment out the following lines in docker-compose.yaml by adding a hashtag character (#) in front of them before you run the "docker compose up" command for the first time:
+```
+so_vits_svc_3_server:
+  image: hydrusbeta/hay_say:so_vits_svc_3_server
+  working_dir: /root/hay_say/so_vits_svc_3
+  volumes:
+    - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
+    - custom_models:/root/hay_say/custom_models
+    - audio_cache:/root/hay_say/audio_cache
+```
+If you do that, you should also comment out the following lines too so you don't download all the models for so-vits-svc 3.0:
+```
+so_vits_svc_3_model_pack_0:
+  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_0
+  volumes:
+    - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+```
+
 ## The Technical Design of Hay Say
 
 The user interface code for Hay Say runs in its own Docker container, hay_say_ui, and the UI is accessed by the user via a web browser. Each AI architecture (e.g. so-vits-svc or ControllableTalkNet) is installed in its own container and a simple Flask web server runs in each one, listening for connections. Each Flask web server defines a /generate method which invokes the AI archtecture to generate an audio file.
