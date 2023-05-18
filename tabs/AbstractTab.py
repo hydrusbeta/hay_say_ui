@@ -49,7 +49,7 @@ class AbstractTab(ABC):
         return [html.P('Put a general description of the AI architecture here'),
                 html.P(
                     html.A("Put a link to the architecture's source code or website here")
-                    )]
+                )]
 
     @property
     @abstractmethod
@@ -70,7 +70,8 @@ class AbstractTab(ABC):
         # checkbox option is given below.
         return html.Table([
             html.Tr([
-                html.Td('Character', className='option-label'),
+                html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
+                # Note: For a real tab, replace the following with html.Td(self.character_dropdown)
                 html.Td(dcc.Dropdown(options=[
                     'Purple Smart',
                     'Ponkers',
@@ -81,16 +82,18 @@ class AbstractTab(ABC):
                 ], value='Purple Smart', clearable=False, className='dropdown'))
             ]),
             html.Tr([
-                html.Td('Set best pony:', className='option-label'),
-                html.Td(dcc.RadioItems(['Rainbow Dash', 'Rainbow Dash ', 'Rainbow Dash  '], labelClassName='label'))
+                html.Td(html.Label('Set best pony:', htmlFor=self.input_ids[1]), className='option-label'),
+                html.Td(dcc.RadioItems(['Rainbow Dash', 'Rainbow Dash ', 'Rainbow Dash  '],
+                                       id='best-pony', labelClassName='label'))
             ])
-            ], className='spaced-table')
+        ], className='spaced-table')
 
     @property
     @abstractmethod
     def input_ids(self):
         # A list of all the element IDs whose values need to be sent when the user clicks the "Generate!" button.
-        return list()
+        return [self.id + '-character',
+                self.id + '-best-pone']
 
     @abstractmethod
     def construct_input_dict(self, *args):

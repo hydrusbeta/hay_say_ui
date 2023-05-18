@@ -45,28 +45,28 @@ class ControllableTalknetTab(AbstractTab):
     def options(self):
         return html.Table([
             html.Tr([
-                html.Td('Character', className='option-label'),
+                html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 html.Td(self.character_dropdown)
             ]),
             html.Tr([
-                html.Td('Disable Audio Input', className='option-label'),
+                html.Td(html.Label('Disable Audio Input', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Td(dcc.Checklist([''], id=self.input_ids[1]))
             ],
                 title='Instructs Controllable Talknet to ignore \n'
                       'the audio file you selected above, if any, \n'
                       'and only use the text you have entered.'),
             html.Tr([
-                html.Td('Adjust Input Pitch (semitones)', className='option-label'),
+                html.Td(html.Label('Adjust Input Pitch (semitones)', htmlFor=self.input_ids[2]), className='option-label'),
                 html.Td(dcc.Input(id=self.input_ids[2], type='number', min=-25, max=25, step=1, value=0))
             ],
                 title='Adjusts the pitch of the input audio, in semitones'),
             html.Tr([
-                html.Td('Auto Tune Output', className='option-label'),
+                html.Td(html.Label('Auto Tune Output', htmlFor=self.input_ids[3]), className='option-label'),
                 html.Td(dcc.Checklist([''], id=self.input_ids[3]), id='autotune-cell')
             ],
                 title='Auto tunes the output using the pitch of the audio reference.'),
             html.Tr([
-                html.Td('Reduce Metallic Sound', className='option-label'),
+                html.Td(html.Label('Reduce Metallic Sound', htmlFor=self.input_ids[4]), className='option-label'),
                 html.Td(dcc.Checklist([''], id=self.input_ids[4]))
             ],
                 title='Runs the generated spectrogram through the "vq" GAN network - and then reconstructs the audio '

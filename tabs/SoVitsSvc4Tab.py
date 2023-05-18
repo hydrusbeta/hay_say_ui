@@ -6,6 +6,7 @@ from dash.exceptions import PreventUpdate
 
 import os
 
+
 class SoVitsSvc4Tab(AbstractTab):
     def __init__(self, app, root_dir):
         super().__init__(app, root_dir)
@@ -60,20 +61,20 @@ class SoVitsSvc4Tab(AbstractTab):
                 html.Td("Note: \"PS1\" = PonySinger1 model")
             ]),
             html.Tr([
-                html.Td('Character', className='option-label'),
+                html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 html.Td(self.character_dropdown)
             ]),
             html.Tr([
-                html.Td('Shift Pitch (semitones)', className='option-label'),
+                html.Td(html.Label('Shift Pitch (semitones)', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Td(dcc.Input(id=self.input_ids[1], type='number', min=-36, max=36, step=1, value=0))
             ], title='Also called "transform". Adjusts the pitch of the generated audio in semitones'),
             html.Tr([
-                html.Td('Predict Voice Pitch', className='option-label'),
+                html.Td(html.Label('Predict Voice Pitch', htmlFor=self.input_ids[2]), className='option-label'),
                 html.Td(dcc.Checklist([''], id=self.input_ids[2]))
             ], title="Using an f0 predictor that was trained alongside the main model, predict the character's pitch "
                      "instead of using the reference audio's actual pitch. Note: Keep this disabled for songs."),
             html.Tr([
-                html.Td('Slice Length (seconds)', className='option-label'),
+                html.Td(html.Label('Slice Length (seconds)', htmlFor=self.input_ids[3]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(type='range', min=0, max=20, value="0", id=self.input_ids[3], step='0.01')),
                     html.Td(html.Div('0', id='slice-length-number')),
@@ -81,14 +82,14 @@ class SoVitsSvc4Tab(AbstractTab):
             ], title="Slice the voice into segments of this length and convert each slice. A value of 0 turns this "
                      "feature off."),
             html.Tr([
-                html.Td('Cross-Fade Length (seconds)', className='option-label'),
+                html.Td(html.Label('Cross-Fade Length (seconds)', htmlFor=self.input_ids[4]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(type='range', min=0, max=20, value="0", id=self.input_ids[4], step='0.01')),
                     html.Td(html.Div('0', id='cross-fade-number')),
                 ])
             ], title="The cross fade overlap between voice slices, in seconds."),
             html.Tr([
-                html.Td('Character Likeness', className='option-label'),
+                html.Td(html.Label('Character Likeness', htmlFor=self.input_ids[5]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(type='range', min=0, max=1, value="0", id=self.input_ids[5], step='0.01')),
                     html.Td(html.Div('0', id='character-likeness-number')),
@@ -99,12 +100,12 @@ class SoVitsSvc4Tab(AbstractTab):
                      "disabled, it means that a kmeans file was not provided with the character model so this option "
                      "cannot be used."),
             html.Tr([
-                html.Td('Reduce Hoarseness', className='option-label'),
+                html.Td(html.Label('Reduce Hoarseness', htmlFor=self.input_ids[6]), className='option-label'),
                 html.Td(dcc.Checklist([''], id=self.input_ids[6]))
             ], title='Don\'t worry, that\'s Hoarseness with an "a", not Horse-ness :) \nApply "mean pooling" on '
                      'the fundamental frequency (f0) to reduce hoarseness in the output.'),
             html.Tr([
-                html.Td('Apply nsf_hifigan', className='option-label'),
+                html.Td(html.Label('Apply nsf_hifigan', htmlFor=self.input_ids[7]), className='option-label'),
                 html.Td(dcc.Checklist([''], id=self.input_ids[7]))
             ], title='Runs the output audio through an additional AI network, nsf_hifigan. May improve output quality '
                      'for characters that were trained on a limited data set. However, this option often degrades '
