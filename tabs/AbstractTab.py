@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from dash import html, dcc, Input, Output, State
+from dash import html, dcc
 import os
 
 import hay_say_common
@@ -10,18 +10,6 @@ class AbstractTab(ABC):
     def __init__(self, app, root_dir):
         self.app = app
         self.root_dir = root_dir
-        app.callback(Output(self.id, 'hidden'),
-                     Input('tabs', 'value'))(self.update_hidden)
-
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output(self.id, 'hidden'),
-    #     Input('tabs', 'value')
-    # )
-    def update_hidden(self, selected_tab):
-        # Un-hide this tab's contents if it is selected. Otherwise, hide them.
-        hidden = False if selected_tab == self.id else True
-        return hidden
 
     @property
     @abstractmethod

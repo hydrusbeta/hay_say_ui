@@ -119,25 +119,35 @@ body {
     text-align: center;
 }
 
-.tab{
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    color: #fff;
-    background-color: rgba(0,0,0,0) !important;
-}
-
-.tab--selected{
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    color: #fff !important;
-    background-color: rgba(0,0,0,0) !important;
-}
-
 .tab-table{
     height: 350px;
 }
 
-.tab-row{
+.tab-button{
+    border: none;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: rgba(0,0,0,0)
+}
+
+.tab-cell{
+    border-width: 1px;
+    border-color: #fff;
+}
+
+.tab-cell-selected{
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 0px;
+    border-color: #fff;
+}
+
+.tab-table-header{
+    width: 100%;
+    table-layout: fixed;
+    height: 60px;
 }
 
 .architecture-info{

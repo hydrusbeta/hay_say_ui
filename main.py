@@ -4,7 +4,7 @@ from hay_say_common import ROOT_DIR, RAW_DIR, PREPROCESSED_DIR, OUTPUT_DIR, POST
 from tabs.ControllableTalknetTab import ControllableTalknetTab
 from tabs.SoVitsSvc3Tab import SoVitsSvc3Tab
 from tabs.SoVitsSvc4Tab import SoVitsSvc4Tab
-from dash import Dash, html, dcc, Input, Output, State
+from dash import Dash, html, dcc, Input, Output, State, ctx
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 from numbers import Number
@@ -21,6 +21,8 @@ import traceback
 
 SHOW_INPUT_OPTIONS_LABEL = 'Show pre-processing options'
 SHOW_OUTPUT_OPTIONS_LABEL = 'Show post-processing options'
+TAB_BUTTON_PREFIX = '-tab-button'
+TAB_CELL_SUFFIX = '-tab-cell'
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
 
@@ -103,9 +105,13 @@ app.layout = \
         html.Hr(),
         html.H2('AI Architecture'),
         html.P("Now pick an AI architecture and tweak its settings to your liking:"),
-        dcc.Tabs(
-            [dcc.Tab(value=tab.id, label=tab.label, selected_className='tab--selected') for tab in available_tabs],
-            id='tabs', className='tabs', parent_className='tabs-parent'
+        html.Table(
+            html.Tr([
+                html.Td(
+                    html.Button(tab.label, id=tab.id + TAB_BUTTON_PREFIX, className='tab-button'),
+                    className='tab-cell', id=tab.id + TAB_CELL_SUFFIX)
+                for tab in available_tabs
+            ]), className='tab-table-header'
         ),
         html.Div([
             html.Table(
@@ -169,6 +175,18 @@ def delete_all_postprocessed(_):
     for filename in os.listdir(POSTPROCESSED_DIR):
         path = os.path.join(POSTPROCESSED_DIR, filename)
         os.remove(path)
+
+
+@app.callback(
+    [Output(tab.id, 'hidden') for tab in available_tabs] +
+    [Output(tab.id + TAB_CELL_SUFFIX, 'className') for tab in available_tabs],
+    [Input(tab.id + TAB_BUTTON_PREFIX, 'n_clicks') for tab in available_tabs]
+)
+def hide_unused_tabs(*_):
+    return [not (tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id) for tab in available_tabs] + \
+        ['tab-cell' if not tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id else 'tab-cell-selected'
+         for tab in available_tabs]
+    return result
 
 
 @app.callback(
@@ -295,7 +313,6 @@ def show_postprocessing_options(value):
     Input('generate-button', 'n_clicks'),
     [State('text-input', 'value'),
      State('file-dropdown', 'value'),
-     State('tabs', 'value'),
      State('semitone-pitch', 'value'),
      State('debug-pitch', 'value'),
      State('reduce-noise', 'value'),
@@ -303,15 +320,16 @@ def show_postprocessing_options(value):
      State('reduce-metallic-sound', 'value'),
      State('auto-tune-output', 'value'),
      State('adjust-output-speed', 'value')]
+    + [State(tab.id, 'hidden') for tab in available_tabs]
     # Add every architecture's inputs as States to the callback:
     + [State(item, 'value') for sublist in [tab.input_ids for tab in available_tabs] for item in sublist]
 )
-def generate(clicks, user_text, selected_file, selected_architecture, semitone_pitch, debug_pitch, reduce_noise,
+def generate(clicks, user_text, selected_file, semitone_pitch, debug_pitch, reduce_noise,
              crop_silence, reduce_metallic_noise, auto_tune_output, output_speed_adjustment, *args):
     if clicks is not None:
         try:
-            selected_tab_object = get_selected_tab_object(selected_architecture)
-            relevant_inputs = get_inputs_for_selected_tab(selected_tab_object, args)
+            selected_tab_object = get_selected_tab_object(args[0:len(available_tabs)])
+            relevant_inputs = get_inputs_for_selected_tab(selected_tab_object, args[len(available_tabs):])
             hash_preprocessed = preprocess_if_needed(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
             hash_output = process(user_text, hash_preprocessed, selected_tab_object, relevant_inputs)
             hash_postprocessed = postprocess(hash_output, reduce_metallic_noise, auto_tune_output, output_speed_adjustment)
@@ -402,11 +420,9 @@ def prettify_inputs(inputs):
     return result
 
 
-def get_selected_tab_object(selected_architecture):
-    tab_object = {tab.id: tab for tab in available_tabs}.get(selected_architecture)
-    if tab_object is None:
-        raise PreventUpdate
-    return tab_object
+def get_selected_tab_object(hidden_states):
+    # Get the tab that is *not* hidden (i.e. hidden == False)
+    return {hidden: tab for hidden, tab in zip(hidden_states, available_tabs)}.get(False)
 
 
 def get_inputs_for_selected_tab(tab_object, args):
@@ -575,17 +591,17 @@ def lookup_filehash(selected_file):
 @app.callback(
     Output('generate-button', 'disabled'),
     [Input('text-input', 'value'),
-     Input('file-dropdown', 'value'),
-     Input('tabs', 'value')],
+     Input('file-dropdown', 'value')] +
+     [Input(tab.id, 'hidden') for tab in available_tabs]
 )
-def disable_generate_button(user_text, selected_file, selected_architecture):
+def disable_generate_button(user_text, selected_file, *hidden_states):
     # todo: don't disable the generate button. Instead, highlight the requirements text and whatever the user is
     #  missing in red.
-    architecture_object = {tab.id: tab for tab in available_tabs}.get(selected_architecture)
-    if architecture_object is None:
+    tab_object = get_selected_tab_object(hidden_states)
+    if tab_object is None:
         return True
     else:
-        return not architecture_object.meets_requirements(user_text, selected_file)
+        return not tab_object.meets_requirements(user_text, selected_file)
 
 
 # todo: disable the preview button if no audio file is selected.
