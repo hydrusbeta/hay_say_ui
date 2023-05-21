@@ -12,11 +12,9 @@ class AbstractTab(ABC):
     def __init__(self, app, root_dir):
         self.app = app
         self.root_dir = root_dir
-        if len(self.characters) != 0:
-            app.callback(
-                Output(self.input_ids[0], 'value'),
-                Output(self.id + '-character-dropdown', 'label'),
-                [Input(self.id + character, 'n_clicks') for character in self.characters])(self.select_character)
+        app.callback(Output(self.input_ids[0], 'value'),
+                     Output(self.id + '-character-dropdown', 'label'),
+                     [Input(self.id + character, 'n_clicks') for character in self.characters])(self.select_character)
 
     # Pretend this is annotated like so:
     # @app.callback(
@@ -136,11 +134,9 @@ class AbstractTab(ABC):
         return html.Div([
             dbc.DropdownMenu(
                 [dbc.DropdownMenuItem(character, id=self.id + character) for character in self.characters],
-                id=self.id + '-character-dropdown',
-                label='No Characters Available' if len(self.characters) == 0 else self.characters[0]),
+                id=self.id + '-character-dropdown', label=None if len(self.characters) == 0 else self.characters[0]),
             # This is a bit of a kludge. We can't just use the DropDownMenu's label to store the name of the selected
             # character. The character name needs to be stored in a component that has a "value" property, so a hidden
             # dcc.Input component is added here and the character name is copied to it in the select_character callback.
-            dcc.Input(None if len(self.characters) == 0 else self.characters[0], id=self.input_ids[0],
-                      style={'display': 'none'})
+            dcc.Input(self.characters[0], id=self.input_ids[0], style={'display': 'none'})
         ])
