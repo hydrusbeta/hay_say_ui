@@ -46,7 +46,7 @@ app.layout = \
                 html.Tr(
                     html.Td(
                         html.Div(
-                            dcc.Dropdown(id='file-dropdown', className='dropdown'),
+                            dbc.Select(id='file-dropdown', className='dropdown'),
                             id='dropdown-container'
                         )
                     )
@@ -215,7 +215,7 @@ def show_preprocessing_options(value):
 )
 def upload_file(file_contents, filename):
     if file_contents is None:  # initial load of page
-        return initialize_dropdown()
+        return update_dropdown(None)
     else:
         filename = append_index_if_needed(filename)
         raw_array, raw_samplerate = get_audio_from_src_attribute(file_contents, 'utf-8')
@@ -223,10 +223,10 @@ def upload_file(file_contents, filename):
         return update_dropdown(filename)
 
 
-def initialize_dropdown():
+def update_dropdown(filename):
     raw_metadata = read_metadata(RAW_DIR)
     filenames = [value['User File'] for value in raw_metadata.values()]
-    currently_selected_file = filenames[0] if filenames else None
+    currently_selected_file = filename if filename else filenames[0] if filenames else None
     hidden = currently_selected_file is None
     return filenames, currently_selected_file, hidden
 
@@ -254,12 +254,6 @@ def save_raw_audio_to_cache(filename, raw_array, raw_samplerate):
     else:
         save_audio_to_cache(RAW_DIR, hash_raw, raw_array, raw_samplerate)
         write_raw_metadata(hash_raw, filename)
-
-
-def update_dropdown(filename):
-    raw_metadata = read_metadata(RAW_DIR)
-    filenames = [value['User File'] for value in raw_metadata.values()]
-    return filenames, filename, False
 
 
 def read_file_bytes(folder, filename):
