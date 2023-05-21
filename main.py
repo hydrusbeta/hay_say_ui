@@ -46,7 +46,7 @@ app.layout = \
                 html.Tr(
                     html.Td(
                         html.Div(
-                            dbc.Select(id='file-dropdown', className='dropdown'),
+                            dbc.Select(id='file-dropdown', className='file-dropdown'),
                             id='dropdown-container'
                         )
                     )

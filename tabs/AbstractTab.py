@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from dash import html, dcc
+import dash_bootstrap_components as dbc
 import os
 
 import hay_say_common
@@ -60,7 +61,7 @@ class AbstractTab(ABC):
             html.Tr([
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 # Note: For a real tab, replace the following with html.Td(self.character_dropdown)
-                html.Td(dcc.Dropdown(options=[
+                html.Td(dbc.Select(options=[
                     'Purple Smart',
                     'Ponkers',
                     'Blue Fast',
@@ -113,6 +114,5 @@ class AbstractTab(ABC):
 
     @property
     def character_dropdown(self):
-        return dcc.Dropdown(options=self.characters,
-                            value=None if len(self.characters) == 0 else self.characters[0],
-                            clearable=False, id=self.input_ids[0], className='option-dropdown', maxHeight=500)
+        return dbc.Select(options=self.characters, value=None if len(self.characters) == 0 else self.characters[0],
+                          id=self.input_ids[0], className='character-dropdown')

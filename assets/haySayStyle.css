@@ -32,7 +32,7 @@ body {
     font-size: 26pt
 }
 
-.dropdown {
+.file-dropdown {
     width: 275px;
     margin: 0 auto;
     background-color: rgba(0,0,0,0.25);
@@ -40,12 +40,14 @@ body {
 }
 
 option {
-    background-color: rgba(0,0,0,0.75);
+    background-color: #222222;
 }
 
-.option-dropdown {
+.character-dropdown {
     width: 100%;
     margin: 0 auto;
+    background-color: rgba(0,0,0,0.25);
+    color: #fff;
 }
 
 #file-picker {
