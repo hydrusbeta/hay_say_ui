@@ -365,6 +365,10 @@ def prepare_postprocessed_display(hash_postprocessed, highlight=False):
         html.Div(style={'height': '30px'}),  # todo: There's got to be a better way to add spacing
         html.Table([
             html.Tr(
+                # This table entry serves the special purpose of alerting screen readers that generation is complete.
+                html.Td('New Output Generated:' if highlight else '', role='status' if highlight else None, colSpan=2)
+            ),
+            html.Tr(
                 html.Td(html.Audio(src=prepare_src_attribute(bytes_postprocessed, CACHE_MIMETYPE), controls=True), colSpan=2)
             ),
             html.Tr([
