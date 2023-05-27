@@ -41,12 +41,12 @@ class SoVitsSvc3Tab(AbstractTab):
     def options(self):
         return html.Table([
             html.Tr([
-                html.Td('Character', className='option-label'),
+                html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 html.Td(self.character_dropdown)
             ]),
             # todo: can this be totally replaced with the preprocessing option?
             html.Tr([
-                html.Td('Shift Pitch (semitones)', className='option-label'),
+                html.Td(html.Label('Shift Pitch (semitones)', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Td(dcc.Input(id=self.input_ids[1], type='number', min=-36, max=36, step=1, value=0))
             ], title='Adjusts the pitch of the generated audio in semitones'),  # todo: is this technically accurate?
         ], className='spaced-table')

@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from dash import html, dcc, Input, Output, State
+from dash import html, dcc
+import dash_bootstrap_components as dbc
 import os
 
 import hay_say_common
@@ -10,18 +11,6 @@ class AbstractTab(ABC):
     def __init__(self, app, root_dir):
         self.app = app
         self.root_dir = root_dir
-        app.callback(Output(self.id, 'hidden'),
-                     Input('tabs', 'value'))(self.update_hidden)
-
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output(self.id, 'hidden'),
-    #     Input('tabs', 'value')
-    # )
-    def update_hidden(self, selected_tab):
-        # Un-hide this tab's contents if it is selected. Otherwise, hide them.
-        hidden = False if selected_tab == self.id else True
-        return hidden
 
     @property
     @abstractmethod
@@ -49,7 +38,7 @@ class AbstractTab(ABC):
         return [html.P('Put a general description of the AI architecture here'),
                 html.P(
                     html.A("Put a link to the architecture's source code or website here")
-                    )]
+                )]
 
     @property
     @abstractmethod
@@ -70,8 +59,9 @@ class AbstractTab(ABC):
         # checkbox option is given below.
         return html.Table([
             html.Tr([
-                html.Td('Character', className='option-label'),
-                html.Td(dcc.Dropdown(options=[
+                html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
+                # Note: For a real tab, replace the following with html.Td(self.character_dropdown)
+                html.Td(dbc.Select(options=[
                     'Purple Smart',
                     'Ponkers',
                     'Blue Fast',
@@ -81,16 +71,18 @@ class AbstractTab(ABC):
                 ], value='Purple Smart', clearable=False, className='dropdown'))
             ]),
             html.Tr([
-                html.Td('Set best pony:', className='option-label'),
-                html.Td(dcc.RadioItems(['Rainbow Dash', 'Rainbow Dash ', 'Rainbow Dash  '], labelClassName='label'))
+                html.Td(html.Label('Set best pony:', htmlFor=self.input_ids[1]), className='option-label'),
+                html.Td(dcc.RadioItems(['Rainbow Dash', 'Rainbow Dash ', 'Rainbow Dash  '],
+                                       id='best-pony', labelClassName='label'))
             ])
-            ], className='spaced-table')
+        ], className='spaced-table')
 
     @property
     @abstractmethod
     def input_ids(self):
         # A list of all the element IDs whose values need to be sent when the user clicks the "Generate!" button.
-        return list()
+        return [self.id + '-character',
+                self.id + '-best-pone']
 
     @abstractmethod
     def construct_input_dict(self, *args):
@@ -122,6 +114,5 @@ class AbstractTab(ABC):
 
     @property
     def character_dropdown(self):
-        return dcc.Dropdown(options=self.characters,
-                            value=None if len(self.characters) == 0 else self.characters[0],
-                            clearable=False, id=self.input_ids[0], className='option-dropdown', maxHeight=500)
+        return dbc.Select(options=self.characters, value=None if len(self.characters) == 0 else self.characters[0],
+                          id=self.input_ids[0], className='character-dropdown')
