@@ -136,6 +136,46 @@ sudo docker compose up
 ```
 Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when you execute that command. cd to that directory first if necessary.
 
+## Updating Hay Say
+
+### 1. Grab the latest docker-compose file 
+To update Hay Say, it is recommended that you first download the latest docker-compose file in case new entries have 
+been added (which will happen when new architecture and model packs have been added to Hay Say). To download the latest 
+docker-compose file, execute the following command. Please note that it will overwrite your existing docker-compose 
+file. If you made any edits to your old docker-compose file (e.g. to make it download only specific architectures), 
+you will need to make the same edits to the new file:
+
+Linux:
+```
+wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml  
+```
+Windows:
+```
+curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+```
+MacOS:
+```
+curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+```
+### 2. Pull the latest images
+Next, execute the following commands to make sure that your containers are stopped, to pull the latest images, and to 
+start Hay Say again:  
+
+Linux:
+```
+sudo docker compose stop
+sudo docker compose pull
+sudo docker compose up
+```
+Windows and MacOS:
+```
+docker compose stop
+docker compose pull
+docker compose up
+```
+
+
+
 
 ## Advanced Topics
 
