@@ -1,31 +1,31 @@
-from dash import html, dcc, Input, Output, State
+from dash import html, dcc
 
 from .AbstractTab import AbstractTab
 
 
-class SoVitsSvc3Tab(AbstractTab):
+class SoVitsSvc5Tab(AbstractTab):
     def __init__(self, app, root_dir):
         super().__init__(app, root_dir)
 
     @property
     def id(self):
-        return 'so_vits_svc_3'
+        return 'so_vits_svc_5'
 
     @property
     def port(self):
-        return 6575
+        return 6577
 
     @property
     def label(self):
-        return 'so-vits-svc 3.0'
+        return 'so-vits-svc 5.0'
 
     @property
     def description(self):
         return [html.P('so-vits-svc achieves a voice conversion effect by extracting "soft speech" features from '
                        'reference audio and passing them to a variational autoencoder.'),
                 html.P(
-                    html.A('https://github.com/svc-develop-team/so-vits-svc',
-                           href='https://github.com/svc-develop-team/so-vits-svc')
+                    html.A('https://github.com/PlayVoice/so-vits-svc-5.0',
+                           href='https://github.com/PlayVoice/so-vits-svc-5.0')
                 )]
 
     @property

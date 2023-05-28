@@ -42,6 +42,12 @@ services:
   #  volumes:
   #    - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
 
+  # Singing models of the Mane Six for so-vits-svc 5.0
+  so_vits_svc_5_model_pack_0:
+    image: hydrusbeta/hay_say:so_vits_svc_5_model_pack_0
+    volumes:
+      - so_vits_svc_5_model_pack_0:/root/hay_say/so_vits_svc_5_model_pack_0
+
   # This container runs the main UI
   hay_say_ui:
     image: hydrusbeta/hay_say:hay_say_ui
@@ -55,6 +61,7 @@ services:
       - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
       - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
       - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
+      - so_vits_svc_5_model_pack_0:/root/hay_say/so_vits_svc_5_model_pack_0
       - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
@@ -98,6 +105,24 @@ services:
     #           count: all
     #           capabilities: [gpu]
 
+  # This container provides a web service interface to so-vits-svc 5.0.
+  so_vits_svc_5_server:
+    image: hydrusbeta/hay_say:so_vits_svc_5_server
+    working_dir: /root/hay_say/so_vits_svc_5
+    volumes:
+      - so_vits_svc_5_model_pack_0:/root/hay_say/so_vits_svc_5_model_pack_0
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for Controllable TalkNet if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
   # This container provides a web service interface to Controllable TalkNet.
   controllable_talknet_server:
     image: hydrusbeta/hay_say:controllable_talknet_server
@@ -128,6 +153,7 @@ volumes:
   so_vits_svc_4_model_pack_0:
   so_vits_svc_4_model_pack_1:
   so_vits_svc_4_model_pack_2:
+  so_vits_svc_5_model_pack_0:
   controllable_talknet_model_pack_0:
   custom_models:
     external: true
