@@ -4,6 +4,7 @@ from hay_say_common import ROOT_DIR, RAW_DIR, PREPROCESSED_DIR, OUTPUT_DIR, POST
 from tabs.ControllableTalknetTab import ControllableTalknetTab
 from tabs.SoVitsSvc3Tab import SoVitsSvc3Tab
 from tabs.SoVitsSvc4Tab import SoVitsSvc4Tab
+from tabs.SoVitsSvc5Tab import SoVitsSvc5Tab
 from dash import Dash, html, dcc, Input, Output, State, ctx
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
@@ -26,7 +27,12 @@ TAB_CELL_SUFFIX = '-tab-cell'
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
 
-available_tabs = [ControllableTalknetTab(app, ROOT_DIR), SoVitsSvc3Tab(app, ROOT_DIR), SoVitsSvc4Tab(app, ROOT_DIR)]
+available_tabs = [
+    ControllableTalknetTab(app, ROOT_DIR),
+    SoVitsSvc3Tab(app, ROOT_DIR),
+    SoVitsSvc4Tab(app, ROOT_DIR),
+    SoVitsSvc5Tab(app, ROOT_DIR)
+]
 
 app.layout = \
     html.Div([
