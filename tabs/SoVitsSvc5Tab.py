@@ -26,7 +26,8 @@ class SoVitsSvc5Tab(AbstractTab):
                 html.P(
                     html.A('https://github.com/PlayVoice/so-vits-svc-5.0',
                            href='https://github.com/PlayVoice/so-vits-svc-5.0')
-                )]
+                ),
+                html.P('Thank you to Vul Traz for providing the character models')]
 
     @property
     def requirements(self):
@@ -40,6 +41,10 @@ class SoVitsSvc5Tab(AbstractTab):
     @property
     def options(self):
         return html.Table([
+            html.Tr([
+                html.Td(),
+                html.Td("Note: \"mane6\" = combined Mane Six singing model", className='centered')
+            ]),
             html.Tr([
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 html.Td(self.character_dropdown)

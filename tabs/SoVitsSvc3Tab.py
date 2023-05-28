@@ -26,7 +26,8 @@ class SoVitsSvc3Tab(AbstractTab):
                 html.P(
                     html.A('https://github.com/svc-develop-team/so-vits-svc',
                            href='https://github.com/svc-develop-team/so-vits-svc')
-                )]
+                ),
+                html.P('Thank you to Vul Traz and various unknown/anonymous users for providing the character models')]
 
     @property
     def requirements(self):

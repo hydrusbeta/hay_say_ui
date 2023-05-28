@@ -38,7 +38,8 @@ class AbstractTab(ABC):
         return [html.P('Put a general description of the AI architecture here'),
                 html.P(
                     html.A("Put a link to the architecture's source code or website here")
-                )]
+                ),
+                html.P('Give credit to those who trained the character models here')]
 
     @property
     @abstractmethod

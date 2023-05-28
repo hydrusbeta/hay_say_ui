@@ -29,7 +29,9 @@ class ControllableTalknetTab(AbstractTab):
                 html.P(
                     html.A('https://github.com/SortAnon/ControllableTalkNet',
                            href='https://github.com/SortAnon/ControllableTalkNet')
-                )]
+                ),
+                html.P("Thank you to SortAnon for providing all the character models")
+                ]
 
     @property
     def requirements(self):
