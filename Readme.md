@@ -11,7 +11,7 @@ A secondary motivation behind Hay Say is to reduce user frustration with install
 
 ## Installation Instructions
 
-Important: Be aware that Hay Say will need to download at least 27 GB of compressed Docker images, so expect it to take a while to start up the first time you run it. It should come up quickly after that. The exact amount of time required for the initial startup depends, of course, on your internet speed. 
+Important: Be aware that Hay Say will need to download at least 41 GB of compressed Docker images, so expect it to take a while to start up the first time you run it. It should come up quickly after that. The exact amount of time required for the initial startup depends, of course, on your internet speed. 
 
 Before you install Hay Say, I recommend you take a look at the Testing Data / Benchmarks section at the bottom of this page to get a ballpark figure on how fast or slow Hay Say might be on your machine.
 
@@ -48,7 +48,7 @@ docker compose up
 
 Note: You might get a Windows Defender Firewall popup. You can safely close that window. No special firewall rules are required to run Hay Say.
 
-Hay Say will take time to download the large Docker images (~27 GB). Once it is done, you should see output like the following:
+Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the following:
 ![](documentation%20images/Windows%20ready%20to%20roll.png)
 
 Open a web browser and go to the following URL:  
@@ -82,7 +82,7 @@ sudo docker volume create audio_cache
 sudo docker compose up
 ```
 
-Hay Say will take time to download the large Docker images (~27 GB). Once it is done, you should see output like the following:  
+Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the following:  
 ![](documentation%20images/Linux%20ready%20to%20roll.png)
 
 Open a web browser and go to the following URL:  
@@ -115,7 +115,7 @@ docker volume create audio_cache
 docker compose up
 ```
 
-Hay Say will take time to download the large Docker images (~27 GB). Once it is done, you should see output like the following:
+Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the following:
 ![](documentation%20images/macOS%20ready%20to%20roll.png)
 
 Open a web browser and go to the following URL:  
