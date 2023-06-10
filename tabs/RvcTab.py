@@ -187,18 +187,7 @@ class RvcTab(AbstractTab):
                 ]
 
     def construct_input_dict(self, *args):
-        return {
-            # Todo: do I *need* to cast these?
-            'Architecture': self.id,
-            'Character': args[0],
-            'Pitch Shift': int(args[1]),
-            'f0 Extraction Method': args[2],
-            'Filter Radius': int(args[3]),
-            'Index Ratio': float(args[4]),
-            'Voice Envelope Mix Ratio': float(args[5]),
-            'Voiceless Consonants Protection Ratio': float(args[6]),
-        } if args[2] == 'harvest' else {
-            # Todo: do I *need* to cast these?
+        input_dict = {
             'Architecture': self.id,
             'Character': args[0],
             'Pitch Shift': int(args[1]),
@@ -207,3 +196,8 @@ class RvcTab(AbstractTab):
             'Voice Envelope Mix Ratio': float(args[5]),
             'Voiceless Consonants Protection Ratio': float(args[6]),
         }
+        if args[2] == 'harvest':
+            input_dict['Filter Radius'] = int(args[3])
+        return input_dict
+
+
