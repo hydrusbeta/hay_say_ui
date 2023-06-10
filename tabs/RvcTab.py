@@ -81,7 +81,7 @@ class RvcTab(AbstractTab):
                 ])
             ], title='The degree to which median filtering is applied, which can help reduce metallic/raspy artifacts. '
                      'A value of 2 or less disables this feature. This feature is only available if the f0 Extraction '
-                     'method is set to "harvest"'),
+                     'method is set to "harvest".'),
             html.Tr([
                 html.Td(html.Label('Character Likeness', htmlFor=self.input_ids[4]), className='option-label'),
                 html.Tr([
@@ -99,7 +99,7 @@ class RvcTab(AbstractTab):
                     html.Td(html.Div('0', id='voice-envelope-mix-ratio-number')),
                 ])
             ], title="Values closer to 0 will reshape the volume envelope of the output to more closely match the "
-                     "volume envelope of the input. A value of 1 will leave the output's volume envelope alone"),
+                     "volume envelope of the input. A value of 1 will leave the output's volume envelope alone."),
             html.Tr([
                 html.Td(html.Label('Voiceless Consonants Protection Ratio', htmlFor=self.input_ids[6]), className='option-label'),
                 html.Tr([
@@ -107,7 +107,7 @@ class RvcTab(AbstractTab):
                     html.Td(html.Div('0', id='voiceless-consonants-protection-ratio-number')),
                 ])
             ], title="Protects voiceless speech to prevent certain artifacts. Lower values add more protection. A "
-                     "value of 0.5 disables this feature"),
+                     "value of 0.5 disables this feature."),
         ], className='spaced-table')
 
     # Pretend this is annotated like so:
@@ -118,8 +118,8 @@ class RvcTab(AbstractTab):
     def adjust_filter_radius(self, adjustment):
         if adjustment is None:
             raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:2d}".format(int(adjustment))
+        # cast to int first, then round to 2 decimal places
+        return "{:d}".format(int(adjustment))
 
     # Pretend this is annotated like so:
     # @app.callback(
