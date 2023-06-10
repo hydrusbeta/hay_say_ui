@@ -116,10 +116,7 @@ class RvcTab(AbstractTab):
     #     Input(self.input_ids[3], 'value')
     # )
     def adjust_filter_radius(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to int first, then round to 2 decimal places
-        return "{:d}".format(int(adjustment))
+        return adjustment
 
     # Pretend this is annotated like so:
     # @app.callback(
