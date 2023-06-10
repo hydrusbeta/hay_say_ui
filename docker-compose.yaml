@@ -48,6 +48,12 @@ services:
     volumes:
       - so_vits_svc_5_model_pack_0:/root/hay_say/so_vits_svc_5_model_pack_0
 
+  # All current models for RVC
+  rvc_model_pack_0:
+    image: hydrusbeta/hay_say:rvc_model_pack_0
+    volumes:
+      - rvc_model_pack_0:/root/hay_say/rvc_model_pack_0
+
   # This container runs the main UI
   hay_say_ui:
     image: hydrusbeta/hay_say:hay_say_ui
@@ -62,6 +68,7 @@ services:
       - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
       - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
       - so_vits_svc_5_model_pack_0:/root/hay_say/so_vits_svc_5_model_pack_0
+      - rvc_model_pack_0:/root/hay_say/rvc_model_pack_0
       - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
@@ -114,7 +121,30 @@ services:
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
-    # Uncomment the lines below to enable it for Controllable TalkNet if you wish.
+    # Uncomment the lines below to enable it for so-vits-svc 5.0 if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # This container provides a web service interface to Retrieval-based Voice Conversion (RVC).
+  rvc_server:
+    image: hydrusbeta/hay_say:rvc_server
+    ports:
+      # Map port 7865 in case someone want to use the original RVC UI.
+      # Note: The original UI does not start up automatically. It can be manually started by executing the following command:
+      # docker exec haysaydockercompose-rvc_server-1 /root/hay_say/.venvs/rvc/bin/python /root/hay_say/rvc/infer-web.py
+      - 7865:7865
+    working_dir: /root/hay_say/rvc
+    volumes:
+      - rvc_model_pack_0:/root/hay_say/rvc_model_pack_0
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for RVC if you wish.
     # deploy:
     #   resources:
     #     reservations:
@@ -154,6 +184,7 @@ volumes:
   so_vits_svc_4_model_pack_1:
   so_vits_svc_4_model_pack_2:
   so_vits_svc_5_model_pack_0:
+  rvc_model_pack_0:
   controllable_talknet_model_pack_0:
   custom_models:
     external: true

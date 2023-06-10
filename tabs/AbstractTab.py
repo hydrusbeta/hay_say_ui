@@ -116,4 +116,4 @@ class AbstractTab(ABC):
     @property
     def character_dropdown(self):
         return dbc.Select(options=self.characters, value=None if len(self.characters) == 0 else self.characters[0],
-                          id=self.input_ids[0], className='character-dropdown')
+                          id=self.input_ids[0], className='option-dropdown')
