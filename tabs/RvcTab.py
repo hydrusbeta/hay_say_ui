@@ -90,8 +90,8 @@ class RvcTab(AbstractTab):
                 ])
             ], title='Also called the "Index Rate." Values closer to 1 will cause the output to mimic the timbre of '
                      'the character more closely, by adjusting the extracted audio features towards patterns that were '
-                     'observed during training. If this feature is disabled, it means that no .index file was created '
-                     'during training or it is unavailable.'),
+                     'observed during training. If this feature is disabled, it means that no .index file was provided '
+                     'with the character model.'),
             html.Tr([
                 html.Td(html.Label('Voice Envelope Mix Ratio', htmlFor=self.input_ids[5]), className='option-label'),
                 html.Tr([
