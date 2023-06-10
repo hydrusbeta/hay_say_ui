@@ -43,7 +43,7 @@ option {
     background-color: #222222;
 }
 
-.character-dropdown {
+.option-dropdown {
     width: 100%;
     margin: 0 auto;
     background-color: rgba(0,0,0,0.25);
