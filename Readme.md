@@ -16,7 +16,7 @@ Important: Be aware that Hay Say will need to download at least 41 GB of compres
 Before you install Hay Say, I recommend you take a look at the Testing Data / Benchmarks section at the bottom of this page to get a ballpark figure on how fast or slow Hay Say might be on your machine.
 
 ### Required Hardware
-At least 112 GB Hard drive space
+At least 100 GB Hard drive space
 
 ### Recommended Hardware and Software
 A fast CPU - or - an Nvidia GPU with a Cuda compute capability of 3.5 or higher. 
