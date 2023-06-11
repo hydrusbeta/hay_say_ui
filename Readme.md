@@ -16,17 +16,16 @@ Important: Be aware that Hay Say will need to download at least 41 GB of compres
 Before you install Hay Say, I recommend you take a look at the Testing Data / Benchmarks section at the bottom of this page to get a ballpark figure on how fast or slow Hay Say might be on your machine.
 
 ### Required Hardware
-At least 100 GB Hard drive space
+* At least 100 GB free Hard drive space 
+* 12 GB System RAM (Hay Say only uses up to ~8 GB RAM, but don't forget that your OS needs RAM too)
 
 ### Recommended Hardware and Software
-A fast CPU - or - an Nvidia GPU with a Cuda compute capability of 3.5 or higher. 
-Hay Say was tested and worked well on the following Operating Systems:
-* Windows 10
-* Windows 11
-* Ubuntu 22.10
-* Ubuntu 23.04
-
-It may or may not work on other operating systems. 
+* A fast CPU - or - an Nvidia GPU with a Cuda compute capability of 3.5 or higher.
+* Hay Say was tested and worked well on the following Operating Systems. It may or may not work on other operating systems.:
+  * Windows 10
+  * Windows 11
+  * Ubuntu 22.10
+  * Ubuntu 23.04
 
 #### A Note on MacOS
 I also tested Hay Say on MacOS 13.3.1 (Ventura) with Apple Silicon M2. I was unable to generate audio with Controllable TalkNet, and so-vits-svc (3.0 and 4.0) was unusably slow even though the machine was brand new (see Testing Data / Benchmarks section). I do not recommend running Hay Say on Apple Silicon. It is unknown whether it works any better on Macs with Intel chips.
