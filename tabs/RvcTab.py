@@ -44,7 +44,7 @@ class RvcTab(AbstractTab):
                     html.A('https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI',
                            href='https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI')
                     ),
-                html.P('Thank you to Vul Traz, ThunderAnon, Kindont, and anony ken for providing the character models')]
+                html.P('Thank you to Vul Traz, ThunderAnon, Kindont, Anony Ken, and Music Box 67 for providing the character models')]
 
     @property
     def requirements(self):
