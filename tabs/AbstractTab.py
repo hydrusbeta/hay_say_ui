@@ -1,16 +1,26 @@
-from abc import ABC, abstractmethod
-from dash import html, dcc
-import dash_bootstrap_components as dbc
-import os
-
 import hay_say_common
 
+from dash import html, dcc, Input, Output, State
+import dash_bootstrap_components as dbc
+from dash.exceptions import PreventUpdate
+
+from abc import ABC, abstractmethod
+import os
+
+SHOW_CHARACTER_DOWNLOAD_MENU = "Show Character Download Menu"
+HIDE_CHARACTER_DOWNLOAD_MENU = "Hide Character Download Menu"
 
 class AbstractTab(ABC):
 
     def __init__(self, app, root_dir):
         self.app = app
         self.root_dir = root_dir
+        app.callback(
+                [Output(self.id+'-download-menu-button', 'children'),
+                 Output(self.id+'-download-menu', 'is_open')],
+                Input(self.id+'-download-menu-button', 'n_clicks'),
+                State(self.id+'-download-menu', 'is_open'),
+        )(self.toggle_character_download_menu)
 
     @property
     @abstractmethod
@@ -98,7 +108,16 @@ class AbstractTab(ABC):
                 html.Tr(self.description),
                 html.Tr(self.requirements)
             ], className='architecture-info'),
-            html.Td(self.options, className='tab-row')
+            html.Td([
+                html.Div([
+                    html.Button("Show Character Download Menu", id=self.id + '-download-menu-button'),
+                    html.Div(dbc.Collapse([
+                        dcc.Checklist(self.characters),
+                        html.Button('Download Selected Models')
+                    ], is_open=False, id=self.id + "-download-menu")),
+                ], className='model-list-div'),
+                self.options,
+            ])
         ], id=self.id, hidden=True)
 
     @property
@@ -117,3 +136,15 @@ class AbstractTab(ABC):
     def character_dropdown(self):
         return dbc.Select(options=self.characters, value=None if len(self.characters) == 0 else self.characters[0],
                           id=self.input_ids[0], className='option-dropdown')
+
+    # Pretend this is annotated like so:
+    # @app.callback(
+    #     [Output(self.id + '-download-menu-button', 'children'),
+    #      Output(self.id + '-download-menu', 'is_open')],
+    #     Input(self.id + '-download-menu-button', 'n_clicks'),
+    #     State(self.id + '-download-menu', 'is_open'),
+    # )
+    def toggle_character_download_menu(self, n_clicks, is_open):
+        if n_clicks is None:
+            raise PreventUpdate
+        return SHOW_CHARACTER_DOWNLOAD_MENU if is_open else HIDE_CHARACTER_DOWNLOAD_MENU, not is_open

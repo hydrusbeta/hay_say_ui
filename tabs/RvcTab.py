@@ -165,6 +165,8 @@ class RvcTab(AbstractTab):
     #     Input(self.input_ids[0], 'value')
     # )
     def disable_character_likeness(self, character):
+        if character is None:
+            raise PreventUpdate
         index_path = self.get_index_path(character)
         return not os.path.isfile(index_path)
 

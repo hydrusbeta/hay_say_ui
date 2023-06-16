@@ -42,8 +42,7 @@ class SoVitsSvc5Tab(AbstractTab):
     def options(self):
         return html.Table([
             html.Tr([
-                html.Td(),
-                html.Td("Note: \"mane6\" = combined Mane Six singing model", className='centered')
+                html.Td("Note: \"mane6\" = combined Mane Six singing model", colSpan=2, className='centered')
             ]),
             html.Tr([
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),

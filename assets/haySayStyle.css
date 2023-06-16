@@ -26,6 +26,11 @@ body {
     padding-top: 30px;
 }
 
+.model-list-div{
+    width: 50%;
+    margin: 0 auto;
+}
+
 .subtitle {
     font-family: Equestria;
     text-align: center;
