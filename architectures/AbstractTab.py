@@ -10,6 +10,7 @@ import os
 SHOW_CHARACTER_DOWNLOAD_MENU = "Show Character Download Menu"
 HIDE_CHARACTER_DOWNLOAD_MENU = "Hide Character Download Menu"
 
+
 class AbstractTab(ABC):
 
     def __init__(self, app, root_dir):
@@ -25,10 +26,9 @@ class AbstractTab(ABC):
     @property
     @abstractmethod
     def id(self):
-        # A unique string for identifying this tab in code. It is used as the 'value' attribute of the dcc.Tab object as
-        # well as the id of the html element containing the tab contents. The hostname of the container running the ai
-        # is <id>_server.
-        return 'an-abstract-tab'
+        # A unique string for identifying this tab in code. It is used as a prefix for the IDs of html elements related
+        # to the tab. The hostname of the container running the ai is <id>_server.
+        return 'sample_architecture'
 
     @property
     @abstractmethod
@@ -39,8 +39,8 @@ class AbstractTab(ABC):
     @property
     @abstractmethod
     def label(self):
-        # The tab name that is displayed to the user. It is used as the 'label' attribute of the dcc.Tab object.
-        return 'An Abstract Tab'
+        # The tab name that is displayed to the user. This is the text shown inside the Button for selecting the tab.
+        return 'A Sample Architecture'
 
     @property
     @abstractmethod

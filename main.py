@@ -1,11 +1,7 @@
 from hay_say_common import ROOT_DIR, RAW_DIR, PREPROCESSED_DIR, OUTPUT_DIR, POSTPROCESSED_DIR, CACHE_MIMETYPE, \
     CACHE_EXTENSION, TIMESTAMP_FORMAT, save_audio_to_cache, get_audio_from_src_attribute, read_metadata, \
     write_metadata, get_hashes_sorted_by_timestamp, file_is_already_cached, read_audio_from_cache
-from tabs.ControllableTalknetTab import ControllableTalknetTab
-from tabs.SoVitsSvc3Tab import SoVitsSvc3Tab
-from tabs.SoVitsSvc4Tab import SoVitsSvc4Tab
-from tabs.SoVitsSvc5Tab import SoVitsSvc5Tab
-from tabs.RvcTab import RvcTab
+from architectures import ControllableTalknetTab, SoVitsSvc3Tab, SoVitsSvc4Tab, SoVitsSvc5Tab, RvcTab
 from dash import Dash, html, dcc, Input, Output, State, ctx
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate

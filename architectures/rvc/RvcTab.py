@@ -1,6 +1,6 @@
 import os
 
-from .AbstractTab import AbstractTab
+from architectures.AbstractTab import AbstractTab
 from hay_say_common import get_model_path
 
 from dash import html, dcc, Input, Output

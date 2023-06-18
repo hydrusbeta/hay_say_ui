@@ -11,7 +11,9 @@ RUN apt-get update && apt-get install -y git
 RUN python -m pip install \
     dash==2.9.1 \
     dash-bootstrap-components==1.4.1 \
-    hay_say_common==0.1.0
+    hay_say_common==0.1.0 \
+    gdown==4.7.1 \
+    huggingface_hub==0.15.1
 
 # Expose port 6573, the port that Hay Say uses
 EXPOSE 6573

@@ -1,4 +1,4 @@
-from .AbstractTab import AbstractTab
+from architectures.AbstractTab import AbstractTab
 
 
 class SampleTab(AbstractTab):

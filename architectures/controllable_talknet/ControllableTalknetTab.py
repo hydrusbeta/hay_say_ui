@@ -1,5 +1,5 @@
 from dash import Dash, html, dcc, Input, Output, State
-from .AbstractTab import AbstractTab
+from architectures.AbstractTab import AbstractTab
 
 
 class ControllableTalknetTab(AbstractTab):

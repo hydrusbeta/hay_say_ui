@@ -1,5 +1,5 @@
 from hay_say_common import get_model_path
-from .AbstractTab import AbstractTab
+from architectures.AbstractTab import AbstractTab
 
 from dash import html, dcc, Input, Output, State
 from dash.exceptions import PreventUpdate
