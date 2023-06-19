@@ -1,5 +1,6 @@
 import os
 
+from architectures.rvc.character_models import character_models
 from architectures.AbstractTab import AbstractTab
 from hay_say_common import get_model_path
 
@@ -199,4 +200,10 @@ class RvcTab(AbstractTab):
             input_dict['Filter Radius'] = int(args[3])
         return input_dict
 
+    @property
+    def characters_metadata(self):
+        return character_models
 
+    @property
+    def multi_speaker_models_metadata(self):
+        return []

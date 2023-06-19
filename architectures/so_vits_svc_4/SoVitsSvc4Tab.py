@@ -200,3 +200,11 @@ class SoVitsSvc4Tab(AbstractTab):
             'Reduce Hoarseness': True if args[6] else False,
             'Apply nsf_hifigan': True if args[7] else False,
         }
+
+    @property
+    def characters_metadata(self):
+        return []
+
+    @property
+    def multi_speaker_models_metadata(self):
+        return []

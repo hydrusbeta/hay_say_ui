@@ -7,8 +7,11 @@ from dash.exceptions import PreventUpdate
 from abc import ABC, abstractmethod
 import os
 
-SHOW_CHARACTER_DOWNLOAD_MENU = "Show Character Download Menu"
-HIDE_CHARACTER_DOWNLOAD_MENU = "Hide Character Download Menu"
+from architectures.sample_architecture.character_models import character_models
+from architectures.sample_architecture.multi_speaker_models import multi_speaker_models
+
+SHOW_CHARACTER_DOWNLOAD_MENU = "▷ Show Character Download Menu"
+HIDE_CHARACTER_DOWNLOAD_MENU = "▽ Hide Character Download Menu"
 
 
 class AbstractTab(ABC):
@@ -22,6 +25,9 @@ class AbstractTab(ABC):
                 Input(self.id+'-download-menu-button', 'n_clicks'),
                 State(self.id+'-download-menu', 'is_open'),
         )(self.toggle_character_download_menu)
+        app.callback(
+            Output(self.id + '-download-size', 'children'),
+            Input(self.id + '-download-checklist', 'value'))(self.update_download_size)
 
     @property
     @abstractmethod
@@ -79,7 +85,7 @@ class AbstractTab(ABC):
                     'Yellow Shy',
                     'Good Apple',
                     'Marshmallow'
-                ], value='Purple Smart', clearable=False, className='dropdown'))
+                ], value='Purple Smart', className='option-dropdown'))
             ]),
             html.Tr([
                 html.Td(html.Label('Set best pony:', htmlFor=self.input_ids[1]), className='option-label'),
@@ -102,6 +108,27 @@ class AbstractTab(ABC):
         return dict()
 
     @property
+    @abstractmethod
+    def characters_metadata(self):
+        # Return a dictionary containing metadata about all downloadable character models for this architecture and the
+        # URLs for downloading them.
+        return character_models
+
+    @property
+    @abstractmethod
+    def multi_speaker_models_metadata(self):
+        # Return a dictionary containing metadata about all downloadable multi-speaker models for this architecture and
+        # the URLs for downloading them.
+        return multi_speaker_models
+
+    @property
+    def downloadable_characters(self):
+        # A sorted list of all downloadable characters, minus the ones that are already downloaded.
+        full_list = [character['Model Name'] for character in self.characters_metadata]
+        already_downloaded = self.characters
+        return sorted(list(set(full_list).difference(set(already_downloaded))))
+
+    @property
     def tab_contents(self):
         return html.Tr([
             html.Td([
@@ -110,11 +137,25 @@ class AbstractTab(ABC):
             ], className='architecture-info'),
             html.Td([
                 html.Div([
-                    html.Button("Show Character Download Menu", id=self.id + '-download-menu-button'),
-                    html.Div(dbc.Collapse([
-                        dcc.Checklist(self.characters),
-                        html.Button('Download Selected Models')
-                    ], is_open=False, id=self.id + "-download-menu")),
+                    html.Button(SHOW_CHARACTER_DOWNLOAD_MENU, id=self.id + '-download-menu-button'),
+                    dbc.Collapse([
+                        html.Table([
+                            html.Colgroup([
+                                # todo: move styling to a css file
+                                html.Col(span=1, style={'width': '10%'}),
+                                html.Col(span=1, style={'width': '90%'}),
+                            ]),
+                            html.Tr([
+                                html.Td(),
+                                html.Td(dcc.Checklist(self.downloadable_characters, id=self.id + '-download-checklist', inputStyle={'margin-right': '10px'}, labelStyle={'margin-top': '5px'}))
+                            ]),
+                        ]),
+                        html.Div([
+                            html.Br(),
+                            html.Div('Total Download Size: 0 bytes', id=self.id + '-download-size', style={'margin': '5px'}),
+                            html.Button('Download Selected Models', style={'margin': '5px'}),
+                        ], className='centered')
+                    ], is_open=False, id=self.id + "-download-menu", className='model-list-expanded'),
                 ], className='model-list-div'),
                 self.options,
             ])
@@ -148,3 +189,36 @@ class AbstractTab(ABC):
         if n_clicks is None:
             raise PreventUpdate
         return SHOW_CHARACTER_DOWNLOAD_MENU if is_open else HIDE_CHARACTER_DOWNLOAD_MENU, not is_open
+
+    # Pretend this is annotated like so:
+    # @app.callback(
+    #     Output(self.id + '-download-size', 'children'),
+    #     Input(self.id + '-download-checklist', 'value')
+    # )
+    def update_download_size(self, selected_characters):
+        if selected_characters is None:
+            return 'Total Download Size: 0 bytes'
+        character_to_size_dict = {character['Model Name']: sum([file['Size (bytes)'] for file in character['Files']])
+                                  for character in self.characters_metadata}
+        total_size = 0
+        for character in selected_characters:
+            total_size += character_to_size_dict[character]
+        return 'Total Download Size: ' + str(self.scale_bytes(total_size))
+
+    def scale_bytes(self, size_in_bytes):
+        # Convert the given number of bytes into a more human-readable number by scaling it to kB, MB, GB, etc.
+        # For example, 1234 becomes "1.21 kB"
+        # size_in_bytes must be non-negative. Otherwise, behavior is undefined. The maximum scale is Zettabytes, ZB.
+        scales = [(0, 'bytes'), (10, 'kB'), (20, 'MB'), (30, 'GB'), (40, 'TB'), (50, 'PB'), (60, 'EB'), (70, 'ZB')]
+
+        scaled_to_zero_decimals = [size_in_bytes >> scale[0] for scale in scales] + [0]
+        index = scaled_to_zero_decimals.index(0) - 1
+        index = 0 if index < 0 else index
+        scaled_to_two_decimals = "{:.2f}".format(size_in_bytes / pow(2, scales[index][0]))
+
+        # return a different precision for bytes than for other scales
+        if index == 0:
+            return str(scaled_to_zero_decimals[index]) + ' ' + scales[index][1]
+        return scaled_to_two_decimals + ' ' + scales[index][1]
+
+

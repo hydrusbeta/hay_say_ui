@@ -34,5 +34,13 @@ class SampleTab(AbstractTab):
     def input_ids(self):
         return super().input_ids
 
+    @property
+    def characters_metadata(self):
+        return super().characters_metadata
+
+    @property
+    def multi_speaker_models_metadata(self):
+        return super().multi_speaker_models_metadata
+
     def construct_input_dict(self, *args):
         return super().construct_input_dict

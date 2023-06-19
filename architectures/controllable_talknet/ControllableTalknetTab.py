@@ -1,4 +1,6 @@
 from dash import Dash, html, dcc, Input, Output, State
+
+from architectures.controllable_talknet.character_models import character_models
 from architectures.AbstractTab import AbstractTab
 
 
@@ -105,3 +107,10 @@ class ControllableTalknetTab(AbstractTab):
             'Reduce Metallic Sound': True if args[4] else False
         }
 
+    @property
+    def characters_metadata(self):
+        return character_models
+
+    @property
+    def multi_speaker_models_metadata(self):
+        return []

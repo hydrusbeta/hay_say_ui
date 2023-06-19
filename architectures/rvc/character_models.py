@@ -87,6 +87,38 @@ character_models = [
     },
 ]
 
+# todo: Add Models with Mega links. See notes below.
+
+# pinkie pie
+# https://mega.nz/file/ZfJF0C7S#gGyLBDqow7yPMBWD8Oqvul74aalzhBpNUqnRjUeizJM
+# 274235568 bytes
+# extracts like:
+# PinkiePie:
+# 	PinkiePie_e400.pth
+# 	added_IVF3144_Flat_nprobe_1.index
+#
+# So introduce a new download method: MEGA
+# Introduce a new unzip method: REMOVE_OUTERMOST_DIR
+# And either introduce a new option in the download dict, under Files:
+# 	"Rename Unzipped Files": [
+# 		{
+# 			"Original Name": "PinkiePie_e400.pth",
+# 			"New Name": "Pinkie Pie.pth"
+# 		},
+# 		{
+# 			"Original Name": "added_IVF3144_Flat_nprobe_1.index",
+# 			"New Name": "Pinkie Pie.index"
+# 		}\
+# 	]
+# OORRR... just redesign the server to look for a pth file and an index file without caring about the basename.
+#
+# applejack
+# https://mega.nz/file/kT50jKxQ#4x9vM78bGJvk_BvurrHqx3zJOnhnHvQySyG_3or2JcY
+#
+# fluttershy
+# https://mega.nz/file/pf4wxT6J#j13tM7AwFKFPhwYJOTorWv_LU1hR8Z8BLjqtPfhbGV0
+
+
 if __name__ == '__main__':
     print('Validating with jsonschema...')
     character_errors = validate_character_model(character_models)

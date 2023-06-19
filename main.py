@@ -1,7 +1,12 @@
 from hay_say_common import ROOT_DIR, RAW_DIR, PREPROCESSED_DIR, OUTPUT_DIR, POSTPROCESSED_DIR, CACHE_MIMETYPE, \
     CACHE_EXTENSION, TIMESTAMP_FORMAT, save_audio_to_cache, get_audio_from_src_attribute, read_metadata, \
     write_metadata, get_hashes_sorted_by_timestamp, file_is_already_cached, read_audio_from_cache
-from architectures import ControllableTalknetTab, SoVitsSvc3Tab, SoVitsSvc4Tab, SoVitsSvc5Tab, RvcTab
+from architectures.controllable_talknet.ControllableTalknetTab import ControllableTalknetTab
+from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
+from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
+from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
+from architectures.rvc.RvcTab import RvcTab
+# from architectures.sample_architecture.SampleArchitectureTab import SampleTab
 from dash import Dash, html, dcc, Input, Output, State, ctx
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
@@ -29,7 +34,8 @@ available_tabs = [
     SoVitsSvc3Tab(app, ROOT_DIR),
     SoVitsSvc4Tab(app, ROOT_DIR),
     SoVitsSvc5Tab(app, ROOT_DIR),
-    RvcTab(app, ROOT_DIR)
+    RvcTab(app, ROOT_DIR),
+    # SampleTab(app, ROOT_DIR)
 ]
 
 app.layout = \
@@ -120,7 +126,7 @@ app.layout = \
         html.Div([
             html.Table(
                 [tab.tab_contents for tab in available_tabs],
-                className='tab-table'
+                className='tab-table spaced-table'
             ),
             html.Table([
                 html.H2('Postprocessing'),
@@ -152,7 +158,7 @@ app.layout = \
                 html.Tr(
                     html.Td(
                         dcc.Loading(
-                            html.Button(id='generate-button'),
+                            html.Button('Generate!', id='generate-button'),
                             type='default'  # circle, graph, cube, circle, dot, default
                         ),
                     ),

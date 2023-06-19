@@ -340,7 +340,7 @@ character_models = [
         ]
     },
     {
-        "Model Name": "Trixie",
+        "Model Name": "Trixie Lulamoon",
         "Files": [
             {
                 "URL": "https://drive.google.com/uc?id=1a3CYt0-oTTSFjxtZvAVMpClTmQteYua5",
@@ -352,7 +352,7 @@ character_models = [
         ]
     },
     {
-        "Model Name": "Trixie (singing)",
+        "Model Name": "Trixie Lulamoon (singing)",
         "Files": [
             {
                 "URL": "https://drive.google.com/uc?id=1dA26cUn0Kltt3Evps8DfM-uSrs3sFz72",

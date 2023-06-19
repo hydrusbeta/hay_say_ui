@@ -61,3 +61,11 @@ class SoVitsSvc3Tab(AbstractTab):
             'Character': args[0],
             'Pitch Shift': args[1]
         }
+
+    @property
+    def characters_metadata(self):
+        return []
+
+    @property
+    def multi_speaker_models_metadata(self):
+        return []

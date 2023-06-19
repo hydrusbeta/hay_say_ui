@@ -27,8 +27,15 @@ body {
 }
 
 .model-list-div{
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
+}
+
+.model-list-expanded{
+    border-width: 1px;
+    border-color: #fff;
+    border-style: solid;
+    padding: 5px;
 }
 
 .subtitle {
@@ -188,11 +195,14 @@ option {
     text-align: center;
 }
 
+button{
+    background-color: rgba(0,0,0,0.25);
+}
+
 #generate-button{
     font-family: Equestria;
     font-size: 36px;
     margin: 0px;
-    background-color: rgba(0,0,0,0.25);
 }
 
 #generate-button:disabled{
