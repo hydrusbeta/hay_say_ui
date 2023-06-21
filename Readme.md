@@ -219,7 +219,9 @@ If you have acquired or trained a model that is not included with Hay Say, you c
 ```
 docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_3
 docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_4
+docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_5
 docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/controllable_talknet
+docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/rvc
 ```
 3. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 model, you can copy it by executing the following on Linux or MacOS:
 ```
