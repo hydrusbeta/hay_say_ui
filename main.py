@@ -41,7 +41,7 @@ available_tabs = [
 ]
 
 # Set up a background callback manager
-MESSAGE_BROKER = os.environ.get('REDIS_URL', 'redis://haysaydockercompose-redis-1:6379')
+MESSAGE_BROKER = os.environ.get('REDIS_URL', 'redis://redis:6379')
 celery_app = Celery(__name__, broker=MESSAGE_BROKER, backend=MESSAGE_BROKER)
 background_callback_manager = CeleryManager(celery_app)
 
