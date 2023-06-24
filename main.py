@@ -7,9 +7,10 @@ from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
 from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
 from architectures.rvc.RvcTab import RvcTab
 # from architectures.sample_architecture.SampleArchitectureTab import SampleTab
-from dash import Dash, html, dcc, Input, Output, State, ctx
+from dash import Dash, html, dcc, Input, Output, State, ctx, CeleryManager
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
+from celery import Celery
 from numbers import Number
 from datetime import datetime
 from http.client import HTTPConnection
@@ -19,6 +20,7 @@ import hashlib
 import json
 import os
 import traceback
+from time import sleep
 
 # todo: so-vits output is much louder than controllable talknet. Should the output volume be equalized?
 
@@ -37,6 +39,37 @@ available_tabs = [
     RvcTab(app, ROOT_DIR),
     # SampleTab(app, ROOT_DIR)
 ]
+
+# Set up a background callback manager
+MESSAGE_BROKER = os.environ.get('REDIS_URL', 'redis://haysaydockercompose-redis-1:6379')
+celery_app = Celery(__name__, broker=MESSAGE_BROKER, backend=MESSAGE_BROKER)
+background_callback_manager = CeleryManager(celery_app)
+
+
+# Create background callbacks for the "Download Selected Models" button in each Tab. Ideally, this callback would simply
+# be defined in AbstractTab. However, Celery does not support using class methods as tasks. Therefore, we must
+# instantiate the callback for each of the Tabs here, instead. See https://github.com/celery/celery/discussions/7085
+# First, define a generator for the callback:
+def generate_download_callback(name):
+    @app.callback(
+        output=Output(name + '-download-text', 'children'),
+        inputs=Input(name + '-download-button', 'n_clicks'),
+        running=[(Output(name + '-download-button', 'disabled'), True, False)],
+        background=True,
+        manager=background_callback_manager,
+    )
+    def begin_downloading(n_clicks):
+        if n_clicks is None:
+            raise PreventUpdate
+        sleep(2.0)
+        return str(n_clicks)
+    return begin_downloading
+
+
+# Now use the generator to instantiate the callback for each Tab.
+# Celery will be able to see and automatically register the callback methods in download_callbacks.
+tab_names = [tab.id for tab in available_tabs]
+download_callbacks = [generate_download_callback(name) for name in tab_names]
 
 app.layout = \
     html.Div([

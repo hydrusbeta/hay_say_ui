@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y git
 # often than the hay_say_ui code itself. Cloning the repo after installing the requirements helps the Docker cache
 # optimize build time. See https://docs.docker.com/build/cache
 RUN python -m pip install \
-    dash==2.9.1 \
+    dash[celery]==2.9.1 \
     dash-bootstrap-components==1.4.1 \
     hay_say_common==0.1.0 \
     gdown==4.7.1 \
@@ -22,5 +22,5 @@ EXPOSE 6573
 # download Hay Say
 RUN git clone -b main --single-branch -q https://github.com/hydrusbeta/hay_say_ui ~/hay_say/hay_say_ui/
 
-# Run the Hay Say Flask server on startup
-CMD ["/bin/sh", "-c", "python /root/hay_say/hay_say_ui/main.py"]
+# Start a Celery worker for background callbacks and run the Hay Say Flask server
+CMD ["/bin/sh", "-c", "celery --workdir ~/hay_say/hay_say_ui/ -A main:celery_app worker --loglevel=INFO && python /root/hay_say/hay_say_ui/main.py"]

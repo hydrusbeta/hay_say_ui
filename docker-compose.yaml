@@ -60,6 +60,13 @@ services:
     volumes:
       - rvc_model_pack_1:/root/hay_say/rvc_model_pack_1
 
+  # The Redis image provides an in-memory data store that can be shared between applications
+  # This allows plotly to pass data to background workers
+  # In the future, the audio cache may also utilize redis instead of writing to files.
+  redis:
+    image: redis
+    command: redis-server
+
   # This container runs the main UI
   hay_say_ui:
     image: hydrusbeta/hay_say:hay_say_ui

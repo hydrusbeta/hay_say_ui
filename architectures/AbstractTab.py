@@ -153,7 +153,11 @@ class AbstractTab(ABC):
                         html.Div([
                             html.Br(),
                             html.Div('Total Download Size: 0 bytes', id=self.id + '-download-size', style={'margin': '5px'}),
-                            html.Button('Download Selected Models', style={'margin': '5px'}),
+                            html.Button('Download Selected Models', style={'margin': '5px'}, id=self.id+'-download-button'),
+                            html.Div([
+                                html.Span("Downloading Fluttershy...", id=self.id + '-download-text'),
+                                html.Progress(max=100, value=50, id=self.id + '-download-progress')
+                            ])
                         ], className='centered')
                     ], is_open=False, id=self.id + "-download-menu", className='model-list-expanded'),
                 ], className='model-list-div'),

@@ -199,15 +199,15 @@ button{
     background-color: rgba(0,0,0,0.25);
 }
 
+button:disabled{
+    background-color: rgba(0,0,0,0);
+    color: #666;
+}
+
 #generate-button{
     font-family: Equestria;
     font-size: 36px;
     margin: 0px;
-}
-
-#generate-button:disabled{
-    background-color: rgba(0,0,0,0);
-    color: #666;
 }
 
 .label{
