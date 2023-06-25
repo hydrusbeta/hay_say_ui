@@ -6,7 +6,6 @@ from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
 from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
 from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
 from architectures.rvc.RvcTab import RvcTab
-# from architectures.sample_architecture.SampleArchitectureTab import SampleTab
 from dash import Dash, html, dcc, Input, Output, State, ctx, CeleryManager
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
@@ -52,18 +51,30 @@ background_callback_manager = CeleryManager(celery_app)
 # First, define a generator for the callback:
 def generate_download_callback(name):
     @app.callback(
-        output=Output(name + '-download-text', 'children'),
+        output=[Output(name + '-download-text', 'children'),
+                Output(name + '-download-progress', 'value')],
         inputs=Input(name + '-download-button', 'n_clicks'),
-        running=[(Output(name + '-download-button', 'disabled'), True, False)],
+        running=[(Output(name + '-download-button', 'hidden'), True, False),
+                 (Output(name + '-cancel-download-button', 'hidden'), False, True),
+                 (Output(name + '-download-text', 'hidden'), False, True),
+                 (Output(name + '-download-progress', 'hidden'), False, True)],
+        cancel=[Input(name + '-cancel-download-button', 'n_clicks')],
+        progress=[Output(name + '-download-progress', 'value'),
+                  Output(name + '-download-progress', 'max'),
+                  Output(name + '-download-text', 'children')],
         background=True,
         manager=background_callback_manager,
     )
-    def begin_downloading(n_clicks):
+    def begin_downloading(set_progress, n_clicks):
         if n_clicks is None:
             raise PreventUpdate
-        sleep(2.0)
-        return str(n_clicks)
+        total = 5
+        for i in range(total):
+            set_progress((str(i), str(total), 'downloading ' + str(i+1)))
+            sleep(3)
+        return '', '0'  # Reset progress bar for the next download
     return begin_downloading
+
 
 
 # Now use the generator to instantiate the callback for each Tab.
@@ -229,7 +240,6 @@ def hide_unused_tabs(*_):
     return [not (tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id) for tab in available_tabs] + \
         ['tab-cell' if not tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id else 'tab-cell-selected'
          for tab in available_tabs]
-    return result
 
 
 @app.callback(

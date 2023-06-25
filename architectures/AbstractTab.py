@@ -142,8 +142,8 @@ class AbstractTab(ABC):
                         html.Table([
                             html.Colgroup([
                                 # todo: move styling to a css file
-                                html.Col(span=1, style={'width': '10%'}),
-                                html.Col(span=1, style={'width': '90%'}),
+                                html.Col(span='1', style={'width': '10%'}),
+                                html.Col(span='1', style={'width': '90%'}),
                             ]),
                             html.Tr([
                                 html.Td(),
@@ -154,10 +154,9 @@ class AbstractTab(ABC):
                             html.Br(),
                             html.Div('Total Download Size: 0 bytes', id=self.id + '-download-size', style={'margin': '5px'}),
                             html.Button('Download Selected Models', style={'margin': '5px'}, id=self.id+'-download-button'),
-                            html.Div([
-                                html.Span("Downloading Fluttershy...", id=self.id + '-download-text'),
-                                html.Progress(max=100, value=50, id=self.id + '-download-progress')
-                            ])
+                            html.Button('Cancel', style={'margin': '5px'}, id=self.id+'-cancel-download-button'),
+                            html.Div('', id=self.id + '-download-text', hidden=True),
+                            html.Progress(max='100', value='0', id=self.id + '-download-progress', hidden=True)
                         ], className='centered')
                     ], is_open=False, id=self.id + "-download-menu", className='model-list-expanded'),
                 ], className='model-list-div'),
