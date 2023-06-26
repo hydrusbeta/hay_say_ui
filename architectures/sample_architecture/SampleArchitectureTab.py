@@ -35,8 +35,8 @@ class SampleTab(AbstractTab):
         return super().input_ids
 
     @property
-    def characters_metadata(self):
-        return super().characters_metadata
+    def model_infos(self):
+        return super().model_infos
 
     @property
     def multi_speaker_models_metadata(self):

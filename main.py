@@ -1,6 +1,7 @@
 from hay_say_common import ROOT_DIR, RAW_DIR, PREPROCESSED_DIR, OUTPUT_DIR, POSTPROCESSED_DIR, CACHE_MIMETYPE, \
     CACHE_EXTENSION, TIMESTAMP_FORMAT, save_audio_to_cache, get_audio_from_src_attribute, read_metadata, \
     write_metadata, get_hashes_sorted_by_timestamp, file_is_already_cached, read_audio_from_cache
+from download.Downloader import download_character
 from architectures.controllable_talknet.ControllableTalknetTab import ControllableTalknetTab
 from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
 from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
@@ -19,7 +20,6 @@ import hashlib
 import json
 import os
 import traceback
-from time import sleep
 
 # todo: so-vits output is much louder than controllable talknet. Should the output volume be equalized?
 
@@ -46,41 +46,50 @@ background_callback_manager = CeleryManager(celery_app)
 
 
 # Create background callbacks for the "Download Selected Models" button in each Tab. Ideally, this callback would simply
-# be defined in AbstractTab. However, Celery does not support using class methods as tasks. Therefore, we must
-# instantiate the callback for each of the Tabs here, instead. See https://github.com/celery/celery/discussions/7085
+# be defined in AbstractTab. However, Celery does not support using class methods as tasks. So instead, we must
+# instantiate the callback for each of the Tabs here. See https://github.com/celery/celery/discussions/7085
 # First, define a generator for the callback:
-def generate_download_callback(name):
+def generate_download_callback(tab):
     @app.callback(
-        output=[Output(name + '-download-text', 'children'),
-                Output(name + '-download-progress', 'value')],
-        inputs=Input(name + '-download-button', 'n_clicks'),
-        running=[(Output(name + '-download-button', 'hidden'), True, False),
-                 (Output(name + '-cancel-download-button', 'hidden'), False, True),
-                 (Output(name + '-download-text', 'hidden'), False, True),
-                 (Output(name + '-download-progress', 'hidden'), False, True)],
-        cancel=[Input(name + '-cancel-download-button', 'n_clicks')],
-        progress=[Output(name + '-download-progress', 'value'),
-                  Output(name + '-download-progress', 'max'),
-                  Output(name + '-download-text', 'children')],
+        output=[Output(tab.id + '-download-text', 'children'),
+                Output(tab.id + '-download-progress', 'value'),
+                Output(tab.id + '-download-checklist', 'options'),
+                Output(tab.id + '-download-checklist', 'value', allow_duplicate=True),
+                Output(tab.input_ids[0], 'options')],  # character dropdown
+        inputs=[Input(tab.id + '-download-button', 'n_clicks'),
+                State(tab.id + '-download-checklist', 'value')],
+        running=[(Output(tab.id + '-download-button', 'hidden'), True, False),
+                 (Output(tab.id + '-cancel-download-button', 'hidden'), False, True),
+                 (Output(tab.id + '-download-text', 'hidden'), False, True),
+                 (Output(tab.id + '-download-progress', 'hidden'), False, True),
+                 (Output(tab.id + '-download-checklist', 'options'), tab.downloadable_characters(disabled=True), tab.downloadable_characters(disabled=False))],
+        cancel=[Input(tab.id + '-cancel-download-button', 'n_clicks')],
+        progress=[Output(tab.id + '-download-progress', 'value'),
+                  Output(tab.id + '-download-progress', 'max'),
+                  Output(tab.id + '-download-text', 'children')],
         background=True,
         manager=background_callback_manager,
+        prevent_initial_call=True
     )
-    def begin_downloading(set_progress, n_clicks):
-        if n_clicks is None:
-            raise PreventUpdate
-        total = 5
-        for i in range(total):
-            set_progress((str(i), str(total), 'downloading ' + str(i+1)))
-            sleep(3)
-        return '', '0'  # Reset progress bar for the next download
+    def begin_downloading(set_progress, _, character_names):
+        num_characters = str(len(character_names))
+        for index, character_name in enumerate(character_names):
+            set_progress((str(index), num_characters, 'downloading ' + character_name + '...'))
+            model_info = next((model_info for model_info in tab.model_infos if model_info['Model Name'] == character_name), None)
+            if model_info is None:
+                # todo: this condition should never happen... but what should we do if it somehow does?
+                continue
+            download_character(tab.id, model_info)
+        return '', '0', tab.downloadable_characters(), [], tab.characters  # Reset the progress bar, checklist, and character dropdown
     return begin_downloading
 
 
-
 # Now use the generator to instantiate the callback for each Tab.
-# Celery will be able to see and automatically register the callback methods in download_callbacks.
-tab_names = [tab.id for tab in available_tabs]
-download_callbacks = [generate_download_callback(name) for name in tab_names]
+# Celery will be able to see and automatically register the callback methods stored in download_callbacks.
+download_callbacks = [generate_download_callback(tab) for tab in available_tabs]
+
+# Fun bit of trivia: using a background callback generator like that was only possible starting a few months ago. A bug
+# that interfered with it was fixed in March: https://github.com/plotly/dash/issues/2221
 
 app.layout = \
     html.Div([

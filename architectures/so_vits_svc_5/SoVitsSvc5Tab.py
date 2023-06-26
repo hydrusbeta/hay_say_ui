@@ -66,7 +66,7 @@ class SoVitsSvc5Tab(AbstractTab):
         }
 
     @property
-    def characters_metadata(self):
+    def model_infos(self):
         return []
 
     @property

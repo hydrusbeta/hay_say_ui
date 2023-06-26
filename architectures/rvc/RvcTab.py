@@ -201,7 +201,7 @@ class RvcTab(AbstractTab):
         return input_dict
 
     @property
-    def characters_metadata(self):
+    def model_infos(self):
         return character_models
 
     @property

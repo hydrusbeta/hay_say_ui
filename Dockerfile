@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y git
 # often than the hay_say_ui code itself. Cloning the repo after installing the requirements helps the Docker cache
 # optimize build time. See https://docs.docker.com/build/cache
 RUN python -m pip install \
-    dash[celery]==2.9.1 \
+    dash[celery]==2.11.0 \
     dash-bootstrap-components==1.4.1 \
     hay_say_common==0.1.0 \
     gdown==4.7.1 \

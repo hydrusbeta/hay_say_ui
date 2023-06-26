@@ -109,7 +109,7 @@ class AbstractTab(ABC):
 
     @property
     @abstractmethod
-    def characters_metadata(self):
+    def model_infos(self):
         # Return a dictionary containing metadata about all downloadable character models for this architecture and the
         # URLs for downloading them.
         return character_models
@@ -121,12 +121,14 @@ class AbstractTab(ABC):
         # the URLs for downloading them.
         return multi_speaker_models
 
-    @property
-    def downloadable_characters(self):
-        # A sorted list of all downloadable characters, minus the ones that are already downloaded.
-        full_list = [character['Model Name'] for character in self.characters_metadata]
+    def downloadable_characters(self, disabled=False):
+        # Sorted options for a dcc.Checklist that includes all downloadable characters, minus the ones that are already
+        # downloaded. Optionally set disabled=True to disable every option in the checklist.
+        full_list = [model_info['Model Name'] for model_info in self.model_infos]
         already_downloaded = self.characters
-        return sorted(list(set(full_list).difference(set(already_downloaded))))
+        sorted_characters = sorted(list(set(full_list).difference(set(already_downloaded))))
+        return [{'label': [html.Span(character)], 'value': character, 'disabled': disabled}
+                for character in  sorted_characters]
 
     @property
     def tab_contents(self):
@@ -147,14 +149,14 @@ class AbstractTab(ABC):
                             ]),
                             html.Tr([
                                 html.Td(),
-                                html.Td(dcc.Checklist(self.downloadable_characters, id=self.id + '-download-checklist', inputStyle={'margin-right': '10px'}, labelStyle={'margin-top': '5px'}))
+                                html.Td(dcc.Checklist(self.downloadable_characters(), id=self.id + '-download-checklist', inputStyle={'margin-right': '10px'}, labelStyle={'margin-top': '5px'}))
                             ]),
                         ]),
                         html.Div([
                             html.Br(),
                             html.Div('Total Download Size: 0 bytes', id=self.id + '-download-size', style={'margin': '5px'}),
                             html.Button('Download Selected Models', style={'margin': '5px'}, id=self.id+'-download-button'),
-                            html.Button('Cancel', style={'margin': '5px'}, id=self.id+'-cancel-download-button'),
+                            html.Button('Cancel', style={'margin': '5px'}, id=self.id+'-cancel-download-button', hidden=True),
                             html.Div('', id=self.id + '-download-text', hidden=True),
                             html.Progress(max='100', value='0', id=self.id + '-download-progress', hidden=True)
                         ], className='centered')
@@ -170,6 +172,9 @@ class AbstractTab(ABC):
         # Loop through all the directories in model_dirs(architecture_name), call os.listdir(model_dir), and flatten the
         # result into a single list. Character models are expected to be in subdirectories with the characters' names,
         # so ignore files.
+        # todo: check for missing files and delete any character folders that are missing files (this can happen if a
+        #  download is canceled). Alternatively, modify the Download Selected Models button so that it downloads to a
+        #  temporary directory and moves the directory as the very last step.
         return sorted(
             [os.path.basename(character_path)
              for character_path_list in ([os.path.join(model_dir, character) for character in os.listdir(model_dir)]
@@ -201,8 +206,8 @@ class AbstractTab(ABC):
     def update_download_size(self, selected_characters):
         if selected_characters is None:
             return 'Total Download Size: 0 bytes'
-        character_to_size_dict = {character['Model Name']: sum([file['Size (bytes)'] for file in character['Files']])
-                                  for character in self.characters_metadata}
+        character_to_size_dict = {model_info['Model Name']: sum([file['Size (bytes)'] for file in model_info['Files']])
+                                  for model_info in self.model_infos}
         total_size = 0
         for character in selected_characters:
             total_size += character_to_size_dict[character]
