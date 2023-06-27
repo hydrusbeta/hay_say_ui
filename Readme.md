@@ -215,27 +215,37 @@ Be sure to save the file, then restart Hay Say (type ctrl+c in Hay Say's termina
 ### Loading Custom Models
 If you have acquired or trained a model that is not included with Hay Say, you can add it to Hay Say by copying it to the custom models folder inside the main docker container. 
 1. First, make sure Hay Say is running. 
-2. Next, create a folder for each of the architectures within the custom_models folder by executing the following commands in a new terminal (or Command Prompt if you are using Windows):
+2. Execute the following command in a terminal or Command Prompt. It will display information about all of the Docker containers:
 ```
-docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_3
-docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_4
-docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_5
-docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/controllable_talknet
-docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/rvc
+docker container ls
 ```
-3. Next, arrange and rename your files to match the expected format:  
+Note: You may need to expand the command window to properly display the output, which is arranged like a wide table. You should see a column titled "IMAGE" in the output. Look for the entry "hydrusbeta/hay_say:hay_say_ui" and find the corresponding container name under the "NAMES" column. You will need that name in a moment:
+![Screenshots showing one possible output of "docker container ls"](documentation%20images/main%20container%20name.png)
+The name you see might be a little different. For example, another name I have seen on someone else's machine was "hay_say_ui-hay_say_ui-1".
+3. Create a folder for each of the architectures within the custom_models folder by executing the following commands in a new terminal (or Command Prompt if you are using Windows). Replace [container-name] with the name you found in step 2.:
+```
+docker exec [container-name] -p /root/hay_say/custom_models/so_vits_svc_3
+docker exec [container-name] mkdir -p /root/hay_say/custom_models/so_vits_svc_4
+docker exec [container-name] mkdir -p /root/hay_say/custom_models/so_vits_svc_5
+docker exec [container-name] mkdir -p /root/hay_say/custom_models/controllable_talknet
+docker exec [container-name] mkdir -p /root/hay_say/custom_models/rvc
+```
+4. Arrange and rename your files to match the expected format:  
 ![Screenshots showing the expected file structures for each architecture's models](documentation%20images/CustomModelFileOrganization.png)  
-4. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 model, you can copy it by executing the following on Linux or MacOS:
+There are some additional restrictions:
+   * For RVC, Hay Say expects the .index and .pth file to have the same name as the folder. 
+   * For all versions of so-vits-svc, only a single speaker name is allowed to appear in config.json (see the "spk" key, usually at the bottom of the file).
+5. Copy the folder containing your custom model into the desired architecture folder using the "docker cp" command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 model, you can copy it by executing the following on Linux or MacOS:
 ```
-docker cp ~/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
+docker cp ~/Desktop/Rainbowshine_Custom/. [container-name]:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
 ```
 or the following command on Windows:
 ```
-docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
+docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. [container-name]:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
 ```
 Note: The dot at the end of "~/Desktop/Rainbowshine_Custom/." is not a typo, so don't leave it out. It instructs Docker to copy all the contents of the Rainbowshine_Custom folder.  
 Note #2: I recommend that you name the folder with "_Custom" appended to the end as I have done in this example. That will avoid a name clash in case the character is added to one of Hay Say's model packs in the future.  
-5. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
+6. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
 
 
 ### Enabling GPU Integration
