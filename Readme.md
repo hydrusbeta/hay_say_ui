@@ -221,7 +221,7 @@ docker container ls
 ```
 Note: You may need to expand the command window to properly display the output, which is arranged like a wide table. You should see a column titled "IMAGE" in the output. Look for the entry "hydrusbeta/hay_say:hay_say_ui" and find the corresponding container name under the "NAMES" column. You will need that name in a moment:
 ![Screenshots showing one possible output of "docker container ls"](documentation%20images/main%20container%20name.png)
-The name you see might be a little different. For example, another name I have seen on someone else's machine was "hay_say_ui-hay_say_ui-1".
+The name you see might be a little different. For example, another name I have seen on someone else's machine was "hay_say_ui-hay_say_ui-1".  
 3. Create a folder for each of the architectures within the custom_models folder by executing the following commands in a new terminal (or Command Prompt if you are using Windows). Replace [container-name] with the name you found in step 2.:
 ```
 docker exec [container-name] -p /root/hay_say/custom_models/so_vits_svc_3
