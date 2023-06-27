@@ -239,7 +239,7 @@ Note #2: I recommend that you name the folder with "_Custom" appended to the end
 
 
 ### Enabling GPU Integration
-GPU integration is turned off by default in Hay Say. If you have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml file. There are 3 places (one for each architecture) where you will need to uncomment several lines. i.e., change this:
+GPU integration is turned off by default in Hay Say. This is to prevent an error for users who do not have a Cuda-capable GPU. If you do have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml file. There are several place (one under each architecture) where you will see the following lines:
 ```
 # resources:
 #   reservations:
@@ -248,7 +248,7 @@ GPU integration is turned off by default in Hay Say. If you have a Cuda-capable 
 #         count: all
 #         capabilities: [gpu]
 ```
-To this:
+To enable GPU for that architecture, uncomment those lines. i.e. remove the hashtags so that they look like this instead:
 ```
 resources:
   reservations:
@@ -257,7 +257,7 @@ resources:
         count: all
         capabilities: [gpu]
 ```
-for each architecture.
+
 
 ### Installing Only Specific Architectures
 You can edit the docker-compose.yaml file so that only specific architecutres are downloaded. The UI will still show tabs for all architectures, but will throw an error if you try to generate audio for an architecture which you didn't download. 
