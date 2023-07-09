@@ -1,0 +1,25 @@
+[
+  {
+    "Model Name": "Pony1",
+    "Files": [
+        {
+            "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/G_101600.pth",
+            "Download With": "HUGGINGFACE_HUB",
+            "Download As": "G_101600.pth",
+            "Size (bytes)": 1111
+        },
+        {
+            "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/config.json",
+            "Download With": "HUGGINGFACE_HUB",
+            "Download As": "config.json",
+            "Size (bytes)": 1111
+        },
+        {
+            "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/kmeans_4000.pt",
+            "Download With": "HUGGINGFACE_HUB",
+            "Download As": "kmeans_4000.pt",
+            "Size (bytes)": 1111
+        }
+    ]
+  }
+]

@@ -1,6 +1,5 @@
 from dash import Dash, html, dcc, Input, Output, State
 
-from architectures.controllable_talknet.character_models import character_models
 from architectures.AbstractTab import AbstractTab
 
 
@@ -42,8 +41,8 @@ class ControllableTalknetTab(AbstractTab):
                     'too, to guide the pacing and inflection of the generated voice.')
         )
 
-    def meets_requirements(self, user_text, user_audio):
-        return user_text is not None and user_text != ''
+    def meets_requirements(self, user_text, user_audio, selected_character):
+        return user_text is not None and user_text != '' and selected_character is not None
 
     @property
     def options(self):
@@ -106,11 +105,3 @@ class ControllableTalknetTab(AbstractTab):
             'Auto Tune': True if args[3] else False,
             'Reduce Metallic Sound': True if args[4] else False
         }
-
-    @property
-    def model_infos(self):
-        return character_models
-
-    @property
-    def multi_speaker_models_metadata(self):
-        return []

@@ -35,8 +35,8 @@ class SoVitsSvc5Tab(AbstractTab):
             html.Em('This architecture requires a voice recording input. Text inputs are ignored.')
         )
 
-    def meets_requirements(self, user_text, user_audio):
-        return user_audio is not None
+    def meets_requirements(self, user_text, user_audio, selected_character):
+        return user_audio is not None and selected_character is not None
 
     @property
     def options(self):
@@ -64,11 +64,3 @@ class SoVitsSvc5Tab(AbstractTab):
             'Character': args[0],
             'Pitch Shift': args[1]
         }
-
-    @property
-    def model_infos(self):
-        return []
-
-    @property
-    def multi_speaker_models_metadata(self):
-        return []

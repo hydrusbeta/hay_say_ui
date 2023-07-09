@@ -1,4 +1,5 @@
-import hay_say_common
+from hay_say_common import model_dirs, character_dir, multispeaker_model_dir
+
 
 from dash import html, dcc, Input, Output, State
 import dash_bootstrap_components as dbc
@@ -6,9 +7,8 @@ from dash.exceptions import PreventUpdate
 
 from abc import ABC, abstractmethod
 import os
-
-from architectures.sample_architecture.character_models import character_models
-from architectures.sample_architecture.multi_speaker_models import multi_speaker_models
+import sys
+import json
 
 SHOW_CHARACTER_DOWNLOAD_MENU = "▷ Show Character Download Menu"
 HIDE_CHARACTER_DOWNLOAD_MENU = "▽ Hide Character Download Menu"
@@ -20,14 +20,16 @@ class AbstractTab(ABC):
         self.app = app
         self.root_dir = root_dir
         app.callback(
-                [Output(self.id+'-download-menu-button', 'children'),
-                 Output(self.id+'-download-menu', 'is_open')],
-                Input(self.id+'-download-menu-button', 'n_clicks'),
-                State(self.id+'-download-menu', 'is_open'),
+            [Output(self.id+'-download-menu-button', 'children'),
+             Output(self.id+'-download-menu', 'is_open')],
+            Input(self.id+'-download-menu-button', 'n_clicks'),
+            State(self.id+'-download-menu', 'is_open'),
         )(self.toggle_character_download_menu)
         app.callback(
             Output(self.id + '-download-size', 'children'),
-            Input(self.id + '-download-checklist', 'value'))(self.update_download_size)
+            Output(self.id + '-download-button', 'disabled'),
+            Input(self.id + '-download-checklist', 'value')
+        )(self.update_download_size)
 
     @property
     @abstractmethod
@@ -65,7 +67,7 @@ class AbstractTab(ABC):
         )
 
     @abstractmethod
-    def meets_requirements(self, user_text, user_audio):
+    def meets_requirements(self, user_text, user_audio, selected_character):
         # Return True or False, depending on whether the supplied inputs meet the requirements
         return False
 
@@ -107,24 +109,10 @@ class AbstractTab(ABC):
         # *args will be a list of values the same length of input_ids, in the respective order.
         return dict()
 
-    @property
-    @abstractmethod
-    def model_infos(self):
-        # Return a dictionary containing metadata about all downloadable character models for this architecture and the
-        # URLs for downloading them.
-        return character_models
-
-    @property
-    @abstractmethod
-    def multi_speaker_models_metadata(self):
-        # Return a dictionary containing metadata about all downloadable multi-speaker models for this architecture and
-        # the URLs for downloading them.
-        return multi_speaker_models
-
     def downloadable_characters(self, disabled=False):
         # Sorted options for a dcc.Checklist that includes all downloadable characters, minus the ones that are already
         # downloaded. Optionally set disabled=True to disable every option in the checklist.
-        full_list = [model_info['Model Name'] for model_info in self.model_infos]
+        full_list = [model_info['Model Name'] for model_info in self.read_character_model_infos()]
         already_downloaded = self.characters
         sorted_characters = sorted(list(set(full_list).difference(set(already_downloaded))))
         return [{'label': [html.Span(character)], 'value': character, 'disabled': disabled}
@@ -149,16 +137,26 @@ class AbstractTab(ABC):
                             ]),
                             html.Tr([
                                 html.Td(),
-                                html.Td(dcc.Checklist(self.downloadable_characters(), id=self.id + '-download-checklist', inputStyle={'margin-right': '10px'}, labelStyle={'margin-top': '5px'}))
+                                html.Td(dcc.Checklist(options=self.downloadable_characters(),
+                                                      value=[],
+                                                      id=self.id + '-download-checklist',
+                                                      inputStyle={'margin-right': '10px'},
+                                                      labelStyle={'margin-top': '5px'}))
                             ]),
                         ]),
                         html.Div([
                             html.Br(),
-                            html.Div('Total Download Size: 0 bytes', id=self.id + '-download-size', style={'margin': '5px'}),
+                            html.Div(id=self.id + '-download-size', style={'margin': '5px'}),
                             html.Button('Download Selected Models', style={'margin': '5px'}, id=self.id+'-download-button'),
                             html.Button('Cancel', style={'margin': '5px'}, id=self.id+'-cancel-download-button', hidden=True),
                             html.Div('', id=self.id + '-download-text', hidden=True),
-                            html.Progress(max='100', value='0', id=self.id + '-download-progress', hidden=True)
+                            html.Div([
+                                dcc.Loading(html.Div(id=self.id + '-download-progress-spinner'),
+                                            parent_style={'display': 'inline-block', 'width': '60px',
+                                                          'height': '15px'}),
+                                html.Progress(max='100', value='0', id=self.id + '-download-progress',
+                                              style={'display': 'inline-block'}),
+                            ], style={'margin-bottom': '20px'}, id=self.id + '-download-progress-container', hidden=True),
                         ], className='centered')
                     ], is_open=False, id=self.id + "-download-menu", className='model-list-expanded'),
                 ], className='model-list-div'),
@@ -178,7 +176,7 @@ class AbstractTab(ABC):
         return sorted(
             [os.path.basename(character_path)
              for character_path_list in ([os.path.join(model_dir, character) for character in os.listdir(model_dir)]
-                                         for model_dir in hay_say_common.model_dirs(self.id))
+                                         for model_dir in model_dirs(self.id))
              for character_path in character_path_list if not os.path.isfile(character_path)])
 
     @property
@@ -201,17 +199,69 @@ class AbstractTab(ABC):
     # Pretend this is annotated like so:
     # @app.callback(
     #     Output(self.id + '-download-size', 'children'),
-    #     Input(self.id + '-download-checklist', 'value')
+    #     Output(self.id + '-download-button', 'disabled'),
+    #     Input(self.id + '-download-checklist', 'value'),
     # )
     def update_download_size(self, selected_characters):
-        if selected_characters is None:
-            return 'Total Download Size: 0 bytes'
-        character_to_size_dict = {model_info['Model Name']: sum([file['Size (bytes)'] for file in model_info['Files']])
-                                  for model_info in self.model_infos}
-        total_size = 0
+        files_and_sizes = {}
         for character in selected_characters:
-            total_size += character_to_size_dict[character]
-        return 'Total Download Size: ' + str(self.scale_bytes(total_size))
+            files_and_sizes |= self.determine_files_required_by_character(character)  # |= performs a PEP 584 Dict union
+        total_size = sum([size for filename, size in files_and_sizes.items()])
+        no_characters_text = 'No additional characters available for download'
+        download_size_text = 'Total Download Size: ' + self.scale_bytes(total_size)
+        displayed_text = no_characters_text if len(self.downloadable_characters()) == 0 else download_size_text
+        return displayed_text, False if selected_characters else True
+
+    def determine_files_required_by_character(self, character):
+        # Return a dictionary with entries of the form {'<path/to/file>': <file_size_in_bytes>}.
+        character_model_info, multi_speaker_model_info = self.get_model_infos_for_character(character)
+        files_and_sizes = self.determine_files_required_for_character_alone(character_model_info)
+        files_and_sizes |= self.determine_files_required_for_multi_speaker_model(multi_speaker_model_info)
+        return files_and_sizes
+
+    def determine_files_required_for_character_alone(self, character_model_info):
+        # Return a dictionary with entries of the form {'<path/to/file>': <file_size_in_bytes>}.
+        model_directory = character_dir(self.id, character_model_info['Model Name'])
+        return {os.path.join(model_directory, file['Download As']): file['Size (bytes)']
+                for file in character_model_info['Files']}
+
+    def determine_files_required_for_multi_speaker_model(self, multi_speaker_model_info):
+        # Return a dictionary with entries of the form {'<path/to/file>': <file_size_in_bytes>}.
+        # If the multi speaker model is already downloaded, return an empty dictionary.
+        if multi_speaker_model_info is not None:
+            model_directory = multispeaker_model_dir(self.id, multi_speaker_model_info['Model Name'])
+            if not os.path.exists(model_directory):
+                return {os.path.join(model_directory, file['Download As']): file['Size (bytes)']
+                        for file in multi_speaker_model_info['Files']}
+        return {}
+
+    def get_model_infos_for_character(self, character):
+        character_model_infos = [model_info for model_info in self.read_character_model_infos()
+                                if model_info['Model Name'] == character]
+        if len(character_model_infos) == 0:
+            # This should never happen. But in case it somehow does, throw a potentially useful Exception.
+            raise Exception(str(character) + ' was not found in character_models.json.')
+        if len(character_model_infos) > 1:
+            raise Exception(str(character) + ' has multiple entries in character_models.json. Only one is allowed.')
+        character_model_info = character_model_infos[0]
+        multi_speaker_model = self.get_multi_speaker_model_info_for_character(character_model_info)
+        return character_model_info, multi_speaker_model
+
+    def get_multi_speaker_model_info_for_character(self, character_model_info):
+        multi_speaker_model_name = character_model_info.get('Multi-speaker Model Dependency')
+        if multi_speaker_model_name is None:
+            return None
+        else:
+            multi_speaker_model_infos = [model_info for model_info in self.read_multi_speaker_model_infos()
+                                         if model_info['Model Name'] == multi_speaker_model_name]
+            if len(multi_speaker_model_infos) == 0:
+                raise Exception(str(multi_speaker_model_name) + ' was not found in multi_speaker_models.json, but is '
+                                'specified as a dependency for ' + character_model_info['Model Name'] + ' in '
+                                'character_models.json')
+            if len(multi_speaker_model_infos) > 1:
+                raise Exception(str(multi_speaker_model_name) + ' has multiple entries in multi_speaker_models.json. '
+                                'Only one is allowed.')
+            return multi_speaker_model_infos[0]
 
     def scale_bytes(self, size_in_bytes):
         # Convert the given number of bytes into a more human-readable number by scaling it to kB, MB, GB, etc.
@@ -229,4 +279,24 @@ class AbstractTab(ABC):
             return str(scaled_to_zero_decimals[index]) + ' ' + scales[index][1]
         return scaled_to_two_decimals + ' ' + scales[index][1]
 
+    def read_character_model_infos(self):
+        return self.read_json_file('character_models.json')
+
+    def read_multi_speaker_model_infos(self):
+        return self.read_json_file('multi_speaker_models.json')
+
+    def read_json_file(self, filename):
+        # Read a json file from this architecture's subdirectory
+        directory = self.get_dir_of_extending_class_module()
+        json_path = os.path.join(directory, filename)
+        with open(json_path, 'r') as file:
+            file_contents = json.load(file)
+        return file_contents
+
+    def get_dir_of_extending_class_module(self):
+        # Gets the directory of the module where the concrete class is defined. For example, if ctt is an instance of
+        # ControllableTalknetTab, then ctt.get_module_dir_of_extending_class() will return a path like
+        # /<path-to-hay_say>/architectures/controllable_talknet/
+        path_to_module_of_extending_class = sys.modules[self.__module__].__file__
+        return os.path.dirname(path_to_module_of_extending_class)
 

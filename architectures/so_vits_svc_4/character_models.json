@@ -1,0 +1,29 @@
+[
+    {
+        "Model Name": "Apple Bloom (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Apple%20Bloom%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 39
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    }
+]
+

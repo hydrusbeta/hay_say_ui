@@ -55,13 +55,14 @@ def generate_download_callback(tab):
                 Output(tab.id + '-download-progress', 'value'),
                 Output(tab.id + '-download-checklist', 'options'),
                 Output(tab.id + '-download-checklist', 'value', allow_duplicate=True),
-                Output(tab.input_ids[0], 'options')],  # character dropdown
+                Output(tab.input_ids[0], 'options'),  # character dropdown,
+                Output(tab.id + '-download-progress-spinner', 'children')],
         inputs=[Input(tab.id + '-download-button', 'n_clicks'),
                 State(tab.id + '-download-checklist', 'value')],
         running=[(Output(tab.id + '-download-button', 'hidden'), True, False),
                  (Output(tab.id + '-cancel-download-button', 'hidden'), False, True),
                  (Output(tab.id + '-download-text', 'hidden'), False, True),
-                 (Output(tab.id + '-download-progress', 'hidden'), False, True),
+                 (Output(tab.id + '-download-progress-container', 'hidden'), False, True),
                  (Output(tab.id + '-download-checklist', 'options'), tab.downloadable_characters(disabled=True), tab.downloadable_characters(disabled=False))],
         cancel=[Input(tab.id + '-cancel-download-button', 'n_clicks')],
         progress=[Output(tab.id + '-download-progress', 'value'),
@@ -75,12 +76,10 @@ def generate_download_callback(tab):
         num_characters = str(len(character_names))
         for index, character_name in enumerate(character_names):
             set_progress((str(index), num_characters, 'downloading ' + character_name + '...'))
-            model_info = next((model_info for model_info in tab.model_infos if model_info['Model Name'] == character_name), None)
-            if model_info is None:
-                # todo: this condition should never happen... but what should we do if it somehow does?
-                continue
-            download_character(tab.id, model_info)
-        return '', '0', tab.downloadable_characters(), [], tab.characters  # Reset the progress bar, checklist, and character dropdown
+            character_model_info, multi_speaker_model_info = tab.get_model_infos_for_character(character_name)
+            download_character(tab.id, character_model_info, multi_speaker_model_info)
+        # Reset the progress bar, checklist, and character dropdown. Also activate the spinner
+        return '', '0', tab.downloadable_characters(), [], tab.characters, ''
     return begin_downloading
 
 
@@ -652,16 +651,21 @@ def lookup_filehash(selected_file):
     Output('generate-button', 'disabled'),
     [Input('text-input', 'value'),
      Input('file-dropdown', 'value')] +
-     [Input(tab.id, 'hidden') for tab in available_tabs]
+    [Input(tab.id, 'hidden') for tab in available_tabs] +
+    [Input(tab.input_ids[0], 'value') for tab in available_tabs]
 )
-def disable_generate_button(user_text, selected_file, *hidden_states):
+def disable_generate_button(user_text, selected_file, *hidden_states_and_character_selections):
     # todo: don't disable the generate button. Instead, highlight the requirements text and whatever the user is
     #  missing in red.
+    hidden_states = hidden_states_and_character_selections[:len(available_tabs)]
+    character_selections = hidden_states_and_character_selections[len(available_tabs):]
     tab_object = get_selected_tab_object(hidden_states)
     if tab_object is None:
         return True
     else:
-        return not tab_object.meets_requirements(user_text, selected_file)
+        index = hidden_states.index(False)
+        selected_character = character_selections[index]
+        return not tab_object.meets_requirements(user_text, selected_file, selected_character)
 
 
 # todo: disable the preview button if no audio file is selected.

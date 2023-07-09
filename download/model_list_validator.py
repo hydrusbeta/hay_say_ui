@@ -67,19 +67,52 @@ multi_speaker_schema = {
 }
 
 
-def validate_character_model(character_model):
-    validation_error = None
+def validate_character_model_infos(tab):
+    character_model_infos = tab.read_character_model_infos()
+    validation_message = 'Character models validation for ' + tab.id + ':\n'
+    validation_error = '    passed'
     try:
-        jsonschema.validate(instance=character_model, schema=character_schema)
+        jsonschema.validate(instance=character_model_infos, schema=character_schema)
     except ValidationError as e:
-        validation_error = e.message
-    return validation_error
+        validation_error = '    ' + e.message
+    return validation_message + validation_error
 
 
-def validate_multi_speaker_model(multi_speaker_model):
-    validation_error = None
+def validate_multi_speaker_model_infos(tab):
+    multi_speaker_model_infos = tab.read_multi_speaker_model_infos()
+    validation_message = 'Multispeaker models validation for ' + tab.id + ':\n'
+    validation_error = '    passed'
     try:
-        jsonschema.validate(instance=multi_speaker_model, schema=multi_speaker_schema)
+        jsonschema.validate(instance=multi_speaker_model_infos, schema=multi_speaker_schema)
     except ValidationError as e:
         validation_error = e.message
-    return validation_error
+    return validation_message + validation_error
+
+
+def instantiate_tabs_for_testing():
+    from architectures.controllable_talknet.ControllableTalknetTab import ControllableTalknetTab
+    from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
+    from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
+    from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
+    from architectures.rvc.RvcTab import RvcTab
+    from architectures.sample_architecture.SampleArchitectureTab import SampleTab
+    from dash import Dash
+    app = Dash(__name__)
+    ROOT_DIR = ''
+    return [
+        ControllableTalknetTab(app, ROOT_DIR),
+        SoVitsSvc3Tab(app, ROOT_DIR),
+        SoVitsSvc4Tab(app, ROOT_DIR),
+        SoVitsSvc5Tab(app, ROOT_DIR),
+        RvcTab(app, ROOT_DIR),
+        SampleTab(app, ROOT_DIR)
+    ]
+
+
+if __name__ == '__main__':
+    available_tabs = instantiate_tabs_for_testing()
+    for tab in available_tabs:
+        character_model_infos = tab.read_character_model_infos()
+        print(validate_character_model_infos(tab))
+        multi_speaker_model_infos = tab.read_multi_speaker_model_infos()
+        print(validate_multi_speaker_model_infos(tab))

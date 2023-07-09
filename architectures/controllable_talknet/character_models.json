@@ -1,8 +1,4 @@
-from download.model_list_validator import validate_character_model
-
-# Todo: Replace 1111 with the correct sizes of the files.
-
-character_models = [
+[
     {
         "Model Name": "Apple Bloom",
         "Files": [
@@ -412,8 +408,3 @@ character_models = [
         ]
     }
 ]
-
-if __name__ == '__main__':
-    print('Validating with jsonschema...')
-    character_errors = validate_character_model(character_models)
-    print(character_errors if character_errors else '=== No validation errors for Character Models ===')

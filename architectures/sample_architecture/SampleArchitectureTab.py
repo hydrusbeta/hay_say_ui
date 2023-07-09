@@ -23,7 +23,7 @@ class SampleTab(AbstractTab):
     def requirements(self):
         return super().requirements
 
-    def meets_requirements(self, user_text, user_audio):
+    def meets_requirements(self, user_text, user_audio, selected_character):
         return super().meets_requirements(user_text, user_audio)
 
     @property
@@ -33,14 +33,6 @@ class SampleTab(AbstractTab):
     @property
     def input_ids(self):
         return super().input_ids
-
-    @property
-    def model_infos(self):
-        return super().model_infos
-
-    @property
-    def multi_speaker_models_metadata(self):
-        return super().multi_speaker_models_metadata
 
     def construct_input_dict(self, *args):
         return super().construct_input_dict

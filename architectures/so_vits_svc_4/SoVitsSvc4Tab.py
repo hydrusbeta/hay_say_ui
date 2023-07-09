@@ -52,8 +52,8 @@ class SoVitsSvc4Tab(AbstractTab):
             html.Em('This architecture requires a voice recording input. Text inputs are ignored.')
         )
 
-    def meets_requirements(self, user_text, user_audio):
-        return user_audio is not None
+    def meets_requirements(self, user_text, user_audio, selected_character):
+        return user_audio is not None and selected_character is not None
 
     @property
     def options(self):
@@ -90,7 +90,7 @@ class SoVitsSvc4Tab(AbstractTab):
                 ])
             ], title="The cross fade overlap between voice slices, in seconds."),
             html.Tr([
-                html.Td(html.Label('Character Likeness', htmlFor=self.input_ids[5]), className='option-label'),
+                html.Td(html.Label('Character Similarity', htmlFor=self.input_ids[5]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(type='range', min=0, max=1, value="0", id=self.input_ids[5], step='0.01')),
                     html.Td(html.Div('0', id='character-likeness-number')),
@@ -200,11 +200,3 @@ class SoVitsSvc4Tab(AbstractTab):
             'Reduce Hoarseness': True if args[6] else False,
             'Apply nsf_hifigan': True if args[7] else False,
         }
-
-    @property
-    def model_infos(self):
-        return []
-
-    @property
-    def multi_speaker_models_metadata(self):
-        return []
