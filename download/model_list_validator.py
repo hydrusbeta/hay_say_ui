@@ -1,3 +1,5 @@
+import os.path
+
 import jsonschema
 from jsonschema.exceptions import ValidationError
 
@@ -89,6 +91,25 @@ def validate_multi_speaker_model_infos(tab):
     return validation_message + validation_error
 
 
+def validate_model_dependencies(tab):
+    validation_message = 'Model dependencies validation for ' + tab.id + ':\n'
+    validation_error = '    passed'
+    multi_speaker_model_dependencies = set([character_model_info.get('Multi-speaker Model Dependency')
+                                            for character_model_info in tab.read_character_model_infos()
+                                            if character_model_info.get('Multi-speaker Model Dependency')])
+    multi_speaker_model_names = set([model_info['Model Name'] for model_info in tab.read_multi_speaker_model_infos()])
+    extra_models = multi_speaker_model_names.difference(multi_speaker_model_dependencies)
+    if len(extra_models) != 0:
+        validation_error = 'Warning! The following multi-speaker model(s) do not appear to be used: ' + \
+                           str(extra_models)
+
+    missing_dependencies = multi_speaker_model_dependencies.difference(multi_speaker_model_names)
+    if len(missing_dependencies) != 0:
+        validation_error = 'Error! One or more characters has a dependency on one of the following multi-speaker ' \
+                           'model(s), but the multi-speaker model(s) do not exist! ' + str(missing_dependencies)
+    return validation_message + validation_error
+
+
 def instantiate_tabs_for_testing():
     from architectures.controllable_talknet.ControllableTalknetTab import ControllableTalknetTab
     from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
@@ -112,7 +133,7 @@ def instantiate_tabs_for_testing():
 if __name__ == '__main__':
     available_tabs = instantiate_tabs_for_testing()
     for tab in available_tabs:
-        character_model_infos = tab.read_character_model_infos()
+        print('===== ' + tab.id + ' =====')
         print(validate_character_model_infos(tab))
-        multi_speaker_model_infos = tab.read_multi_speaker_model_infos()
         print(validate_multi_speaker_model_infos(tab))
+        print(validate_model_dependencies(tab))

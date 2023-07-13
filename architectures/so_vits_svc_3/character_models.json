@@ -1,1 +1,329 @@
-[]
+[
+    {
+        "Model Name": "Apple Bloom",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applebloom%203.0/G_55000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_55000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applebloom%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1538
+            }
+        ]
+    },
+    {
+        "Model Name": "Applejack",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applejack%203.0/G_38000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_38000.pth",
+                "Size (bytes)": 699315036
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applejack%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1549
+            }
+        ]
+    },
+    {
+        "Model Name": "Bon Bon",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_sweetiedrops_32khz_4000/G_4000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_4000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_sweetiedrops_32khz_4000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1541
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/z3QDFSbC#LK1piFtq8zr4NQV0SkHFpJuwCbLa6OJMB-Vvtk9HJCA"
+    },
+    {
+        "Model Name": "Discord",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_discord_32khz_49000/G_49000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_49000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_discord_32khz_49000/config-discord.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1537
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/H3AV1Dbb#t75tJkdsgoWlL59vWhNPH1bVfIMBuYx9hVMQtaNYVAg"
+    },
+    {
+        "Model Name": "Fluttershy",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Fluttershy%20(speaking)%203.0/G_58000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_58000.pth",
+                "Size (bytes)": 699315036
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Fluttershy%20(speaking)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1550
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_pinkie_32khz_34000/G_34000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_34000.pth",
+                "Size (bytes)": 699513885
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_pinkie_32khz_34000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1535
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/yn4gmbBA#wlI5sgLzWoUYFlIwtOKGuFHIkYvAmyfA1oxDcSv-Tkg"
+    },
+    {
+        "Model Name": "Rainbow Dash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rainbow%20Dash%20(speaking)%203.0/G_844000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_844000.pth",
+                "Size (bytes)": 699315036
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rainbow%20Dash%20(speaking)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1555
+            }
+        ]
+    },
+    {
+        "Model Name": "Rarity",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rarity%20(speaking)%203.0/G_61000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_61000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rarity%20(speaking)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1546
+            }
+        ]
+    },
+    {
+        "Model Name": "Scootaloo",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Scootaloo%203.0/G_52000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_52000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Scootaloo%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1538
+            }
+        ]
+    },
+    {
+        "Model Name": "Sweetie Belle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Sweetie%20Belle%203.0/G_37000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_37000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Sweetie%20Belle%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1541
+            }
+        ]
+    },
+    {
+        "Model Name": "Trixie Lulamoon",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_trixie_32khz_22000/G_22000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_22000.pth",
+                "Size (bytes)": 699319644
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_trixie_32khz_22000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1564
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/u3Q3yapZ#2-wyakRPAqZUI-_yhUTHyFs2AiBOz7lS_HX-w_U0Np8"
+    },
+    {
+        "Model Name": "Twilight Sparkle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/TwilightSparkle%203.0/G_32000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_32000.pth",
+                "Size (bytes)": 699513885
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/TwilightSparkle%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1544
+            }
+        ]
+    },
+    {
+        "Model Name": "Applejack (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applejack%20(singing%2C%20reduced%20dataset)%203.0/G_12000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_12000.pth",
+                "Size (bytes)": 699315036
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applejack%20(singing%2C%20reduced%20dataset)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1565
+            }
+        ]
+    },
+    {
+        "Model Name": "Cadance (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Cadance%20(singing)%203.0/G_29000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_29000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Cadance%20(singing)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1536
+            }
+        ]
+    },
+    {
+        "Model Name": "Celestia (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Celestia%203.0/G_15000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_15000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Celestia%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1547
+            }
+        ]
+    },
+    {
+        "Model Name": "Luna (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Luna%203.0/G_12000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_12000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Luna%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1533
+            }
+        ]
+    },
+    {
+        "Model Name": "Rarity (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rarity%20(singing%2C%20reduced%20dataset)%203.0/G_17000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_17000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rarity%20(singing%2C%20reduced%20dataset)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1553
+            }
+        ]
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Starlight%20Glimmer%203.0/G_19000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_19000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Starlight%20Glimmer%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1556
+            }
+        ]
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Twilight%20Sparkle%20(singing)/G_32000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_32000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Twilight%20Sparkle%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1642
+            }
+        ]
+    }
+]

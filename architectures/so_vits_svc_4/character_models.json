@@ -24,6 +24,1396 @@
                 "Target": "kmeans_4000.pt"
             }
         ]
+    },
+    {
+        "Model Name": "Applejack (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Applejack%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 40
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Cadance (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Cadance%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 39
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Celestia (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Celestia%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 40
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Fluttershy (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Fluttershy%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 42
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Luna (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Luna%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 36
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 42
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Rainbow Dash (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Rainbow%20Dash%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 44
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Rarity (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Rarity%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 38
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Scootaloo (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Scootaloo%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 41
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Sweetie Belle (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Sweetie%20Belle%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 45
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing, PS1)",
+        "Multi-speaker Model Dependency": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Twilight%20Sparkle%20(singing%2C%20PS1)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 48
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_101600.pth",
+                "Target": "G_101600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Apple Bloom (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applebloom%20(singing)/G_28800.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_28800.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applebloom%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1621
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applebloom%20(singing)/kmeans_1000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_1000.pt",
+                "Size (bytes)": 1540015
+            }
+        ]
+    },
+    {
+        "Model Name": "Applejack (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applejack%20(singing)/G_46400.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_46400.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applejack%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1620
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applejack%20(singing)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15436015
+            }
+        ]
+    },
+    {
+        "Model Name": "Cadance (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Cadance%20(singing)/G_19200.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_19200.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Cadance%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1618
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Cadance%20(singing)/kmeans_1000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_1000.pt",
+                "Size (bytes)": 1542447
+            }
+        ]
+    },
+    {
+        "Model Name": "Celestia (singing)",
+        "Multi-speaker Model Dependency": "Celestia (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Celestia%20(singing)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 40
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_12000.pth",
+                "Target": "G_12000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_1000.pt",
+                "Target": "kmeans_1000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Celestia (singing, alt)",
+        "Multi-speaker Model Dependency": "Celestia (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Celestia%20(singing%2C%20alt)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 42
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_12000.pth",
+                "Target": "G_12000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_1000.pt",
+                "Target": "kmeans_1000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Fluttershy (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Fluttershy%20(singing)/G_30400.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_30400.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Fluttershy%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1621
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Fluttershy%20(singing)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15443759
+            }
+        ]
+    },
+    {
+        "Model Name": "Luna (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Luna%20(singing)/G_28000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_28000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Luna%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1615
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Luna%20(singing)/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6180527
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(singing)/G_40000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_40000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1621
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(singing)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15426927
+            }
+        ]
+    },
+    {
+        "Model Name": "Rainbow Dash (singing, alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(singing%20alt)/G_4000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_4000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(singing%20alt)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1627
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(singing%20alt)/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6178479
+            }
+        ]
+    },
+    {
+        "Model Name": "Rainbow Dash (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(singing)/G_30400.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_30400.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1623
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(singing)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15439535
+            }
+        ]
+    },
+    {
+        "Model Name": "Rarity (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rarity%20(singing)/G_34400.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_34400.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rarity%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1617
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rarity%20(singing)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15448943
+            }
+        ]
+    },
+    {
+        "Model Name": "Scootaloo (singing, alt)",
+        "Multi-speaker Model Dependency": "Starlight and Scootaloo (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Scootaloo%20(singing%2C%20alt)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 41
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_40000.pth",
+                "Target": "G_40000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_1500.pt",
+                "Target": "kmeans_1500.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing, evil)",
+        "Multi-speaker Model Dependency": "Starlight and Scootaloo (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Starlight%20Glimmer%20(singing%2C%20evil)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 47
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_40000.pth",
+                "Target": "G_40000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_1500.pt",
+                "Target": "kmeans_1500.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing, good)",
+        "Multi-speaker Model Dependency": "Starlight and Scootaloo (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Starlight%20Glimmer%20(singing%2C%20good)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 46
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_40000.pth",
+                "Target": "G_40000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_1500.pt",
+                "Target": "kmeans_1500.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Scootaloo (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Scootaloo%20(singing)/G_41000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_41000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Scootaloo%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1621
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Scootaloo%20(singing)/kmeans_2000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_2000.pt",
+                "Size (bytes)": 3082671
+            }
+        ]
+    },
+    {
+        "Model Name": "Sweetie Belle (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Sweetie%20Belle%20(singing)/G_20000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_20000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Sweetie%20Belle%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1624
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Sweetie%20Belle%20(singing)/kmeans_2000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_2000.pt",
+                "Size (bytes)": 3087279
+            }
+        ]
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Twilight%20(singing)/G_45600.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_45600.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Twilight%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1627
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Twilight%20(singing)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15431151
+            }
+        ]
+    },
+    {
+        "Model Name": "Apple Bloom",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applebloom%20(speaking)/G_87000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_87000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applebloom%20(speaking)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1623
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applebloom%20(speaking)/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6159919
+            }
+        ]
+    },
+    {
+        "Model Name": "Applejack",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applejack%20(speaking%20mix)/G_88800.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_88800.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applejack%20(speaking%20mix)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1621
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Applejack%20(speaking%20mix)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15404473
+            }
+        ]
+    },
+    {
+        "Model Name": "Celestia",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Celestia%20(speaking)/G_58000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_58000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Celestia%20(speaking)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1621
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Celestia%20(speaking)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15419887
+            }
+        ]
+    },
+    {
+        "Model Name": "Chrysalis",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Chrysalis/G_39000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_39000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Chrysalis/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1649
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Chrysalis/kmeans_5000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_5000.pt",
+                "Size (bytes)": 23104815
+            }
+        ]
+    },
+    {
+        "Model Name": "Derpy Hooves",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Derpy%20Hooves/G_100000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_100000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Derpy%20Hooves/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1666
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Derpy%20Hooves/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6175535
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsZip/Derpy_100000.zip"
+    },
+    {
+        "Model Name": "Discord",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Discord/G_54000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_54000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Discord/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1609
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Discord/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15419951
+            }
+        ]
+    },
+    {
+        "Model Name": "Fluttershy",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Fluttershy%20(speaking%20mix)/G_70400.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_70400.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Fluttershy%20(speaking%20mix)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1622
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Fluttershy%20(speaking%20mix)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15420527
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(speaking%20mix)/G_56000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_56000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(speaking%20mix)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1622
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(speaking%20mix)/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6158511
+            }
+        ]
+    },
+    {
+        "Model Name": "Rainbow Dash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(speaking)/G_68800.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_68800.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(speaking)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1624
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rainbow%20Dash%20(speaking)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15399407
+            }
+        ]
+    },
+    {
+        "Model Name": "Rarity",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rarity%20(speaking%20mix)/G_40800.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_40800.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rarity%20(speaking%20mix)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1619
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Rarity%20(speaking%20mix)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15406511
+            }
+        ]
+    },
+    {
+        "Model Name": "Saffron Masala",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Saffron%20Masala/G_15000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_15000.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Saffron%20Masala/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1612
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_saffron_44khz_15000_sv4.zip"
+    },
+    {
+        "Model Name": "Shining Armor",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Shining%20Armor/G_25000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_25000.pth",
+                "Size (bytes)": 542789469
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Shining%20Armor/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1581
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_shining_armor_44khz_25000_sv4.zip"
+    },
+    {
+        "Model Name": "Tree Hugger",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Tree%20Hugger/G_69000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_69000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Tree%20Hugger/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1671
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsZip/TreeHugger_69k.zip"
+    },
+    {
+        "Model Name": "Trixie Lulamoon",
+        "Multi-speaker Model Dependency": "Trixie Lulamoon (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Trixie%20Lulamoon/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 39
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_61600.pth",
+                "Target": "G_61600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_5000.pt",
+                "Target": "kmeans_5000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Trixie Lulamoon (singing)",
+        "Multi-speaker Model Dependency": "Trixie Lulamoon (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Trixie%20Lulamoon%20(singing)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 38
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_61600.pth",
+                "Target": "G_61600.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_5000.pt",
+                "Target": "kmeans_5000.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Twilight Sparkle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Twilight%20(speaking%20mix)/G_108800.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_108800.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Twilight%20(speaking%20mix)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1620
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Twilight%20(speaking%20mix)/kmeans_10000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_10000.pt",
+                "Size (bytes)": 15405551
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (angry)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(angry)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 32
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (annoyed)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(annoyed)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 34
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (anxious)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(anxious)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 34
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (fearful)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(fearful)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 31
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (happy)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(happy)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 32
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (neutral)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(neutral)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 34
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (nonverbal)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(nonverbal)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 36
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (sad shouting)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(sad%20shouting)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 39
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (sad)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(sad)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 30
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (shouting)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(shouting)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 35
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (surprised)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(surprised)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 36
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (tired)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(tired)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 32
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (whispering)",
+        "Multi-speaker Model Dependency": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Pinkie%20Pie%20(whispering)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 36
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_166400.pth",
+                "Target": "G_166400.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_600.pt",
+                "Target": "kmeans_600.pt"
+            }
+        ]
     }
 ]
 
