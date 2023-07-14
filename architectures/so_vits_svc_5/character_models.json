@@ -1,1 +1,109 @@
-[]
+[
+    {
+        "Model Name": "Pinkie Pie (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/pinkie%20pie/sovits5.0_2460.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "sovits5.0_2460.pt",
+                "Size (bytes)": 552046166
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/pinkie%20pie/singer/Pinkie%20Pie%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Pinkie Pie (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ]
+    },
+    {
+        "Model Name": "Applejack (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            },
+            {
+                "As": "singer/Applejack (singing).spk.npy",
+                "Target": "singer/Applejack (singing).spk.npy"
+            }
+        ]
+    },
+    {
+        "Model Name": "Fluttershy (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            },
+            {
+                "As": "singer/Fluttershy (singing).spk.npy",
+                "Target": "singer/Fluttershy (singing).spk.npy"
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie Pie (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            },
+            {
+                "As": "singer/Pinkie Pie (singing).spk.npy",
+                "Target": "singer/Pinkie Pie (singing).spk.npy"
+            }
+        ]
+    },
+    {
+        "Model Name": "Rainbow Dash (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            },
+            {
+                "As": "singer/Rainbow Dash (singing).spk.npy",
+                "Target": "singer/Rainbow Dash (singing).spk.npy"
+            }
+        ]
+    },
+    {
+        "Model Name": "Rarity (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            },
+            {
+                "As": "singer/Rarity (singing).spk.npy",
+                "Target": "singer/Rarity (singing).spk.npy"
+            }
+        ]
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            },
+            {
+                "As": "singer/Twilight Sparkle (singing).spk.npy",
+                "Target": "singer/Twilight Sparkle (singing).spk.npy"
+            }
+        ]
+    }
+]

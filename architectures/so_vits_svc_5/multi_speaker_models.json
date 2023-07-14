@@ -1,1 +1,49 @@
-[]
+[
+    {
+        "Model Name": "mane6",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/mane6/sovits5.0_1300.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "sovits5.0_1300.pt",
+                "Size (bytes)": 552047830
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/mane6/singer/Applejack (singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Applejack (singing).spk.npy",
+                "Size (bytes)": 1152
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/mane6/singer/Fluttershy (singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Fluttershy (singing).spk.npy",
+                "Size (bytes)": 1152
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/mane6/singer/Pinkie Pie (singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Pinkie Pie (singing).spk.npy",
+                "Size (bytes)": 1152
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/mane6/singer/Rainbow Dash (singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Rainbow Dash (singing).spk.npy",
+                "Size (bytes)": 1152
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/mane6/singer/Rarity (singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Rarity (singing).spk.npy",
+                "Size (bytes)": 1152
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/mane6/singer/Twilight Sparkle (singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Twilight Sparkle (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ]
+    }
+]
