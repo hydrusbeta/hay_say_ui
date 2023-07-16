@@ -1502,7 +1502,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 2196
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Braeburn",
@@ -1525,7 +1526,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 2195
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Diamond Tiara",
@@ -1548,7 +1550,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1819
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Doctor Whooves",
@@ -1565,7 +1568,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1822
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Gallus",
@@ -1582,7 +1586,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1815
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Sandbar",
@@ -1605,7 +1610,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 2194
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Smolder",
@@ -1628,10 +1634,11 @@
                 "Download As": "config.json",
                 "Size (bytes)": 2194
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
-        "Model Name": "Spike",
+        "Model Name": "Spike (alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Spike/G_1668.pth",
@@ -1651,7 +1658,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 2194
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Sunny Starscout",
@@ -1674,7 +1682,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1813
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Tempest Shadow",
@@ -1697,7 +1706,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1821
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Thorax",
@@ -1720,7 +1730,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1814
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Big McIntosh",
@@ -1773,6 +1784,51 @@
                 "Target": "kmeans.pt"
             }
         ]
+    },
+    {
+        "Model Name": "Mrs. Cake",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/CakeMrs_70/G_70000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_70000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/CakeMrs_70/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1576
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/CakeMrs_70/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6178159
+            }
+        ]
+    },
+    {
+        "Model Name": "Spike",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Spike_45000/G_45000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_45000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Spike_45000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1574
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Spike_45000/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6165743
+            }
+        ]
     }
 ]
-
