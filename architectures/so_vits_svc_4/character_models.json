@@ -952,37 +952,35 @@
         "Model Name": "Saffron Masala",
         "Files": [
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Saffron%20Masala/G_15000.pth",
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Saffron%20Masala%20(15k)/G_15000.pth",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "G_15000.pth",
                 "Size (bytes)": 548687709
             },
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Saffron%20Masala/config.json",
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Saffron%20Masala%20(15k)/config.json",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1612
             }
-        ],
-        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_saffron_44khz_15000_sv4.zip"
+        ]
     },
     {
         "Model Name": "Shining Armor",
         "Files": [
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Shining%20Armor/G_25000.pth",
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Shining%20Armor%20(25k)/G_25000.pth",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "G_25000.pth",
                 "Size (bytes)": 542789469
             },
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Shining%20Armor/config.json",
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Shining%20Armor%20(25k)/config.json",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1581
             }
-        ],
-        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_shining_armor_44khz_25000_sv4.zip"
+        ]
     },
     {
         "Model Name": "Tree Hugger",
@@ -1412,6 +1410,367 @@
             {
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Athena",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Athena%20(25k)/G_25000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_25000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Athena%20(25k)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1575
+            }
+        ]
+    },
+    {
+        "Model Name": "Cadance",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Cadance%20(25k)/G_25000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_25000.pth",
+                "Size (bytes)": 561098249
+            },
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Cadance%20(25k)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1612
+            }
+        ]
+    },
+    {
+        "Model Name": "Arizona (TFH)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/TFH%20Arizona%20(20k)/G_20000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_20000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/TFH%20Arizona%20(20k)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1580
+            }
+        ]
+    },
+    {
+        "Model Name": "Velvet (TFH)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/TFH%20Velvet%20(20k)/G_20000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_20000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/TFH%20Velvet%20(20k)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1579
+            }
+        ]
+    },
+    {
+        "Model Name": "Babs Seed",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Babs%20Seed/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Babs%20Seed/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 9243631
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Babs%20Seed/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2196
+            }
+        ]
+    },
+    {
+        "Model Name": "Braeburn",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Braeburn/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Braeburn/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 9239791
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Braeburn/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2195
+            }
+        ]
+    },
+    {
+        "Model Name": "Diamond Tiara",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Diamond%20Tiara/G_6000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_6000.pth",
+                "Size (bytes)": 542789469
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Diamond%20Tiara/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 3083247
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Diamond%20Tiara/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1819
+            }
+        ]
+    },
+    {
+        "Model Name": "Doctor Whooves",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Doctor%20Whooves/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 180896611
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Doctor%20Whooves/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1822
+            }
+        ]
+    },
+    {
+        "Model Name": "Gallus",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Gallus/G_10000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_10000.pth",
+                "Size (bytes)": 542789469
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Gallus/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1815
+            }
+        ]
+    },
+    {
+        "Model Name": "Sandbar",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Sandbar/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Sandbar/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 9240175
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Sandbar/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2194
+            }
+        ]
+    },
+    {
+        "Model Name": "Smolder",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Smolder/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Smolder/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 9243183
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Smolder/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2194
+            }
+        ]
+    },
+    {
+        "Model Name": "Spike",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Spike/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Spike/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 9240111
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Spike/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2194
+            }
+        ]
+    },
+    {
+        "Model Name": "Sunny Starscout",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Sunny%20Starscout/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 542789469
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Sunny%20Starscout/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 3087407
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Sunny%20Starscout/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1813
+            }
+        ]
+    },
+    {
+        "Model Name": "Tempest Shadow",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Tempest%20Shadow/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 542789469
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Tempest%20Shadow/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 3087599
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Tempest%20Shadow/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1821
+            }
+        ]
+    },
+    {
+        "Model Name": "Thorax",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Thorax/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 542789469
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Thorax/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 3079919
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Thorax/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1814
+            }
+        ]
+    },
+    {
+        "Model Name": "Big McIntosh",
+        "Multi-speaker Model Dependency": "Big McIntosh",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 29
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_1668.pth",
+                "Target": "G_1668.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans.pt",
+                "Target": "kmeans.pt"
+            }
+        ]
+    },
+    {
+        "Model Name": "Babs Seed (alt)",
+        "Multi-speaker Model Dependency": "Big McIntosh",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Babs%20Seed%20(alt)/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 31
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_1668.pth",
+                "Target": "G_1668.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans.pt",
+                "Target": "kmeans.pt"
             }
         ]
     }

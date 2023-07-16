@@ -124,7 +124,7 @@ app.layout = \
             parent_className='dropdown-container-loader'
         ),
         html.H2('Preprocessing'),
-        dcc.Checklist([SHOW_INPUT_OPTIONS_LABEL], id='show-preprocessing-options', value=[]),
+        dcc.Checklist([SHOW_INPUT_OPTIONS_LABEL], id='show-preprocessing-options', value=[], inputStyle={'margin-right': '10px'}),
         # For future ref, this is how you do a vertical checklist with spacing, in case I want to try doing that again:
         # dcc.Checklist(['Debug pitch', 'Reduce noise', 'Crop Silence'], ['Debug pitch'], id='test', labelStyle={'display': 'block', 'margin': '20px'}),
         html.Table([
@@ -182,7 +182,7 @@ app.layout = \
             ),
             html.Table([
                 html.H2('Postprocessing'),
-                dcc.Checklist([SHOW_OUTPUT_OPTIONS_LABEL], id='show-output-options', value=[])
+                dcc.Checklist([SHOW_OUTPUT_OPTIONS_LABEL], id='show-output-options', value=[], inputStyle={'margin-right': '10px'})
                 ],
             ),
             html.Table([

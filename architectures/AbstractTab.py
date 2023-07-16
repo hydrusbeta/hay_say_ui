@@ -149,7 +149,6 @@ class AbstractTab(ABC):
                             html.Div(id=self.id + '-download-size', style={'margin': '5px'}),
                             html.Button('Download Selected Models', style={'margin': '5px'}, id=self.id+'-download-button'),
                             html.Button('Cancel', style={'margin': '5px'}, id=self.id+'-cancel-download-button', hidden=True),
-                            html.Div('', id=self.id + '-download-text', hidden=True),
                             html.Div([
                                 dcc.Loading(html.Div(id=self.id + '-download-progress-spinner'),
                                             parent_style={'display': 'inline-block', 'width': '60px',
@@ -157,6 +156,7 @@ class AbstractTab(ABC):
                                 html.Progress(max='100', value='0', id=self.id + '-download-progress',
                                               style={'display': 'inline-block'}),
                             ], style={'margin-bottom': '20px'}, id=self.id + '-download-progress-container', hidden=True),
+                            html.Div('', id=self.id + '-download-text', hidden=True),
                         ], className='centered')
                     ], is_open=False, id=self.id + "-download-menu", className='model-list-expanded'),
                 ], className='model-list-div'),

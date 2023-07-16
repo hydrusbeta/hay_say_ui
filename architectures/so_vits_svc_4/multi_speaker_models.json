@@ -113,5 +113,28 @@
                 "Size (bytes)": 12016431
             }
         ]
+    },
+    {
+        "Model Name": "Big McIntosh",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 18488879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2216
+            }
+        ]
     }
 ]
