@@ -1,5 +1,5 @@
 from hay_say_common import model_dirs, character_dir, multispeaker_model_dir
-
+from download.Downloader import requests_downloader
 
 from dash import html, dcc, Input, Output, State
 import dash_bootstrap_components as dbc
@@ -9,9 +9,19 @@ from abc import ABC, abstractmethod
 import os
 import sys
 import json
+import tempfile
+import socket
+import shutil
 
-SHOW_CHARACTER_DOWNLOAD_MENU = "▷ Show Character Download Menu"
-HIDE_CHARACTER_DOWNLOAD_MENU = "▽ Hide Character Download Menu"
+SHOW_CHARACTER_DOWNLOAD_MENU = '▷ Show Character Download Menu'
+HIDE_CHARACTER_DOWNLOAD_MENU = '▽ Hide Character Download Menu'
+
+BRANCH = 'In-app-model-download'  # todo: Update this to 'main' before Pull Request to main.
+CHARACTER_JSON_FILENAME = 'character_models.json'
+MULTI_SPEAKER_JSON_FILENAME = 'multi_speaker_models.json'
+BASE_JSON_URL = 'https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/' + BRANCH + '/architectures/{architecture}/'
+BASE_CHARACTER_JSON_URL = BASE_JSON_URL + CHARACTER_JSON_FILENAME
+BASE_MULTISPEAKER_JSON_URL = BASE_JSON_URL + MULTI_SPEAKER_JSON_FILENAME
 
 
 class AbstractTab(ABC):
@@ -19,6 +29,9 @@ class AbstractTab(ABC):
     def __init__(self, app, root_dir):
         self.app = app
         self.root_dir = root_dir
+        if self.internet_available():
+            self.update_multi_speaker_infos_file()
+            self.update_character_infos_file()
         app.callback(
             [Output(self.id+'-download-menu-button', 'children'),
              Output(self.id+'-download-menu', 'is_open')],
@@ -30,6 +43,16 @@ class AbstractTab(ABC):
             Output(self.id + '-download-button', 'disabled'),
             Input(self.id + '-download-checklist', 'value')
         )(self.update_download_size)
+
+    def internet_available(self):
+        # Taken from https://stackoverflow.com/questions/20913411/test-if-an-internet-connection-is-present-in-python
+        try:
+            host = socket.gethostbyname("github.com")
+            s = socket.create_connection((host, 443), timeout=2)
+            s.close()
+            return True
+        except Exception:
+            return False
 
     @property
     @abstractmethod
@@ -270,10 +293,10 @@ class AbstractTab(ABC):
         return scaled_to_two_decimals + ' ' + scales[index][1]
 
     def read_character_model_infos(self):
-        return self.read_json_file('character_models.json')
+        return self.read_json_file(CHARACTER_JSON_FILENAME)
 
     def read_multi_speaker_model_infos(self):
-        return self.read_json_file('multi_speaker_models.json')
+        return self.read_json_file(MULTI_SPEAKER_JSON_FILENAME)
 
     def read_json_file(self, filename):
         # Read a json file from this architecture's subdirectory
@@ -289,4 +312,19 @@ class AbstractTab(ABC):
         # /<path-to-hay_say>/architectures/controllable_talknet/
         path_to_module_of_extending_class = sys.modules[self.__module__].__file__
         return os.path.dirname(path_to_module_of_extending_class)
+
+    def update_multi_speaker_infos_file(self):
+        self.update_model_infos_file(BASE_MULTISPEAKER_JSON_URL, MULTI_SPEAKER_JSON_FILENAME)
+
+    def update_character_infos_file(self):
+        self.update_model_infos_file(BASE_CHARACTER_JSON_URL, CHARACTER_JSON_FILENAME)
+
+    def update_model_infos_file(self, base_url, filename):
+        target_path = os.path.join(self.get_dir_of_extending_class_module(), filename)
+        url = base_url.replace("{architecture}", self.id)
+        with tempfile.TemporaryDirectory() as tempdir:
+            source_path = os.path.join(tempdir, filename)
+            requests_downloader(url, source_path)
+            os.remove(target_path)  # delete the original file
+            shutil.move(source_path, target_path)  # replace the original file
 

@@ -10,6 +10,8 @@ from urllib.parse import urlparse, unquote
 import tempfile
 import subprocess
 import shutil
+import requests
+
 
 class DownloadType(Enum):
     GDOWN = auto()
@@ -173,6 +175,12 @@ def huggingface_hub_downloader(url, target_filepath):
 def mega_downloader(url, target_filepath):
     subprocess.run(['mega-get', url, target_filepath])
     pass
+
+
+def requests_downloader(url, target_filepath):
+    response = requests.get(url)
+    with open(target_filepath, 'wb') as file:
+        file.write(response.content)
 
 
 def parse_huggingface_url(url):
