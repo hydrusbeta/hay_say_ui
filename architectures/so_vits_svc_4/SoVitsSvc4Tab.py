@@ -33,7 +33,7 @@ class SoVitsSvc4Tab(AbstractTab):
 
     @property
     def label(self):
-        return 'so-vits-svc 4.0'
+        return 'so-vits-svc 4.0/4.1'
 
     @property
     def description(self):

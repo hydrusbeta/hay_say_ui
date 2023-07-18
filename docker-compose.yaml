@@ -3,72 +3,83 @@
 # in a launcher UI.
 
 services:
-  # The sole purpose of all the model_pack services is to populate Docker volumes with model files.
+  # Hay Say used to download character models via Docker by downloading special, data-only images called "model
+  # packs". Model packs proved to be inefficient with disk space usage, so Hay Say was updated to allow users to
+  # download individual characters directly from Mega, Google Drive, and Huggingface Hub instead. The models packs
+  # should still work, however, and they are included below (but commented out) if you still want to use them to
+  # download models in bulk. See the Readme file for the list of characters included in each
+  # model pack.
 
   # All current models for Controllable TalkNet
-  controllable_talknet_model_pack_0:
-    image: hydrusbeta/hay_say:controllable_talknet_model_pack_0
-    volumes:
-      - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
+  # controllable_talknet_model_pack_0:
+  #   image: hydrusbeta/hay_say:controllable_talknet_model_pack_0
+  #   volumes:
+  #     - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
 
   # Talking models for so-vits-svc 3.0
-  so_vits_svc_3_model_pack_0:
-    image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_0
-    volumes:
-      - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+  # so_vits_svc_3_model_pack_0:
+  #   image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_0
+  #   volumes:
+  #     - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
 
-  # Singing models for so-vits-svc 3.0. They are not included by default. Uncomment this section to download them.
-  #so_vits_svc_3_model_pack_1:
-  #  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1
-  #  volumes:
-  #    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
+  # Singing models for so-vits-svc 3.0.
+  # so_vits_svc_3_model_pack_1:
+  #   image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1
+  #   volumes:
+  #     - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
 
   # Talking models for so-vits-svc 4.0.
-  so_vits_svc_4_model_pack_0:
-    image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_0
-    volumes:
-      - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
+  # so_vits_svc_4_model_pack_0:
+  #   image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_0
+  #   volumes:
+  #     - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
 
-  # Singing models for so-vits-svc 4.0. They are not included by default. Uncomment this section to download them.
-  #so_vits_svc_4_model_pack_1:
+  # Singing models for so-vits-svc 4.0.
   #  image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_1
   #  volumes:
   #    - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
 
-  # Multi-speaker so-vits-svc 4.0 model for Pinkie Pie's various emotions. It is not included by default. Uncomment
-  # this section to download it.
-  #so_vits_svc_4_model_pack_2:
-  #  image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_2
-  #  volumes:
-  #    - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
+  # Multi-speaker so-vits-svc 4.0 model for Pinkie Pie's various emotions.
+  # so_vits_svc_4_model_pack_2:
+  #   image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_2
+  #   volumes:
+  #     - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
 
   # Singing models of the Mane Six for so-vits-svc 5.0
-  so_vits_svc_5_model_pack_0:
-    image: hydrusbeta/hay_say:so_vits_svc_5_model_pack_0
-    volumes:
-      - so_vits_svc_5_model_pack_0:/root/hay_say/so_vits_svc_5_model_pack_0
+  # so_vits_svc_5_model_pack_0:
+  #   image: hydrusbeta/hay_say:so_vits_svc_5_model_pack_0
+  #   volumes:
+  #     - so_vits_svc_5_model_pack_0:/root/hay_say/so_vits_svc_5_model_pack_0
 
   # First group of pony models that were available for RVC
-  rvc_model_pack_0:
-    image: hydrusbeta/hay_say:rvc_model_pack_0
-    volumes:
-      - rvc_model_pack_0:/root/hay_say/rvc_model_pack_0
+  # rvc_model_pack_0:
+  #   image: hydrusbeta/hay_say:rvc_model_pack_0
+  #   volumes:
+  #     - rvc_model_pack_0:/root/hay_say/rvc_model_pack_0
 
-  # Mane Six models
-  rvc_model_pack_1:
-    image: hydrusbeta/hay_say:rvc_model_pack_1
-    volumes:
-      - rvc_model_pack_1:/root/hay_say/rvc_model_pack_1
+  # Mane Six models for RVC
+  # rvc_model_pack_1:
+  #   image: hydrusbeta/hay_say:rvc_model_pack_1
+  #   volumes:
+  #     - rvc_model_pack_1:/root/hay_say/rvc_model_pack_1
 
-  # The Redis image provides an in-memory data store that can be shared between applications
-  # This allows plotly to pass data to background workers
+  # The Redis container provides an in-memory data store that can be shared between applications.
+  # This allows plotly to pass data to background workers.
   # In the future, the audio cache may also utilize redis instead of writing to files.
   redis:
     image: redis
     command: redis-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 30s
 
   # This container runs the main UI
   hay_say_ui:
+    depends_on:
+      - redis
     image: hydrusbeta/hay_say:hay_say_ui
     ports:
       - 6573:6573
@@ -84,16 +95,20 @@ services:
       - rvc_model_pack_0:/root/hay_say/rvc_model_pack_0
       - rvc_model_pack_1:/root/hay_say/rvc_model_pack_1
       - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
+      - models:/root/hay_say/models
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
 
   # This container provides a web service interface to so-vits-svc 3.0.
   so_vits_svc_3_server:
+    depends_on:
+      - redis
     image: hydrusbeta/hay_say:so_vits_svc_3_server
     working_dir: /root/hay_say/so_vits_svc_3
     volumes:
       - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
       - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
+      - models:/root/hay_say/models
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
@@ -108,12 +123,15 @@ services:
 
   # This container provides a web service interface to so-vits-svc 4.0.
   so_vits_svc_4_server:
+    depends_on:
+      - redis
     image: hydrusbeta/hay_say:so_vits_svc_4_server
     working_dir: /root/hay_say/so_vits_svc_4
     volumes:
       - so_vits_svc_4_model_pack_0:/root/hay_say/so_vits_svc_4_model_pack_0
       - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
       - so_vits_svc_4_model_pack_2:/root/hay_say/so_vits_svc_4_model_pack_2
+      - models:/root/hay_say/models
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
@@ -128,10 +146,13 @@ services:
 
   # This container provides a web service interface to so-vits-svc 5.0.
   so_vits_svc_5_server:
+    depends_on:
+      - redis
     image: hydrusbeta/hay_say:so_vits_svc_5_server
     working_dir: /root/hay_say/so_vits_svc_5
     volumes:
       - so_vits_svc_5_model_pack_0:/root/hay_say/so_vits_svc_5_model_pack_0
+      - models:/root/hay_say/models
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
@@ -146,9 +167,12 @@ services:
 
   # This container provides a web service interface to Retrieval-based Voice Conversion (RVC).
   rvc_server:
+    depends_on:
+      - redis
     image: hydrusbeta/hay_say:rvc_server
     ports:
-      # Map port 7865 in case someone want to use the original RVC UI.
+      # Map port 7865 in case someone wants to see the original RVC UI. It's not really usable because it won't see the
+      # model files or reference audio files.
       # Note: The original UI does not start up automatically. It can be manually started by executing the following command:
       # docker exec haysaydockercompose-rvc_server-1 /root/hay_say/.venvs/rvc/bin/python /root/hay_say/rvc/infer-web.py
       - 7865:7865
@@ -156,6 +180,7 @@ services:
     volumes:
       - rvc_model_pack_0:/root/hay_say/rvc_model_pack_0
       - rvc_model_pack_1:/root/hay_say/rvc_model_pack_1
+      - models:/root/hay_say/models
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
@@ -170,6 +195,8 @@ services:
 
   # This container provides a web service interface to Controllable TalkNet.
   controllable_talknet_server:
+    depends_on:
+      - redis
     image: hydrusbeta/hay_say:controllable_talknet_server
     ports:
       # Map port 8050 in case someone want to use the original Controllable TalkNet UI.
@@ -180,6 +207,7 @@ services:
     working_dir: /root/hay_say/controllable_talknet
     volumes:
       - controllable_talknet_model_pack_0:/root/hay_say/controllable_talknet_model_pack_0
+      - models:/root/hay_say/models
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
@@ -202,6 +230,8 @@ volumes:
   rvc_model_pack_0:
   rvc_model_pack_1:
   controllable_talknet_model_pack_0:
+  models:
+    external: true
   custom_models:
     external: true
   audio_cache:

@@ -90,7 +90,7 @@ download_callbacks = [generate_download_callback(tab) for tab in available_tabs]
 # Fun bit of trivia: using a background callback generator like that was only possible starting a few months ago. A bug
 # that interfered with it was fixed in March: https://github.com/plotly/dash/issues/2221
 
-app.layout = \
+main_interface = [
     html.Div([
         html.H1('Hay Say'),
         html.H2('A Unified Interface for Pony Voice Generation', className='subtitle'),
@@ -224,7 +224,10 @@ app.layout = \
         # todo: hide this delete button if there's nothing to delete?
         html.Button('Delete all generated audio', id='delete-postprocessed'),
         html.Div(id='message'),
-    ], id='outer-div')
+    ], id='hay-say-outer-div', className='outer-div')
+]
+
+app.layout = html.Div(main_interface)
 app.title = 'Hay Say'
 
 
@@ -750,6 +753,18 @@ def preprocess_bytes(bytes_raw, sr_raw, semitone_pitch, debug_pitch, reduce_nois
 
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=6573)
+    local_mode = True
+
+    if local_mode:
+        from model_manager import construct_model_manager, register_model_manager_callbacks
+        from toolbar import construct_toolbar, register_toolbar_callbacks
+
+        app_layout = app.layout.children
+        app_layout.append(construct_model_manager(available_tabs))
+        register_model_manager_callbacks(app, available_tabs)
+        app_layout.append(construct_toolbar())
+        register_toolbar_callbacks(app)
+
+    app.run(host='0.0.0.0', port=6573)
 
 

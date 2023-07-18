@@ -129,21 +129,11 @@ class AbstractTab(ABC):
                 html.Div([
                     html.Button(SHOW_CHARACTER_DOWNLOAD_MENU, id=self.id + '-download-menu-button'),
                     dbc.Collapse([
-                        html.Table([
-                            html.Colgroup([
-                                # todo: move styling to a css file
-                                html.Col(span='1', style={'width': '10%'}),
-                                html.Col(span='1', style={'width': '90%'}),
-                            ]),
-                            html.Tr([
-                                html.Td(),
-                                html.Td(dcc.Checklist(options=self.downloadable_characters(),
-                                                      value=[],
-                                                      id=self.id + '-download-checklist',
-                                                      inputStyle={'margin-right': '10px'},
-                                                      labelStyle={'margin-top': '5px'}))
-                            ]),
-                        ]),
+                        # todo: move styling to a css file
+                        dcc.Checklist(options=self.downloadable_characters(),
+                                      value=[],
+                                      id=self.id + '-download-checklist',
+                                      inputClassName='checklist-input-style'),
                         html.Div([
                             html.Br(),
                             html.Div(id=self.id + '-download-size', style={'margin': '5px'}),
