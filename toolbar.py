@@ -1,4 +1,4 @@
-from dash import html, Input, Output, ctx
+from dash import html, Input, Output, ctx, callback
 
 
 def construct_toolbar():
@@ -8,8 +8,8 @@ def construct_toolbar():
     ], id='toolbar', className='toolbar')
 
 
-def register_toolbar_callbacks(app):
-    @app.callback(
+def register_toolbar_callbacks():
+    @callback(
         [Output('manage-models', 'hidden'),
          Output('hay-say', 'hidden'),
          Output('hay-say-outer-div', 'hidden'),

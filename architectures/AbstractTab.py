@@ -1,7 +1,8 @@
 from hay_say_common import model_dirs, character_dir, multispeaker_model_dir
-from download.Downloader import requests_downloader
+import download.Downloader as Downloader
+import util
 
-from dash import html, dcc, Input, Output, State
+from dash import html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 
@@ -10,7 +11,6 @@ import os
 import sys
 import json
 import tempfile
-import socket
 import shutil
 
 SHOW_CHARACTER_DOWNLOAD_MENU = '▷ Show Character Download Menu'
@@ -25,35 +25,6 @@ BASE_MULTISPEAKER_JSON_URL = BASE_JSON_URL + MULTI_SPEAKER_JSON_FILENAME
 
 
 class AbstractTab(ABC):
-
-    def __init__(self, app, root_dir):
-        self.app = app
-        self.root_dir = root_dir
-        if self.internet_available():
-            self.update_multi_speaker_infos_file()
-            self.update_character_infos_file()
-        app.callback(
-            [Output(self.id+'-download-menu-button', 'children'),
-             Output(self.id+'-download-menu', 'is_open')],
-            Input(self.id+'-download-menu-button', 'n_clicks'),
-            State(self.id+'-download-menu', 'is_open'),
-        )(self.toggle_character_download_menu)
-        app.callback(
-            Output(self.id + '-download-size', 'children'),
-            Output(self.id + '-download-button', 'disabled'),
-            Input(self.id + '-download-checklist', 'value')
-        )(self.update_download_size)
-
-    def internet_available(self):
-        # Taken from https://stackoverflow.com/questions/20913411/test-if-an-internet-connection-is-present-in-python
-        try:
-            host = socket.gethostbyname("github.com")
-            s = socket.create_connection((host, 443), timeout=2)
-            s.close()
-            return True
-        except Exception:
-            return False
-
     @property
     @abstractmethod
     def id(self):
@@ -110,12 +81,12 @@ class AbstractTab(ABC):
                     'Yellow Shy',
                     'Good Apple',
                     'Marshmallow'
-                ], value='Purple Smart', className='option-dropdown'))
+                ], value='Purple Smart', className='option-dropdown', id=self.input_ids[0]))
             ]),
             html.Tr([
                 html.Td(html.Label('Set best pony:', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Td(dcc.RadioItems(['Rainbow Dash', 'Rainbow Dash ', 'Rainbow Dash  '],
-                                       id='best-pony', labelClassName='label'))
+                                       id=self.input_ids[1], labelClassName='label'))
             ])
         ], className='spaced-table')
 
@@ -132,7 +103,7 @@ class AbstractTab(ABC):
         # *args will be a list of values the same length of input_ids, in the respective order.
         return dict()
 
-    def downloadable_characters(self, disabled=False):
+    def downloadable_character_options(self, disabled=False):
         # Sorted options for a dcc.Checklist that includes all downloadable characters, minus the ones that are already
         # downloaded. Optionally set disabled=True to disable every option in the checklist.
         full_list = [model_info['Model Name'] for model_info in self.read_character_model_infos()]
@@ -142,18 +113,24 @@ class AbstractTab(ABC):
                 for character in  sorted_characters]
 
     @property
-    def tab_contents(self):
+    def deletable_character_options(self):
+        model_paths_and_sizes = [(dir, util.get_size_of_directory(dir)) for dir in sorted(self.model_directory_paths)]
+        return [{'label': os.path.basename(entry[0]) + ' [' + util.scale_bytes(entry[1]) + ']',
+                 'value': os.path.basename(entry[0])}
+                for entry in model_paths_and_sizes]
+
+    def tab_contents(self, enable_model_management):
         return html.Tr([
             html.Td([
                 html.Tr(self.description),
                 html.Tr(self.requirements)
             ], className='architecture-info'),
-            html.Td([
-                html.Div([
+            html.Td(
+                ([] if not enable_model_management else [html.Div([
                     html.Button(SHOW_CHARACTER_DOWNLOAD_MENU, id=self.id + '-download-menu-button'),
                     dbc.Collapse([
                         # todo: move styling to a css file
-                        dcc.Checklist(options=self.downloadable_characters(),
+                        dcc.Checklist(options=self.downloadable_character_options(),
                                       value=[],
                                       id=self.id + '-download-checklist',
                                       inputClassName='checklist-input-style'),
@@ -172,58 +149,60 @@ class AbstractTab(ABC):
                             html.Div('', id=self.id + '-download-text', hidden=True),
                         ], className='centered')
                     ], is_open=False, id=self.id + "-download-menu", className='model-list-expanded'),
-                ], className='model-list-div'),
-                self.options,
-            ])
+                ], className='model-list-div')]) +
+                [self.options])
         ], id=self.id, hidden=True)
 
     @property
     def characters(self):
         # A sorted list of all the characters available for this architecture.
+        return sorted([os.path.basename(character_path) for character_path in self.model_directory_paths])
+
+    @property
+    def model_directory_paths(self):
+        # A list of all the individual character model folders for this architecture.
         # Loop through all the directories in model_dirs(architecture_name), call os.listdir(model_dir), and flatten the
-        # result into a single list. Character models are expected to be in subdirectories with the characters' names,
-        # so ignore files.
-        # todo: check for missing files and delete any character folders that are missing files (this can happen if a
-        #  download is canceled). Alternatively, modify the Download Selected Models button so that it downloads to a
-        #  temporary directory and moves the directory as the very last step.
-        return sorted(
-            [os.path.basename(character_path)
-             for character_path_list in ([os.path.join(model_dir, character) for character in os.listdir(model_dir)]
-                                         for model_dir in model_dirs(self.id))
-             for character_path in character_path_list if not os.path.isfile(character_path)])
+        # result into a single list. Ignore files; we're only interested in folders that bear character names.
+        return [character_path
+                for character_path_list in ([os.path.join(model_dir, character) for character in os.listdir(model_dir)]
+                                            for model_dir in model_dirs(self.id))
+                for character_path in character_path_list if not os.path.isfile(character_path)]
 
     @property
     def character_dropdown(self):
         return dbc.Select(options=self.characters, value=None if len(self.characters) == 0 else self.characters[0],
                           id=self.input_ids[0], className='option-dropdown')
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     [Output(self.id + '-download-menu-button', 'children'),
-    #      Output(self.id + '-download-menu', 'is_open')],
-    #     Input(self.id + '-download-menu-button', 'n_clicks'),
-    #     State(self.id + '-download-menu', 'is_open'),
-    # )
-    def toggle_character_download_menu(self, n_clicks, is_open):
-        if n_clicks is None:
-            raise PreventUpdate
-        return SHOW_CHARACTER_DOWNLOAD_MENU if is_open else HIDE_CHARACTER_DOWNLOAD_MENU, not is_open
+    def register_callbacks(self, enable_model_management):
+        if enable_model_management:
+            self.register_model_management_callbacks()
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output(self.id + '-download-size', 'children'),
-    #     Output(self.id + '-download-button', 'disabled'),
-    #     Input(self.id + '-download-checklist', 'value'),
-    # )
-    def update_download_size(self, selected_characters):
-        files_and_sizes = {}
-        for character in selected_characters:
-            files_and_sizes |= self.determine_files_required_by_character(character)  # |= performs a PEP 584 Dict union
-        total_size = sum([size for filename, size in files_and_sizes.items()])
-        no_characters_text = 'No additional characters available for download'
-        download_size_text = 'Total Download Size: ' + self.scale_bytes(total_size)
-        displayed_text = no_characters_text if len(self.downloadable_characters()) == 0 else download_size_text
-        return displayed_text, False if selected_characters else True
+    def register_model_management_callbacks(self):
+        @callback(
+            [Output(self.id + '-download-menu-button', 'children'),
+             Output(self.id + '-download-menu', 'is_open')],
+            Input(self.id + '-download-menu-button', 'n_clicks'),
+            State(self.id + '-download-menu', 'is_open'),
+        )
+        def toggle_character_download_menu(n_clicks, is_open):
+            if n_clicks is None:
+                raise PreventUpdate
+            return SHOW_CHARACTER_DOWNLOAD_MENU if is_open else HIDE_CHARACTER_DOWNLOAD_MENU, not is_open
+
+        @callback(
+            Output(self.id + '-download-size', 'children'),
+            Output(self.id + '-download-button', 'disabled'),
+            Input(self.id + '-download-checklist', 'value'),
+        )
+        def update_download_size(selected_characters):
+            files_and_sizes = {}
+            for character in selected_characters:
+                files_and_sizes |= self.determine_files_required_by_character(character)  # |= performs a PEP 584 Dict union
+            total_size = sum([size for filename, size in files_and_sizes.items()])
+            no_characters_text = 'No additional characters available for download'
+            download_size_text = 'Total Download Size: ' + util.scale_bytes(total_size)
+            displayed_text = no_characters_text if len(self.downloadable_character_options()) == 0 else download_size_text
+            return displayed_text, False if selected_characters else True
 
     def determine_files_required_by_character(self, character):
         # Return a dictionary with entries of the form {'<path/to/file>': <file_size_in_bytes>}.
@@ -276,22 +255,6 @@ class AbstractTab(ABC):
                                 'Only one is allowed.')
             return multi_speaker_model_infos[0]
 
-    def scale_bytes(self, size_in_bytes):
-        # Convert the given number of bytes into a more human-readable number by scaling it to kB, MB, GB, etc.
-        # For example, 1234 becomes "1.21 kB"
-        # size_in_bytes must be non-negative. Otherwise, behavior is undefined. The maximum scale is Zettabytes, ZB.
-        scales = [(0, 'bytes'), (10, 'kB'), (20, 'MB'), (30, 'GB'), (40, 'TB'), (50, 'PB'), (60, 'EB'), (70, 'ZB')]
-
-        scaled_to_zero_decimals = [size_in_bytes >> scale[0] for scale in scales] + [0]
-        index = scaled_to_zero_decimals.index(0) - 1
-        index = 0 if index < 0 else index
-        scaled_to_two_decimals = "{:.2f}".format(size_in_bytes / pow(2, scales[index][0]))
-
-        # return a different precision for bytes than for other scales
-        if index == 0:
-            return str(scaled_to_zero_decimals[index]) + ' ' + scales[index][1]
-        return scaled_to_two_decimals + ' ' + scales[index][1]
-
     def read_character_model_infos(self):
         return self.read_json_file(CHARACTER_JSON_FILENAME)
 
@@ -324,7 +287,8 @@ class AbstractTab(ABC):
         url = base_url.replace("{architecture}", self.id)
         with tempfile.TemporaryDirectory() as tempdir:
             source_path = os.path.join(tempdir, filename)
-            requests_downloader(url, source_path)
-            os.remove(target_path)  # delete the original file
+            Downloader.requests_downloader(url, source_path)
+            if os.path.exists(target_path):
+                os.remove(target_path)  # delete the original file
             shutil.move(source_path, target_path)  # replace the original file
 

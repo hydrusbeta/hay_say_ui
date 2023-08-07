@@ -1,4 +1,5 @@
 from hay_say_common import character_dir, multispeaker_model_dir, create_link
+import util
 
 from huggingface_hub import hf_hub_download
 import gdown
@@ -23,10 +24,6 @@ class UnzipType(Enum):
     UNZIP_IN_PLACE = auto()
     FLATTEN = auto()
     REMOVE_OUTERMOST_DIR = auto()
-
-
-def update_download_list():
-    pass
 
 
 def download_character(architecture, character_model_info, multi_speaker_model_info):
@@ -174,7 +171,6 @@ def huggingface_hub_downloader(url, target_filepath):
 
 def mega_downloader(url, target_filepath):
     subprocess.run(['mega-get', url, target_filepath])
-    pass
 
 
 def requests_downloader(url, target_filepath):
@@ -272,3 +268,17 @@ def flatten_directory(target_dir):
 
 def no_unzip(*_):
     pass
+
+
+# === Model lists update logic ===
+
+
+def update_model_lists_if_needed(args, available_tabs):
+    if args.update_model_lists_on_startup and util.internet_available():
+        update_model_lists(available_tabs)
+
+
+def update_model_lists(available_tabs):
+    for tab in available_tabs:
+        tab.update_multi_speaker_infos_file()
+        tab.update_character_infos_file()

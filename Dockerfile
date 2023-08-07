@@ -32,7 +32,7 @@ EXPOSE 6573
 RUN git clone -b main --single-branch -q https://github.com/hydrusbeta/hay_say_ui ~/hay_say/hay_say_ui/
 
 # Start a Celery worker for background callbacks and run the Hay Say Flask server
-CMD ["/bin/sh", "-c", "celery --workdir ~/hay_say/hay_say_ui/ -A main:celery_app worker --loglevel=INFO & python /root/hay_say/hay_say_ui/main.py"]
+CMD ["/bin/sh", "-c", "celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO & python /root/hay_say/hay_say_ui/main.py"]
 
 # Todo: use a production server, like gunicorn
 # CMD gunicorn --workers=? --threads=? --bind 0.0.0.0:6573 python /root/hay_say/hay_say_ui/main.py:app

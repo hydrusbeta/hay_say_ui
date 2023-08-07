@@ -3,28 +3,13 @@ import os
 from architectures.AbstractTab import AbstractTab
 from hay_say_common import get_model_path
 
-from dash import html, dcc, Input, Output
+from dash import html, dcc, Input, Output, callback
 from dash.exceptions import PreventUpdate
 
 import dash_bootstrap_components as dbc
 
 
 class RvcTab(AbstractTab):
-    def __init__(self, app, root_dir):
-        super().__init__(app, root_dir)
-        app.callback(Output('filter-radius-number', 'children'),
-                     Input(self.input_ids[3], 'value'))(self.adjust_filter_radius)
-        app.callback(Output('rvc-character-likeness-number', 'children'),
-                     Input(self.input_ids[4], 'value'))(self.adjust_character_likeness)
-        app.callback(Output('voice-envelope-mix-ratio-number', 'children'),
-                     Input(self.input_ids[5], 'value'))(self.adjust_voice_envelope_mix_ratio)
-        app.callback(Output('voiceless-consonants-protection-ratio-number', 'children'),
-                     Input(self.input_ids[6], 'value'))(self.adjust_voiceless_consonants_protection_ratio)
-        app.callback(Output(self.input_ids[3], 'disabled'),
-                     Input(self.input_ids[2], 'value'))(self.disable_filter_radius)
-        app.callback(Output(self.input_ids[4], 'disabled'),
-                     Input(self.input_ids[0], 'value'))(self.disable_character_likeness)
-
     @property
     def id(self):
         return 'rvc'
@@ -110,65 +95,62 @@ class RvcTab(AbstractTab):
                      "value of 0.5 disables this feature."),
         ], className='spaced-table')
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('filter-radius-number', 'children'),
-    #     Input(self.input_ids[3], 'value')
-    # )
-    def adjust_filter_radius(self, adjustment):
-        return adjustment
+    def register_callbacks(self, enable_model_management):
+        super().register_callbacks(enable_model_management)
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('rvc-character-likeness-number', 'children'),
-    #     Input(self.input_ids[4], 'value')
-    # )
-    def adjust_character_likeness(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+        @callback(
+            Output('filter-radius-number', 'children'),
+            Input(self.input_ids[3], 'value')
+        )
+        def adjust_filter_radius(adjustment):
+            return adjustment
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('voice-envelope-mix-ratio-number', 'children'),
-    #     Input(self.input_ids[5], 'value')
-    # )
-    def adjust_voice_envelope_mix_ratio(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+        @callback(
+            Output('rvc-character-likeness-number', 'children'),
+            Input(self.input_ids[4], 'value')
+        )
+        def adjust_character_likeness(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('voiceless-consonants-protection-ratio-number', 'children'),
-    #     Input(self.input_ids[6], 'value')
-    # )
-    def adjust_voiceless_consonants_protection_ratio(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+        @callback(
+            Output('voice-envelope-mix-ratio-number', 'children'),
+            Input(self.input_ids[5], 'value')
+        )
+        def adjust_voice_envelope_mix_ratio(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output(self.input_ids[3], 'disabled'),
-    #     Input(self.input_ids[2], 'value')
-    # )
-    def disable_filter_radius(self, f0_extraction_method):
-        return not f0_extraction_method == 'harvest'
+        @callback(
+            Output('voiceless-consonants-protection-ratio-number', 'children'),
+            Input(self.input_ids[6], 'value')
+        )
+        def adjust_voiceless_consonants_protection_ratio(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output(self.input_ids[4], 'disabled'),
-    #     Input(self.input_ids[0], 'value')
-    # )
-    def disable_character_likeness(self, character):
-        if character is None:
-            raise PreventUpdate
-        index_path = self.get_index_path(character)
-        return not os.path.isfile(index_path)
+        @callback(
+            Output(self.input_ids[3], 'disabled'),
+            Input(self.input_ids[2], 'value')
+        )
+        def disable_filter_radius(f0_extraction_method):
+            return not f0_extraction_method == 'harvest'
+
+        @callback(
+            Output(self.input_ids[4], 'disabled'),
+            Input(self.input_ids[0], 'value')
+        )
+        def disable_character_likeness(character):
+            if character is None:
+                raise PreventUpdate
+            index_path = self.get_index_path(character)
+            return not os.path.isfile(index_path)
 
     def get_index_path(self, character):
         character_dir = get_model_path(self.id, character)

@@ -1,28 +1,13 @@
 from hay_say_common import get_model_path
 from architectures.AbstractTab import AbstractTab
 
-from dash import html, dcc, Input, Output, State
+from dash import html, dcc, Input, Output, State, callback
 from dash.exceptions import PreventUpdate
 
 import os
 
 
 class SoVitsSvc4Tab(AbstractTab):
-    def __init__(self, app, root_dir):
-        super().__init__(app, root_dir)
-        app.callback(Output('slice-length-number', 'children'),
-                     Input(self.input_ids[3], 'value'))(self.adjust_slice_length)
-        app.callback(Output('cross-fade-number', 'children'),
-                     Input(self.input_ids[4], 'value'))(self.adjust_crossfade_length)
-        app.callback(Output('character-likeness-number', 'children'),
-                     Input(self.input_ids[5], 'value'))(self.adjust_character_likeness)
-        app.callback([Output(self.input_ids[5], 'disabled'),
-                      Output(self.input_ids[5], 'value')],
-                     Input(self.input_ids[0], 'value'),
-                     State(self.input_ids[5], 'value'))(self.disable_character_likeness)
-        app.callback(Output(self.input_ids[4], 'disabled'),
-                     Input(self.input_ids[3], 'value'))(self.disable_crossfade_length)
-
     @property
     def id(self):
         return 'so_vits_svc_4'
@@ -116,66 +101,64 @@ class SoVitsSvc4Tab(AbstractTab):
                      'quality for well-trained characters.'),
         ], className='spaced-table')
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('slice-length-number', 'children'),
-    #     Input(self.input_ids[3], 'value')
-    # )
-    def adjust_slice_length(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+    def register_callbacks(self, enable_model_management):
+        super().register_callbacks(enable_model_management)
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('cross-fade-number', 'children'),
-    #     Input(self.input_ids[4], 'value')
-    # )
-    def adjust_crossfade_length(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+        @callback(
+            Output('slice-length-number', 'children'),
+            Input(self.input_ids[3], 'value')
+        )
+        def adjust_slice_length(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('character-likeness-number', 'children'),
-    #     Input(self.input_ids[5], 'value')
-    # )
-    def adjust_character_likeness(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+        @callback(
+            Output('cross-fade-number', 'children'),
+            Input(self.input_ids[4], 'value')
+        )
+        def adjust_crossfade_length(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     [Output(self.input_ids[5], 'disabled'),
-    #      Output(self.input_ids[5], 'value')
-    #     Input(self.input_ids[0], 'value'),
-    #     State(self.input_ids[5], 'value')
-    # )
-    def disable_character_likeness(self, character, current_character_likeness):
-        # todo: Account for the possibility of multiple kmeans models for multi-speaker models
-        if character is None:
-            raise PreventUpdate
-        character_dir = get_model_path(self.id, character)
-        potential_names = [file for file in os.listdir(character_dir) if file.startswith('kmeans')]
-        if len(potential_names) == 0:
-            return True, 0
-        else:
-            return False, current_character_likeness
+        @callback(
+            Output('character-likeness-number', 'children'),
+            Input(self.input_ids[5], 'value')
+        )
+        def adjust_character_likeness(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output(self.input_ids[4], 'disabled'),
-    #     Input(self.input_ids[3], 'value')
-    # )
-    def disable_crossfade_length(self, slice_length):
-        if slice_length is None:
-            raise PreventUpdate
-        return float(slice_length) < 0.01
+        @callback(
+            [Output(self.input_ids[5], 'disabled'),
+             Output(self.input_ids[5], 'value')],
+            Input(self.input_ids[0], 'value'),
+            State(self.input_ids[5], 'value')
+        )
+        def disable_character_likeness(character, current_character_likeness):
+            # todo: Account for the possibility of multiple kmeans models for multi-speaker models
+            if character is None:
+                raise PreventUpdate
+            character_dir = get_model_path(self.id, character)
+            potential_names = [file for file in os.listdir(character_dir) if file.startswith('kmeans')]
+            if len(potential_names) == 0:
+                return True, 0
+            else:
+                return False, current_character_likeness
+
+        @callback(
+            Output(self.input_ids[4], 'disabled'),
+            Input(self.input_ids[3], 'value')
+        )
+        def disable_crossfade_length(slice_length):
+            if slice_length is None:
+                raise PreventUpdate
+            return float(slice_length) < 0.01
 
     @property
     def input_ids(self):

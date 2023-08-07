@@ -117,16 +117,13 @@ def instantiate_tabs_for_testing():
     from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
     from architectures.rvc.RvcTab import RvcTab
     from architectures.sample_architecture.SampleArchitectureTab import SampleTab
-    from dash import Dash
-    app = Dash(__name__)
-    ROOT_DIR = ''
     return [
-        ControllableTalknetTab(app, ROOT_DIR),
-        SoVitsSvc3Tab(app, ROOT_DIR),
-        SoVitsSvc4Tab(app, ROOT_DIR),
-        SoVitsSvc5Tab(app, ROOT_DIR),
-        RvcTab(app, ROOT_DIR),
-        SampleTab(app, ROOT_DIR)
+        ControllableTalknetTab(),
+        SoVitsSvc3Tab(),
+        SoVitsSvc4Tab(),
+        SoVitsSvc5Tab(),
+        RvcTab(),
+        SampleTab()
     ]
 
 

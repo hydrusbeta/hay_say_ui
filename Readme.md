@@ -38,7 +38,7 @@ I also tested Hay Say on MacOS 13.3.1 (Ventura) with Apple Silicon M2. I was una
 	If you get a popup window stating "Docker Desktop requires a newer WSL kernel version", open a command prompt, execute the following command, and then start docker desktop again:
 	`wsl --update`
 3. Open a command prompt and execute the following commands:
-```
+```commandline
 curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 docker volume create custom_models
 docker volume create audio_cache
@@ -62,7 +62,7 @@ To start Hay Say again, first make sure that the Docker Engine is running. You c
 ![image showing the Docker whale icon in a Windows Taskbar](documentation%20images/windows%20docker%20icon.png)  
 If it is not running, you can start it by launching Docker Desktop. 
 Then, open Command Prompt and type the following command:
-```
+```commandline
 docker compose up
 ```
 Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when you execute that command. cd to that directory first if necessary.
@@ -74,7 +74,7 @@ Note: you must be in the folder where docker-compose.yaml is located (you downlo
 Note: Docker usually needs to be run as a superuser. However, it is possible to install it in a way that lets you run it in rootless mode (see https://docs.docker.com/engine/security/rootless). Hay Say has not been tested in a rootless configuration.
 
 2. Open a terminal and execute the following commands:
-```
+```commandline
 wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 sudo docker volume create custom_models
 sudo docker volume create audio_cache
@@ -92,7 +92,7 @@ To stop Hay Say, go to the terminal where you ran "docker compose up" earlier an
 
 #### Starting Hay Say Again 
 To start Hay Say again, open a terminal and type the following command:
-```
+```commandline
 sudo docker compose up
 ```
 Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 2 above) when you execute that command. cd to that directory first if necessary.
@@ -107,7 +107,7 @@ Important! Hay Say did not run well on Apple Silicon during my testing. See "A N
 	https://www.docker.com/
 2. Start Docker Desktop and wait until it has finished loading.
 3. Open a terminal and execute the following commands:
-```
+```commandline
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 docker volume create custom_models
 docker volume create audio_cache
@@ -130,7 +130,7 @@ To start Hay Say again, first make sure that the Docker Engine is running. You c
 ![image showing the Docker whale icon in a MacOS Taskbar](documentation%20images/macOS%20docker%20icon.png)  
 If it is not running, you can start it by launching Docker Desktop
 Then open a terminal and type the following command
-```
+```commandline
 sudo docker compose up
 ```
 Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when you execute that command. cd to that directory first if necessary.
@@ -145,15 +145,15 @@ file. If you made any edits to your old docker-compose file (e.g. to make it dow
 you will need to make the same edits to the new file:
 
 Linux:
-```
+```commandline
 wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml  
 ```
 Windows:
-```
+```commandline
 curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 ```
 MacOS:
-```
+```commandline
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 ```
 ### 2. Pull the latest images
@@ -161,13 +161,13 @@ Next, execute the following commands to make sure that your containers are stopp
 start Hay Say again:  
 
 Linux:
-```
+```commandline
 sudo docker compose stop
 sudo docker compose pull
 sudo docker compose up
 ```
 Windows and MacOS:
-```
+```commandline
 docker compose stop
 docker compose pull
 docker compose up
@@ -185,14 +185,14 @@ configure Hay Say to download additional model packs by editing the docker-compo
 
 For example, singing models for so-vits-svc 3.0 and 4.0 are not downloaded by default. To download the so-vits-svc 3.0 
 singing models, uncomment (remove the hashtag at the start of) the following lines:
-```
+```yaml
 #so_vits_svc_3_model_pack_1:  
 #  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1  
 #  volumes:  
 #    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1  
 ```
 To download the so-vits-svc 4.0 singing models, uncomment (remove the hashtag at the start of) the following lines:
-```
+```yaml
 #so_vits_svc_4_model_pack_1:
 #  image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_1
 #  volumes:
@@ -216,17 +216,17 @@ Be sure to save the file, then restart Hay Say (type ctrl+c in Hay Say's termina
 If you have acquired or trained a model that is not included with Hay Say, you can add it to Hay Say by copying it to the custom models folder inside the main docker container. 
 1. First, make sure Hay Say is running. 
 2. Next, create a folder for each of the architectures within the custom_models folder by executing the following commands in a new terminal (or Command Prompt if you are using Windows):
-```
+```commandline
 docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_3
 docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_4
 docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/controllable_talknet
 ```
 3. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 model, you can copy it by executing the following on Linux or MacOS:
-```
+```commandline
 docker cp ~/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
 ```
 or the following command on Windows:
-```
+```commandline
 docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
 ```
 Note: The dot at the end of "~/Desktop/Rainbowshine_Custom/." is not a typo, so don't leave it out. It instructs Docker to copy all the contents of the Rainbowshine_Custom folder.  
@@ -236,7 +236,7 @@ Note #2: I recommend that you name the folder with "_Custom" appended to the end
 
 ### Enabling GPU Integration
 GPU integration is turned off by default in Hay Say. If you have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml file. There are 3 places (one for each architecture) where you will need to uncomment several lines. i.e., change this:
-```
+```yaml
 # resources:
 #   reservations:
 #     devices:
@@ -245,7 +245,7 @@ GPU integration is turned off by default in Hay Say. If you have a Cuda-capable 
 #         capabilities: [gpu]
 ```
 To this:
-```
+```yaml
 resources:
   reservations:
     devices:
@@ -259,7 +259,7 @@ for each architecture.
 You can edit the docker-compose.yaml file so that only specific architecutres are downloaded. The UI will still show tabs for all architectures, but will throw an error if you try to generate audio for an architecture which you didn't download. 
 
 If you don't want to install so-vits-svc 3.0, for example, comment out the following lines in docker-compose.yaml by adding a hashtag character (#) in front of them before you run the "docker compose up" command for the first time:
-```
+```yaml
 so_vits_svc_3_server:
   image: hydrusbeta/hay_say:so_vits_svc_3_server
   working_dir: /root/hay_say/so_vits_svc_3
@@ -270,12 +270,222 @@ so_vits_svc_3_server:
     - audio_cache:/root/hay_say/audio_cache
 ```
 If you do that, you should also comment out the following lines too so you don't download all the models for so-vits-svc 3.0:
-```
+```yaml
 so_vits_svc_3_model_pack_0:
   image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_0
   volumes:
     - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
 ```
+
+### Reducing Disk Space usage
+There are a couple of ways you can reduce the disk usage of Hay Say. 
+
+Important! Windows users must complete additional steps to free disk space after following any of these methods. See 
+[Additional Required Steps for Windows Users](#additional-required-steps-for-windows-users).
+
+#### Method 1: Deleting characters
+Launch Hay Say and click on the "Manage Models" button at the top of the screen.
+![Screenshot of Hay Say showing the "Manage Models" button in the toolbar](documentation%20images/ManageModelsInToolbar.png)
+
+This will open a screen where you can delete characters from different architectures.
+
+#### Method 2: Deleting architectures
+By default, Hay Say downloads all supported AI architectures. This currently includes Controllable TalkNet, so-vits-svc 
+3.0, so-vits-svc 4.0, so-vits-svc 5.0, and RVC. Each of those take about 10GB of disk space. It is possible to delete 
+architectures to save space. First, you must disable the architecture so that Hay Say does not automatically re-download 
+it. Open the docker-compose.yaml file and look for sections named like architectureName_server. For example, here is 
+the section that defines the so-vits-svc 3.0 server:
+```yaml
+  # This container provides a web service interface to so-vits-svc 3.0.
+  so_vits_svc_3_server:
+    depends_on:
+      - redis
+    image: hydrusbeta/hay_say:so_vits_svc_3_server
+    working_dir: /root/hay_say/so_vits_svc_3
+    volumes:
+      - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+      - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
+      - models:/root/hay_say/models
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for so-vits-svc 3.0 if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+```
+You can disable so-vits-svc 3.0 by commenting out this section, i.e., add hashtags at the beginnings of the lines to 
+make it look like this: 
+```yaml
+  # This container provides a web service interface to so-vits-svc 3.0.
+  # so_vits_svc_3_server:
+    # depends_on:
+    #   - redis
+    # image: hydrusbeta/hay_say:so_vits_svc_3_server
+    # working_dir: /root/hay_say/so_vits_svc_3
+    # volumes:
+    #   - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+    #   - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
+    #   - models:/root/hay_say/models
+    #   - custom_models:/root/hay_say/custom_models
+    #   - audio_cache:/root/hay_say/audio_cache
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for so-vits-svc 3.0 if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+```
+Next, you can delete the Docker image for so-vits-svc 3.0 to free disk space. Open a command prompt or terminal and 
+execute the following command to list all containers:
+```commandline
+docker container ls -a
+```
+The output should be similar to the following:
+```commandline
+CONTAINER ID   IMAGE                                                  COMMAND                  CREATED       STATUS                              PORTS     NAMES
+4d3098ae4c2f   hydrusbeta/hay_say:so_vits_svc_3_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_3_server-1
+0c6c9eac8573   hydrusbeta/hay_say:so_vits_svc_5_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_5_server-1
+7defd670649c   hydrusbeta/hay_say:controllable_talknet_server         "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-controllable_talknet_server-1
+9b85ad39fea9   hydrusbeta/hay_say:so_vits_svc_4_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_4_server-1
+48bc80452718   hydrusbeta/hay_say:rvc_server                          "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-rvc_server-1
+d0343f8f00d4   hydrusbeta/hay_say:hay_say_ui                          "/bin/sh -c 'python …"   9 days ago    Exited (137) 9 days ago                       hay_say-hay_say_ui-1
+d82816c5889a   redis                                                  "docker-entrypoint.s…"   9 days ago    Exited (0) 9 days ago                         hay_say-redis-1
+c26692c3240b   hydrusbeta/hay_say:so_vits_svc_4_model_pack_1          "/bin/sh"                9 days ago    Exited (0) 9 days ago                         hay_say-so_vits_svc_4_model_pack_1-1
+e49ad2b1ff83   hydrusbeta/hay_say:so_vits_svc_3_model_pack_1          "/bin/sh"                9 days ago    Exited (0) 9 days ago                         hay_say-so_vits_svc_3_model_pack_1-1
+35913b4b7f7e   hydrusbeta/hay_say:so_vits_svc_4_model_pack_2          "/bin/sh"                9 days ago    Exited (0) 9 days ago                         hay_say-so_vits_svc_4_model_pack_2-1
+fd2f36c568e3   hydrusbeta/hay_say:so_vits_svc_3_model_pack_0          "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-so_vits_svc_3_model_pack_0-1
+feb9c22c9d1b   hydrusbeta/hay_say:controllable_talknet_model_pack_0   "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-controllable_talknet_model_pack_0-1
+d3c8114e4639   hydrusbeta/hay_say:so_vits_svc_5_model_pack_0          "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-so_vits_svc_5_model_pack_0-1
+3830263165be   hydrusbeta/hay_say:so_vits_svc_4_model_pack_0          "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-so_vits_svc_4_model_pack_0-1
+9c5f0eb3478a   hydrusbeta/hay_say:rvc_model_pack_0                    "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-rvc_model_pack_0-1
+d4824c05694a   hydrusbeta/hay_say:rvc_model_pack_1                    "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-rvc_model_pack_1-1
+```
+In the NAMES column, look for the name of the architecture you want to delete, followed by "_server". In this case, we 
+have hay_say-**so_vits_svc_3_server**-1. Delete that container by executing the following command:
+```commandline
+docker container rm <name of the container you want to delete>
+```
+In this case,
+```commandline
+docker container rm hay_say-so_vits_svc_3_server-1
+```
+
+Next, execute the following command to list all Docker images:
+```commandline
+docker image ls
+```
+The output should be similar to the following:
+```commandline
+REPOSITORY               TAG                                 IMAGE ID       CREATED        SIZE
+redis                    latest                              8e69fcb59ff4   5 weeks ago    130MB
+hydrusbeta/hay_say       hay_say_ui                          381f9d276433   6 weeks ago    1.47GB
+hydrusbeta/hay_say       rvc_server                          a619e2e6e6ee   6 weeks ago    11.1GB
+hydrusbeta/hay_say       rvc_model_pack_0                    032a923041bf   6 weeks ago    1.34GB
+hydrusbeta/hay_say       so_vits_svc_5_server                2b15ea8db246   8 weeks ago    10GB
+hydrusbeta/hay_say       so_vits_svc_5_model_pack_0          65410b0d89b7   8 weeks ago    1.11GB
+hydrusbeta/hay_say       controllable_talknet_server         65bfaae29689   2 months ago   8.13GB
+hydrusbeta/hay_say       so_vits_svc_4_server                4bae6175c9d4   2 months ago   6.89GB
+hydrusbeta/hay_say       so_vits_svc_3_server                e3224b5a2c79   2 months ago   6.12GB
+hydrusbeta/hay_say       so_vits_svc_4_model_pack_0          8f73a6838a1d   2 months ago   8.33GB
+hydrusbeta/hay_say       so_vits_svc_3_model_pack_0          8c92571c4566   2 months ago   8.4GB
+hydrusbeta/hay_say       controllable_talknet_model_pack_0   972e53accb49   3 months ago   3.96GB
+```
+Look for the desired architecture name in the "TAG" column and then delete the desired architecture by executing the 
+following 
+command:
+```commandline
+docker image rm hydrusbeta/hay_say:<tag of image you would like to delete>
+```
+So, for so-vits-svc 3.0 for example, that would be:
+```commandline
+docker image rm hydrusbeta/hay_say:so_vits_svc_3_server
+```
+
+#### Additional Required Steps for Windows Users
+
+Windows users must complete additional steps to free disk space after following any of the above methods. You have a 
+couple of options:
+
+###### Option 1: Shrink the WSL2 virtual disk manually
+
+1. Locate the ext.vhdx file on your system. It is typically under 
+C:\\Users\\<your_username>\AppData\Local\Docker\wsl\data
+2. Shut down Hay Say (type CTRL+c into the Command Prompt window that you started Hay Say from).
+3. Stop the Docker Engine by right-clicking on the whale icon in the taskbar and selecting "Quit Docker 
+Desktop". Wait until the whale icon disappears.
+4. Open a command prompt and execute the following commands:  
+    ```
+    wsl --shutdown
+    diskpart
+    ```
+5. That will open a new command prompt window. In that one, execute the following:
+    ```
+    select vdisk file="C:\\path\\to\\your\\vhdx\\file.vhdx"
+    attach vdisk readonly
+    compact vdisk
+    detach vdisk
+    exit
+    ```
+
+If you are running Windows 10 _Pro_, you can use just these two commands instead of all the ones in steps 4 and 
+5:
+    ```
+    wsl --shutdown  
+    optimize-vhd -Path "C:\\path\\to\\your\\vhdx\\file.vhdx" -Mode full
+    ```
+
+###### Option 2: Shrink the WSL2 virtual disk using wslcompact
+
+If you have a drive with enough free space to save a copy of the vhdi file, another options is to use wslcompact. 
+wslcompact saves a copy of the vhdi file first, operates on the copy, and then overwrites the original vhdi file if the 
+operation is successful
+
+1. Install [wslcompact](https://github.com/okibcn/wslcompact). Below are instructions on how to install it as a Scoop 
+app.
+   1. Open a PowerShell window and execute the following to install wslcompact as a Scoop app:
+       ```commandline
+       irm get.scoop.sh | iex
+       scoop bucket add .oki https://github.com/okibcn/Bucket
+       scoop install wslcompact
+       ```
+2. If your primary drive does not have enough space to save a copy of the vhdi file, set the "TEMP" environment 
+variable to a folder on a drive with enough space. For example, if you have space on drive letter Z:
+    ```commandline
+   $env:TEMP="Z:/specify/a/folder/on/the/drive" 
+   ```
+3. Shut down Hay Say (type CTRL+c into the Command Prompt window that you started Hay Say from).
+4. Stop the Docker Engine by right-clicking on the whale icon in the taskbar and selecting "Quit Docker 
+Desktop". Wait until the whale icon disappears.
+5. Open a command prompt and execute:
+    ```
+    wslcompact -c -d docker-desktop-data
+    ```
+It is possible that your WSL distro name is different. If the command in step 5 does not work, then execute the 
+following to list all distro names:
+```commandline
+wslcompact -l
+```
+and search for a distro name with the word "docker" or "ubunt" in it.
+
+###### Explanation: 
+Hay Say runs on the Docker Engine. On Windows, Docker typically runs on a virtualization platform called 
+"Windows Subsystem for Linux, version 2", or WSL2, which stores all of its data on a virtual hard disk (a .vhdx 
+file). The vhdx file will automatically grow in size as data is added to it (e.g. when you download a new model 
+in Hay Say), but it will not automatically shrink when you delete files. To reclaim unused disk space from WSL2, 
+you need to manually shrink the .vhdx file. There is an open feature request for Microsoft to make WSL 
+automatically release disk space, which is discussed here:  
+https://github.com/microsoft/WSL/issues/4699  
+
+Linux and MacOS users are unaffected by this issue and should see an immediate increase in disk space after 
+clicking "Delete Selected Models". 
 
 ## The Technical Design of Hay Say
 

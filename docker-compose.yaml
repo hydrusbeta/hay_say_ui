@@ -98,6 +98,13 @@ services:
       - models:/root/hay_say/models
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
+    # Override the CMD in the Docker file to enable model management, update model lists on startup, and automatically
+    # migrate all models to the models folder. If updating model lists on startup causes issues, users can disable it
+    # by removing the --update_model_lists_on_startup flag.
+    command: ["/bin/sh", "-c", "
+              celery --workdir ~/hay_say/hay_say_ui/ -A main:celery_app worker --loglevel=INFO & 
+              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models
+              "]
 
   # This container provides a web service interface to so-vits-svc 3.0.
   so_vits_svc_3_server:

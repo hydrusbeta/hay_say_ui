@@ -4,9 +4,6 @@ from architectures.AbstractTab import AbstractTab
 
 
 class SoVitsSvc3Tab(AbstractTab):
-    def __init__(self, app, root_dir):
-        super().__init__(app, root_dir)
-
     @property
     def id(self):
         return 'so_vits_svc_3'
