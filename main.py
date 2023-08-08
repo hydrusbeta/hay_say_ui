@@ -726,10 +726,13 @@ def construct_main_app(args, available_tabs):
     return app
 
 
-def register_download_callbacks():
+def register_download_callbacks(args):
     # The import statement is located here, to make sure that the download callbacks are not loaded at all unless this
     # method is called.
-    import celery_component
+    from celery_component import ArchitectureSelection
+    # Instantiate ArchitectureSelection to instantiate the download callbacks.
+    ArchitectureSelection(None, args.architectures)
+
 
 def add_model_manager_page(app, available_tabs):
     # The import statement is located here, to make sure that the model_manager module is not loaded at all unless this
@@ -749,11 +752,11 @@ def add_toolbar(app):
 
 def add_model_management_components_if_needed(args, app, available_tabs):
     if args.enable_model_management:
-        add_model_management_components(app, available_tabs)
+        add_model_management_components(args, app, available_tabs)
 
 
-def add_model_management_components(app, available_tabs):
-    register_download_callbacks()
+def add_model_management_components(args, app, available_tabs):
+    register_download_callbacks(args)
     add_model_manager_page(app, available_tabs)
     add_toolbar(app)
 

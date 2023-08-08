@@ -102,8 +102,8 @@ services:
     # migrate all models to the models folder. If updating model lists on startup causes issues, users can disable it
     # by removing the --update_model_lists_on_startup flag.
     command: ["/bin/sh", "-c", "
-              celery --workdir ~/hay_say/hay_say_ui/ -A main:celery_app worker --loglevel=INFO & 
-              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO --include_architecture ControllableTalkNet --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
+              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --architectures ControllableTalkNet SoVitsSvc3 SoVitsSvc4 SoVitsSvc5 Rvc
               "]
 
   # This container provides a web service interface to so-vits-svc 3.0.
