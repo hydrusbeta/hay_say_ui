@@ -1,17 +1,18 @@
-from hay_say_common import character_dir, multispeaker_model_dir, create_link
-import util
-
-from huggingface_hub import hf_hub_download
-import gdown
-
-from enum import Enum, auto
-import zipfile
 import os
-from urllib.parse import urlparse, unquote
-import tempfile
-import subprocess
 import shutil
+import subprocess
+import tempfile
+import traceback
+import zipfile
+from enum import Enum, auto
+from urllib.parse import urlparse, unquote
+
+import gdown
 import requests
+from huggingface_hub import hf_hub_download
+
+import util
+from hay_say_common import character_dir, multispeaker_model_dir, create_link
 
 
 class DownloadType(Enum):
@@ -24,6 +25,15 @@ class UnzipType(Enum):
     UNZIP_IN_PLACE = auto()
     FLATTEN = auto()
     REMOVE_OUTERMOST_DIR = auto()
+
+
+def try_download_character(architecture, character_model_info, multi_speaker_model_info):
+    # Call download_character, returning any error stacktrace as a string
+    try:
+        download_character(architecture, character_model_info, multi_speaker_model_info)
+    except Exception as e:
+        return traceback.format_exc()
+    return ''
 
 
 def download_character(architecture, character_model_info, multi_speaker_model_info):

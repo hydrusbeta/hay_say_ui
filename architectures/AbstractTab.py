@@ -146,7 +146,7 @@ class AbstractTab(ABC):
                                 html.Progress(max='100', value='0', id=self.id + '-download-progress',
                                               style={'display': 'inline-block'}),
                             ], style={'margin-bottom': '20px'}, id=self.id + '-download-progress-container', hidden=True),
-                            html.Div('', id=self.id + '-download-text', hidden=True),
+                            html.Div('', id=self.id + '-download-text'),
                         ], className='centered')
                     ], is_open=False, id=self.id + "-download-menu", className='model-list-expanded'),
                 ], className='model-list-div')]) +

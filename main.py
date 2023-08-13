@@ -268,8 +268,9 @@ def register_main_callbacks(available_tabs):
                                                  output_speed_adjustment)
                 highlight_first = True
             except Exception as e:
-                return 'An error has occurred. Please send the software maintainers the following information (please ' \
-                       'review and remove any private info before sending!): \n\n' + \
+                return 'An error has occurred. Please send the software maintainers the following information as ' \
+                       'well as any recent output in the Command Prompt/terminal (please review and remove any ' \
+                       'private info before sending!): \n\n' + \
                        traceback.format_exc(), 'Generate!'
         else:
             highlight_first = False
