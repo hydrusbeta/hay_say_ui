@@ -273,7 +273,7 @@ def no_unzip(*_):
 # === Model lists update logic ===
 
 
-def update_model_lists_if_needed(args, available_tabs):
+def update_model_lists_if_specified(args, available_tabs):
     if args.update_model_lists_on_startup and util.internet_available():
         update_model_lists(available_tabs)
 

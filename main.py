@@ -765,8 +765,8 @@ if __name__ == '__main__':
     args = parse_arguments()
 
     available_tabs = select_architecture_tabs(args.architectures)
-    Migrator.migrate_models_if_needed(args, available_tabs)
-    Downloader.update_model_lists_if_needed(args, available_tabs)
+    Migrator.migrate_models_if_specified(args, available_tabs)
+    Downloader.update_model_lists_if_specified(args, available_tabs)
     app = construct_main_app(args, available_tabs)
     add_model_management_components_if_needed(args, app, available_tabs)
 
