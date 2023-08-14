@@ -443,10 +443,10 @@ Desktop". Wait until the whale icon disappears.
 
 If you are running Windows 10 _Pro_, you can use just these two commands instead of all the ones in steps 4 and 
 5:
-    ```
-    wsl --shutdown  
-    optimize-vhd -Path "C:\\path\\to\\your\\vhdx\\file.vhdx" -Mode full
-    ```
+   ```
+   wsl --shutdown
+   optimize-vhd -Path "C:\\path\\to\\your\\vhdx\\file.vhdx" -Mode full
+   ```
 
 ###### Option 2: Shrink the WSL2 virtual disk using wslcompact
 
