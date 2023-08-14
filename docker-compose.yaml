@@ -3,12 +3,12 @@
 # in a launcher UI.
 
 services:
-  # Hay Say used to download character models via Docker by downloading special, data-only images called "model
-  # packs". Model packs proved to be inefficient with disk space usage, so Hay Say was updated to allow users to
-  # download individual characters directly from Mega, Google Drive, and Huggingface Hub instead. The models packs
-  # should still work, however, and they are included below (but commented out) if you still want to use them to
-  # download models in bulk. See the Readme file for the list of characters included in each
-  # model pack.
+  # Hay Say used to download character models via Docker by downloading special, data-only images called "model packs".
+  # Model packs proved to be inefficient with disk space usage, so Hay Say was updated to allow users to download
+  # individual characters directly from Mega, Google Drive, and Huggingface Hub instead. The models packs should still
+  # work, however, and they are included below (but commented out) as a fallback in case there is an issue with
+  # downloading models individually. See the Readme file for the list of characters included in each model pack.
+  # Support for model packs will be removed in the future.
 
   # All current models for Controllable TalkNet
   # controllable_talknet_model_pack_0:

@@ -40,6 +40,7 @@ I also tested Hay Say on MacOS 13.3.1 (Ventura) with Apple Silicon M2. I was una
 3. Open a command prompt and execute the following commands:
 ```commandline
 curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+docker volume create models
 docker volume create custom_models
 docker volume create audio_cache
 docker compose up
@@ -76,6 +77,7 @@ Note: Docker usually needs to be run as a superuser. However, it is possible to 
 2. Open a terminal and execute the following commands:
 ```commandline
 wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+sudo docker volume create models
 sudo docker volume create custom_models
 sudo docker volume create audio_cache
 sudo docker compose up
@@ -109,6 +111,7 @@ Important! Hay Say did not run well on Apple Silicon during my testing. See "A N
 3. Open a terminal and execute the following commands:
 ```commandline
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+docker volume create models
 docker volume create custom_models
 docker volume create audio_cache
 docker compose up
@@ -178,60 +181,67 @@ docker compose up
 
 ## Advanced Topics
 
-### Downloading Additional Character Models
-Character models are organized into "model packs". Hay Say only downloads some of these model packs by default. You can 
-configure Hay Say to download additional model packs by editing the docker-compose.yaml file. You will need to 
-"uncomment" the relevant lines. 
+### Using the Model Packs to Download Models in Bulk
+Hay Say used to download character models via Docker by downloading special, data-only images called "model packs".
+Model packs proved to be inefficient with disk space usage, so Hay Say was updated to allow users to download
+individual characters directly from Mega, Google Drive, and Huggingface Hub instead. The existing models packs should 
+still work, however, and are available as a fallback in case there is an issue with downloading models individually. 
+Please note that model packs will be deprecated in the future.
 
-For example, singing models for so-vits-svc 3.0 and 4.0 are not downloaded by default. To download the so-vits-svc 3.0 
-singing models, uncomment (remove the hashtag at the start of) the following lines:
+You can configure Hay Say to download a model pack by "uncommenting" the relevant lines in the docker-compose.yaml file.
+For example, to download the singing models for so-vits-svc 4.0, uncomment (remove the hashtag at the start of) the 
+following lines:
 ```yaml
 #so_vits_svc_3_model_pack_1:  
 #  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1  
 #  volumes:  
 #    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1  
 ```
-To download the so-vits-svc 4.0 singing models, uncomment (remove the hashtag at the start of) the following lines:
+So that they look like this instead:
 ```yaml
-#so_vits_svc_4_model_pack_1:
-#  image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_1
-#  volumes:
-#    - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
+so_vits_svc_3_model_pack_1:  
+  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1  
+  volumes:  
+    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1  
 ```
-Be sure to save the file, then restart Hay Say (type ctrl+c in Hay Say's terminal if it is running and then execute "docker compose up" again)
+Be sure to save the file, then restart Hay Say (type ctrl+c in Hay Say's terminal if it is running and then execute 
+"docker compose up" again). 
 
-|          Model Pack Name          | Included in Default docker-compose.yaml | Characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|:---------------------------------:|:---------------------------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| controllable_talknet_model_pack_0 |           :heavy_check_mark:            | Apple Bloom, Applejack, Applejack (singing), Big McIntosh, Cadance, Celestia, Chrysalis, Cozy Glow, Discord, Fluttershy, Fluttershy (singing), Granny Smith, hifire, hifis, Luna, Maud Pie, Mayor Mare, Pinkie Pie, Pinkie Pie (singing), Rainbow Dash, Rainbow Dash (singing), Rarity, Rarity (singing), Scootaloo, Shining Armor, Spike, Starlight Glimmer, Sunset Shimmer, Sweetie Belle, Tirek, Trixie Lulamoon, Trixie Lulamoon (singing), Twilight Sparkle, Twilight Sparkle (singing), Twilight Sparkle (whispering), Zecora                                                                                                                                                                                                                    |
-|    so_vits_svc_3_model_pack_0     |           :heavy_check_mark:            | Apple Bloom, Applejack, Bon Bon, Discord, Fluttershy, Pinkie Pie, Rainbow Dash, Rarity, Scootaloo, Sweetie Belle, Trixie Lulamoon, Twilight Sparkle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|    so_vits_svc_3_model_pack_1     |                   :x:                   | Applejack (singing), Cadance (singing), Celestia (singing), Luna (singing), Rarity (singing), Starlight Glimmer (singing), Twilight Sparkle (singing)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-|    so_vits_svc_4_model_pack_0     |           :heavy_check_mark:            | Apple Bloom, Applejack, Celestia, Chrysalis, Derpy Hooves, Discord, Fluttershy, Pinkie Pie, Rainbow Dash, Rarity, Saffron Masala, Shining Armor, Tree Hugger, Trixie Lulamoon, Trixie Lulamoon (singing), Twilight Sparkle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|    so_vits_svc_4_model_pack_1     |                   :x:                   | Apple Bloom (singing), Apple Bloom (singing, PS1), Applejack (singing), Applejack (singing, PS1), Cadance (singing), Cadance (singing, PS1), Celestia (singing), Celestia (singing, alt), Celestia (singing, PS1), Fluttershy (singing), Fluttershy (singing, PS1), Luna (singing), Luna (singing, PS1), Pinkie Pie (singing), Pinkie Pie (singing, PS1), Rainbow Dash (singing), Rainbow Dash (singing, alt), Rainbow Dash (singing, PS1), Rarity (singing), Rarity (singing, PS1), Scootaloo (singing), Scootaloo (singing, alt), Scootaloo (singing, PS1), Starlight Glimmer (singing, evil), Starlight Glimmer (singing, good), Sweetie Belle (singing), Sweetie Belle (singing, PS1), Twilight Sparkle (singing), Twilight Sparkle (singing, PS1) |
-|    so_vits_svc_4_model_pack_2     |                   :x:                   | Pinkie Pie (angry), Pinkie Pie (annoyed), Pinkie Pie (anxious), Pinkie Pie (fearful), Pinkie Pie (happy), Pinkie Pie (neutral), Pinkie Pie (nonverbal), Pinkie Pie (sad), Pinkie Pie (sad shouting), Pinkie Pie (shouting), Pinkie Pie (surprised), Pinkie Pie (tired), Pinkie Pie (whispering)                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|    so_vits_svc_5_model_pack_0     |           :heavy_check_mark:            | Applejack (singing, mane6), Fluttershy (singing, mane6), Pinkie Pie (singing), Pinkie Pie (singing, mane6), Rainbow Dash (singing, mane6), Rarity (singing, mane6), Twilight Sparkle (singing, mane6)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-|         rvc_model_pack_0          |           :heavy_check_mark:            | Babs Seed, Big McIntosh, Braeburn, Bunni Bunni, Cozy Glow, Cream Heart, Derpy Hooves, Diamond Tiara, Doctor Whooves, Gallus, Octavia Melody, Thorax, Twilight Sparkle (singing), Vinyl Scratch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|         rvc_model_pack_1          |           :heavy_check_mark:            | Applejack, Applejack (alt), Fluttershy, Fluttershy (alt), Pinkie Pie, Pinkie Pie (alt), Rainbow Dash (alt), Rarity (alt), Twilight Sparkle (alt)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+Here is a table showing which characters are included in each model pack:
+
+|          Model Pack Name          | Characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|:---------------------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| controllable_talknet_model_pack_0 | Apple Bloom, Applejack, Applejack (singing), Big McIntosh, Cadance, Celestia, Chrysalis, Cozy Glow, Discord, Fluttershy, Fluttershy (singing), Granny Smith, hifire, hifis, Luna, Maud Pie, Mayor Mare, Pinkie Pie, Pinkie Pie (singing), Rainbow Dash, Rainbow Dash (singing), Rarity, Rarity (singing), Scootaloo, Shining Armor, Spike, Starlight Glimmer, Sunset Shimmer, Sweetie Belle, Tirek, Trixie Lulamoon, Trixie Lulamoon (singing), Twilight Sparkle, Twilight Sparkle (singing), Twilight Sparkle (whispering), Zecora                                                                                                                                                                                                                    |
+|    so_vits_svc_3_model_pack_0     | Apple Bloom, Applejack, Bon Bon, Discord, Fluttershy, Pinkie Pie, Rainbow Dash, Rarity, Scootaloo, Sweetie Belle, Trixie Lulamoon, Twilight Sparkle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|    so_vits_svc_3_model_pack_1     | Applejack (singing), Cadance (singing), Celestia (singing), Luna (singing), Rarity (singing), Starlight Glimmer (singing), Twilight Sparkle (singing)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|    so_vits_svc_4_model_pack_0     | Apple Bloom, Applejack, Celestia, Chrysalis, Derpy Hooves, Discord, Fluttershy, Pinkie Pie, Rainbow Dash, Rarity, Saffron Masala, Shining Armor, Tree Hugger, Trixie Lulamoon, Trixie Lulamoon (singing), Twilight Sparkle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|    so_vits_svc_4_model_pack_1     | Apple Bloom (singing), Apple Bloom (singing, PS1), Applejack (singing), Applejack (singing, PS1), Cadance (singing), Cadance (singing, PS1), Celestia (singing), Celestia (singing, alt), Celestia (singing, PS1), Fluttershy (singing), Fluttershy (singing, PS1), Luna (singing), Luna (singing, PS1), Pinkie Pie (singing), Pinkie Pie (singing, PS1), Rainbow Dash (singing), Rainbow Dash (singing, alt), Rainbow Dash (singing, PS1), Rarity (singing), Rarity (singing, PS1), Scootaloo (singing), Scootaloo (singing, alt), Scootaloo (singing, PS1), Starlight Glimmer (singing, evil), Starlight Glimmer (singing, good), Sweetie Belle (singing), Sweetie Belle (singing, PS1), Twilight Sparkle (singing), Twilight Sparkle (singing, PS1) |
+|    so_vits_svc_4_model_pack_2     | Pinkie Pie (angry), Pinkie Pie (annoyed), Pinkie Pie (anxious), Pinkie Pie (fearful), Pinkie Pie (happy), Pinkie Pie (neutral), Pinkie Pie (nonverbal), Pinkie Pie (sad), Pinkie Pie (sad shouting), Pinkie Pie (shouting), Pinkie Pie (surprised), Pinkie Pie (tired), Pinkie Pie (whispering)                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|    so_vits_svc_5_model_pack_0     | Applejack (singing, mane6), Fluttershy (singing, mane6), Pinkie Pie (singing), Pinkie Pie (singing, mane6), Rainbow Dash (singing, mane6), Rarity (singing, mane6), Twilight Sparkle (singing, mane6)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|         rvc_model_pack_0          | Babs Seed, Big McIntosh, Braeburn, Bunni Bunni, Cozy Glow, Cream Heart, Derpy Hooves, Diamond Tiara, Doctor Whooves, Gallus, Octavia Melody, Thorax, Twilight Sparkle (singing), Vinyl Scratch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|         rvc_model_pack_1          | Applejack, Applejack (alt), Fluttershy, Fluttershy (alt), Pinkie Pie, Pinkie Pie (alt), Rainbow Dash (alt), Rarity (alt), Twilight Sparkle (alt)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ### Loading Custom Models
-If you have acquired or trained a model that is not included with Hay Say, you can add it to Hay Say by copying it to the custom models folder inside the main docker container. 
+If you have acquired or trained a model that is not included with Hay Say, you can add it to Hay Say by copying it to 
+the relevant characters folder inside the main docker container:  
+/root/hay_say/models/[architecture]/characters/  
+where [architecture] is one of: controllable_talknet, rvc, so_vits_svc_3, so_vits_svc_4, or so_vits_svc_5 
 1. First, make sure Hay Say is running. 
-2. Next, create a folder for each of the architectures within the custom_models folder by executing the following commands in a new terminal (or Command Prompt if you are using Windows):
-```commandline
-docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_3
-docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/so_vits_svc_4
-docker exec hydrusbeta-hay_say_ui-1 mkdir -p /root/hay_say/custom_models/controllable_talknet
-```
-3. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 model, you can copy it by executing the following on Linux or MacOS:
-```commandline
-docker cp ~/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
-```
-or the following command on Windows:
-```commandline
-docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
-```
-Note: The dot at the end of "~/Desktop/Rainbowshine_Custom/." is not a typo, so don't leave it out. It instructs Docker to copy all the contents of the Rainbowshine_Custom folder.  
-Note #2: I recommend that you name the folder with "_Custom" appended to the end as I have done in this example. That will avoid a name clash in case the character is added to one of Hay Say's model packs in the future.  
-4. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
+2. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" 
+   command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 
+   model, you can copy it by executing the following on Linux or MacOS:
+    ```commandline
+    docker cp ~/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/models/so_vits_svc_4/characters/RainbowShine_Custom
+    ```
+    or the following command on Windows:
+    ```commandline
+    docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/models/so_vits_svc_4/characters/RainbowShine_Custom
+    ```
+    Note #1: The dot at the end of "~/Desktop/Rainbowshine_Custom/." is not a typo, so don't leave it out. It instructs 
+    Docker to copy all the contents of the Rainbowshine_Custom folder.  
+    Note #2: I recommend that you name the folder with "_Custom" appended to the end as I have done in this example. 
+    That will avoid a name clash in case the character becomes available for download in the future.  
+3. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
 
 
 ### Enabling GPU Integration
@@ -255,28 +265,6 @@ resources:
 ```
 for each architecture.
 
-### Installing Only Specific Architectures
-You can edit the docker-compose.yaml file so that only specific architecutres are downloaded. The UI will still show tabs for all architectures, but will throw an error if you try to generate audio for an architecture which you didn't download. 
-
-If you don't want to install so-vits-svc 3.0, for example, comment out the following lines in docker-compose.yaml by adding a hashtag character (#) in front of them before you run the "docker compose up" command for the first time:
-```yaml
-so_vits_svc_3_server:
-  image: hydrusbeta/hay_say:so_vits_svc_3_server
-  working_dir: /root/hay_say/so_vits_svc_3
-  volumes:
-    - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
-    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
-    - custom_models:/root/hay_say/custom_models
-    - audio_cache:/root/hay_say/audio_cache
-```
-If you do that, you should also comment out the following lines too so you don't download all the models for so-vits-svc 3.0:
-```yaml
-so_vits_svc_3_model_pack_0:
-  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_0
-  volumes:
-    - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
-```
-
 ### Reducing Disk Space usage
 There are a couple of ways you can reduce the disk usage of Hay Say. 
 
@@ -287,14 +275,14 @@ Important! Windows users must complete additional steps to free disk space after
 Launch Hay Say and click on the "Manage Models" button at the top of the screen.
 ![Screenshot of Hay Say showing the "Manage Models" button in the toolbar](documentation%20images/ManageModelsInToolbar.png)
 
-This will open a screen where you can delete characters from different architectures.
+This will open a screen where you can delete characters.
 
 #### Method 2: Deleting architectures
 By default, Hay Say downloads all supported AI architectures. This currently includes Controllable TalkNet, so-vits-svc 
-3.0, so-vits-svc 4.0, so-vits-svc 5.0, and RVC. Each of those take about 10GB of disk space. It is possible to delete 
-architectures to save space. First, you must disable the architecture so that Hay Say does not automatically re-download 
-it. Open the docker-compose.yaml file and look for sections named like architectureName_server. For example, here is 
-the section that defines the so-vits-svc 3.0 server:
+3.0, so-vits-svc 4.0, so-vits-svc 5.0, and RVC. Each of those take about 10GB. If you want to reclaim some disk space by
+deleting undesired architectures, you must first disable the architecture so that Hay Say does not automatically 
+re-download it. Open the docker-compose.yaml file and look for sections named like architectureName_server. For example,
+here is the section that defines the so-vits-svc 3.0 server:
 ```yaml
   # This container provides a web service interface to so-vits-svc 3.0.
   so_vits_svc_3_server:
@@ -343,7 +331,7 @@ make it look like this:
     #           count: all
     #           capabilities: [gpu]
 ```
-Next, you can delete the Docker image for so-vits-svc 3.0 to free disk space. Open a command prompt or terminal and 
+Next, delete the Docker image for so-vits-svc 3.0 to free disk space. Open a command prompt or terminal and 
 execute the following command to list all containers:
 ```commandline
 docker container ls -a
