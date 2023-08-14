@@ -227,7 +227,26 @@ the relevant characters folder inside the main docker container:
 /root/hay_say/models/[architecture]/characters/  
 where [architecture] is one of: controllable_talknet, rvc, so_vits_svc_3, so_vits_svc_4, or so_vits_svc_5 
 1. First, make sure Hay Say is running. 
-2. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" 
+2. Execute the following command in a terminal or Command Prompt. It will display information about all of the running Docker containers:
+```
+docker container ls
+```
+Note: You may need to expand the command window to properly display the output, which is arranged like a wide table. You should see a column titled "IMAGE" in the output. Look for the entry "hydrusbeta/hay_say:hay_say_ui" and find the corresponding container name under the "NAMES" column. You will need that name in a moment:
+![Screenshots showing one possible output of "docker container ls"](documentation%20images/main%20container%20name.png)
+The name you see might be a little different. For example, another name I have seen on someone else's machine was "hay_say_ui-hay_say_ui-1".  
+3. Create a folder for each of the architectures within the custom_models folder by executing the following commands in a new terminal (or Command Prompt if you are using Windows). Replace [container-name] with the name you found in step 2.:
+```
+docker exec [container-name] -p /root/hay_say/custom_models/so_vits_svc_3
+docker exec [container-name] mkdir -p /root/hay_say/custom_models/so_vits_svc_4
+docker exec [container-name] mkdir -p /root/hay_say/custom_models/so_vits_svc_5
+docker exec [container-name] mkdir -p /root/hay_say/custom_models/controllable_talknet
+docker exec [container-name] mkdir -p /root/hay_say/custom_models/rvc
+```
+4. Arrange and rename your files to match the expected format:  
+![Screenshots showing the expected file structures for each architecture's models](documentation%20images/CustomModelFileOrganization.png)  
+Additional restrictions: 
+   * For all versions of so-vits-svc, only a single speaker name is allowed to appear in config.json (see the "spk" key, usually at the bottom of the file).
+5. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" 
    command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 
    model, you can copy it by executing the following on Linux or MacOS:
     ```commandline
@@ -241,11 +260,11 @@ where [architecture] is one of: controllable_talknet, rvc, so_vits_svc_3, so_vit
     Docker to copy all the contents of the Rainbowshine_Custom folder.  
     Note #2: I recommend that you name the folder with "_Custom" appended to the end as I have done in this example. 
     That will avoid a name clash in case the character becomes available for download in the future.  
-3. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
+6. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
 
 
 ### Enabling GPU Integration
-GPU integration is turned off by default in Hay Say. If you have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml file. There are 3 places (one for each architecture) where you will need to uncomment several lines. i.e., change this:
+GPU integration is turned off by default in Hay Say. This is to prevent an error for users who do not have a Cuda-capable GPU. If you do have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml file. There are several place (one under each architecture) where you will see the following lines:
 ```yaml
 # resources:
 #   reservations:
@@ -254,7 +273,7 @@ GPU integration is turned off by default in Hay Say. If you have a Cuda-capable 
 #         count: all
 #         capabilities: [gpu]
 ```
-To this:
+To enable GPU for that architecture, uncomment those lines. i.e. remove the hashtags so that they look like this instead:
 ```yaml
 resources:
   reservations:
@@ -263,7 +282,6 @@ resources:
         count: all
         capabilities: [gpu]
 ```
-for each architecture.
 
 ### Reducing Disk Space usage
 There are a couple of ways you can reduce the disk usage of Hay Say. 
