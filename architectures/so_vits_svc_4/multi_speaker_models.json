@@ -137,5 +137,22 @@
             }
         ],
         "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+    },
+    {
+        "Model Name": "Daring Do",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/ddm_DaringDo_100k/G_100000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_100000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/ddm_DaringDo_100k/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1670
+            }
+        ]
     }
 ]

@@ -1757,7 +1757,8 @@
                 "As": "kmeans.pt",
                 "Target": "kmeans.pt"
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Babs Seed (alt)",
@@ -1783,7 +1784,8 @@
                 "As": "kmeans.pt",
                 "Target": "kmeans.pt"
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
         "Model Name": "Mrs. Cake",
@@ -1828,6 +1830,205 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6165743
+            }
+        ]
+    },
+    {
+        "Model Name": "Tirek",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Tirek_100k/G_100000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_100000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Tirek_100k/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1610
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Tirek_100k/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 18485679
+            }
+        ]
+    },
+    {
+        "Model Name": "Dark Rainbow Dash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/DRD_60000/G_60000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_60000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/DRD_60000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1576
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/DRD_60000/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6160943
+            }
+        ]
+    },
+    {
+        "Model Name": "Vinyl Scratch",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/DJpon3_V3_120k/G_120000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_120000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/DJpon3_V3_120k/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1614
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/DJpon3_V3_120k/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 18485487
+            }
+        ]
+    },
+    {
+        "Model Name": "Ocellus",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Ocellus/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Ocellus/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2091
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Ocellus/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 9242991
+            }
+        ]
+    },
+    {
+        "Model Name": "Silverstream",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Silverstream/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Silverstream/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2097
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Silverstream/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 9247343
+            }
+        ]
+    },
+    {
+        "Model Name": "Daring Do",
+        "Multi-speaker Model Dependency": "Daring Do",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Daring%20Do/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 31
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/ddm_DaringDo_100k/ddm_DaringDo_kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "ddm_DaringDo_kmeans_4000.pt",
+                "Size (bytes)": 18486319
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_100000.pth",
+                "Target": "G_100000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            }
+        ]
+    },
+    {
+        "Model Name": "Lightning Dust",
+        "Multi-speaker Model Dependency": "Daring Do",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Lightning%20Dust/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 36
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/ddm_DaringDo_100k/ddm_LightningDust_kmeans_3000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "ddm_LightningDust_kmeans_3000.pt",
+                "Size (bytes)": 13867823
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_100000.pth",
+                "Target": "G_100000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            }
+        ]
+    },
+    {
+        "Model Name": "Moon Dancer",
+        "Multi-speaker Model Dependency": "Daring Do",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Moon%20Dancer/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 33
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/ddm_DaringDo_100k/ddm_Moondancer_kmeans_3000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "ddm_Moondancer_kmeans_3000.pt",
+                "Size (bytes)": 13864879
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_100000.pth",
+                "Target": "G_100000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
             }
         ]
     }

@@ -585,5 +585,113 @@
                 "Unzip Strategy": "FLATTEN"
             }
         ]
+    },
+    {
+        "Model Name": "Celestia",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP01Celestia.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP01Celestia.zip",
+                "Size (bytes)": 106972536,
+                "Unzip Strategy": "FLATTEN"
+            }
+        ]
+    },
+    {
+        "Model Name": "Twilight Sparkle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP03TwilightSparkle.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP03TwilightSparkle.zip",
+                "Size (bytes)": 75428356,
+                "Unzip Strategy": "FLATTEN"
+            }
+        ]
+    },
+    {
+        "Model Name": "Rainbow Dash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP05RainbowDash.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP05RainbowDash.zip",
+                "Size (bytes)": 68458741,
+                "Unzip Strategy": "FLATTEN"
+            }
+        ]
+    },
+    {
+        "Model Name": "Rarity",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP06Rarity.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP06Rarity.zip",
+                "Size (bytes)": 74767341,
+                "Unzip Strategy": "FLATTEN"
+            }
+        ]
+    },
+    {
+        "Model Name": "Discord",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP09Discord.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP09Discord.zip",
+                "Size (bytes)": 81233486,
+                "Unzip Strategy": "FLATTEN"
+            }
+        ]
+    },
+    {
+        "Model Name": "Starlight Glimmer",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP10StarlightGlimmer.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP10StarlightGlimmer.zip",
+                "Size (bytes)": 78859076,
+                "Unzip Strategy": "FLATTEN"
+            }
+        ]
+    },
+    {
+        "Model Name": "Button Mash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Button%20Mash/Button%20Mash.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Button%20Mash.pth",
+                "Size (bytes)": 55225115
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Button%20Mash/added_IVF729_Flat_nprobe_1_Button-Mash_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF729_Flat_nprobe_1_Button-Mash_v2.index",
+                "Size (bytes)": 89843739
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C"
+    },
+    {
+        "Model Name": "Yona",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Yona/Yona-thunder-V2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Yona-thunder-V2.pth",
+                "Size (bytes)": 55192782
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Yona/added_IVF869_Flat_nprobe_1_Yona_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF869_Flat_nprobe_1_Yona_v2.index",
+                "Size (bytes)": 107159499
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C"
     }
 ]
