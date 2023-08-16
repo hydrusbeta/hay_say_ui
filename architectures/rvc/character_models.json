@@ -776,5 +776,17 @@
             }
         ],
         "Originally Acquired From": "https://huggingface.co/KenDoStudio/MLP_Sandbar40k/tree/main"
+    },
+    {
+        "Model Name": "Derpy (BaldDumboRat fan VA)",
+        "Files": [
+            {
+                "URL": "https://files.catbox.moe/1xtrz9.zip",
+                "Download With": "WGET",
+                "Download As": "1xtrz9.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 55792327
+            }
+        ]
     }
 ]

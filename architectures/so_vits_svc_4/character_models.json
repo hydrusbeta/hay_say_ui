@@ -2031,5 +2031,28 @@
                 "Target": "config.json"
             }
         ]
+    },
+    {
+        "Model Name": "Derpy Hooves (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Derpy%20Hooves%20(69k)/G_69000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_69000.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Derpy%20Hooves%20(69k)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1620
+            },
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/SV4-M/resolve/main/Derpy%20Hooves%20(69k)/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 18485815
+            }
+        ]
     }
 ]
