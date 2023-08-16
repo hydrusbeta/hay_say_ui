@@ -293,25 +293,6 @@
         "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
     },
     {
-        "Model Name": "Sandbar",
-        "Files": [
-            {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Sandbar/Sandbar.pth",
-                "Download With": "HUGGINGFACE_HUB",
-                "Download As": "Sandbar.pth",
-                "Size (bytes)": 55222703
-            },
-            {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Sandbar/added_IVF597_Flat_nprobe_1_Sandbar_v2.index",
-                "Download With": "HUGGINGFACE_HUB",
-                "Download As": "added_IVF597_Flat_nprobe_1_Sandbar_v2.index",
-                "Size (bytes)": 73550539
-            }
-
-        ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
-    },
-    {
         "Model Name": "Silverstream",
         "Files": [
             {
