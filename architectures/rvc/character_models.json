@@ -693,5 +693,107 @@
             }
         ],
         "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C"
+    },
+    {
+        "Model Name": "G1 Spike",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_g1_spike/resolve/main/MLP_G1_Spike.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_G1_Spike.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 103450883
+            }
+        ]
+    },
+    {
+        "Model Name": "Cheerilee",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Cheerilee/resolve/main/MLP_Cherrilee_v2.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Cherrilee_v2.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 72960664
+            }
+        ]
+    },
+    {
+        "Model Name": "Sunburst",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Sunburst/resolve/main/MLP_Sunburst.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Sunburst.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 122036158
+            }
+        ]
+    },
+    {
+        "Model Name": "Luster Dawn",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_LusterDawn/resolve/main/MLP_Luster_Dawn.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Luster_Dawn.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 58837936
+            }
+        ]
+    },
+    {
+        "Model Name": "Pear Butter",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Pear%20Butter/MLP_pearbutter.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_pearbutter.pth",
+                "Size (bytes)": 55226492
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Pear%20Butter/added_IVF144_Flat_nprobe_1_MLP_pearbutter_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF144_Flat_nprobe_1_MLP_pearbutter_v2.index",
+                "Size (bytes)": 17845659
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/Pear_Butter/tree/main"
+    },
+    {
+        "Model Name": "Cream Heart",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Cream%20Heart/Cream-Heart-Ken.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Cream-Heart-Ken.pth",
+                "Size (bytes)": 55030343
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Cream%20Heart/added_IVF1773_Flat_nprobe_1_Cream-Heart-Ken_v1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1773_Flat_nprobe_1_Cream-Heart-Ken_v1.index",
+                "Size (bytes)": 73207123
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/Cream_Heart/tree/main"
+    },
+    {
+        "Model Name": "Sandbar",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Sandbar/MLP_Sandbar.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Sandbar.pth",
+                "Size (bytes)": 55225115
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Sandbar/added_IVF1003_Flat_nprobe_1_MLP_Sandbar_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1003_Flat_nprobe_1_MLP_Sandbar_v2.index",
+                "Size (bytes)": 123646739
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/MLP_Sandbar40k/tree/main"
     }
 ]
