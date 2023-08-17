@@ -79,6 +79,18 @@
         ]
     },
     {
+        "Model Name": "Vinyl Scratch (alt)",
+        "Files": [
+            {
+                "URL": "https://files.catbox.moe/2xh15a.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "2xh15a.zip",
+                "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
+                "Size (bytes)": 0
+            }
+        ]
+    },
+    {
         "Model Name": "Pinkie Pie",
         "Files": [
             {
@@ -782,10 +794,44 @@
         "Files": [
             {
                 "URL": "https://files.catbox.moe/1xtrz9.zip",
-                "Download With": "WGET",
+                "Download With": "REQUESTS",
                 "Download As": "1xtrz9.zip",
                 "Unzip Strategy": "FLATTEN",
                 "Size (bytes)": 55792327
+            }
+        ]
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing, v2)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TwilightSingingv2/TwilightSIngingv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "TwilightSIngingv2.pth",
+                "Size (bytes)": 57587165
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TwilightSingingv2/added_IVF1495_Flat_nprobe_1_TwilightSIngingv2_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1495_Flat_nprobe_1_TwilightSIngingv2_v2.index",
+                "Size (bytes)": 184214939
+            }
+        ]
+    },
+    {
+        "Model Name": "Tree Hugger",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TreeHugger/TreeHugger.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "TreeHugger.pth",
+                "Size (bytes)": 57583952
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TreeHugger/added_IVF104_Flat_nprobe_1_TreeHugger_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF104_Flat_nprobe_1_TreeHugger_v2.index",
+                "Size (bytes)": 12871459
             }
         ]
     }

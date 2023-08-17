@@ -2054,5 +2054,97 @@
                 "Size (bytes)": 18485815
             }
         ]
+    },
+    {
+        "Model Name": "Ember",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/mlp/Ember/G_36000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_36000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/mlp/Ember/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1610
+            },
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/mlp/Ember/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 18486191
+            }
+        ]
+    },
+    {
+        "Model Name": "Sludge",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/mlp/Sludge%2021k/G_21000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_21000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/mlp/Sludge%2021k/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1611
+            },
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/mlp/Sludge%2021k/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 18483055
+            }
+        ]
+    },
+    {
+        "Model Name": "Sunset Shimmer",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/eqg/Sunset%20Shimmer/G_44000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_44000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/eqg/Sunset%20Shimmer/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1619
+            },
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/eqg/Sunset%20Shimmer/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 18485615
+            }
+        ]
+    },
+    {
+        "Model Name": "Wallflower Blush",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/eqg/Wallflower%20Blush/G_44000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_44000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/eqg/Wallflower%20Blush/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1621
+            },
+            {
+                "URL": "https://huggingface.co/Ponetan/Cloppy_SoVits_Models/resolve/main/eqg/Wallflower%20Blush/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 18490671
+            }
+        ]
     }
 ]

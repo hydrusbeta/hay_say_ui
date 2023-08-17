@@ -19,6 +19,7 @@ class DownloadType(Enum):
     GDOWN = auto()
     HUGGINGFACE_HUB = auto()
     MEGA = auto()
+    REQUESTS = auto()
 
 
 class UnzipType(Enum):
@@ -119,6 +120,8 @@ def get_downloader(download_type):
         return huggingface_hub_downloader
     elif download_type == DownloadType.MEGA.name:
         return mega_downloader
+    elif download_type == DownloadType.REQUESTS.name:
+        return requests_downloader
     else:
         raise Exception('Unknown download type "' + download_type + '"')
 
