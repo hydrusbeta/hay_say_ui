@@ -382,7 +382,7 @@
     },
     {
         "Model Name": "Celestia (singing)",
-        "Multi-speaker Model Dependency": "Celestia (singing)",
+        "Multi-speaker Model Dependency": "Celestia (singing) and Celestia (singing, alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Celestia%20(singing)/speaker.json",
@@ -408,7 +408,7 @@
     },
     {
         "Model Name": "Celestia (singing, alt)",
-        "Multi-speaker Model Dependency": "Celestia (singing)",
+        "Multi-speaker Model Dependency": "Celestia (singing) and Celestia (singing, alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Celestia%20(singing%2C%20alt)/speaker.json",
@@ -572,7 +572,7 @@
     },
     {
         "Model Name": "Scootaloo (singing, alt)",
-        "Multi-speaker Model Dependency": "Starlight and Scootaloo (singing)",
+        "Multi-speaker Model Dependency": "Starlight Glimmer (singing, good), Starlight Glimmer (singing, evil), and Scootaloo (singing, alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Scootaloo%20(singing%2C%20alt)/speaker.json",
@@ -598,7 +598,7 @@
     },
     {
         "Model Name": "Starlight Glimmer (singing, evil)",
-        "Multi-speaker Model Dependency": "Starlight and Scootaloo (singing)",
+        "Multi-speaker Model Dependency": "Starlight Glimmer (singing, good), Starlight Glimmer (singing, evil), and Scootaloo (singing, alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Starlight%20Glimmer%20(singing%2C%20evil)/speaker.json",
@@ -624,7 +624,7 @@
     },
     {
         "Model Name": "Starlight Glimmer (singing, good)",
-        "Multi-speaker Model Dependency": "Starlight and Scootaloo (singing)",
+        "Multi-speaker Model Dependency": "Starlight Glimmer (singing, good), Starlight Glimmer (singing, evil), and Scootaloo (singing, alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Starlight%20Glimmer%20(singing%2C%20good)/speaker.json",
@@ -1002,7 +1002,7 @@
     },
     {
         "Model Name": "Trixie Lulamoon",
-        "Multi-speaker Model Dependency": "Trixie Lulamoon (singing)",
+        "Multi-speaker Model Dependency": "Trixie Lulamoon and Trixie Lulamoon (singing)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Trixie%20Lulamoon/speaker.json",
@@ -1028,7 +1028,7 @@
     },
     {
         "Model Name": "Trixie Lulamoon (singing)",
-        "Multi-speaker Model Dependency": "Trixie Lulamoon (singing)",
+        "Multi-speaker Model Dependency": "Trixie Lulamoon and Trixie Lulamoon (singing)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Trixie%20Lulamoon%20(singing)/speaker.json",
@@ -1735,7 +1735,7 @@
     },
     {
         "Model Name": "Big McIntosh",
-        "Multi-speaker Model Dependency": "Big McIntosh",
+        "Multi-speaker Model Dependency": "Big McIntosh and Babs Seed (alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/speaker.json",
@@ -1762,7 +1762,7 @@
     },
     {
         "Model Name": "Babs Seed (alt)",
-        "Multi-speaker Model Dependency": "Big McIntosh",
+        "Multi-speaker Model Dependency": "Big McIntosh and Babs Seed (alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Babs%20Seed%20(alt)/speaker.json",
@@ -1950,7 +1950,7 @@
     },
     {
         "Model Name": "Daring Do",
-        "Multi-speaker Model Dependency": "Daring Do",
+        "Multi-speaker Model Dependency": "Daring Do, Lightning Dust, and Moon Dancer",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Daring%20Do/speaker.json",
@@ -1978,7 +1978,7 @@
     },
     {
         "Model Name": "Lightning Dust",
-        "Multi-speaker Model Dependency": "Daring Do",
+        "Multi-speaker Model Dependency": "Daring Do, Lightning Dust, and Moon Dancer",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Lightning%20Dust/speaker.json",
@@ -2006,7 +2006,7 @@
     },
     {
         "Model Name": "Moon Dancer",
-        "Multi-speaker Model Dependency": "Daring Do",
+        "Multi-speaker Model Dependency": "Daring Do, Lightning Dust, and Moon Dancer",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Moon%20Dancer/speaker.json",

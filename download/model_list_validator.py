@@ -1,5 +1,3 @@
-import os.path
-
 import jsonschema
 from jsonschema.exceptions import ValidationError
 

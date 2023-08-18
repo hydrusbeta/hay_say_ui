@@ -688,7 +688,7 @@
         "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C"
     },
     {
-        "Model Name": "G1 Spike",
+        "Model Name": "Spike (G1)",
         "Files": [
             {
                 "URL": "https://huggingface.co/KenDoStudio/MLP_g1_spike/resolve/main/MLP_G1_Spike.zip",
@@ -790,7 +790,7 @@
         "Originally Acquired From": "https://huggingface.co/KenDoStudio/MLP_Sandbar40k/tree/main"
     },
     {
-        "Model Name": "Derpy (BaldDumboRat fan VA)",
+        "Model Name": "Derpy Hooves (BaldDumboRat fan VA)",
         "Files": [
             {
                 "URL": "https://files.catbox.moe/1xtrz9.zip",
@@ -802,7 +802,7 @@
         ]
     },
     {
-        "Model Name": "Twilight Sparkle (singing, v2)",
+        "Model Name": "Twilight Sparkle (singing)",
         "Files": [
             {
                 "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TwilightSingingv2/TwilightSIngingv2.pth",

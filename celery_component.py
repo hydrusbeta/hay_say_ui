@@ -5,6 +5,7 @@ from click import Option
 from dash import Input, Output, State, CeleryManager, callback
 
 import download.Downloader as Downloader
+import util
 from main import architecture_map, select_architecture_tabs
 
 # Set up a background callback manager
@@ -51,17 +52,17 @@ class ArchitectureSelection(bootsteps.Step):
                 prevent_initial_call=True
             )
             def begin_downloading(set_progress, _, character_names):
+                if not util.internet_available():
+                    return 'No internet connection detected', '0', tab.downloadable_character_options(), [], tab.characters, ''
                 num_characters = str(len(character_names))
                 errors = ''
                 for index, character_name in enumerate(character_names):
                     set_progress((str(index), num_characters, 'downloading ' + character_name + '...'))
                     character_model_info, multi_speaker_model_info = tab.get_model_infos_for_character(character_name)
                     errors += Downloader.try_download_character(tab.id, character_model_info, multi_speaker_model_info)
-
                 if errors:
                     errors = 'One or more errors have occurred. Please send the software maintainers the following ' \
                              'information as well as any recent output in the Command Prompt/terminal: ' + errors
-                    print(errors, flush=True)
                 # Report any errors and reset the progress bar, checklist, and character dropdown. Also activate the
                 # spinner.
                 return errors, '0', tab.downloadable_character_options(), [], tab.characters, ''

@@ -23,7 +23,7 @@
         ]
     },
     {
-        "Model Name": "Celestia (singing)",
+        "Model Name": "Celestia (singing) and Celestia (singing, alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Celestia%20(singing)/G_12000.pth",
@@ -46,7 +46,7 @@
         ]
     },
     {
-        "Model Name": "Starlight and Scootaloo (singing)",
+        "Model Name": "Starlight Glimmer (singing, good), Starlight Glimmer (singing, evil), and Scootaloo (singing, alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20(singing)/G_40000.pth",
@@ -69,7 +69,7 @@
         ]
     },
     {
-        "Model Name": "Trixie Lulamoon (singing)",
+        "Model Name": "Trixie Lulamoon and Trixie Lulamoon (singing)",
         "Files": [
             {
                 "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Trixie%20(mix)/G_61600.pth",
@@ -115,7 +115,7 @@
         ]
     },
     {
-        "Model Name": "Big McIntosh",
+        "Model Name": "Big McIntosh and Babs Seed (alt)",
         "Files": [
             {
                 "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/G_1668.pth",
@@ -139,7 +139,7 @@
         "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
     },
     {
-        "Model Name": "Daring Do",
+        "Model Name": "Daring Do, Lightning Dust, and Moon Dancer",
         "Files": [
             {
                 "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/ddm_DaringDo_100k/G_100000.pth",

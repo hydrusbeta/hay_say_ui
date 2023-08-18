@@ -104,6 +104,7 @@ def download_file_and_unzip(file, target_directory):
 
 
 def download_file(download_type, url, target_filepath):
+    os.makedirs(os.path.dirname(target_filepath), exist_ok=True)
     downloader = get_downloader(download_type)
     downloader(url, target_filepath)
 
@@ -179,7 +180,7 @@ def huggingface_hub_downloader(url, target_filepath):
     with tempfile.TemporaryDirectory() as tempdir:
         hf_hub_download(repo_id=repo_id, filename=download_filename, local_dir=tempdir, local_dir_use_symlinks=False)
         download_filepath = os.path.join(tempdir, download_filename)
-        os.rename(download_filepath, target_filepath)
+        shutil.move(download_filepath, target_filepath)
 
 
 def mega_downloader(url, target_filepath):
