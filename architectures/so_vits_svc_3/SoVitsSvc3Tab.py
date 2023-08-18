@@ -39,6 +39,9 @@ class SoVitsSvc3Tab(AbstractTab):
     def options(self):
         return html.Table([
             html.Tr([
+                html.Td("Note: \"TFH\" = Them's Fightin' Herds characters", colSpan=2, className='centered')
+            ]),
+            html.Tr([
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 html.Td(self.character_dropdown)
             ]),
