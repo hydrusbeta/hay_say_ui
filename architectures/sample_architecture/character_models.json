@@ -1,0 +1,28 @@
+[
+    {
+        "Model Name": "Rainbow Shine",
+        "Multi-speaker Model Dependency": "Generic Pony",
+        "Files": [
+            {
+                "URL": "https://localhost",
+                "Download With": "GDOWN",
+                "Download As": "something.config",
+                "Size (bytes)": 1111
+            },
+            {
+                "URL": "https://localhost",
+                "Download With": "GDOWN",
+                "Download As": "indices/somethingElse.index",
+                "Size (bytes)": 1111
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "singer/Rainbow Shine.pth",
+                "Target": "singer/Generic Pony.pth"
+            }
+        ],
+        "Originally Acquired From": "originalURL.com/1.zip",
+        "License": "UNSPECIFIED"
+    }
+]

@@ -1,0 +1,523 @@
+[
+    {
+        "Model Name": "Apple Bloom",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applebloom%203.0/G_55000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_55000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applebloom%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1538
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applejack%203.0/G_38000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_38000.pth",
+                "Size (bytes)": 699315036
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applejack%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1549
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Bon Bon",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_sweetiedrops_32khz_4000/G_4000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_4000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_sweetiedrops_32khz_4000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1541
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/z3QDFSbC#LK1piFtq8zr4NQV0SkHFpJuwCbLa6OJMB-Vvtk9HJCA",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Discord",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_discord_32khz_49000/G_49000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_49000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_discord_32khz_49000/config-discord.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1537
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/H3AV1Dbb#t75tJkdsgoWlL59vWhNPH1bVfIMBuYx9hVMQtaNYVAg",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Fluttershy",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Fluttershy%20(speaking)%203.0/G_58000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_58000.pth",
+                "Size (bytes)": 699315036
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Fluttershy%20(speaking)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1550
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_pinkie_32khz_34000/G_34000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_34000.pth",
+                "Size (bytes)": 699513885
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_pinkie_32khz_34000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1535
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/yn4gmbBA#wlI5sgLzWoUYFlIwtOKGuFHIkYvAmyfA1oxDcSv-Tkg",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rainbow%20Dash%20(speaking)%203.0/G_844000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_844000.pth",
+                "Size (bytes)": 699315036
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rainbow%20Dash%20(speaking)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1555
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rarity",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rarity%20(speaking)%203.0/G_61000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_61000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rarity%20(speaking)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1546
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scootaloo",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Scootaloo%203.0/G_52000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_52000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Scootaloo%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1538
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sweetie Belle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Sweetie%20Belle%203.0/G_37000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_37000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Sweetie%20Belle%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1541
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Trixie Lulamoon",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_trixie_32khz_22000/G_22000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_22000.pth",
+                "Size (bytes)": 699319644
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_trixie_32khz_22000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1564
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/u3Q3yapZ#2-wyakRPAqZUI-_yhUTHyFs2AiBOz7lS_HX-w_U0Np8",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_twilight-speaking_32khz_28000/G_28000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_28000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/sovits_twilight-speaking_32khz_28000/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1546
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applejack%20(singing%2C%20reduced%20dataset)%203.0/G_12000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_12000.pth",
+                "Size (bytes)": 699315036
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Applejack%20(singing%2C%20reduced%20dataset)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1565
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cadance (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Cadance%20(singing)%203.0/G_29000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_29000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Cadance%20(singing)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1536
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Celestia%203.0/G_15000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_15000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Celestia%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1547
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Luna (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Luna%203.0/G_12000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_12000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Luna%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1533
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rarity (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rarity%20(singing%2C%20reduced%20dataset)%203.0/G_17000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_17000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Rarity%20(singing%2C%20reduced%20dataset)%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1553
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Starlight%20Glimmer%203.0/G_19000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_19000.pth",
+                "Size (bytes)": 699313500
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/Starlight%20Glimmer%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1556
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/TwilightSparkle%203.0/G_32000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_32000.pth",
+                "Size (bytes)": 699513885
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-3.0/resolve/main/TwilightSparkle%203.0/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1544
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Arizona (TFH)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Arizona%20(TFH)/G_20000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_20000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Arizona%20(TFH)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1580
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Arizona%20(TFH)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_tfh_arizona_44khz_20000_sv4.zip",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Athena",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Athena/G_25000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_25000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Athena/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1575
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Athena/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_athena_44khz_25000_sv4.zip",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cadance",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Cadance/G_10000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_10000.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Cadance/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1612
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Cadance/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_cadance_speaking_44khz_10000_sv4.zip",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Derpy Hooves",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Derpy%20Hooves/G_20000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_20000.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Derpy%20Hooves/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1620
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Derpy%20Hooves/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_derpy_sol_bge_44khz_20000_sv4.zip",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Saffron Masala",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Saffron%20Masala/G_15000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_15000.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Saffron%20Masala/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1612
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Saffron%20Masala/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_saffron_44khz_15000_sv4.zip",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Shining Armor",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Shining%20Armor/G_25000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_25000.pth",
+                "Size (bytes)": 542789469
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Shining%20Armor/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1581
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Shining%20Armor/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_shining_armor_44khz_25000_sv4.zip",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Velvet (TFH)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Velvet%20(TFH)/G_20000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_20000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Velvet%20(TFH)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1579
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Velvet%20(TFH)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_tfh_velvet_44khz_20000_sv4.zip",
+        "License": "UNSPECIFIED"
+    }
+]

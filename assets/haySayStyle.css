@@ -20,10 +20,22 @@ body {
     padding-bottom: 400px;
 }
 
-#outer-div{
+.outer-div{
     width: 960px;
     margin: 0 auto;
-    padding-top: 30px;
+    margin-top: 40px; /* Makes room for Toolbar */
+}
+
+.model-list-div{
+    width: 75%;
+    margin: 0 auto;
+}
+
+.model-list-expanded{
+    border-width: 1px;
+    border-color: #fff;
+    border-style: solid;
+    padding: 5px;
 }
 
 .subtitle {
@@ -62,6 +74,13 @@ option {
 
 .centered{
     text-align: center;
+}
+
+.toolbar{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: #222222;
 }
 
 #message{
@@ -183,16 +202,19 @@ option {
     text-align: center;
 }
 
+button{
+    background-color: rgba(0,0,0,0.25);
+}
+
+button:disabled{
+    background-color: rgba(0,0,0,0);
+    color: #666;
+}
+
 #generate-button{
     font-family: Equestria;
     font-size: 36px;
     margin: 0px;
-    background-color: rgba(0,0,0,0.25);
-}
-
-#generate-button:disabled{
-    background-color: rgba(0,0,0,0);
-    color: #666;
 }
 
 .label{
@@ -203,4 +225,9 @@ option {
 .dropdown-container-loader{
     text-align: center;
     margin: auto;
+}
+
+.checklist-input-style{
+    margin-right: 10px;
+    margin-left: 15px;
 }

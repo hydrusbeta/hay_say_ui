@@ -1,0 +1,1082 @@
+[
+    {
+        "Model Name": "Cozy Glow",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/CozyGlow/CozyGlow.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "CozyGlow.pth",
+                "Size (bytes)": 55125567
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/CozyGlow/added_IVF173_Flat_nprobe_4.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF173_Flat_nprobe_4.index.index",
+                "Size (bytes)": 7158091
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Derpy Hooves",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Derpy%20Hooves/derpy_hooves.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "derpy_hooves.pth",
+                "Size (bytes)": 55127639
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Derpy%20Hooves/added_IVF127_Flat_nprobe_4.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF127_Flat_nprobe_4.index",
+                "Size (bytes)": 5243731
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Octavia Melody",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Octavia%20Melody/OctaviaMelody.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "OctaviaMelody.pth",
+                "Size (bytes)": 55128157
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Octavia%20Melody/added_IVF34_Flat_nprobe_2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF34_Flat_nprobe_2.index",
+                "Size (bytes)": 1441843
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Twilight%20Sparkle%20(singing)/twilight_sparkle_singing.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "twilight_sparkle_singing.pth",
+                "Size (bytes)": 55133983
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Twilight%20Sparkle%20(singing)/added_IVF1364_Flat_nprobe_8.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1364_Flat_nprobe_8.index",
+                "Size (bytes)": 56333923
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Vinyl Scratch",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/VinylScratch/VinylScratch.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "VinylScratch.pth",
+                "Size (bytes)": 55127639
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Vinyl Scratch (alt)",
+        "Files": [
+            {
+                "URL": "https://files.catbox.moe/2xh15a.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "2xh15a.zip",
+                "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
+                "Size (bytes)": 170764494
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie",
+        "Files": [
+            {
+                "URL": "https://mega.nz/file/ZfJF0C7S#gGyLBDqow7yPMBWD8Oqvul74aalzhBpNUqnRjUeizJM",
+                "Download With": "MEGA",
+                "Download As": "PinkiePie.zip",
+                "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
+                "Size (bytes)": 274235568
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack",
+        "Files": [
+            {
+                "URL": "https://mega.nz/file/kT50jKxQ#4x9vM78bGJvk_BvurrHqx3zJOnhnHvQySyG_3or2JcY",
+                "Download With": "MEGA",
+                "Download As": "Applejack.zip",
+                "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
+                "Size (bytes)": 370103262
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Fluttershy",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Fluttershy/Fluttershy_e500.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Fluttershy_e500.pth",
+                "Size (bytes)": 55226951
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Fluttershy/added_IVF3345_Flat_nprobe_1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF3345_Flat_nprobe_1.index",
+                "Size (bytes)": 412184219
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Fluttershy/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 261
+            }
+        ],
+        "Originally Acquired From": "https://mega.nz/file/pf4wxT6J#j13tM7AwFKFPhwYJOTorWv_LU1hR8Z8BLjqtPfhbGV0",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Bunni Bunni",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Bunni%20Bunni/Twilight-Alt-Ken.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Twilight-Alt-Ken.pth",
+                "Size (bytes)": 55030802
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Bunni%20Bunni/added_IVF5696_Flat_nprobe_1_Twilight-Alt-Ken_v1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF5696_Flat_nprobe_1_Twilight-Alt-Ken_v1.index",
+                "Size (bytes)": 235134115
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Bunni%20Bunni/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 284
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1eX-wqSQ1VucyzRHrpwXQUV137KQ0JuOy/view?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Babs Seed",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Babs%20Seed/Babs-Seed-300-Epoch.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Babs-Seed-300-Epoch.pth",
+                "Size (bytes)": 55032179
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Babs%20Seed/added_IVF111_Flat_nprobe_4.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF111_Flat_nprobe_4.index",
+                "Size (bytes)": 4594603
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Babs%20Seed/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Big McIntosh",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Big%20McIntosh/Big-Mac-300-Epoch.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Big-Mac-300-Epoch.pth",
+                "Size (bytes)": 55031261
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Big%20McIntosh/added_IVF342_Flat_nprobe_5.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF342_Flat_nprobe_5.index",
+                "Size (bytes)": 14138539
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Big%20McIntosh/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Braeburn",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Braeburn/Braeburn-700-epoch.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Braeburn-700-epoch.pth",
+                "Size (bytes)": 55031720
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Braeburn/added_IVF155_Flat_nprobe_4.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF155_Flat_nprobe_4.index",
+                "Size (bytes)": 6403699
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Braeburn/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Diamond Tiara",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Diamond%20Tiara/Diamond-Tiara.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Diamond-Tiara.pth",
+                "Size (bytes)": 55029425
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Diamond%20Tiara/added_IVF845_Flat_nprobe_1_Diamond-Tiara_v1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF845_Flat_nprobe_1_Diamond-Tiara_v1.index",
+                "Size (bytes)": 34906507
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Diamond%20Tiara/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Doctor Whooves",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Doctor%20Whooves/Doctor-Whooves.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Doctor-Whooves.pth",
+                "Size (bytes)": 55226492
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Doctor%20Whooves/added_IVF155_Flat_nprobe_1_Doctor-Whooves_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF155_Flat_nprobe_1_Doctor-Whooves_v2.index",
+                "Size (bytes)": 19160819
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Doctor%20Whooves/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Gallus",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Gallus/Gallus.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Gallus.pth",
+                "Size (bytes)": 55216420
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Gallus/added_IVF688_Flat_nprobe_1_Gallus_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF688_Flat_nprobe_1_Gallus_v2.index",
+                "Size (bytes)": 84841819
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Gallus/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Ocellus",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Ocellus/Ocellus.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Ocellus.pth",
+                "Size (bytes)": 55222703
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Ocellus/added_IVF542_Flat_nprobe_1_Ocellus_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF542_Flat_nprobe_1_Ocellus_v2.index",
+                "Size (bytes)": 66845379
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Ocellus/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Silverstream",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Silverstream/Silverstream.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Silverstream.pth",
+                "Size (bytes)": 55225574
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Silverstream/added_IVF790_Flat_nprobe_1_Silverstream_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF790_Flat_nprobe_1_Silverstream_v2.index",
+                "Size (bytes)": 97343539
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Silverstream/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Smolder",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Smolder/SmolderV2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "SmolderV2.pth",
+                "Size (bytes)": 55225574
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Smolder/added_IVF773_Flat_nprobe_1_Smolder-Thun_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF773_Flat_nprobe_1_Smolder-Thun_v2.index",
+                "Size (bytes)": 95236819
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Smolder/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Spike",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Spike/Spike.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Spike.pth",
+                "Size (bytes)": 55193241
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Spike/added_IVF602_Flat_nprobe_1_Spike_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF602_Flat_nprobe_1_Spike_v2.index",
+                "Size (bytes)": 74200419
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Spike/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Tempest Shadow",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Tempest%20Shadow/Tempest-Shadow.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Tempest-Shadow.pth",
+                "Size (bytes)": 55226492
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Tempest%20Shadow/added_IVF258_Flat_nprobe_1_Tempest-Shadow_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF258_Flat_nprobe_1_Tempest-Shadow_v2.index",
+                "Size (bytes)": 31887379
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Tempest%20Shadow/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Thorax",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Thorax/Thorax-300-Epoch.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Thorax-300-Epoch.pth",
+                "Size (bytes)": 55030802
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Thorax/added_IVF571_Flat_nprobe_6.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF571_Flat_nprobe_6.index",
+                "Size (bytes)": 23595787
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Thorax/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Applejack%20(alt)/added_IVF63_Flat_nprobe_1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF63_Flat_nprobe_1.index",
+                "Size (bytes)": 2626579
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Applejack%20(alt)/applejack.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "applejack.pth",
+                "Size (bytes)": 55027589
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Applejack%20(alt)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 300
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1-02IwowItSAi1_imh5eHcW3oh7dv_lwk/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Fluttershy (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Fluttershy%20(alt)/added_IVF40_Flat_nprobe_1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF40_Flat_nprobe_1.index",
+                "Size (bytes)": 1684363
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Fluttershy%20(alt)/fluttershy.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "fluttershy.pth",
+                "Size (bytes)": 55028048
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Fluttershy%20(alt)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 300
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1sr_WqwS9sGxhm3HysnduCZmQZ9lkOlzN/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Pinkie%20Pie%20(alt)/added_IVF66_Flat_nprobe_1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF66_Flat_nprobe_1.index",
+                "Size (bytes)": 2753515
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Pinkie%20Pie%20(alt)/pinkiepie.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "pinkiepie.pth",
+                "Size (bytes)": 55027589
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Pinkie%20Pie%20(alt)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 300
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1-JGghIIhgKWNIclhTV5BxVNLxVr_bbbp/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Rainbow%20Dash%20(alt)/added_IVF55_Flat_nprobe_1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF55_Flat_nprobe_1.index",
+                "Size (bytes)": 2289115
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Rainbow%20Dash%20(alt)/rainbowdash.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "rainbowdash.pth",
+                "Size (bytes)": 55028507
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Rainbow%20Dash%20(alt)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 300
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1-Apympt6iiDye-zHar_0C7r-v4476fT2/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rarity (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Rarity%20(alt)/added_IVF80_Flat_nprobe_1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF80_Flat_nprobe_1.index",
+                "Size (bytes)": 3312859
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Rarity%20(alt)/rarity.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "rarity.pth",
+                "Size (bytes)": 55019812
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Rarity%20(alt)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 300
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1-AAggYM3JTxfoPcj22QG15laKCqqffhv/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Twilight%20Sparkle%20(alt)/added_IVF66_Flat_nprobe_1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF66_Flat_nprobe_1.index",
+                "Size (bytes)": 2732875
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Twilight%20Sparkle%20(alt)/twilightsparkle.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "twilightsparkle.pth",
+                "Size (bytes)": 55030343
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Twilight%20Sparkle%20(alt)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 300
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1Iz4benaXeIkBOlPLYvNI8yZ2Lcb00MGH/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Luna",
+        "Files": [
+            {
+                "URL": "https://mega.nz/file/obRFWazA#4DjA1MHr-AooZnqhDNpdQyu3YHezx_a7hcLFO9d_uEM",
+                "Download With": "MEGA",
+                "Download As": "Luna.zip",
+                "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
+                "Size (bytes)": 81650352
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Nightmare Moon",
+        "Files": [
+            {
+                "URL": "https://mega.nz/file/YLIBTTZA#qYZVi_uhEbvZ3_scpI-5YgPG2-Nlu2Q-mxaSKwONeMA",
+                "Download With": "MEGA",
+                "Download As": "Nightmare_Moon.zip",
+                "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
+                "Size (bytes)": 61835502
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Bright Mac",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Bright%20Mac/MLP_Brightmac.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Brightmac.pth",
+                "Size (bytes)": 55227869
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Bright%20Mac/added_IVF73_Flat_nprobe_1_MLP_Brightmac.zip_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF73_Flat_nprobe_1_MLP_Brightmac.zip_v2.index",
+                "Size (bytes)": 9015299
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Bright%20Mac/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 270
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1r_kN1Otk5yS2RojfmFlJPPI5ZTl0_kZZ/view?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Coconut Cream",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Coconut%20Cream/MLP-Coconut_Cream.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP-Coconut_Cream.pth",
+                "Size (bytes)": 55227869
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Coconut%20Cream/added_IVF42_Flat_nprobe_1_MLP-Coconut_Cream_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF42_Flat_nprobe_1_MLP-Coconut_Cream_v2.index",
+                "Size (bytes)": 5233059
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Coconut%20Cream/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 270
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/file/d/1aO4fkb_yH54OOJeDrXWvE9G3wvWXPwvA/view?usp=sharing",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sweetie Belle",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1Bj2quFGEpLq6uaQhsA-WwkRRA3EfWpbI",
+                "Download With": "GDOWN",
+                "Download As": "MLP_Sweetie Belle (rvc).zip",
+                "Size (bytes)": 87963134,
+                "Unzip Strategy": "FLATTEN"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP01Celestia.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP01Celestia.zip",
+                "Size (bytes)": 106972536,
+                "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
+            }
+        ],
+        "License": "OPEN_RAIL_M"
+    },
+    {
+        "Model Name": "Twilight Sparkle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP03TwilightSparkle.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP03TwilightSparkle.zip",
+                "Size (bytes)": 75428356,
+                "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
+            }
+        ],
+        "License": "OPEN_RAIL_M"
+    },
+    {
+        "Model Name": "Rainbow Dash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP05RainbowDash.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP05RainbowDash.zip",
+                "Size (bytes)": 68458741,
+                "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
+            }
+        ],
+        "License": "OPEN_RAIL_M"
+    },
+    {
+        "Model Name": "Rarity",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP06Rarity.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP06Rarity.zip",
+                "Size (bytes)": 74767341,
+                "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
+            }
+        ],
+        "License": "OPEN_RAIL_M"
+    },
+    {
+        "Model Name": "Discord",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP09Discord.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP09Discord.zip",
+                "Size (bytes)": 81233486,
+                "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
+            }
+        ],
+        "License": "OPEN_RAIL_M"
+    },
+    {
+        "Model Name": "Starlight Glimmer",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/MLP10StarlightGlimmer.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP10StarlightGlimmer.zip",
+                "Size (bytes)": 78859076,
+                "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
+            }
+        ],
+        "License": "OPEN_RAIL_M"
+    },
+    {
+        "Model Name": "Button Mash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Button%20Mash/Button%20Mash.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Button%20Mash.pth",
+                "Size (bytes)": 55225115
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Button%20Mash/added_IVF729_Flat_nprobe_1_Button-Mash_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF729_Flat_nprobe_1_Button-Mash_v2.index",
+                "Size (bytes)": 89843739
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Button%20Mash/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Yona",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Yona/Yona-thunder-V2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Yona-thunder-V2.pth",
+                "Size (bytes)": 55192782
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Yona/added_IVF869_Flat_nprobe_1_Yona_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF869_Flat_nprobe_1_Yona_v2.index",
+                "Size (bytes)": 107159499
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Yona/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C",
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Spike (G1)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_g1_spike/resolve/main/MLP_G1_Spike.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_G1_Spike.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 103450883
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_g1_spike/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 20
+            }
+        ],
+        "License": "CC_UNSPECIFIC",
+        "Creator": "KenDoStudio"
+    },
+    {
+        "Model Name": "Cheerilee",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Cheerilee/resolve/main/MLP_Cherrilee_v2.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Cherrilee_v2.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 72960664
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Cheerilee/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 25
+            }
+        ],
+        "License": "CC0_1"
+    },
+    {
+        "Model Name": "Sunburst",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Sunburst/resolve/main/MLP_Sunburst.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Sunburst.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 122036158
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Sunburst/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 20
+            }
+        ],
+        "License": "CC_UNSPECIFIC",
+        "Creator": "KenDoStudio"
+    },
+    {
+        "Model Name": "Luster Dawn",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_LusterDawn/resolve/main/MLP_Luster_Dawn.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Luster_Dawn.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 58837936
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_LusterDawn/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 25
+            }
+        ],
+        "License": "AFL_3"
+    },
+    {
+        "Model Name": "Pear Butter",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Pear%20Butter/MLP_pearbutter.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_pearbutter.pth",
+                "Size (bytes)": 55226492
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Pear%20Butter/added_IVF144_Flat_nprobe_1_MLP_pearbutter_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF144_Flat_nprobe_1_MLP_pearbutter_v2.index",
+                "Size (bytes)": 17845659
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/Pear_Butter/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 25
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/Pear_Butter/tree/main",
+        "License": "LGPL_LR",
+        "Creator": "KenDoStudio"
+    },
+    {
+        "Model Name": "Cream Heart",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Cream%20Heart/Cream-Heart-Ken.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Cream-Heart-Ken.pth",
+                "Size (bytes)": 55030343
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Cream%20Heart/added_IVF1773_Flat_nprobe_1_Cream-Heart-Ken_v1.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1773_Flat_nprobe_1_Cream-Heart-Ken_v1.index",
+                "Size (bytes)": 73207123
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/Cream_Heart/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 33
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/Cream_Heart/tree/main",
+        "License": "CC_BY_NC_ND_3",
+        "Creator": "KenDoStudio"
+    },
+    {
+        "Model Name": "Sandbar",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Sandbar/MLP_Sandbar.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Sandbar.pth",
+                "Size (bytes)": 55225115
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Sandbar/added_IVF1003_Flat_nprobe_1_MLP_Sandbar_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1003_Flat_nprobe_1_MLP_Sandbar_v2.index",
+                "Size (bytes)": 123646739
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Sandbar40k/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 30
+            }
+        ],
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/MLP_Sandbar40k/tree/main",
+        "License": "ARTISTIC_2"
+    },
+    {
+        "Model Name": "Derpy Hooves (BaldDumboRat fan VA)",
+        "Files": [
+            {
+                "URL": "https://files.catbox.moe/1xtrz9.zip",
+                "Download With": "REQUESTS",
+                "Download As": "1xtrz9.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 55792327
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TwilightSingingv2/TwilightSIngingv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "TwilightSIngingv2.pth",
+                "Size (bytes)": 57587165
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TwilightSingingv2/added_IVF1495_Flat_nprobe_1_TwilightSIngingv2_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1495_Flat_nprobe_1_TwilightSIngingv2_v2.index",
+                "Size (bytes)": 184214939
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Tree Hugger",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TreeHugger/TreeHugger.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "TreeHugger.pth",
+                "Size (bytes)": 57583952
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TreeHugger/added_IVF104_Flat_nprobe_1_TreeHugger_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF104_Flat_nprobe_1_TreeHugger_v2.index",
+                "Size (bytes)": 12871459
+            }
+        ],
+        "License": "UNSPECIFIED"
+    }
+]
