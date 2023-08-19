@@ -159,6 +159,20 @@ MacOS:
 ```commandline
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 ```
+### 1.5. Special Instructions for the Aug 19, 2023 update
+Following the update on Aug 19, 2023, Hay Say now expects the presence of a "models" docker volume. If you installed Hay
+Say before that date, then you must also execute the following command to create that volume:
+
+Linux:
+```commandline
+sudo docker volume create models
+```
+
+Windows and MacOS:
+```commandline
+docker volume create models
+```
+
 ### 2. Pull the latest images
 Next, execute the following commands to make sure that your containers are stopped, to pull the latest images, and to 
 start Hay Say again:  
@@ -245,7 +259,18 @@ docker exec [container-name] mkdir -p /root/hay_say/custom_models/rvc
 4. Arrange and rename your files to match the expected format:  
 ![Screenshots showing the expected file structures for each architecture's models](documentation%20images/CustomModelFileOrganization.png)  
 Additional restrictions: 
-   * For all versions of so-vits-svc, only a single speaker name is allowed to appear in config.json (see the "spk" key, usually at the bottom of the file).
+   * Only a single speaker is supported per character folder. 
+     * If your custom model is a so-vits-svc 5 model, you may only have a single .spk.npy file within the "singer" 
+     directory.
+     * If your custom model is a _multi-speaker_ so-vits-svc 4 model (i.e. the config.json file has multiple speakers 
+       listed under "spk" at the bottom of the file), then you must add a speaker.json file which specifies which 
+       speaker to use. The contents of the file should look like this:
+       ```json
+       {
+       "speaker": "<name of speaker>"
+       }
+       ```
+       where `<name of speaker>` should match one of the strings under "spk" in the config.json file.
 5. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" 
    command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 
    model, you can copy it by executing the following on Linux or MacOS:
@@ -349,8 +374,8 @@ make it look like this:
     #           count: all
     #           capabilities: [gpu]
 ```
-Next, delete the Docker image for so-vits-svc 3.0 to free disk space. Open a command prompt or terminal and 
-execute the following command to list all containers:
+Next, delete both the Docker contain and Docker image for so-vits-svc 3.0 to free disk space. Open a command prompt or 
+terminal and execute the following command to list all containers:
 ```commandline
 docker container ls -a
 ```
@@ -413,6 +438,24 @@ docker image rm hydrusbeta/hay_say:<tag of image you would like to delete>
 So, for so-vits-svc 3.0 for example, that would be:
 ```commandline
 docker image rm hydrusbeta/hay_say:so_vits_svc_3_server
+```
+
+Optional Step: You can hide the architecture in the UI by editing the docker-compose.yaml file. Look for the following
+lines:
+```yaml
+    command: ["/bin/sh", "-c", "
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO --include_architecture ControllableTalkNet --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
+              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --architectures ControllableTalkNet SoVitsSvc3 SoVitsSvc4 SoVitsSvc5 Rvc
+              "]
+```
+There are two places where your architecture's name will appear. Delete `"--include_architecture <architectureName>"` 
+and also delete the architecture name after the `"--architectures"` flag. For example, here's the result after removing 
+so-vits-svc 3.0:
+```yaml
+    command: ["/bin/sh", "-c", "
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO --include_architecture ControllableTalkNet --include_architecture ControllableTalkNet --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
+              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --architectures ControllableTalkNet SoVitsSvc4 SoVitsSvc5 Rvc
+              "]
 ```
 
 #### Additional Required Steps for Windows Users
@@ -479,7 +522,7 @@ following to list all distro names:
 ```commandline
 wslcompact -l
 ```
-and search for a distro name with the word "docker" or "ubunt" in it.
+and search for a distro name with the word "docker" or "ubuntu" in it.
 
 ###### Explanation: 
 Hay Say runs on the Docker Engine. On Windows, Docker typically runs on a virtualization platform called 
@@ -490,8 +533,8 @@ you need to manually shrink the .vhdx file. There is an open feature request for
 automatically release disk space, which is discussed here:  
 https://github.com/microsoft/WSL/issues/4699  
 
-Linux and MacOS users are unaffected by this issue and should see an immediate increase in disk space after 
-clicking "Delete Selected Models". 
+Linux and MacOS users are unaffected by this issue and should see an immediate increase in disk space after deleting
+models or architectures. 
 
 ## The Technical Design of Hay Say
 
@@ -512,16 +555,22 @@ The code for the main UI is in this repository. Code for the Flask servers for t
 ## "Roadmap"
 
 Here are some tasks I consider important. I intend to work on them "soon", in no particular order:
-1. Additional character models have become available for so-vits-svc 4.0. I'd like to package these up into another model pack.
-2. There are currently no preprocessing or postprocessing options. I need to do requirements gathering and start adding some options. 
-3. I forsee a need for a "Hay Say launcher" that lets the user select which characters and architectures they want to download and run. That way, the user doesn't have to download *everything* if all they want is, say, the TTS solutions like controllable talknet for specific characters. This also gives the user some control over memory usage on a resource-constrained machine, and would be a good place for downloading updates.
-4. New and upcoming architectures are on my radar:
-    * Retrieval-based Voice Converstion (RVC)
+1. There are currently no preprocessing or postprocessing options. I need to do requirements gathering and start adding 
+   some options. 
+2. I forsee a need for a "Hay Say launcher" that lets the user select which characters and architectures they want to 
+   download and run. That way, the user doesn't have to download *everything* if all they want is, say, the TTS 
+   solutions like controllable talknet for specific characters. This also gives the user some control over memory usage 
+   on a resource-constrained machine, and would be a good place for downloading updates.
+3. Add another text-to-speech option. A couple of possibilities include:
     * BarkAI
-    * so-vits-svc 5.0
-5. Hay Say runs terribly on Apple Silicon. I'd like to see whether performance can be improved by re-building the images using ARM base images.
-6. Write up more documentation on the technical details of Hay Say and tutorials on: adding a new architecture, adding a model pack, and adding pre/postprocessing options.
-7. Currently, the "Generate!" button becomes disabled if a required input has not been provided yet. This might be confusing for users. Instead, let them hit the "Generate!" button and then highlight the missing, required fields in red, along with a useful error message.
+    * tkinterAnon's TTS tool
+4. Hay Say runs terribly on Apple Silicon. I'd like to see whether performance can be improved by re-building the images 
+   using a different base image.
+5. Write up more documentation on the technical details of Hay Say and tutorials for developers on: adding a new 
+   architecture, adding a model pack, and adding pre/postprocessing options.
+6. Currently, the "Generate!" button becomes disabled if a required input has not been provided yet. This might be 
+   confusing for users. Instead, let them hit the "Generate!" button and then highlight the missing, required fields in 
+   red, along with a useful error message.
 
 Plus, there are numerous minor code improvement opportunities that I have marked with "todo" throughout the codebase.
 
