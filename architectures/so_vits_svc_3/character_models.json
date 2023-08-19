@@ -359,6 +359,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1580
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Arizona%20(TFH)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
             }
         ],
         "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_tfh_arizona_44khz_20000_sv4.zip",
@@ -378,6 +384,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1575
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Athena/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
             }
         ],
         "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_athena_44khz_25000_sv4.zip",
@@ -397,6 +409,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1612
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Cadance/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
             }
         ],
         "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_cadance_speaking_44khz_10000_sv4.zip",
@@ -416,6 +434,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1620
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Derpy%20Hooves/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
             }
         ],
         "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_derpy_sol_bge_44khz_20000_sv4.zip",
@@ -435,6 +459,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1612
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Saffron%20Masala/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
             }
         ],
         "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_saffron_44khz_15000_sv4.zip",
@@ -454,6 +484,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1581
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Shining%20Armor/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
             }
         ],
         "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_shining_armor_44khz_25000_sv4.zip",
@@ -473,6 +509,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1579
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Velvet%20(TFH)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 253
             }
         ],
         "Originally Acquired From": "https://huggingface.co/datasets/HazySkies/SV3/resolve/main/sovits_tfh_velvet_44khz_20000_sv4.zip",

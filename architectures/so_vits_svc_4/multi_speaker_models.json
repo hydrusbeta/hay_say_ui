@@ -134,6 +134,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 2216
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 312
             }
         ],
         "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
