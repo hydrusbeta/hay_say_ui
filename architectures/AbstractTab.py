@@ -16,7 +16,7 @@ import shutil
 SHOW_CHARACTER_DOWNLOAD_MENU = '▷ Show Character Download Menu'
 HIDE_CHARACTER_DOWNLOAD_MENU = '▽ Hide Character Download Menu'
 
-BRANCH = 'In-app-model-download'  # todo: Update this to 'main' before Pull Request to main.
+BRANCH = 'main'
 CHARACTER_JSON_FILENAME = 'character_models.json'
 MULTI_SPEAKER_JSON_FILENAME = 'multi_speaker_models.json'
 BASE_JSON_URL = 'https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/' + BRANCH + '/architectures/{architecture}/'
