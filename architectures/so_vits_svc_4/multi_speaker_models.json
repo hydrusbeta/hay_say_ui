@@ -1,0 +1,164 @@
+[
+    {
+        "Model Name": "Pony1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/G_101600.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_101600.pth",
+                "Size (bytes)": 1111
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1111
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 1111
+            }
+        ]
+    },
+    {
+        "Model Name": "Celestia (singing) and Celestia (singing, alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Celestia%20(singing)/G_12000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_12000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Celestia%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1650
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Celestia%20(singing)/kmeans_1000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_1000.pt",
+                "Size (bytes)": 3088687
+            }
+        ]
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing, good), Starlight Glimmer (singing, evil), and Scootaloo (singing, alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20(singing)/G_40000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_40000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20(singing)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1691
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20(singing)/kmeans_1500.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_1500.pt",
+                "Size (bytes)": 4632175
+            }
+        ]
+    },
+    {
+        "Model Name": "Trixie Lulamoon and Trixie Lulamoon (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Trixie%20(mix)/G_61600.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_61600.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Trixie%20(mix)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1644
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Trixie%20(mix)/kmeans_5000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_5000.pt",
+                "Size (bytes)": 15424887
+            }
+        ]
+    },
+    {
+        "Model Name": "Pinkie (speaking sep)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(speaking%20sep)/G_166400.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_166400.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(speaking%20sep)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1943
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pinkie%20(speaking%20sep)/kmeans_600.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_600.pt",
+                "Size (bytes)": 12016431
+            }
+        ]
+    },
+    {
+        "Model Name": "Big McIntosh and Babs Seed (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/G_1668.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_1668.pth",
+                "Size (bytes)": 548687709
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/kmeans.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans.pt",
+                "Size (bytes)": 18488879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 2216
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Big%20McIntosh/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 312
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+    },
+    {
+        "Model Name": "Daring Do, Lightning Dust, and Moon Dancer",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/ddm_DaringDo_100k/G_100000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_100000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/ddm_DaringDo_100k/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1670
+            }
+        ]
+    }
+]

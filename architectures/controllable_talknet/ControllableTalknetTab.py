@@ -1,15 +1,9 @@
-from dash import Dash, html, dcc, Input, Output, State
-from .AbstractTab import AbstractTab
+from dash import html, dcc, Input, Output, State, callback
+
+from architectures.AbstractTab import AbstractTab
 
 
 class ControllableTalknetTab(AbstractTab):
-
-    def __init__(self, app, root_dir):
-        super().__init__(app, root_dir)
-        app.callback(Output('autotune-cell', 'children'),
-                     [Input(self.input_ids[1], 'value'),
-                      Input('file-dropdown', 'value')])(self.disable_autotune)
-
     @property
     def id(self):
         return 'controllable_talknet'
@@ -40,8 +34,8 @@ class ControllableTalknetTab(AbstractTab):
                     'too, to guide the pacing and inflection of the generated voice.')
         )
 
-    def meets_requirements(self, user_text, user_audio):
-        return user_text is not None and user_text != ''
+    def meets_requirements(self, user_text, user_audio, selected_character):
+        return user_text is not None and user_text != '' and selected_character is not None
 
     @property
     def options(self):
@@ -75,15 +69,17 @@ class ControllableTalknetTab(AbstractTab):
                       'from the spectrogram using the "hifirec" GAN network - to reduce metallic noise.'),
         ], className='spaced-table')
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('autotune-cell', 'children'),
-    #     [Input(self.input_ids[1], 'value'),
-    #      Input('file-dropdown', 'value')]
-    # )
-    def disable_autotune(self, disable_audio_input, selected_file):
-        disabled = True if disable_audio_input else selected_file is None
-        return dcc.Checklist(options=[{'label': '', 'value': '', 'disabled': disabled}], id=self.input_ids[3])
+    def register_callbacks(self, enable_model_management):
+        super().register_callbacks(enable_model_management)
+
+        @callback(
+            Output('autotune-cell', 'children'),
+            [Input(self.input_ids[1], 'value'),
+             Input('file-dropdown', 'value')]
+        )
+        def disable_autotune(disable_audio_input, selected_file):
+            disabled = True if disable_audio_input else selected_file is None
+            return dcc.Checklist(options=[{'label': '', 'value': '', 'disabled': disabled}], id=self.input_ids[3])
 
     @property
     def input_ids(self):
@@ -104,4 +100,3 @@ class ControllableTalknetTab(AbstractTab):
             'Auto Tune': True if args[3] else False,
             'Reduce Metallic Sound': True if args[4] else False
         }
-

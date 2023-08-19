@@ -1,0 +1,24 @@
+[
+    {
+        "Model Name": "mane6",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/mane6/sovits5.0_1300.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "sovits5.0_1300.pt",
+                "Size (bytes)": 552047830
+            }
+        ]
+    },
+    {
+        "Model Name": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/sovits5.0_0440.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "sovits5.0_0440.pt",
+                "Size (bytes)": 552045206
+            }
+        ]
+    }
+]

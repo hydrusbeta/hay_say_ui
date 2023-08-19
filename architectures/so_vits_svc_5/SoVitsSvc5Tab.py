@@ -1,12 +1,9 @@
 from dash import html, dcc
 
-from .AbstractTab import AbstractTab
+from architectures.AbstractTab import AbstractTab
 
 
 class SoVitsSvc5Tab(AbstractTab):
-    def __init__(self, app, root_dir):
-        super().__init__(app, root_dir)
-
     @property
     def id(self):
         return 'so_vits_svc_5'
@@ -35,15 +32,17 @@ class SoVitsSvc5Tab(AbstractTab):
             html.Em('This architecture requires a voice recording input. Text inputs are ignored.')
         )
 
-    def meets_requirements(self, user_text, user_audio):
-        return user_audio is not None
+    def meets_requirements(self, user_text, user_audio, selected_character):
+        return user_audio is not None and selected_character is not None
 
     @property
     def options(self):
         return html.Table([
             html.Tr([
-                html.Td(),
-                html.Td("Note: \"mane6\" = combined Mane Six singing model", className='centered')
+                html.Td("Note: \"mane6\" = combined Mane Six singing model", colSpan=2, className='centered')
+            ]),
+            html.Tr([
+                html.Td("Note: \"ext1\" = combined Non-Mane-Six model", colSpan=2, className='centered')
             ]),
             html.Tr([
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),

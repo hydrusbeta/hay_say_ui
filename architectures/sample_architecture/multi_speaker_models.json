@@ -1,0 +1,21 @@
+[
+    {
+        "Model Name": "Generic Pony",
+        "Files": [
+            {
+                "URL": "https://localhost",
+                "Download With": "GDOWN",
+                "Download As": "something.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 1111
+            },
+            {
+                "URL": "https://localhost",
+                "Download With": "GDOWN",
+                "Download As": "indices/somethingElse.index",
+                "Size (bytes)": 1111
+            }
+        ],
+        "Originally Acquired From": "originalURL.com/1.zip"
+    }
+]

@@ -1,23 +1,26 @@
-from hay_say_common import ROOT_DIR, RAW_DIR, PREPROCESSED_DIR, OUTPUT_DIR, POSTPROCESSED_DIR, CACHE_MIMETYPE, \
-    CACHE_EXTENSION, TIMESTAMP_FORMAT, save_audio_to_cache, get_audio_from_src_attribute, read_metadata, \
-    write_metadata, get_hashes_sorted_by_timestamp, file_is_already_cached, read_audio_from_cache
-from tabs.ControllableTalknetTab import ControllableTalknetTab
-from tabs.SoVitsSvc3Tab import SoVitsSvc3Tab
-from tabs.SoVitsSvc4Tab import SoVitsSvc4Tab
-from tabs.SoVitsSvc5Tab import SoVitsSvc5Tab
-from tabs.RvcTab import RvcTab
-from dash import Dash, html, dcc, Input, Output, State, ctx
-import dash_bootstrap_components as dbc
-from dash.exceptions import PreventUpdate
-from numbers import Number
-from datetime import datetime
-from http.client import HTTPConnection
-import re
+import argparse
 import base64
 import hashlib
 import json
 import os
+import re
 import traceback
+from datetime import datetime
+from http.client import HTTPConnection
+from numbers import Number
+
+import dash_bootstrap_components as dbc
+from dash import Dash, html, dcc, Input, Output, State, ctx, callback
+from dash.exceptions import PreventUpdate
+
+from architectures.controllable_talknet.ControllableTalknetTab import ControllableTalknetTab
+from architectures.rvc.RvcTab import RvcTab
+from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
+from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
+from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
+from hay_say_common import *
+import model_migrator as Migrator
+import download.Downloader as Downloader
 
 # todo: so-vits output is much louder than controllable talknet. Should the output volume be equalized?
 
@@ -26,209 +29,298 @@ SHOW_OUTPUT_OPTIONS_LABEL = 'Show post-processing options'
 TAB_BUTTON_PREFIX = '-tab-button'
 TAB_CELL_SUFFIX = '-tab-cell'
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
 
-available_tabs = [
-    ControllableTalknetTab(app, ROOT_DIR),
-    SoVitsSvc3Tab(app, ROOT_DIR),
-    SoVitsSvc4Tab(app, ROOT_DIR),
-    SoVitsSvc5Tab(app, ROOT_DIR),
-    RvcTab(app, ROOT_DIR)
-]
-
-app.layout = \
-    html.Div([
-        html.H1('Hay Say'),
-        html.H2('A Unified Interface for Pony Voice Generation', className='subtitle'),
-        html.H2('Input'),
-        dcc.Textarea(id='text-input', placeholder="Enter some text you would like a pony to say."),
-        html.P('And/or provide a voice recording that you would like to ponify:'),
-        dcc.Upload([html.Div('Drag and drop file or click to Upload...')], id='file-picker'),
-        dcc.Loading(
+def construct_main_interface(tab_buttons, tabs_contents):
+    return [
+        html.Div([
+            html.H1('Hay Say'),
+            html.H2('A Unified Interface for Pony Voice Generation', className='subtitle'),
+            html.H2('Input'),
+            dcc.Textarea(id='text-input', placeholder="Enter some text you would like a pony to say."),
+            html.P('And/or provide a voice recording that you would like to ponify:'),
+            dcc.Upload([html.Div('Drag and drop file or click to Upload...')], id='file-picker'),
+            dcc.Loading(
+                html.Table([
+                    html.Tr(
+                        html.Td(
+                            html.Div('Selected File:')
+                        )
+                    ),
+                    html.Tr(
+                        html.Td(
+                            html.Div(
+                                dbc.Select(id='file-dropdown', className='file-dropdown'),
+                                id='dropdown-container'
+                            )
+                        )
+                    ),
+                    html.Tr(
+                        html.Td(
+                            html.Div(html.Audio(src=None, controls=True, id='input-playback', hidden=True))
+                        )
+                    )],
+                    className='spaced-table'
+                ),
+                type='default',
+                parent_className='dropdown-container-loader'
+            ),
+            html.H2('Preprocessing'),
+            dcc.Checklist([SHOW_INPUT_OPTIONS_LABEL], id='show-preprocessing-options', value=[], inputStyle={'margin-right': '10px'}),
+            # For future ref, this is how you do a vertical checklist with spacing, in case I want to try doing that again:
+            # dcc.Checklist(['Debug pitch', 'Reduce noise', 'Crop Silence'], ['Debug pitch'], id='test', labelStyle={'display': 'block', 'margin': '20px'}),
             html.Table([
                 html.Tr(
+                    html.Td("Note: There are currently no options available. Adding pre-processing options is on the to-do list!",
+                            colSpan=2, className='centered')
+                ),
+                html.Tr([
+                    html.Td('Adjust pitch of voice recording (semitones)', className='option-label'),
+                    html.Td(dcc.Input(id='semitone-pitch', type='number', min=-25, max=25, step=1, value=0))
+                ], hidden=True),
+                html.Tr([
+                    html.Td('Debug pitch', className='option-label'),
+                    html.Td(dcc.Checklist([''], id='debug-pitch'))
+                ], hidden=True),
+                html.Tr([
+                    html.Td('Reduce noise', className='option-label'),
+                    html.Td(dcc.Checklist([''], id='reduce-noise'))
+                ], hidden=True),
+                html.Tr([
+                    html.Td('Crop silence at beginning and end', className='option-label'),
+                    html.Td(dcc.Checklist([''], id='crop-silence'))
+                ], hidden=True),
+                html.Tr(
                     html.Td(
-                        html.Div('Selected File:')
-                    )
+                        html.Button("Preview", id='preview'),
+                        colSpan=2, className='centered'),
+                    hidden=True
                 ),
                 html.Tr(
                     html.Td(
                         html.Div(
-                            dbc.Select(id='file-dropdown', className='file-dropdown'),
-                            id='dropdown-container'
-                        )
-                    )
-                ),
-                html.Tr(
-                    html.Td(
-                        html.Div(html.Audio(src=None, controls=True, id='input-playback', hidden=True))
-                    )
-                )],
-                className='spaced-table'
+                            html.Audio(src=None, controls=True, id='preprocess_playback'),
+                            className='centered'),
+                        colSpan=2
+                    ), hidden=True
+                )], id='preprocessing-options', className='spaced-table'
             ),
-            type='default',
-            parent_className='dropdown-container-loader'
-        ),
-        html.H2('Preprocessing'),
-        dcc.Checklist([SHOW_INPUT_OPTIONS_LABEL], id='show-preprocessing-options', value=[]),
-        # For future ref, this is how you do a vertical checklist with spacing, in case I want to try doing that again:
-        # dcc.Checklist(['Debug pitch', 'Reduce noise', 'Crop Silence'], ['Debug pitch'], id='test', labelStyle={'display': 'block', 'margin': '20px'}),
-        html.Table([
-            html.Tr(
-                html.Td("Note: There are currently no options available. Adding pre-processing options is on the to-do list!",
-                        colSpan=2, className='centered')
-            ),
-            html.Tr([
-                html.Td('Adjust pitch of voice recording (semitones)', className='option-label'),
-                html.Td(dcc.Input(id='semitone-pitch', type='number', min=-25, max=25, step=1, value=0))
-            ], hidden=True),
-            html.Tr([
-                html.Td('Debug pitch', className='option-label'),
-                html.Td(dcc.Checklist([''], id='debug-pitch'))
-            ], hidden=True),
-            html.Tr([
-                html.Td('Reduce noise', className='option-label'),
-                html.Td(dcc.Checklist([''], id='reduce-noise'))
-            ], hidden=True),
-            html.Tr([
-                html.Td('Crop silence at beginning and end', className='option-label'),
-                html.Td(dcc.Checklist([''], id='crop-silence'))
-            ], hidden=True),
-            html.Tr(
-                html.Td(
-                    html.Button("Preview", id='preview'),
-                    colSpan=2, className='centered'),
-                hidden=True
-            ),
-            html.Tr(
-                html.Td(
-                    html.Div(
-                        html.Audio(src=None, controls=True, id='preprocess_playback'),
-                        className='centered'),
-                    colSpan=2
-                ), hidden=True
-            )], id='preprocessing-options', className='spaced-table'
-        ),
-        html.Br(),
-        html.Hr(),
-        html.H2('AI Architecture'),
-        html.P("Now pick an AI architecture and tweak its settings to your liking:"),
-        html.Table(
-            html.Tr([
-                html.Td(
-                    html.Button(tab.label, id=tab.id + TAB_BUTTON_PREFIX, className='tab-button'),
-                    className='tab-cell', id=tab.id + TAB_CELL_SUFFIX)
-                for tab in available_tabs
-            ]), className='tab-table-header'
-        ),
-        html.Div([
+            html.Br(),
+            html.Hr(),
+            html.H2('AI Architecture'),
+            html.P("Now pick an AI architecture and tweak its settings to your liking:"),
             html.Table(
-                [tab.tab_contents for tab in available_tabs],
-                className='tab-table'
+                html.Tr(tab_buttons), className='tab-table-header'
             ),
-            html.Table([
-                html.H2('Postprocessing'),
-                dcc.Checklist([SHOW_OUTPUT_OPTIONS_LABEL], id='show-output-options', value=[])
-                ],
-            ),
-            html.Table([
-                html.Tr(
-                    html.Td("Note: There are currently no options available. Adding post-processing options is on the to-do list!",
-                            colSpan=2, className='centered')
+            html.Div([
+                html.Table(
+                    tabs_contents,
+                    className='tab-table spaced-table'
                 ),
-                html.Tr([
-                    html.Td('Reduce Metallic Sound', className='option-label'),
-                    html.Td(dcc.Checklist([''], id='reduce-metallic-sound'), colSpan=2)
-                ], hidden=True),
-                html.Tr([
-                    html.Td('Auto-tune output', className='option-label'),
-                    html.Td(dcc.Checklist([''], id='auto-tune-output'), colSpan=2)
-                ], hidden=True),
-                html.Tr([
-                    html.Td('Adjust speed of output', className='option-label'),
-                    html.Td(html.Div('20', id='output-speed-adjustment')),
-                    html.Td(dcc.Input(type='range', min=0.25, max=4, value="1", id='adjust-output-speed', step='0.01')),
-                ], hidden=True)],
-                id='postprocessing-options',
-                className='spaced-table'
-            ),
-            html.Table(
-                html.Tr(
-                    html.Td(
-                        dcc.Loading(
-                            html.Button(id='generate-button'),
-                            type='default'  # circle, graph, cube, circle, dot, default
+                html.Table([
+                    html.H2('Postprocessing'),
+                    dcc.Checklist([SHOW_OUTPUT_OPTIONS_LABEL], id='show-output-options', value=[], inputStyle={'margin-right': '10px'})
+                    ],
+                ),
+                html.Table([
+                    html.Tr(
+                        html.Td("Note: There are currently no options available. Adding post-processing options is on the to-do list!",
+                                colSpan=2, className='centered')
+                    ),
+                    html.Tr([
+                        html.Td('Reduce Metallic Sound', className='option-label'),
+                        html.Td(dcc.Checklist([''], id='reduce-metallic-sound'), colSpan=2)
+                    ], hidden=True),
+                    html.Tr([
+                        html.Td('Auto-tune output', className='option-label'),
+                        html.Td(dcc.Checklist([''], id='auto-tune-output'), colSpan=2)
+                    ], hidden=True),
+                    html.Tr([
+                        html.Td('Adjust speed of output', className='option-label'),
+                        html.Td(html.Div('20', id='output-speed-adjustment')),
+                        html.Td(dcc.Input(type='range', min=0.25, max=4, value="1", id='adjust-output-speed', step='0.01')),
+                    ], hidden=True)],
+                    id='postprocessing-options',
+                    className='spaced-table'
+                ),
+                html.Table(
+                    html.Tr(
+                        html.Td(
+                            dcc.Loading(
+                                html.Button('Generate!', id='generate-button'),
+                                type='default'  # circle, graph, cube, circle, dot, default
+                            ),
                         ),
                     ),
+                    className='generate-table'
                 ),
-                className='generate-table'
-            ),
-        ], className='box-div'),
-        html.Br(),
-        html.Hr(),
-        html.H2('Output'),
-        # todo: hide this delete button if there's nothing to delete?
-        html.Button('Delete all generated audio', id='delete-postprocessed'),
-        html.Div(id='message'),
-    ], id='outer-div')
-app.title = 'Hay Say'
+            ], className='box-div'),
+            html.Br(),
+            html.Hr(),
+            html.H2('Output'),
+            # todo: hide this delete button if there's nothing to delete?
+            html.Button('Delete all generated audio', id='delete-postprocessed'),
+            html.Div(id='message'),
+        ], id='hay-say-outer-div', className='outer-div')
+    ]
 
 
-@app.callback(
-    Output('message', 'children', allow_duplicate=True),
-    Input('delete-postprocessed', 'n_clicks'),
-    prevent_initial_call=True
-)
-def delete_all_postprocessed(_):
-    for filename in os.listdir(POSTPROCESSED_DIR):
-        path = os.path.join(POSTPROCESSED_DIR, filename)
-        os.remove(path)
+def register_main_callbacks(available_tabs):
+    @callback(
+        Output('message', 'children', allow_duplicate=True),
+        Input('delete-postprocessed', 'n_clicks'),
+        prevent_initial_call=True
+    )
+    def delete_all_postprocessed(_):
+        for filename in os.listdir(POSTPROCESSED_DIR):
+            path = os.path.join(POSTPROCESSED_DIR, filename)
+            os.remove(path)
 
+    @callback(
+        [Output(tab.id, 'hidden') for tab in available_tabs] +
+        [Output(tab.id + TAB_CELL_SUFFIX, 'className') for tab in available_tabs],
+        [Input(tab.id + TAB_BUTTON_PREFIX, 'n_clicks') for tab in available_tabs]
+    )
+    def hide_unused_tabs(*_):
+        return [not (tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id) for tab in available_tabs] + \
+            ['tab-cell' if not tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id else 'tab-cell-selected'
+             for tab in available_tabs]
 
-@app.callback(
-    [Output(tab.id, 'hidden') for tab in available_tabs] +
-    [Output(tab.id + TAB_CELL_SUFFIX, 'className') for tab in available_tabs],
-    [Input(tab.id + TAB_BUTTON_PREFIX, 'n_clicks') for tab in available_tabs]
-)
-def hide_unused_tabs(*_):
-    return [not (tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id) for tab in available_tabs] + \
-        ['tab-cell' if not tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id else 'tab-cell-selected'
-         for tab in available_tabs]
-    return result
+    @callback(
+        Output('output-speed-adjustment', 'children'),
+        Input('adjust-output-speed', 'value')
+    )
+    def adjust_output_speed(adjustment):
+        # cast to float first, then round to 2 decimal places
+        return "{:3.2f}".format(float(adjustment))
 
+    @callback(
+        Output('preprocessing-options', 'hidden'),
+        Input('show-preprocessing-options', 'value')
+    )
+    def show_preprocessing_options(value):
+        return SHOW_INPUT_OPTIONS_LABEL not in value
 
-@app.callback(
-    Output('output-speed-adjustment', 'children'),
-    Input('adjust-output-speed', 'value')
-)
-def adjust_output_speed(adjustment):
-    # cast to float first, then round to 2 decimal places
-    return "{:3.2f}".format(float(adjustment))
+    @callback(
+        [Output('file-dropdown', 'options'),
+         Output('file-dropdown', 'value'),
+         Output('dropdown-container', 'hidden')],
+        Input('file-picker', 'contents'),
+        State('file-picker', 'filename')
+    )
+    def upload_file(file_contents, filename):
+        if file_contents is None:  # initial load of page
+            return update_dropdown(None)
+        else:
+            filename = append_index_if_needed(filename)
+            raw_array, raw_samplerate = get_audio_from_src_attribute(file_contents, 'utf-8')
+            save_raw_audio_to_cache(filename, raw_array, raw_samplerate)
+            return update_dropdown(filename)
 
+    @callback(
+        [Output('input-playback', 'src'),
+         Output('input-playback', 'hidden')],
+        Input('file-dropdown', 'value')
+    )
+    def update_playback(selected_file):
+        if selected_file is None:
+            return None, True
+        metadata = read_metadata(RAW_DIR)
+        reverse_lookup = {metadata[key]['User File']: key for key in metadata}
+        hash_raw = reverse_lookup[selected_file]
+        bytes_raw = read_file_bytes(RAW_DIR, hash_raw)
+        src = prepare_src_attribute(bytes_raw, CACHE_MIMETYPE)
+        return src, False
 
-@app.callback(
-    Output('preprocessing-options', 'hidden'),
-    Input('show-preprocessing-options', 'value')
-)
-def show_preprocessing_options(value):
-    return SHOW_INPUT_OPTIONS_LABEL not in value
+    @callback(
+        Output('postprocessing-options', 'hidden'),
+        Input('show-output-options', 'value')
+    )
+    def show_postprocessing_options(value):
+        return SHOW_OUTPUT_OPTIONS_LABEL not in value
 
+    @callback(
+        [Output('message', 'children'),
+         Output('generate-button', 'children')],  # To activate the spinner
+        Input('generate-button', 'n_clicks'),
+        [State('text-input', 'value'),
+         State('file-dropdown', 'value'),
+         State('semitone-pitch', 'value'),
+         State('debug-pitch', 'value'),
+         State('reduce-noise', 'value'),
+         State('crop-silence', 'value'),
+         State('reduce-metallic-sound', 'value'),
+         State('auto-tune-output', 'value'),
+         State('adjust-output-speed', 'value')]
+        + [State(tab.id, 'hidden') for tab in available_tabs]
+        # Add every architecture's inputs as States to the callback:
+        + [State(item, 'value') for sublist in [tab.input_ids for tab in available_tabs] for item in sublist]
+    )
+    def generate(clicks, user_text, selected_file, semitone_pitch, debug_pitch, reduce_noise,
+                 crop_silence, reduce_metallic_noise, auto_tune_output, output_speed_adjustment, *args):
+        if clicks is not None:
+            try:
+                selected_tab_object = get_selected_tab_object(args[0:len(available_tabs)])
+                relevant_inputs = get_inputs_for_selected_tab(selected_tab_object, args[len(available_tabs):])
+                hash_preprocessed = preprocess_if_needed(selected_file, semitone_pitch, debug_pitch, reduce_noise,
+                                                         crop_silence)
+                hash_output = process(user_text, hash_preprocessed, selected_tab_object, relevant_inputs)
+                hash_postprocessed = postprocess(hash_output, reduce_metallic_noise, auto_tune_output,
+                                                 output_speed_adjustment)
+                highlight_first = True
+            except Exception as e:
+                return 'An error has occurred. Please send the software maintainers the following information as ' \
+                       'well as any recent output in the Command Prompt/terminal (please review and remove any ' \
+                       'private info before sending!): \n\n' + \
+                       traceback.format_exc(), 'Generate!'
+        else:
+            highlight_first = False
+        sorted_hashes = get_hashes_sorted_by_timestamp(POSTPROCESSED_DIR)
+        first_output = [
+            prepare_postprocessed_display(sorted_hashes[0], highlight=highlight_first)] if sorted_hashes else []
+        remaining_outputs = [prepare_postprocessed_display(hash_postprocessed) for hash_postprocessed in
+                             reversed(sorted_hashes[1:])]
+        return remaining_outputs + first_output, 'Generate!'
 
-@app.callback(
-    [Output('file-dropdown', 'options'),
-     Output('file-dropdown', 'value'),
-     Output('dropdown-container', 'hidden')],
-    Input('file-picker', 'contents'),
-    State('file-picker', 'filename')
-)
-def upload_file(file_contents, filename):
-    if file_contents is None:  # initial load of page
-        return update_dropdown(None)
-    else:
-        filename = append_index_if_needed(filename)
-        raw_array, raw_samplerate = get_audio_from_src_attribute(file_contents, 'utf-8')
-        save_raw_audio_to_cache(filename, raw_array, raw_samplerate)
-        return update_dropdown(filename)
+    @callback(
+        Output('generate-button', 'disabled'),
+        [Input('text-input', 'value'),
+         Input('file-dropdown', 'value')] +
+        [Input(tab.id, 'hidden') for tab in available_tabs] +
+        [Input(tab.input_ids[0], 'value') for tab in available_tabs]
+    )
+    def disable_generate_button(user_text, selected_file, *hidden_states_and_character_selections):
+        # todo: don't disable the generate button. Instead, highlight the requirements text and whatever the user is
+        #  missing in red.
+        hidden_states = hidden_states_and_character_selections[:len(available_tabs)]
+        character_selections = hidden_states_and_character_selections[len(available_tabs):]
+        tab_object = get_selected_tab_object(hidden_states)
+        if tab_object is None:
+            return True
+        else:
+            index = hidden_states.index(False)
+            selected_character = character_selections[index]
+            return not tab_object.meets_requirements(user_text, selected_file, selected_character)
+
+    # todo: disable the preview button if no audio file is selected.
+    @callback(
+        Output('preprocess_playback', 'src'),
+        Input('preview', 'n_clicks'),
+        State('file-dropdown', 'value'),
+        State('semitone-pitch', 'value'),
+        State('debug-pitch', 'value'),
+        State('reduce-noise', 'value'),
+        State('crop-silence', 'value'),
+    )
+    def generate_preview(_, selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
+        if selected_file is None:
+            raise PreventUpdate
+
+        hash_preprocessed = preprocess(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
+
+        # return src
+        bytes_preprocessed = read_file_bytes(PREPROCESSED_DIR, hash_preprocessed)
+        hash_raw = lookup_filehash(selected_file)
+        return prepare_src_attribute(bytes_preprocessed, CACHE_MIMETYPE)
 
 
 def update_dropdown(filename):
@@ -280,72 +372,9 @@ def write_raw_metadata(hash_80_bits, filename):
     write_metadata(RAW_DIR, raw_metadata)
 
 
-@app.callback(
-    [Output('input-playback', 'src'),
-     Output('input-playback', 'hidden')],
-    Input('file-dropdown', 'value')
-)
-def update_playback(selected_file):
-    if selected_file is None:
-        return None, True
-    metadata = read_metadata(RAW_DIR)
-    reverse_lookup = {metadata[key]['User File']: key for key in metadata}
-    hash_raw = reverse_lookup[selected_file]
-    bytes_raw = read_file_bytes(RAW_DIR, hash_raw)
-    src = prepare_src_attribute(bytes_raw, CACHE_MIMETYPE)
-    return src, False
-
-
 def prepare_src_attribute(src_bytes, mimetype):
     binary_contents = b'data:' + mimetype.encode('utf-8') + b',' + base64.b64encode(src_bytes)
     return binary_contents.decode('utf-8')
-
-
-@app.callback(
-    Output('postprocessing-options', 'hidden'),
-    Input('show-output-options', 'value')
-)
-def show_postprocessing_options(value):
-    return SHOW_OUTPUT_OPTIONS_LABEL not in value
-
-
-@app.callback(
-    [Output('message', 'children'),
-     Output('generate-button', 'children')],  # To activate the spinner
-    Input('generate-button', 'n_clicks'),
-    [State('text-input', 'value'),
-     State('file-dropdown', 'value'),
-     State('semitone-pitch', 'value'),
-     State('debug-pitch', 'value'),
-     State('reduce-noise', 'value'),
-     State('crop-silence', 'value'),
-     State('reduce-metallic-sound', 'value'),
-     State('auto-tune-output', 'value'),
-     State('adjust-output-speed', 'value')]
-    + [State(tab.id, 'hidden') for tab in available_tabs]
-    # Add every architecture's inputs as States to the callback:
-    + [State(item, 'value') for sublist in [tab.input_ids for tab in available_tabs] for item in sublist]
-)
-def generate(clicks, user_text, selected_file, semitone_pitch, debug_pitch, reduce_noise,
-             crop_silence, reduce_metallic_noise, auto_tune_output, output_speed_adjustment, *args):
-    if clicks is not None:
-        try:
-            selected_tab_object = get_selected_tab_object(args[0:len(available_tabs)])
-            relevant_inputs = get_inputs_for_selected_tab(selected_tab_object, args[len(available_tabs):])
-            hash_preprocessed = preprocess_if_needed(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
-            hash_output = process(user_text, hash_preprocessed, selected_tab_object, relevant_inputs)
-            hash_postprocessed = postprocess(hash_output, reduce_metallic_noise, auto_tune_output, output_speed_adjustment)
-            highlight_first = True
-        except Exception as e:
-            return 'An error has occurred. Please send the software maintainers the following information (please ' \
-                   'review and remove any private info before sending!): \n\n' + \
-                      traceback.format_exc(), 'Generate!'
-    else:
-        highlight_first = False
-    sorted_hashes = get_hashes_sorted_by_timestamp(POSTPROCESSED_DIR)
-    first_output = [prepare_postprocessed_display(sorted_hashes[0], highlight=highlight_first)] if sorted_hashes else []
-    remaining_outputs = [prepare_postprocessed_display(hash_postprocessed) for hash_postprocessed in reversed(sorted_hashes[1:])]
-    return remaining_outputs + first_output, 'Generate!'
 
 
 def prepare_postprocessed_display(hash_postprocessed, highlight=False):
@@ -594,44 +623,6 @@ def lookup_filehash(selected_file):
     return reverse_lookup.get(selected_file)
 
 
-@app.callback(
-    Output('generate-button', 'disabled'),
-    [Input('text-input', 'value'),
-     Input('file-dropdown', 'value')] +
-     [Input(tab.id, 'hidden') for tab in available_tabs]
-)
-def disable_generate_button(user_text, selected_file, *hidden_states):
-    # todo: don't disable the generate button. Instead, highlight the requirements text and whatever the user is
-    #  missing in red.
-    tab_object = get_selected_tab_object(hidden_states)
-    if tab_object is None:
-        return True
-    else:
-        return not tab_object.meets_requirements(user_text, selected_file)
-
-
-# todo: disable the preview button if no audio file is selected.
-@app.callback(
-    Output('preprocess_playback', 'src'),
-    Input('preview', 'n_clicks'),
-    State('file-dropdown', 'value'),
-    State('semitone-pitch', 'value'),
-    State('debug-pitch', 'value'),
-    State('reduce-noise', 'value'),
-    State('crop-silence', 'value'),
-)
-def generate_preview(_, selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
-    if selected_file is None:
-        raise PreventUpdate
-
-    hash_preprocessed = preprocess(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
-
-    # return src
-    bytes_preprocessed = read_file_bytes(PREPROCESSED_DIR, hash_preprocessed)
-    hash_raw = lookup_filehash(selected_file)
-    return prepare_src_attribute(bytes_preprocessed, CACHE_MIMETYPE)
-
-
 def compute_next_hash(current_hash, *args):
     # concatenate current_hash with all the remaining arguments and then take the hash
     # current_hash can be None.
@@ -690,8 +681,96 @@ def preprocess_bytes(bytes_raw, sr_raw, semitone_pitch, debug_pitch, reduce_nois
     # todo: implement this
     return bytes_raw, sr_raw
 
+def construct_tab_buttons(available_tabs):
+    return [html.Td(
+        html.Button(tab.label, id=tab.id + TAB_BUTTON_PREFIX, className='tab-button'),
+        className='tab-cell', id=tab.id + TAB_CELL_SUFFIX)
+        for tab in available_tabs]
+
+
+def construct_tabs_interface(available_tabs, enable_model_management):
+    tab_buttons = construct_tab_buttons(available_tabs)
+    tabs_contents = [tab.tab_contents(enable_model_management) for tab in available_tabs]
+    return tab_buttons, tabs_contents
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(prog='Hay Say', description='A Unified Interface for Pony Voice Generation')
+    parser.add_argument('--update_model_lists_on_startup', action='store_true', default=False, help='Causes Hay Say to download the latest model lists so that all the latest models appear in the character download menus.')
+    parser.add_argument('--enable_model_management', action='store_true', default=False, help='Enables the user to download and delete models')
+    parser.add_argument('--migrate_models', action='store_true', default=False, help='Automatically move models from the model pack directories and custom model directory to the new models directory when Hay Say starts.')
+    parser.add_argument('--architectures', nargs='*', choices=architecture_map.keys(), default=architecture_map.keys(), help='Selects which architectures are shown in the Hay Say UI')
+    return parser.parse_args()
+
+
+architecture_map = {'ControllableTalkNet': ControllableTalknetTab(),
+                    'SoVitsSvc3': SoVitsSvc3Tab(),
+                    'SoVitsSvc4': SoVitsSvc4Tab(),
+                    'SoVitsSvc5': SoVitsSvc5Tab(),
+                    'Rvc': RvcTab()}
+
+
+def select_architecture_tabs(choices):
+    return [architecture_map[choice] for choice in choices]
+
+
+def construct_main_app(args, available_tabs):
+    app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
+
+    tab_buttons, tabs_contents = construct_tabs_interface(available_tabs, args.enable_model_management)
+    for tab in available_tabs:
+        tab.register_callbacks(args.enable_model_management)
+
+    app.layout = html.Div(construct_main_interface(tab_buttons, tabs_contents))
+    register_main_callbacks(available_tabs)
+    app.title = 'Hay Say'
+    return app
+
+
+def register_download_callbacks(args):
+    # The import statement is located here, to make sure that the download callbacks are not loaded at all unless this
+    # method is called.
+    from celery_component import ArchitectureSelection
+    # Instantiate ArchitectureSelection to instantiate the download callbacks.
+    ArchitectureSelection(None, args.architectures)
+
+
+def add_model_manager_page(app, available_tabs):
+    # The import statement is located here, to make sure that the model_manager module is not loaded at all unless this
+    # method is called.
+    from model_manager import construct_model_manager, register_model_manager_callbacks
+    app.layout.children.append(construct_model_manager(available_tabs))
+    register_model_manager_callbacks(available_tabs)
+
+
+def add_toolbar(app):
+    # The import statement is located here, to make sure that the toolbar module is not loaded at all unless this method
+    # is called.
+    from toolbar import construct_toolbar, register_toolbar_callbacks
+    app.layout.children.append(construct_toolbar())
+    register_toolbar_callbacks()
+
+
+def add_model_management_components_if_needed(args, app, available_tabs):
+    if args.enable_model_management:
+        add_model_management_components(args, app, available_tabs)
+
+
+def add_model_management_components(args, app, available_tabs):
+    register_download_callbacks(args)
+    add_model_manager_page(app, available_tabs)
+    add_toolbar(app)
+
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=6573)
+    args = parse_arguments()
+
+    available_tabs = select_architecture_tabs(args.architectures)
+    Migrator.migrate_models_if_specified(args, available_tabs)
+    Downloader.update_model_lists_if_specified(args, available_tabs)
+    app = construct_main_app(args, available_tabs)
+    add_model_management_components_if_needed(args, app, available_tabs)
+
+    app.run(host='0.0.0.0', port=6573)
 
 

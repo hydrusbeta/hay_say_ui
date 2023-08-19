@@ -1,30 +1,16 @@
 import os
 
-from .AbstractTab import AbstractTab
+from architectures.AbstractTab import AbstractTab
 from hay_say_common import get_model_path
+import model_licenses
 
-from dash import html, dcc, Input, Output
+from dash import html, dcc, Input, Output, callback
 from dash.exceptions import PreventUpdate
 
 import dash_bootstrap_components as dbc
 
 
 class RvcTab(AbstractTab):
-    def __init__(self, app, root_dir):
-        super().__init__(app, root_dir)
-        app.callback(Output('filter-radius-number', 'children'),
-                     Input(self.input_ids[3], 'value'))(self.adjust_filter_radius)
-        app.callback(Output('rvc-character-likeness-number', 'children'),
-                     Input(self.input_ids[4], 'value'))(self.adjust_character_likeness)
-        app.callback(Output('voice-envelope-mix-ratio-number', 'children'),
-                     Input(self.input_ids[5], 'value'))(self.adjust_voice_envelope_mix_ratio)
-        app.callback(Output('voiceless-consonants-protection-ratio-number', 'children'),
-                     Input(self.input_ids[6], 'value'))(self.adjust_voiceless_consonants_protection_ratio)
-        app.callback(Output(self.input_ids[3], 'disabled'),
-                     Input(self.input_ids[2], 'value'))(self.disable_filter_radius)
-        app.callback(Output(self.input_ids[4], 'disabled'),
-                     Input(self.input_ids[0], 'value'))(self.disable_character_likeness)
-
     @property
     def id(self):
         return 'rvc'
@@ -52,8 +38,8 @@ class RvcTab(AbstractTab):
             html.Em('This architecture requires a voice recording input. Text inputs are ignored.')
         )
 
-    def meets_requirements(self, user_text, user_audio):
-        return user_audio is not None
+    def meets_requirements(self, user_text, user_audio, selected_character):
+        return user_audio is not None and selected_character is not None
 
     @property
     def options(self):
@@ -62,6 +48,10 @@ class RvcTab(AbstractTab):
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 html.Td(self.character_dropdown)
             ]),
+            html.Tr(
+                html.Td(id=self.id + '-license-note', colSpan=2),
+                id=self.id + '-license-row', hidden=True
+            ),
             html.Tr([
                 html.Td(html.Label('Shift Pitch (semitones)', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Td(dcc.Input(id=self.input_ids[1], type='number', min=-36, max=36, step=1, value=0))
@@ -83,7 +73,7 @@ class RvcTab(AbstractTab):
                      'A value of 2 or less disables this feature. This feature is only available if the f0 Extraction '
                      'method is set to "harvest".'),
             html.Tr([
-                html.Td(html.Label('Character Likeness', htmlFor=self.input_ids[4]), className='option-label'),
+                html.Td(html.Label('Character Similarity', htmlFor=self.input_ids[4]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(type='range', min=0, max=1, value="0.88", id=self.input_ids[4], step='0.01')),
                     html.Td(html.Div('0', id='rvc-character-likeness-number')),
@@ -110,63 +100,76 @@ class RvcTab(AbstractTab):
                      "value of 0.5 disables this feature."),
         ], className='spaced-table')
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('filter-radius-number', 'children'),
-    #     Input(self.input_ids[3], 'value')
-    # )
-    def adjust_filter_radius(self, adjustment):
-        return adjustment
+    def register_callbacks(self, enable_model_management):
+        super().register_callbacks(enable_model_management)
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('rvc-character-likeness-number', 'children'),
-    #     Input(self.input_ids[4], 'value')
-    # )
-    def adjust_character_likeness(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+        @callback(
+            Output('filter-radius-number', 'children'),
+            Input(self.input_ids[3], 'value')
+        )
+        def adjust_filter_radius(adjustment):
+            return adjustment
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('voice-envelope-mix-ratio-number', 'children'),
-    #     Input(self.input_ids[5], 'value')
-    # )
-    def adjust_voice_envelope_mix_ratio(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+        @callback(
+            Output('rvc-character-likeness-number', 'children'),
+            Input(self.input_ids[4], 'value')
+        )
+        def adjust_character_likeness(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output('voiceless-consonants-protection-ratio-number', 'children'),
-    #     Input(self.input_ids[6], 'value')
-    # )
-    def adjust_voiceless_consonants_protection_ratio(self, adjustment):
-        if adjustment is None:
-            raise PreventUpdate
-        # cast to float first, then round to 2 decimal places
-        return "{:3.2f}".format(float(adjustment))
+        @callback(
+            Output('voice-envelope-mix-ratio-number', 'children'),
+            Input(self.input_ids[5], 'value')
+        )
+        def adjust_voice_envelope_mix_ratio(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output(self.input_ids[3], 'disabled'),
-    #     Input(self.input_ids[2], 'value')
-    # )
-    def disable_filter_radius(self, f0_extraction_method):
-        return not f0_extraction_method == 'harvest'
+        @callback(
+            Output('voiceless-consonants-protection-ratio-number', 'children'),
+            Input(self.input_ids[6], 'value')
+        )
+        def adjust_voiceless_consonants_protection_ratio(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
 
-    # Pretend this is annotated like so:
-    # @app.callback(
-    #     Output(self.input_ids[4], 'disabled'),
-    #     Input(self.input_ids[0], 'value')
-    # )
-    def disable_character_likeness(self, character):
-        index_path = self.get_index_path(character)
-        return not os.path.isfile(index_path)
+        @callback(
+            Output(self.input_ids[3], 'disabled'),
+            Input(self.input_ids[2], 'value')
+        )
+        def disable_filter_radius(f0_extraction_method):
+            return not f0_extraction_method == 'harvest'
+
+        @callback(
+            Output(self.input_ids[4], 'disabled'),
+            Input(self.input_ids[0], 'value')
+        )
+        def disable_character_likeness(character):
+            if character is None:
+                raise PreventUpdate
+            index_path = self.get_index_path(character)
+            return not os.path.isfile(index_path)
+
+        @callback(
+            [Output(self.id + '-license-note', 'children'),
+             Output(self.id + '-license-row', 'hidden')],
+            Input(self.input_ids[0], 'value')
+        )
+        def show_license_note(character):
+            model_metadata = next(iter([model_info for model_info in self.read_character_model_infos()
+                                        if model_info['Model Name'] == character]), None)
+            license_name = model_metadata.get('License')
+            license_enum = model_licenses.get_license_enum(license_name)
+            additional_text = model_metadata.get('Creator')
+            return model_licenses.get_verbiage(license_enum, additional_text), \
+                not model_licenses.is_ui_notice_required(license_enum)
 
     def get_index_path(self, character):
         character_dir = get_model_path(self.id, character)
@@ -196,5 +199,4 @@ class RvcTab(AbstractTab):
         if args[2] == 'harvest':
             input_dict['Filter Radius'] = int(args[3])
         return input_dict
-
 

@@ -38,8 +38,9 @@ I also tested Hay Say on MacOS 13.3.1 (Ventura) with Apple Silicon M2. I was una
 	If you get a popup window stating "Docker Desktop requires a newer WSL kernel version", open a command prompt, execute the following command, and then start docker desktop again:
 	`wsl --update`
 3. Open a command prompt and execute the following commands:
-```
+```commandline
 curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+docker volume create models
 docker volume create custom_models
 docker volume create audio_cache
 docker compose up
@@ -62,7 +63,7 @@ To start Hay Say again, first make sure that the Docker Engine is running. You c
 ![image showing the Docker whale icon in a Windows Taskbar](documentation%20images/windows%20docker%20icon.png)  
 If it is not running, you can start it by launching Docker Desktop. 
 Then, open Command Prompt and type the following command:
-```
+```commandline
 docker compose up
 ```
 Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when you execute that command. cd to that directory first if necessary.
@@ -74,8 +75,9 @@ Note: you must be in the folder where docker-compose.yaml is located (you downlo
 Note: Docker usually needs to be run as a superuser. However, it is possible to install it in a way that lets you run it in rootless mode (see https://docs.docker.com/engine/security/rootless). Hay Say has not been tested in a rootless configuration.
 
 2. Open a terminal and execute the following commands:
-```
+```commandline
 wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+sudo docker volume create models
 sudo docker volume create custom_models
 sudo docker volume create audio_cache
 sudo docker compose up
@@ -92,7 +94,7 @@ To stop Hay Say, go to the terminal where you ran "docker compose up" earlier an
 
 #### Starting Hay Say Again 
 To start Hay Say again, open a terminal and type the following command:
-```
+```commandline
 sudo docker compose up
 ```
 Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 2 above) when you execute that command. cd to that directory first if necessary.
@@ -107,8 +109,9 @@ Important! Hay Say did not run well on Apple Silicon during my testing. See "A N
 	https://www.docker.com/
 2. Start Docker Desktop and wait until it has finished loading.
 3. Open a terminal and execute the following commands:
-```
+```commandline
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+docker volume create models
 docker volume create custom_models
 docker volume create audio_cache
 docker compose up
@@ -130,7 +133,7 @@ To start Hay Say again, first make sure that the Docker Engine is running. You c
 ![image showing the Docker whale icon in a MacOS Taskbar](documentation%20images/macOS%20docker%20icon.png)  
 If it is not running, you can start it by launching Docker Desktop
 Then open a terminal and type the following command
-```
+```commandline
 sudo docker compose up
 ```
 Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when you execute that command. cd to that directory first if necessary.
@@ -145,29 +148,43 @@ file. If you made any edits to your old docker-compose file (e.g. to make it dow
 you will need to make the same edits to the new file:
 
 Linux:
-```
+```commandline
 wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml  
 ```
 Windows:
-```
+```commandline
 curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 ```
 MacOS:
-```
+```commandline
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 ```
+### 1.5. Special Instructions for the Aug 19, 2023 update
+Following the update on Aug 19, 2023, Hay Say now expects the presence of a "models" docker volume. If you installed Hay
+Say before that date, then you must also execute the following command to create that volume:
+
+Linux:
+```commandline
+sudo docker volume create models
+```
+
+Windows and MacOS:
+```commandline
+docker volume create models
+```
+
 ### 2. Pull the latest images
 Next, execute the following commands to make sure that your containers are stopped, to pull the latest images, and to 
 start Hay Say again:  
 
 Linux:
-```
+```commandline
 sudo docker compose stop
 sudo docker compose pull
 sudo docker compose up
 ```
 Windows and MacOS:
-```
+```commandline
 docker compose stop
 docker compose pull
 docker compose up
@@ -178,44 +195,53 @@ docker compose up
 
 ## Advanced Topics
 
-### Downloading Additional Character Models
-Character models are organized into "model packs". Hay Say only downloads some of these model packs by default. You can 
-configure Hay Say to download additional model packs by editing the docker-compose.yaml file. You will need to 
-"uncomment" the relevant lines. 
+### Using the Model Packs to Download Models in Bulk
+Hay Say used to download character models via Docker by downloading special, data-only images called "model packs".
+Model packs proved to be inefficient with disk space usage, so Hay Say was updated to allow users to download
+individual characters directly from Mega, Google Drive, and Huggingface Hub instead. The existing models packs should 
+still work, however, and are available as a fallback in case there is an issue with downloading models individually. 
+Please note that model packs will be deprecated in the future.
 
-For example, singing models for so-vits-svc 3.0 and 4.0 are not downloaded by default. To download the so-vits-svc 3.0 
-singing models, uncomment (remove the hashtag at the start of) the following lines:
-```
+You can configure Hay Say to download a model pack by "uncommenting" the relevant lines in the docker-compose.yaml file.
+For example, to download the singing models for so-vits-svc 4.0, uncomment (remove the hashtag at the start of) the 
+following lines:
+```yaml
 #so_vits_svc_3_model_pack_1:  
 #  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1  
 #  volumes:  
 #    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1  
 ```
-To download the so-vits-svc 4.0 singing models, uncomment (remove the hashtag at the start of) the following lines:
+So that they look like this instead:
+```yaml
+so_vits_svc_3_model_pack_1:  
+  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1  
+  volumes:  
+    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1  
 ```
-#so_vits_svc_4_model_pack_1:
-#  image: hydrusbeta/hay_say:so_vits_svc_4_model_pack_1
-#  volumes:
-#    - so_vits_svc_4_model_pack_1:/root/hay_say/so_vits_svc_4_model_pack_1
-```
-Be sure to save the file, then restart Hay Say (type ctrl+c in Hay Say's terminal if it is running and then execute "docker compose up" again)
+Be sure to save the file, then restart Hay Say (type ctrl+c in Hay Say's terminal if it is running and then execute 
+"docker compose up" again). 
 
-|          Model Pack Name          | Included in Default docker-compose.yaml | Characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|:---------------------------------:|:---------------------------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| controllable_talknet_model_pack_0 |           :heavy_check_mark:            | Apple Bloom, Applejack, Applejack (singing), Big McIntosh, Cadance, Celestia, Chrysalis, Cozy Glow, Discord, Fluttershy, Fluttershy (singing), Granny Smith, hifire, hifis, Luna, Maud Pie, Mayor Mare, Pinkie Pie, Pinkie Pie (singing), Rainbow Dash, Rainbow Dash (singing), Rarity, Rarity (singing), Scootaloo, Shining Armor, Spike, Starlight Glimmer, Sunset Shimmer, Sweetie Belle, Tirek, Trixie Lulamoon, Trixie Lulamoon (singing), Twilight Sparkle, Twilight Sparkle (singing), Twilight Sparkle (whispering), Zecora                                                                                                                                                                                                                    |
-|    so_vits_svc_3_model_pack_0     |           :heavy_check_mark:            | Apple Bloom, Applejack, Bon Bon, Discord, Fluttershy, Pinkie Pie, Rainbow Dash, Rarity, Scootaloo, Sweetie Belle, Trixie Lulamoon, Twilight Sparkle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|    so_vits_svc_3_model_pack_1     |                   :x:                   | Applejack (singing), Cadance (singing), Celestia (singing), Luna (singing), Rarity (singing), Starlight Glimmer (singing), Twilight Sparkle (singing)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-|    so_vits_svc_4_model_pack_0     |           :heavy_check_mark:            | Apple Bloom, Applejack, Celestia, Chrysalis, Derpy Hooves, Discord, Fluttershy, Pinkie Pie, Rainbow Dash, Rarity, Saffron Masala, Shining Armor, Tree Hugger, Trixie Lulamoon, Trixie Lulamoon (singing), Twilight Sparkle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|    so_vits_svc_4_model_pack_1     |                   :x:                   | Apple Bloom (singing), Apple Bloom (singing, PS1), Applejack (singing), Applejack (singing, PS1), Cadance (singing), Cadance (singing, PS1), Celestia (singing), Celestia (singing, alt), Celestia (singing, PS1), Fluttershy (singing), Fluttershy (singing, PS1), Luna (singing), Luna (singing, PS1), Pinkie Pie (singing), Pinkie Pie (singing, PS1), Rainbow Dash (singing), Rainbow Dash (singing, alt), Rainbow Dash (singing, PS1), Rarity (singing), Rarity (singing, PS1), Scootaloo (singing), Scootaloo (singing, alt), Scootaloo (singing, PS1), Starlight Glimmer (singing, evil), Starlight Glimmer (singing, good), Sweetie Belle (singing), Sweetie Belle (singing, PS1), Twilight Sparkle (singing), Twilight Sparkle (singing, PS1) |
-|    so_vits_svc_4_model_pack_2     |                   :x:                   | Pinkie Pie (angry), Pinkie Pie (annoyed), Pinkie Pie (anxious), Pinkie Pie (fearful), Pinkie Pie (happy), Pinkie Pie (neutral), Pinkie Pie (nonverbal), Pinkie Pie (sad), Pinkie Pie (sad shouting), Pinkie Pie (shouting), Pinkie Pie (surprised), Pinkie Pie (tired), Pinkie Pie (whispering)                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|    so_vits_svc_5_model_pack_0     |           :heavy_check_mark:            | Applejack (singing, mane6), Fluttershy (singing, mane6), Pinkie Pie (singing), Pinkie Pie (singing, mane6), Rainbow Dash (singing, mane6), Rarity (singing, mane6), Twilight Sparkle (singing, mane6)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-|         rvc_model_pack_0          |           :heavy_check_mark:            | Babs Seed, Big McIntosh, Braeburn, Bunni Bunni, Cozy Glow, Cream Heart, Derpy Hooves, Diamond Tiara, Doctor Whooves, Gallus, Octavia Melody, Thorax, Twilight Sparkle (singing), Vinyl Scratch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|         rvc_model_pack_1          |           :heavy_check_mark:            | Applejack, Applejack (alt), Fluttershy, Fluttershy (alt), Pinkie Pie, Pinkie Pie (alt), Rainbow Dash (alt), Rarity (alt), Twilight Sparkle (alt)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+Here is a table showing which characters are included in each model pack:
+
+|          Model Pack Name          | Characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|:---------------------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| controllable_talknet_model_pack_0 | Apple Bloom, Applejack, Applejack (singing), Big McIntosh, Cadance, Celestia, Chrysalis, Cozy Glow, Discord, Fluttershy, Fluttershy (singing), Granny Smith, hifire, hifis, Luna, Maud Pie, Mayor Mare, Pinkie Pie, Pinkie Pie (singing), Rainbow Dash, Rainbow Dash (singing), Rarity, Rarity (singing), Scootaloo, Shining Armor, Spike, Starlight Glimmer, Sunset Shimmer, Sweetie Belle, Tirek, Trixie Lulamoon, Trixie Lulamoon (singing), Twilight Sparkle, Twilight Sparkle (singing), Twilight Sparkle (whispering), Zecora                                                                                                                                                                                                                    |
+|    so_vits_svc_3_model_pack_0     | Apple Bloom, Applejack, Bon Bon, Discord, Fluttershy, Pinkie Pie, Rainbow Dash, Rarity, Scootaloo, Sweetie Belle, Trixie Lulamoon, Twilight Sparkle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|    so_vits_svc_3_model_pack_1     | Applejack (singing), Cadance (singing), Celestia (singing), Luna (singing), Rarity (singing), Starlight Glimmer (singing), Twilight Sparkle (singing)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|    so_vits_svc_4_model_pack_0     | Apple Bloom, Applejack, Celestia, Chrysalis, Derpy Hooves, Discord, Fluttershy, Pinkie Pie, Rainbow Dash, Rarity, Saffron Masala, Shining Armor, Tree Hugger, Trixie Lulamoon, Trixie Lulamoon (singing), Twilight Sparkle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|    so_vits_svc_4_model_pack_1     | Apple Bloom (singing), Apple Bloom (singing, PS1), Applejack (singing), Applejack (singing, PS1), Cadance (singing), Cadance (singing, PS1), Celestia (singing), Celestia (singing, alt), Celestia (singing, PS1), Fluttershy (singing), Fluttershy (singing, PS1), Luna (singing), Luna (singing, PS1), Pinkie Pie (singing), Pinkie Pie (singing, PS1), Rainbow Dash (singing), Rainbow Dash (singing, alt), Rainbow Dash (singing, PS1), Rarity (singing), Rarity (singing, PS1), Scootaloo (singing), Scootaloo (singing, alt), Scootaloo (singing, PS1), Starlight Glimmer (singing, evil), Starlight Glimmer (singing, good), Sweetie Belle (singing), Sweetie Belle (singing, PS1), Twilight Sparkle (singing), Twilight Sparkle (singing, PS1) |
+|    so_vits_svc_4_model_pack_2     | Pinkie Pie (angry), Pinkie Pie (annoyed), Pinkie Pie (anxious), Pinkie Pie (fearful), Pinkie Pie (happy), Pinkie Pie (neutral), Pinkie Pie (nonverbal), Pinkie Pie (sad), Pinkie Pie (sad shouting), Pinkie Pie (shouting), Pinkie Pie (surprised), Pinkie Pie (tired), Pinkie Pie (whispering)                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|    so_vits_svc_5_model_pack_0     | Applejack (singing, mane6), Fluttershy (singing, mane6), Pinkie Pie (singing), Pinkie Pie (singing, mane6), Rainbow Dash (singing, mane6), Rarity (singing, mane6), Twilight Sparkle (singing, mane6)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|         rvc_model_pack_0          | Babs Seed, Big McIntosh, Braeburn, Bunni Bunni, Cozy Glow, Cream Heart, Derpy Hooves, Diamond Tiara, Doctor Whooves, Gallus, Octavia Melody, Thorax, Twilight Sparkle (singing), Vinyl Scratch                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|         rvc_model_pack_1          | Applejack, Applejack (alt), Fluttershy, Fluttershy (alt), Pinkie Pie, Pinkie Pie (alt), Rainbow Dash (alt), Rarity (alt), Twilight Sparkle (alt)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ### Loading Custom Models
-If you have acquired or trained a model that is not included with Hay Say, you can add it to Hay Say by copying it to the custom models folder inside the main docker container. 
+If you have acquired or trained a model that is not included with Hay Say, you can add it to Hay Say by copying it to 
+the relevant characters folder inside the main docker container:  
+/root/hay_say/models/[architecture]/characters/  
+where [architecture] is one of: controllable_talknet, rvc, so_vits_svc_3, so_vits_svc_4, or so_vits_svc_5 
 1. First, make sure Hay Say is running. 
-2. Execute the following command in a terminal or Command Prompt. It will display information about all of the Docker containers:
+2. Execute the following command in a terminal or Command Prompt. It will display information about all of the running Docker containers:
 ```
 docker container ls
 ```
@@ -232,25 +258,39 @@ docker exec [container-name] mkdir -p /root/hay_say/custom_models/rvc
 ```
 4. Arrange and rename your files to match the expected format:  
 ![Screenshots showing the expected file structures for each architecture's models](documentation%20images/CustomModelFileOrganization.png)  
-There are some additional restrictions:
-   * For RVC, Hay Say expects the .index and .pth file to have the same name as the folder. 
-   * For all versions of so-vits-svc, only a single speaker name is allowed to appear in config.json (see the "spk" key, usually at the bottom of the file).
-5. Copy the folder containing your custom model into the desired architecture folder using the "docker cp" command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 model, you can copy it by executing the following on Linux or MacOS:
-```
-docker cp ~/Desktop/Rainbowshine_Custom/. [container-name]:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
-```
-or the following command on Windows:
-```
-docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. [container-name]:/root/hay_say/custom_models/so_vits_svc_4/RainbowShine_Custom
-```
-Note: The dot at the end of "~/Desktop/Rainbowshine_Custom/." is not a typo, so don't leave it out. It instructs Docker to copy all the contents of the Rainbowshine_Custom folder.  
-Note #2: I recommend that you name the folder with "_Custom" appended to the end as I have done in this example. That will avoid a name clash in case the character is added to one of Hay Say's model packs in the future.  
+Additional restrictions: 
+   * Only a single speaker is supported per character folder. 
+     * If your custom model is a so-vits-svc 5 model, you may only have a single .spk.npy file within the "singer" 
+     directory.
+     * If your custom model is a _multi-speaker_ so-vits-svc 4 model (i.e. the config.json file has multiple speakers 
+       listed under "spk" at the bottom of the file), then you must add a speaker.json file which specifies which 
+       speaker to use. The contents of the file should look like this:
+       ```json
+       {
+       "speaker": "<name of speaker>"
+       }
+       ```
+       where `<name of speaker>` should match one of the strings under "spk" in the config.json file.
+5. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" 
+   command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 
+   model, you can copy it by executing the following on Linux or MacOS:
+    ```commandline
+    docker cp ~/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/models/so_vits_svc_4/characters/RainbowShine_Custom
+    ```
+    or the following command on Windows:
+    ```commandline
+    docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/models/so_vits_svc_4/characters/RainbowShine_Custom
+    ```
+    Note #1: The dot at the end of "~/Desktop/Rainbowshine_Custom/." is not a typo, so don't leave it out. It instructs 
+    Docker to copy all the contents of the Rainbowshine_Custom folder.  
+    Note #2: I recommend that you name the folder with "_Custom" appended to the end as I have done in this example. 
+    That will avoid a name clash in case the character becomes available for download in the future.  
 6. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
 
 
 ### Enabling GPU Integration
 GPU integration is turned off by default in Hay Say. This is to prevent an error for users who do not have a Cuda-capable GPU. If you do have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml file. There are several place (one under each architecture) where you will see the following lines:
-```
+```yaml
 # resources:
 #   reservations:
 #     devices:
@@ -259,7 +299,7 @@ GPU integration is turned off by default in Hay Say. This is to prevent an error
 #         capabilities: [gpu]
 ```
 To enable GPU for that architecture, uncomment those lines. i.e. remove the hashtags so that they look like this instead:
-```
+```yaml
 resources:
   reservations:
     devices:
@@ -268,28 +308,233 @@ resources:
         capabilities: [gpu]
 ```
 
+### Reducing Disk Space usage
+There are a couple of ways you can reduce the disk usage of Hay Say. 
 
-### Installing Only Specific Architectures
-You can edit the docker-compose.yaml file so that only specific architecutres are downloaded. The UI will still show tabs for all architectures, but will throw an error if you try to generate audio for an architecture which you didn't download. 
+Important! Windows users must complete additional steps to free disk space after following any of these methods. See 
+[Additional Required Steps for Windows Users](#additional-required-steps-for-windows-users).
 
-If you don't want to install so-vits-svc 3.0, for example, comment out the following lines in docker-compose.yaml by adding a hashtag character (#) in front of them before you run the "docker compose up" command for the first time:
+#### Method 1: Deleting characters
+Launch Hay Say and click on the "Manage Models" button at the top of the screen.
+![Screenshot of Hay Say showing the "Manage Models" button in the toolbar](documentation%20images/ManageModelsInToolbar.png)
+
+This will open a screen where you can delete characters.
+
+#### Method 2: Deleting architectures
+By default, Hay Say downloads all supported AI architectures. This currently includes Controllable TalkNet, so-vits-svc 
+3.0, so-vits-svc 4.0, so-vits-svc 5.0, and RVC. Each of those take about 10GB. If you want to reclaim some disk space by
+deleting undesired architectures, you must first disable the architecture so that Hay Say does not automatically 
+re-download it. Open the docker-compose.yaml file and look for sections named like architectureName_server. For example,
+here is the section that defines the so-vits-svc 3.0 server:
+```yaml
+  # This container provides a web service interface to so-vits-svc 3.0.
+  so_vits_svc_3_server:
+    depends_on:
+      - redis
+    image: hydrusbeta/hay_say:so_vits_svc_3_server
+    working_dir: /root/hay_say/so_vits_svc_3
+    volumes:
+      - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+      - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
+      - models:/root/hay_say/models
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for so-vits-svc 3.0 if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
 ```
-so_vits_svc_3_server:
-  image: hydrusbeta/hay_say:so_vits_svc_3_server
-  working_dir: /root/hay_say/so_vits_svc_3
-  volumes:
-    - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
-    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
-    - custom_models:/root/hay_say/custom_models
-    - audio_cache:/root/hay_say/audio_cache
+You can disable so-vits-svc 3.0 by commenting out this section, i.e., add hashtags at the beginnings of the lines to 
+make it look like this: 
+```yaml
+  # This container provides a web service interface to so-vits-svc 3.0.
+  # so_vits_svc_3_server:
+    # depends_on:
+    #   - redis
+    # image: hydrusbeta/hay_say:so_vits_svc_3_server
+    # working_dir: /root/hay_say/so_vits_svc_3
+    # volumes:
+    #   - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+    #   - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
+    #   - models:/root/hay_say/models
+    #   - custom_models:/root/hay_say/custom_models
+    #   - audio_cache:/root/hay_say/audio_cache
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for so-vits-svc 3.0 if you wish.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
 ```
-If you do that, you should also comment out the following lines too so you don't download all the models for so-vits-svc 3.0:
+Next, delete both the Docker contain and Docker image for so-vits-svc 3.0 to free disk space. Open a command prompt or 
+terminal and execute the following command to list all containers:
+```commandline
+docker container ls -a
 ```
-so_vits_svc_3_model_pack_0:
-  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_0
-  volumes:
-    - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
+The output should be similar to the following:
+```commandline
+CONTAINER ID   IMAGE                                                  COMMAND                  CREATED       STATUS                              PORTS     NAMES
+4d3098ae4c2f   hydrusbeta/hay_say:so_vits_svc_3_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_3_server-1
+0c6c9eac8573   hydrusbeta/hay_say:so_vits_svc_5_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_5_server-1
+7defd670649c   hydrusbeta/hay_say:controllable_talknet_server         "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-controllable_talknet_server-1
+9b85ad39fea9   hydrusbeta/hay_say:so_vits_svc_4_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_4_server-1
+48bc80452718   hydrusbeta/hay_say:rvc_server                          "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-rvc_server-1
+d0343f8f00d4   hydrusbeta/hay_say:hay_say_ui                          "/bin/sh -c 'python …"   9 days ago    Exited (137) 9 days ago                       hay_say-hay_say_ui-1
+d82816c5889a   redis                                                  "docker-entrypoint.s…"   9 days ago    Exited (0) 9 days ago                         hay_say-redis-1
+c26692c3240b   hydrusbeta/hay_say:so_vits_svc_4_model_pack_1          "/bin/sh"                9 days ago    Exited (0) 9 days ago                         hay_say-so_vits_svc_4_model_pack_1-1
+e49ad2b1ff83   hydrusbeta/hay_say:so_vits_svc_3_model_pack_1          "/bin/sh"                9 days ago    Exited (0) 9 days ago                         hay_say-so_vits_svc_3_model_pack_1-1
+35913b4b7f7e   hydrusbeta/hay_say:so_vits_svc_4_model_pack_2          "/bin/sh"                9 days ago    Exited (0) 9 days ago                         hay_say-so_vits_svc_4_model_pack_2-1
+fd2f36c568e3   hydrusbeta/hay_say:so_vits_svc_3_model_pack_0          "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-so_vits_svc_3_model_pack_0-1
+feb9c22c9d1b   hydrusbeta/hay_say:controllable_talknet_model_pack_0   "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-controllable_talknet_model_pack_0-1
+d3c8114e4639   hydrusbeta/hay_say:so_vits_svc_5_model_pack_0          "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-so_vits_svc_5_model_pack_0-1
+3830263165be   hydrusbeta/hay_say:so_vits_svc_4_model_pack_0          "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-so_vits_svc_4_model_pack_0-1
+9c5f0eb3478a   hydrusbeta/hay_say:rvc_model_pack_0                    "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-rvc_model_pack_0-1
+d4824c05694a   hydrusbeta/hay_say:rvc_model_pack_1                    "/bin/sh"                11 days ago   Exited (0) 9 days ago                         hay_say-rvc_model_pack_1-1
 ```
+In the NAMES column, look for the name of the architecture you want to delete, followed by "_server". In this case, we 
+have hay_say-**so_vits_svc_3_server**-1. Delete that container by executing the following command:
+```commandline
+docker container rm <name of the container you want to delete>
+```
+In this case,
+```commandline
+docker container rm hay_say-so_vits_svc_3_server-1
+```
+
+Next, execute the following command to list all Docker images:
+```commandline
+docker image ls
+```
+The output should be similar to the following:
+```commandline
+REPOSITORY               TAG                                 IMAGE ID       CREATED        SIZE
+redis                    latest                              8e69fcb59ff4   5 weeks ago    130MB
+hydrusbeta/hay_say       hay_say_ui                          381f9d276433   6 weeks ago    1.47GB
+hydrusbeta/hay_say       rvc_server                          a619e2e6e6ee   6 weeks ago    11.1GB
+hydrusbeta/hay_say       rvc_model_pack_0                    032a923041bf   6 weeks ago    1.34GB
+hydrusbeta/hay_say       so_vits_svc_5_server                2b15ea8db246   8 weeks ago    10GB
+hydrusbeta/hay_say       so_vits_svc_5_model_pack_0          65410b0d89b7   8 weeks ago    1.11GB
+hydrusbeta/hay_say       controllable_talknet_server         65bfaae29689   2 months ago   8.13GB
+hydrusbeta/hay_say       so_vits_svc_4_server                4bae6175c9d4   2 months ago   6.89GB
+hydrusbeta/hay_say       so_vits_svc_3_server                e3224b5a2c79   2 months ago   6.12GB
+hydrusbeta/hay_say       so_vits_svc_4_model_pack_0          8f73a6838a1d   2 months ago   8.33GB
+hydrusbeta/hay_say       so_vits_svc_3_model_pack_0          8c92571c4566   2 months ago   8.4GB
+hydrusbeta/hay_say       controllable_talknet_model_pack_0   972e53accb49   3 months ago   3.96GB
+```
+Look for the desired architecture name in the "TAG" column and then delete the desired architecture by executing the 
+following 
+command:
+```commandline
+docker image rm hydrusbeta/hay_say:<tag of image you would like to delete>
+```
+So, for so-vits-svc 3.0 for example, that would be:
+```commandline
+docker image rm hydrusbeta/hay_say:so_vits_svc_3_server
+```
+
+Optional Step: You can hide the architecture in the UI by editing the docker-compose.yaml file. Look for the following
+lines:
+```yaml
+    command: ["/bin/sh", "-c", "
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO --include_architecture ControllableTalkNet --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
+              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --architectures ControllableTalkNet SoVitsSvc3 SoVitsSvc4 SoVitsSvc5 Rvc
+              "]
+```
+There are two places where your architecture's name will appear. Delete `"--include_architecture <architectureName>"` 
+and also delete the architecture name after the `"--architectures"` flag. For example, here's the result after removing 
+so-vits-svc 3.0:
+```yaml
+    command: ["/bin/sh", "-c", "
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO --include_architecture ControllableTalkNet --include_architecture ControllableTalkNet --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
+              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --architectures ControllableTalkNet SoVitsSvc4 SoVitsSvc5 Rvc
+              "]
+```
+
+#### Additional Required Steps for Windows Users
+
+Windows users must complete additional steps to free disk space after following any of the above methods. You have a 
+couple of options:
+
+###### Option 1: Shrink the WSL2 virtual disk manually
+
+1. Locate the ext.vhdx file on your system. It is typically under 
+C:\\Users\\<your_username>\AppData\Local\Docker\wsl\data
+2. Shut down Hay Say (type CTRL+c into the Command Prompt window that you started Hay Say from).
+3. Stop the Docker Engine by right-clicking on the whale icon in the taskbar and selecting "Quit Docker 
+Desktop". Wait until the whale icon disappears.
+4. Open a command prompt and execute the following commands:  
+    ```
+    wsl --shutdown
+    diskpart
+    ```
+5. That will open a new command prompt window. In that one, execute the following:
+    ```
+    select vdisk file="C:\\path\\to\\your\\vhdx\\file.vhdx"
+    attach vdisk readonly
+    compact vdisk
+    detach vdisk
+    exit
+    ```
+
+If you are running Windows 10 _Pro_, you can use just these two commands instead of all the ones in steps 4 and 
+5:
+   ```
+   wsl --shutdown
+   optimize-vhd -Path "C:\\path\\to\\your\\vhdx\\file.vhdx" -Mode full
+   ```
+
+###### Option 2: Shrink the WSL2 virtual disk using wslcompact
+
+If you have a drive with enough free space to save a copy of the vhdi file, another options is to use wslcompact. 
+wslcompact saves a copy of the vhdi file first, operates on the copy, and then overwrites the original vhdi file if the 
+operation is successful
+
+1. Install [wslcompact](https://github.com/okibcn/wslcompact). Below are instructions on how to install it as a Scoop 
+app.
+   1. Open a PowerShell window and execute the following to install wslcompact as a Scoop app:
+       ```commandline
+       irm get.scoop.sh | iex
+       scoop bucket add .oki https://github.com/okibcn/Bucket
+       scoop install wslcompact
+       ```
+2. If your primary drive does not have enough space to save a copy of the vhdi file, set the "TEMP" environment 
+variable to a folder on a drive with enough space. For example, if you have space on drive letter Z:
+    ```commandline
+   $env:TEMP="Z:/specify/a/folder/on/the/drive" 
+   ```
+3. Shut down Hay Say (type CTRL+c into the Command Prompt window that you started Hay Say from).
+4. Stop the Docker Engine by right-clicking on the whale icon in the taskbar and selecting "Quit Docker 
+Desktop". Wait until the whale icon disappears.
+5. Open a command prompt and execute:
+    ```
+    wslcompact -c -d docker-desktop-data
+    ```
+It is possible that your WSL distro name is different. If the command in step 5 does not work, then execute the 
+following to list all distro names:
+```commandline
+wslcompact -l
+```
+and search for a distro name with the word "docker" or "ubuntu" in it.
+
+###### Explanation: 
+Hay Say runs on the Docker Engine. On Windows, Docker typically runs on a virtualization platform called 
+"Windows Subsystem for Linux, version 2", or WSL2, which stores all of its data on a virtual hard disk (a .vhdx 
+file). The vhdx file will automatically grow in size as data is added to it (e.g. when you download a new model 
+in Hay Say), but it will not automatically shrink when you delete files. To reclaim unused disk space from WSL2, 
+you need to manually shrink the .vhdx file. There is an open feature request for Microsoft to make WSL 
+automatically release disk space, which is discussed here:  
+https://github.com/microsoft/WSL/issues/4699  
+
+Linux and MacOS users are unaffected by this issue and should see an immediate increase in disk space after deleting
+models or architectures. 
 
 ## The Technical Design of Hay Say
 
@@ -310,16 +555,22 @@ The code for the main UI is in this repository. Code for the Flask servers for t
 ## "Roadmap"
 
 Here are some tasks I consider important. I intend to work on them "soon", in no particular order:
-1. Additional character models have become available for so-vits-svc 4.0. I'd like to package these up into another model pack.
-2. There are currently no preprocessing or postprocessing options. I need to do requirements gathering and start adding some options. 
-3. I forsee a need for a "Hay Say launcher" that lets the user select which characters and architectures they want to download and run. That way, the user doesn't have to download *everything* if all they want is, say, the TTS solutions like controllable talknet for specific characters. This also gives the user some control over memory usage on a resource-constrained machine, and would be a good place for downloading updates.
-4. New and upcoming architectures are on my radar:
-    * Retrieval-based Voice Converstion (RVC)
+1. There are currently no preprocessing or postprocessing options. I need to do requirements gathering and start adding 
+   some options. 
+2. I forsee a need for a "Hay Say launcher" that lets the user select which characters and architectures they want to 
+   download and run. That way, the user doesn't have to download *everything* if all they want is, say, the TTS 
+   solutions like controllable talknet for specific characters. This also gives the user some control over memory usage 
+   on a resource-constrained machine, and would be a good place for downloading updates.
+3. Add another text-to-speech option. A couple of possibilities include:
     * BarkAI
-    * so-vits-svc 5.0
-5. Hay Say runs terribly on Apple Silicon. I'd like to see whether performance can be improved by re-building the images using ARM base images.
-6. Write up more documentation on the technical details of Hay Say and tutorials on: adding a new architecture, adding a model pack, and adding pre/postprocessing options.
-7. Currently, the "Generate!" button becomes disabled if a required input has not been provided yet. This might be confusing for users. Instead, let them hit the "Generate!" button and then highlight the missing, required fields in red, along with a useful error message.
+    * tkinterAnon's TTS tool
+4. Hay Say runs terribly on Apple Silicon. I'd like to see whether performance can be improved by re-building the images 
+   using a different base image.
+5. Write up more documentation on the technical details of Hay Say and tutorials for developers on: adding a new 
+   architecture, adding a model pack, and adding pre/postprocessing options.
+6. Currently, the "Generate!" button becomes disabled if a required input has not been provided yet. This might be 
+   confusing for users. Instead, let them hit the "Generate!" button and then highlight the missing, required fields in 
+   red, along with a useful error message.
 
 Plus, there are numerous minor code improvement opportunities that I have marked with "todo" throughout the codebase.
 

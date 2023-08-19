@@ -1,4 +1,4 @@
-from .AbstractTab import AbstractTab
+from architectures.AbstractTab import AbstractTab
 
 
 class SampleTab(AbstractTab):
@@ -23,8 +23,8 @@ class SampleTab(AbstractTab):
     def requirements(self):
         return super().requirements
 
-    def meets_requirements(self, user_text, user_audio):
-        return super().meets_requirements(user_text, user_audio)
+    def meets_requirements(self, user_text, user_audio, selected_character):
+        return super().meets_requirements(user_text, user_audio, selected_character)
 
     @property
     def options(self):

@@ -1,0 +1,343 @@
+[
+    {
+        "Model Name": "Pinkie Pie (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pinkie%20pie/sovits5.0_2460.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "sovits5.0_2460.pt",
+                "Size (bytes)": 552046166
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pinkie%20pie/singer/Pinkie%20Pie%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Pinkie Pie (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/mane6/singer/Applejack%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Applejack (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Fluttershy (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/mane6/singer/Fluttershy%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Fluttershy (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/mane6/singer/Pinkie%20Pie%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Pinkie Pie (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/mane6/singer/Rainbow%20Dash%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Rainbow Dash (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rarity (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/mane6/singer/Rarity%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Rarity (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing, mane6)",
+        "Multi-speaker Model Dependency": "mane6",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/mane6/singer/Twilight%20Sparkle%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Twilight Sparkle (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_1300.pt",
+                "Target": "sovits5.0_1300.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Apple Bloom (singing, ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Applebloom%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Applebloom (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cadance (singing, ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Cadance%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Cadance (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia (singing, ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Celestia%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Celestia (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia (singing, ext1, alt)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Celestia%202%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Celestia 2 (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Luna (singing, ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Luna%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Luna (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scootaloo (singing, ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Scootaloo%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Scootaloo (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing, ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Starlight%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Starlight (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing, ext1, alt)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Starlight%202%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Starlight 2 (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sweetie Belle (singing, ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Sweetie%20Belle%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Sweetie Belle (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Trixie (singing, ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Trixie%20(singing).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Trixie (singing).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Trixie (ext1)",
+        "Multi-speaker Model Dependency": "pony_ext1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0-old/resolve/main/pony_ext1/singer/Trixie%20(speaking).spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Trixie (speaking).spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "sovits5.0_0440.pt",
+                "Target": "sovits5.0_0440.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    }
+]
