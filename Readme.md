@@ -1,19 +1,36 @@
 # Hay Say, A Unified Interface for Pony Voice Generation
 ## What is Hay Say?
 
-Hay Say is a user interface for generating pony voices. From a single UI, you can generate voices from AI architectures, such as so-vits-svc (https://github.com/svc-develop-team/so-vits-svc) and Controllable TalkNet (https://github.com/SortAnon/ControllableTalkNet). At the moment, all supported AI architectures can run locally and do not require an internet connection.
+Hay Say is a user interface for generating pony voices. From a single UI, you can generate voices from AI architectures, 
+such as so-vits-svc (https://github.com/svc-develop-team/so-vits-svc) and Controllable TalkNet 
+(https://github.com/SortAnon/ControllableTalkNet). At the moment, all supported AI architectures can run locally and do 
+not require an internet connection except to download character models.
 
 ## The Motivation Behind Hay Say
 
-Over the past few years, many AI architectures have emerged for accomplishing text-to-speech (TTS) generation and voice modification ("speech-to-speech"). Many of these new technologies did not have a graphical user interface when they first became available. Each time a new technology has entered into the awareness of the Pony Preservation Project thread at /mlp on 4chan, someone has had to develop a new UI to make the technology accessible to others. This has lead to a collection of user interfaces over time, each one unique to a particular AI architecture and with features that are not available in the other UIs. The primary motivation behind Hay Say is to create a unified user experience for all the voice generation solutions. Preprocessing and postprocessing options are separated from architecture-specific options so that every architecture can benefit from new pre- or post-processing features. With a UI framework already in place, it should be possible to give new architectures a usable UI more quickly by integrating them with Hay Say.
+Over the past few years, many AI architectures have emerged for accomplishing text-to-speech (TTS) generation and voice 
+modification ("speech-to-speech"). Many of these new technologies did not have a graphical user interface when they 
+first became available. Each time a new technology has entered into the awareness of the Pony Preservation Project 
+thread at /mlp on 4chan, someone has had to develop a new UI to make the technology accessible to others. This has lead 
+to a collection of user interfaces over time, each one unique to a particular AI architecture and with features that are
+not available in the other UIs. The primary motivation behind Hay Say is to create a unified user experience for all the
+voice generation solutions. Preprocessing and postprocessing options are separated from architecture-specific options so
+that every architecture can benefit from new pre- or post-processing features. With a UI framework already in place, it 
+should be possible to give new architectures a usable UI more quickly by integrating them with Hay Say.
 
-A secondary motivation behind Hay Say is to reduce user frustration with installing software. Falling into Python's "dependency hell" seems to be a common pain point when users try to install voice generation software locally. Hay Say addresses this issue by pre-installing all the AI solutions into their own Docker images. Users simply need to install Docker and pull the pre-built images.
+A secondary motivation behind Hay Say is to reduce user frustration with installing software. Falling into Python's 
+"dependency hell" seems to be a common pain point when users try to install voice generation software locally. Hay Say 
+addresses this issue by pre-installing all the AI solutions into their own Docker images. Users simply need to install 
+Docker and pull the pre-built images.
 
 ## Installation Instructions
 
-Important: Be aware that Hay Say will need to download at least 41 GB of compressed Docker images, so expect it to take a while to start up the first time you run it. It should come up quickly after that. The exact amount of time required for the initial startup depends, of course, on your internet speed. 
+Important: Be aware that Hay Say will need to download at least 41 GB of compressed Docker images, so expect it to take 
+a while to start up the first time you run it. It should come up quickly after that. The exact amount of time required 
+for the initial startup depends, of course, on your internet speed. 
 
-Before you install Hay Say, I recommend you take a look at the Testing Data / Benchmarks section at the bottom of this page to get a ballpark figure on how fast or slow Hay Say might be on your machine.
+Before you install Hay Say, I recommend you take a look at the Testing Data / Benchmarks section at the bottom of this 
+page to get a ballpark figure on how fast or slow Hay Say might be on your machine.
 
 ### Required Hardware
 * At least 100 GB free Hard drive space 
@@ -21,21 +38,26 @@ Before you install Hay Say, I recommend you take a look at the Testing Data / Be
 
 ### Recommended Hardware and Software
 * A fast CPU - or - an Nvidia GPU with a Cuda compute capability of 3.5 or higher.
-* Hay Say was tested and worked well on the following Operating Systems. It may or may not work on other operating systems.:
+* Hay Say was tested and worked well on the following Operating Systems. It may or may not work on other operating 
+  systems.:
   * Windows 10
   * Windows 11
   * Ubuntu 22.10
   * Ubuntu 23.04
 
 #### A Note on MacOS
-I also tested Hay Say on MacOS 13.3.1 (Ventura) with Apple Silicon M2. I was unable to generate audio with Controllable TalkNet, and so-vits-svc (3.0 and 4.0) was unusably slow even though the machine was brand new (see Testing Data / Benchmarks section). I do not recommend running Hay Say on Apple Silicon. It is unknown whether it works any better on Macs with Intel chips.
+I also tested Hay Say on MacOS 13.3.1 (Ventura) with Apple Silicon M2. I was unable to generate audio with Controllable 
+TalkNet, and so-vits-svc (3.0 and 4.0) was unusably slow even though the machine was brand new (see Testing Data / 
+Benchmarks section). I do not recommend running Hay Say on Apple Silicon. It is unknown whether it works any better on 
+Macs with Intel chips.
 
 ### Windows Installation Instructions
 
 1. Install Docker Desktop:  
 	https://www.docker.com/
 2. Start Docker Desktop and wait until it has finished loading.
-	If you get a popup window stating "Docker Desktop requires a newer WSL kernel version", open a command prompt, execute the following command, and then start docker desktop again:
+	If you get a popup window stating "Docker Desktop requires a newer WSL kernel version", open a command prompt, 
+3. execute the following command, and then start docker desktop again:
 	`wsl --update`
 3. Open a command prompt and execute the following commands:
 ```commandline
@@ -46,33 +68,42 @@ docker volume create audio_cache
 docker compose up
 ```
 
-Note: You might get a Windows Defender Firewall popup. You can safely close that window. No special firewall rules are required to run Hay Say.
+Note: You might get a Windows Defender Firewall popup. You can safely close that window. No special firewall rules are 
+required to run Hay Say.
 
-Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the following:
+Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the 
+following:
 ![](documentation%20images/Windows%20ready%20to%20roll.png)
 
 Open a web browser and go to the following URL:  
 http://127.0.0.1:6573/
 
 #### Stopping Hay Say
-To stop Hay Say, go to the Command Prompt that you ran "docker compose up" in earlier and type CTRL+C. It will take 10-30 seconds for Docker to gracefully shut down all of the containers.
-I also recommend shutting down Docker Desktop. Right click on the Whale icon in the taskbar and select "Quit Docker Desktop".
+To stop Hay Say, go to the Command Prompt that you ran "docker compose up" in earlier and type CTRL+C. It will take 
+10-30 seconds for Docker to gracefully shut down all of the containers.
+I also recommend shutting down Docker Desktop. Right click on the Whale icon in the taskbar and select "Quit Docker 
+Desktop".
 
 #### Starting Hay Say Again 
-To start Hay Say again, first make sure that the Docker Engine is running. You can check for Docker Engine in the taskbar:  
+To start Hay Say again, first make sure that the Docker Engine is running. You can check for Docker Engine in the 
+taskbar:  
 ![image showing the Docker whale icon in a Windows Taskbar](documentation%20images/windows%20docker%20icon.png)  
 If it is not running, you can start it by launching Docker Desktop. 
 Then, open Command Prompt and type the following command:
 ```commandline
 docker compose up
 ```
-Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when you execute that command. cd to that directory first if necessary.
+Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when 
+you execute that command. cd to that directory first if necessary.
 
 
 ### Linux Installation Instructions
 
-1. Install Docker Engine. This can be done in several ways according to preference. See https://docs.docker.com/engine/install/ubuntu. I recommend following the instructions under the section "Install using the apt repository".
-Note: Docker usually needs to be run as a superuser. However, it is possible to install it in a way that lets you run it in rootless mode (see https://docs.docker.com/engine/security/rootless). Hay Say has not been tested in a rootless configuration.
+1. Install Docker Engine. This can be done in several ways according to preference. See 
+https://docs.docker.com/engine/install/ubuntu. I recommend following the instructions under the section "Install using 
+the apt repository". Note: Docker usually needs to be run as a superuser. However, it is possible to install it in a way
+that lets you run it in rootless mode (see https://docs.docker.com/engine/security/rootless). Hay Say has not been 
+tested in a rootless configuration.
 
 2. Open a terminal and execute the following commands:
 ```commandline
@@ -83,29 +114,34 @@ sudo docker volume create audio_cache
 sudo docker compose up
 ```
 
-Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the following:  
+Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the 
+following:  
 ![](documentation%20images/Linux%20ready%20to%20roll.png)
 
 Open a web browser and go to the following URL:  
 http://127.0.0.1:6573/
 
 #### Stopping Hay Say
-To stop Hay Say, go to the terminal where you ran "docker compose up" earlier and type CTRL+C. It will take 10-30 seconds for Docker to gracefully shut down all of the containers.
+To stop Hay Say, go to the terminal where you ran "docker compose up" earlier and type CTRL+C. It will take 10-30 
+seconds for Docker to gracefully shut down all of the containers.
 
 #### Starting Hay Say Again 
 To start Hay Say again, open a terminal and type the following command:
 ```commandline
 sudo docker compose up
 ```
-Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 2 above) when you execute that command. cd to that directory first if necessary.
+Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 2 above) when 
+you execute that command. cd to that directory first if necessary.
 
 
 
 ### MacOS Installation Instructions
 
-Important! Hay Say did not run well on Apple Silicon during my testing. See "A Note on MacOS" in the Recommended Hardware and Software section, above. But here are the steps in case you want to give it a try anyways.
+Important! Hay Say did not run well on Apple Silicon during my testing. See "A Note on MacOS" in the Recommended 
+Hardware and Software section, above. But here are the steps in case you want to give it a try anyways.
 
-1. Install Docker Desktop (note: if you are running MacOS on Apple Silicon (e.g. M1 or M2), make sure you download the version for Apple Silicon):  
+1. Install Docker Desktop (note: if you are running MacOS on Apple Silicon (e.g. M1 or M2), make sure you download the
+version for Apple Silicon):  
 	https://www.docker.com/
 2. Start Docker Desktop and wait until it has finished loading.
 3. Open a terminal and execute the following commands:
@@ -117,26 +153,30 @@ docker volume create audio_cache
 docker compose up
 ```
 
-Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the following:
+Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the 
+following:
 ![](documentation%20images/macOS%20ready%20to%20roll.png)
 
 Open a web browser and go to the following URL:  
 http://127.0.0.1:6573/
 
 #### Stopping Hay Say
-To stop Hay Say, go to the Terminal where you ran "docker compose up" earlier and type CTRL+C. It will take 10-30 seconds for Docker to gracefully shut down all of the containers.
-I also recommend shutting down Docker Desktop. Right click on the Whale icon in the taskbar and select "Quit Docker Desktop".
+To stop Hay Say, go to the Terminal where you ran "docker compose up" earlier and type CTRL+C. It will take 10-30 
+seconds for Docker to gracefully shut down all of the containers. I also recommend shutting down Docker Desktop. Right 
+click on the Whale icon in the taskbar and select "Quit Docker Desktop".
 
 
 #### Starting Hay Say Again 
-To start Hay Say again, first make sure that the Docker Engine is running. You can check for Docker Engine in the taskbar:
+To start Hay Say again, first make sure that the Docker Engine is running. You can check for Docker Engine in the 
+taskbar:
 ![image showing the Docker whale icon in a MacOS Taskbar](documentation%20images/macOS%20docker%20icon.png)  
 If it is not running, you can start it by launching Docker Desktop
 Then open a terminal and type the following command
 ```commandline
 sudo docker compose up
 ```
-Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when you execute that command. cd to that directory first if necessary.
+Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when 
+you execute that command. cd to that directory first if necessary.
 
 ## Updating Hay Say
 
@@ -241,14 +281,20 @@ the relevant characters folder inside the main docker container:
 /root/hay_say/models/[architecture]/characters/  
 where [architecture] is one of: controllable_talknet, rvc, so_vits_svc_3, so_vits_svc_4, or so_vits_svc_5 
 1. First, make sure Hay Say is running. 
-2. Execute the following command in a terminal or Command Prompt. It will display information about all of the running Docker containers:
+2. Execute the following command in a terminal or Command Prompt. It will display information about all of the running 
+Docker containers:
 ```
 docker container ls
 ```
-Note: You may need to expand the command window to properly display the output, which is arranged like a wide table. You should see a column titled "IMAGE" in the output. Look for the entry "hydrusbeta/hay_say:hay_say_ui" and find the corresponding container name under the "NAMES" column. You will need that name in a moment:
+Note: You may need to expand the command window to properly display the output, which is arranged like a wide table. You
+should see a column titled "IMAGE" in the output. Look for the entry "hydrusbeta/hay_say:hay_say_ui" and find the 
+corresponding container name under the "NAMES" column. You will need that name in a moment:
 ![Screenshots showing one possible output of "docker container ls"](documentation%20images/main%20container%20name.png)
-The name you see might be a little different. For example, another name I have seen on someone else's machine was "hay_say_ui-hay_say_ui-1".  
-3. Create a folder for each of the architectures within the custom_models folder by executing the following commands in a new terminal (or Command Prompt if you are using Windows). Replace [container-name] with the name you found in step 2.:
+The name you see might be a little different. For example, another name I have seen on someone else's machine was 
+"hay_say_ui-hay_say_ui-1".  
+3. Create a folder for each of the architectures within the custom_models folder by executing the following commands in 
+a new terminal (or Command Prompt if you are using Windows). Replace [container-name] with the name you found in step 
+2.:
 ```
 docker exec [container-name] -p /root/hay_say/custom_models/so_vits_svc_3
 docker exec [container-name] mkdir -p /root/hay_say/custom_models/so_vits_svc_4
@@ -289,7 +335,9 @@ Additional restrictions:
 
 
 ### Enabling GPU Integration
-GPU integration is turned off by default in Hay Say. This is to prevent an error for users who do not have a Cuda-capable GPU. If you do have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml file. There are several place (one under each architecture) where you will see the following lines:
+GPU integration is turned off by default in Hay Say. This is to prevent an error for users who do not have a 
+Cuda-capable GPU. If you do have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml 
+file. There are several place (one under each architecture) where you will see the following lines:
 ```yaml
 # resources:
 #   reservations:
@@ -538,19 +586,43 @@ models or architectures.
 
 ## The Technical Design of Hay Say
 
-The user interface code for Hay Say runs in its own Docker container, hay_say_ui, and the UI is accessed by the user via a web browser. Each AI architecture (e.g. so-vits-svc or ControllableTalkNet) is installed in its own container and a simple Flask web server runs in each one, listening for connections. Each Flask web server defines a /generate method which invokes the AI archtecture to generate an audio file.
+The user interface code for Hay Say runs in its own Docker container, hay_say_ui, and the UI is accessed by the user via
+a web browser. Each AI architecture (e.g. so-vits-svc or ControllableTalkNet) is installed in its own container and a 
+simple Flask web server runs in each one, listening for connections. Each Flask web server defines a /generate method 
+which invokes the AI archtecture to generate an audio file.
 
 ![diagram of Hay Say's networking setup, showing that the main UI container communicates with the AI Architecture containers by sharing files and by using webservice calls to trigger audio generation](documentation%20images/design%20diagram.png)
 
-After the user enters their desired options and presses the "Generate!" button, hay_say_ui first preprocesses the audio and saves the result to a mounted volume, audio_cache. It then makes a web service call to the container with the desired AI architecture, instructing it to generate audio. That container reads the preprocessed audio from audio_cache, generates a pony voice from it, and saves it back to audio_cache. The hay_say_ui container then reads the generated audio, performs any postprocessing, and presents the result to the user via an HTML audio element. 
+After the user enters their desired options and presses the "Generate!" button, hay_say_ui first preprocesses the audio 
+and saves the result to a mounted volume, audio_cache. It then makes a web service call to the container with the 
+desired AI architecture, instructing it to generate audio. That container reads the preprocessed audio from audio_cache, 
+generates a pony voice from it, and saves it back to audio_cache. The hay_say_ui container then reads the generated 
+audio, performs any postprocessing, and presents the result to the user via an HTML audio element. 
 
-Hence, there are 2 mechanisms of communication between the docker containers: calling web services and passing files over a shared volume.
+Hence, there are 2 mechanisms of communication between the docker containers: calling web services and passing files 
+over a shared volume.
 
-Weights for the neural networks are stored in Docker volumes that are named like "controllable_talknet_model_pack_0" or "so_vits_svc_4_model_pack_1". Within each volume is a collection of folders, one for each pony character. Each character folder contains files with the model weights for that character. The volumes are initially populated by pulling a Docker image containing models for many characters and mounting the corresponding model_pack volume to that image, which automatically copies all the models from the image to the volume. There is also a "custom models" volume where the user can manually add character weights that are not yet present in any model packs. See the Advanced Topics section.
+Weights for the neural networks are stored in Docker volumes that are named like "controllable_talknet_model_pack_0" or 
+"so_vits_svc_4_model_pack_1". Within each volume is a collection of folders, one for each pony character. Each character
+folder contains files with the model weights for that character. The volumes are initially populated by pulling a Docker
+image containing models for many characters and mounting the corresponding model_pack volume to that image, which 
+automatically copies all the models from the image to the volume. There is also a "custom models" volume where the user 
+can manually add character weights that are not yet present in any model packs. See the Advanced Topics section.
 
-Hay say also has an "audio_cache" volume for maintaining a small cache of audio files. Any time the user uploads an audio file to Hay Say, the file is saved to audio_cache/raw. When a file is preprocessed, the result is saved to audio_cache/preprocessed. When an audio file is generated, the result is saved to audio_cache/output and, finally, when an output audio is postprocessed, the result is saved in audio_cache/postprocessed. Up to 25 files can be stored in each subfolder before Hay Say begins to automatically delete the oldest files. The purpose of the caching system is twofold. First, by storing the file at various stages of production, Hay Say will be able to present a playback button at each stage, so users can compare the "before" and "after" of a particular step. For example, the user can play back the raw audio and also play back the preprocessed audio to compare them. Second, some operations take a lot of computational power to complete, such as generating output from one of the AI architectures. By caching that output, Hay Say can allow the user to tweak the post-processing options and listen to the results over and over without needing to invoke the AI architecture each time. 
+Hay say also has an "audio_cache" volume for maintaining a small cache of audio files. Any time the user uploads an 
+audio file to Hay Say, the file is saved to audio_cache/raw. When a file is preprocessed, the result is saved to 
+audio_cache/preprocessed. When an audio file is generated, the result is saved to audio_cache/output and, finally, when
+an output audio is postprocessed, the result is saved in audio_cache/postprocessed. Up to 25 files can be stored in each
+subfolder before Hay Say begins to automatically delete the oldest files. The purpose of the caching system is twofold.
+First, by storing the file at various stages of production, Hay Say will be able to present a playback button at each
+stage, so users can compare the "before" and "after" of a particular step. For example, the user can play back the raw
+audio and also play back the preprocessed audio to compare them. Second, some operations take a lot of computational
+power to complete, such as generating output from one of the AI architectures. By caching that output, Hay Say can allow
+the user to tweak the post-processing options and listen to the results over and over without needing to invoke the AI 
+architecture each time. 
 
-The code for the main UI is in this repository. Code for the Flask servers for the other containers can be found in various other code repositories on hydrusbeta's account. See https://github.com/hydrusbeta?tab=repositories.
+The code for the main UI is in this repository. Code for the Flask servers for the other containers can be found in 
+various other code repositories on hydrusbeta's account. See https://github.com/hydrusbeta?tab=repositories.
 
 ## "Roadmap"
 
@@ -575,7 +647,8 @@ Here are some tasks I consider important. I intend to work on them "soon", in no
 Plus, there are numerous minor code improvement opportunities that I have marked with "todo" throughout the codebase.
 
 ### A note on Google Colab
-I have decided to focus on developing locally-running software and have no plans to port this project over to Google Collab. If someone else wants to work on doing that, however, I would be happy to provide support.
+I have decided to focus on developing locally-running software and have no plans to port this project over to Google 
+Collab. If someone else wants to work on doing that, however, I would be happy to provide support.
 
 
 ## Testing Data / Benchmarks
