@@ -2,6 +2,7 @@ import os
 
 from architectures.AbstractTab import AbstractTab
 from hay_say_common import get_model_path
+import model_licenses
 
 from dash import html, dcc, Input, Output, callback
 from dash.exceptions import PreventUpdate
@@ -47,6 +48,10 @@ class RvcTab(AbstractTab):
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 html.Td(self.character_dropdown)
             ]),
+            html.Tr(
+                html.Td(id=self.id + '-license-note', colSpan=2),
+                id=self.id + '-license-row', hidden=True
+            ),
             html.Tr([
                 html.Td(html.Label('Shift Pitch (semitones)', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Td(dcc.Input(id=self.input_ids[1], type='number', min=-36, max=36, step=1, value=0))
@@ -151,6 +156,20 @@ class RvcTab(AbstractTab):
                 raise PreventUpdate
             index_path = self.get_index_path(character)
             return not os.path.isfile(index_path)
+
+        @callback(
+            [Output(self.id + '-license-note', 'children'),
+             Output(self.id + '-license-row', 'hidden')],
+            Input(self.input_ids[0], 'value')
+        )
+        def show_license_note(character):
+            model_metadata = next(iter([model_info for model_info in self.read_character_model_infos()
+                                        if model_info['Model Name'] == character]), None)
+            license_name = model_metadata.get('License')
+            license_enum = model_licenses.get_license_enum(license_name)
+            additional_text = model_metadata.get('Creator')
+            return model_licenses.get_verbiage(license_enum, additional_text), \
+                not model_licenses.is_ui_notice_required(license_enum)
 
     def get_index_path(self, character):
         character_dir = get_model_path(self.id, character)

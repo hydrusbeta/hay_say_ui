@@ -14,7 +14,8 @@
                 "Download As": "added_IVF173_Flat_nprobe_4.index.index",
                 "Size (bytes)": 7158091
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Derpy Hooves",
@@ -31,7 +32,8 @@
                 "Download As": "added_IVF127_Flat_nprobe_4.index",
                 "Size (bytes)": 5243731
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Octavia Melody",
@@ -48,7 +50,8 @@
                 "Download As": "added_IVF34_Flat_nprobe_2.index",
                 "Size (bytes)": 1441843
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Twilight Sparkle (singing)",
@@ -65,7 +68,8 @@
                 "Download As": "added_IVF1364_Flat_nprobe_8.index",
                 "Size (bytes)": 56333923
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Vinyl Scratch",
@@ -76,7 +80,8 @@
                 "Download As": "VinylScratch.pth",
                 "Size (bytes)": 55127639
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Vinyl Scratch (alt)",
@@ -86,9 +91,10 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "2xh15a.zip",
                 "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
-                "Size (bytes)": 0
+                "Size (bytes)": 170764494
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie",
@@ -100,7 +106,8 @@
                 "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
                 "Size (bytes)": 274235568
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Applejack",
@@ -112,7 +119,8 @@
                 "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
                 "Size (bytes)": 370103262
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Fluttershy",
@@ -131,26 +139,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://mega.nz/file/pf4wxT6J#j13tM7AwFKFPhwYJOTorWv_LU1hR8Z8BLjqtPfhbGV0"
-    },
-    {
-        "Model Name": "Cream Heart",
-        "Files": [
-            {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Cream%20Heart/Cream-Heart-Ken.pth",
-                "Download With": "HUGGINGFACE_HUB",
-                "Download As": "Cream-Heart-Ken.pth",
-                "Size (bytes)": 55030343
-            },
-            {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Cream%20Heart/added_IVF1773_Flat_nprobe_1_Cream-Heart-Ken_v1.index",
-                "Download With": "HUGGINGFACE_HUB",
-                "Download As": "added_IVF1773_Flat_nprobe_1_Cream-Heart-Ken_v1.index",
-                "Size (bytes)": 73207123
-            }
-
-        ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1eoFWbyDZ3u8SRbtXqwKQSYevD9br-Guo/view?usp=sharing"
+        "Originally Acquired From": "https://mega.nz/file/pf4wxT6J#j13tM7AwFKFPhwYJOTorWv_LU1hR8Z8BLjqtPfhbGV0",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Bunni Bunni",
@@ -169,7 +159,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1eX-wqSQ1VucyzRHrpwXQUV137KQ0JuOy/view?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/file/d/1eX-wqSQ1VucyzRHrpwXQUV137KQ0JuOy/view?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Babs Seed",
@@ -188,7 +179,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Big McIntosh",
@@ -207,7 +199,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Braeburn",
@@ -226,7 +219,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Diamond Tiara",
@@ -245,7 +239,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Doctor Whooves",
@@ -264,7 +259,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Gallus",
@@ -283,7 +279,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Ocellus",
@@ -302,7 +299,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Silverstream",
@@ -321,7 +319,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Smolder",
@@ -340,7 +339,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Spike",
@@ -359,7 +359,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Tempest Shadow",
@@ -378,7 +379,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Thorax",
@@ -397,7 +399,8 @@
             }
 
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Applejack (alt)",
@@ -415,7 +418,8 @@
                 "Size (bytes)": 55027589
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1-02IwowItSAi1_imh5eHcW3oh7dv_lwk/view?usp=drivesdk"
+        "Originally Acquired From": "https://drive.google.com/file/d/1-02IwowItSAi1_imh5eHcW3oh7dv_lwk/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Fluttershy (alt)",
@@ -433,7 +437,8 @@
                 "Size (bytes)": 55028048
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1sr_WqwS9sGxhm3HysnduCZmQZ9lkOlzN/view?usp=drivesdk"
+        "Originally Acquired From": "https://drive.google.com/file/d/1sr_WqwS9sGxhm3HysnduCZmQZ9lkOlzN/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (alt)",
@@ -451,7 +456,8 @@
                 "Size (bytes)": 55027589
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1-JGghIIhgKWNIclhTV5BxVNLxVr_bbbp/view?usp=drivesdk"
+        "Originally Acquired From": "https://drive.google.com/file/d/1-JGghIIhgKWNIclhTV5BxVNLxVr_bbbp/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rainbow Dash (alt)",
@@ -469,7 +475,8 @@
                 "Size (bytes)": 55028507
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1-Apympt6iiDye-zHar_0C7r-v4476fT2/view?usp=drivesdk"
+        "Originally Acquired From": "https://drive.google.com/file/d/1-Apympt6iiDye-zHar_0C7r-v4476fT2/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rarity (alt)",
@@ -487,7 +494,8 @@
                 "Size (bytes)": 55019812
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1-AAggYM3JTxfoPcj22QG15laKCqqffhv/view?usp=drivesdk"
+        "Originally Acquired From": "https://drive.google.com/file/d/1-AAggYM3JTxfoPcj22QG15laKCqqffhv/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Twilight Sparkle (alt)",
@@ -505,7 +513,8 @@
                 "Size (bytes)": 55030343
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1Iz4benaXeIkBOlPLYvNI8yZ2Lcb00MGH/view?usp=drivesdk"
+        "Originally Acquired From": "https://drive.google.com/file/d/1Iz4benaXeIkBOlPLYvNI8yZ2Lcb00MGH/view?usp=drivesdk",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Luna",
@@ -517,7 +526,8 @@
                 "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
                 "Size (bytes)": 81650352
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Nightmare Moon",
@@ -529,7 +539,8 @@
                 "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
                 "Size (bytes)": 61835502
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Bright Mac",
@@ -547,7 +558,8 @@
                 "Size (bytes)": 9015299
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1r_kN1Otk5yS2RojfmFlJPPI5ZTl0_kZZ/view?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/file/d/1r_kN1Otk5yS2RojfmFlJPPI5ZTl0_kZZ/view?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Coconut Cream",
@@ -565,7 +577,8 @@
                 "Size (bytes)": 5233059
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/file/d/1aO4fkb_yH54OOJeDrXWvE9G3wvWXPwvA/view?usp=sharing"
+        "Originally Acquired From": "https://drive.google.com/file/d/1aO4fkb_yH54OOJeDrXWvE9G3wvWXPwvA/view?usp=sharing",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Sweetie Belle",
@@ -577,7 +590,8 @@
                 "Size (bytes)": 87963134,
                 "Unzip Strategy": "FLATTEN"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Celestia",
@@ -588,8 +602,15 @@
                 "Download As": "MLP01Celestia.zip",
                 "Size (bytes)": 106972536,
                 "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
             }
-        ]
+        ],
+        "License": "OPEN_RAIL_M"
     },
     {
         "Model Name": "Twilight Sparkle",
@@ -600,8 +621,15 @@
                 "Download As": "MLP03TwilightSparkle.zip",
                 "Size (bytes)": 75428356,
                 "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
             }
-        ]
+        ],
+        "License": "OPEN_RAIL_M"
     },
     {
         "Model Name": "Rainbow Dash",
@@ -612,8 +640,15 @@
                 "Download As": "MLP05RainbowDash.zip",
                 "Size (bytes)": 68458741,
                 "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
             }
-        ]
+        ],
+        "License": "OPEN_RAIL_M"
     },
     {
         "Model Name": "Rarity",
@@ -624,8 +659,15 @@
                 "Download As": "MLP06Rarity.zip",
                 "Size (bytes)": 74767341,
                 "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
             }
-        ]
+        ],
+        "License": "OPEN_RAIL_M"
     },
     {
         "Model Name": "Discord",
@@ -636,8 +678,15 @@
                 "Download As": "MLP09Discord.zip",
                 "Size (bytes)": 81233486,
                 "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
             }
-        ]
+        ],
+        "License": "OPEN_RAIL_M"
     },
     {
         "Model Name": "Starlight Glimmer",
@@ -648,8 +697,15 @@
                 "Download As": "MLP10StarlightGlimmer.zip",
                 "Size (bytes)": 78859076,
                 "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/datasets/marup/MLLPFIMRVC/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
             }
-        ]
+        ],
+        "License": "OPEN_RAIL_M"
     },
     {
         "Model Name": "Button Mash",
@@ -667,7 +723,8 @@
                 "Size (bytes)": 89843739
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Yona",
@@ -685,7 +742,8 @@
                 "Size (bytes)": 107159499
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Spike (G1)",
@@ -696,8 +754,16 @@
                 "Download As": "MLP_G1_Spike.zip",
                 "Unzip Strategy": "FLATTEN",
                 "Size (bytes)": 103450883
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_g1_spike/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 20
             }
-        ]
+        ],
+        "License": "CC_UNSPECIFIC",
+        "Creator": "KenDoStudio"
     },
     {
         "Model Name": "Cheerilee",
@@ -708,8 +774,15 @@
                 "Download As": "MLP_Cherrilee_v2.zip",
                 "Unzip Strategy": "FLATTEN",
                 "Size (bytes)": 72960664
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Cheerilee/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 25
             }
-        ]
+        ],
+        "License": "CC0_1"
     },
     {
         "Model Name": "Sunburst",
@@ -720,8 +793,16 @@
                 "Download As": "MLP_Sunburst.zip",
                 "Unzip Strategy": "FLATTEN",
                 "Size (bytes)": 122036158
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Sunburst/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 20
             }
-        ]
+        ],
+        "License": "CC_UNSPECIFIC",
+        "Creator": "KenDoStudio"
     },
     {
         "Model Name": "Luster Dawn",
@@ -732,8 +813,15 @@
                 "Download As": "MLP_Luster_Dawn.zip",
                 "Unzip Strategy": "FLATTEN",
                 "Size (bytes)": 58837936
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_LusterDawn/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 25
             }
-        ]
+        ],
+        "License": "AFL_3"
     },
     {
         "Model Name": "Pear Butter",
@@ -749,9 +837,17 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "added_IVF144_Flat_nprobe_1_MLP_pearbutter_v2.index",
                 "Size (bytes)": 17845659
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/Pear_Butter/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 25
             }
         ],
-        "Originally Acquired From": "https://huggingface.co/KenDoStudio/Pear_Butter/tree/main"
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/Pear_Butter/tree/main",
+        "License": "LGPL_LR",
+        "Creator": "KenDoStudio"
     },
     {
         "Model Name": "Cream Heart",
@@ -769,7 +865,9 @@
                 "Size (bytes)": 73207123
             }
         ],
-        "Originally Acquired From": "https://huggingface.co/KenDoStudio/Cream_Heart/tree/main"
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/Cream_Heart/tree/main",
+        "License": "CC_BY_NC_ND_3",
+        "Creator": "KenDoStudio"
     },
     {
         "Model Name": "Sandbar",
@@ -785,9 +883,16 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "added_IVF1003_Flat_nprobe_1_MLP_Sandbar_v2.index",
                 "Size (bytes)": 123646739
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Sandbar40k/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 30
             }
         ],
-        "Originally Acquired From": "https://huggingface.co/KenDoStudio/MLP_Sandbar40k/tree/main"
+        "Originally Acquired From": "https://huggingface.co/KenDoStudio/MLP_Sandbar40k/tree/main",
+        "License": "ARTISTIC_2"
     },
     {
         "Model Name": "Derpy Hooves (BaldDumboRat fan VA)",
@@ -799,7 +904,8 @@
                 "Unzip Strategy": "FLATTEN",
                 "Size (bytes)": 55792327
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Twilight Sparkle (singing)",
@@ -816,7 +922,8 @@
                 "Download As": "added_IVF1495_Flat_nprobe_1_TwilightSIngingv2_v2.index",
                 "Size (bytes)": 184214939
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Tree Hugger",
@@ -833,6 +940,7 @@
                 "Download As": "added_IVF104_Flat_nprobe_1_TreeHugger_v2.index",
                 "Size (bytes)": 12871459
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     }
 ]

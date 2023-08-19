@@ -42,6 +42,9 @@ class SoVitsSvc5Tab(AbstractTab):
                 html.Td("Note: \"mane6\" = combined Mane Six singing model", colSpan=2, className='centered')
             ]),
             html.Tr([
+                html.Td("Note: \"ext1\" = combined Non-Mane-Six model", colSpan=2, className='centered')
+            ]),
+            html.Tr([
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),
                 html.Td(self.character_dropdown)
             ]),

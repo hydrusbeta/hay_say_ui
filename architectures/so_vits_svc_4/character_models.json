@@ -23,7 +23,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Applejack (singing, PS1)",
@@ -49,7 +50,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Cadance (singing, PS1)",
@@ -75,7 +77,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Celestia (singing, PS1)",
@@ -101,7 +104,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Fluttershy (singing, PS1)",
@@ -127,7 +131,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Luna (singing, PS1)",
@@ -153,7 +158,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (singing, PS1)",
@@ -179,7 +185,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rainbow Dash (singing, PS1)",
@@ -205,7 +212,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rarity (singing, PS1)",
@@ -231,7 +239,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Scootaloo (singing, PS1)",
@@ -257,7 +266,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Sweetie Belle (singing, PS1)",
@@ -283,7 +293,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Twilight Sparkle (singing, PS1)",
@@ -309,7 +320,8 @@
                 "As": "kmeans_4000.pt",
                 "Target": "kmeans_4000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Apple Bloom (singing)",
@@ -332,7 +344,8 @@
                 "Download As": "kmeans_1000.pt",
                 "Size (bytes)": 1540015
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Applejack (singing)",
@@ -355,7 +368,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15436015
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Cadance (singing)",
@@ -378,7 +392,8 @@
                 "Download As": "kmeans_1000.pt",
                 "Size (bytes)": 1542447
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Celestia (singing)",
@@ -404,7 +419,8 @@
                 "As": "kmeans_1000.pt",
                 "Target": "kmeans_1000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Celestia (singing, alt)",
@@ -430,7 +446,8 @@
                 "As": "kmeans_1000.pt",
                 "Target": "kmeans_1000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Fluttershy (singing)",
@@ -453,7 +470,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15443759
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Luna (singing)",
@@ -476,7 +494,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6180527
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (singing)",
@@ -499,7 +518,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15426927
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rainbow Dash (singing, alt)",
@@ -522,7 +542,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6178479
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rainbow Dash (singing)",
@@ -545,7 +566,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15439535
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rarity (singing)",
@@ -568,7 +590,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15448943
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Scootaloo (singing, alt)",
@@ -594,7 +617,8 @@
                 "As": "kmeans_1500.pt",
                 "Target": "kmeans_1500.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Starlight Glimmer (singing, evil)",
@@ -620,7 +644,8 @@
                 "As": "kmeans_1500.pt",
                 "Target": "kmeans_1500.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Starlight Glimmer (singing, good)",
@@ -646,7 +671,8 @@
                 "As": "kmeans_1500.pt",
                 "Target": "kmeans_1500.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Scootaloo (singing)",
@@ -669,7 +695,8 @@
                 "Download As": "kmeans_2000.pt",
                 "Size (bytes)": 3082671
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Sweetie Belle (singing)",
@@ -692,7 +719,8 @@
                 "Download As": "kmeans_2000.pt",
                 "Size (bytes)": 3087279
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Twilight Sparkle (singing)",
@@ -715,7 +743,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15431151
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Apple Bloom",
@@ -738,7 +767,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6159919
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Applejack",
@@ -761,7 +791,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15404473
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Celestia",
@@ -784,7 +815,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15419887
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Chrysalis",
@@ -807,31 +839,32 @@
                 "Download As": "kmeans_5000.pt",
                 "Size (bytes)": 23104815
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Derpy Hooves",
         "Files": [
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Derpy%20Hooves/G_100000.pth",
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Derpy_100000/G_100000.pth",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "G_100000.pth",
                 "Size (bytes)": 542789405
             },
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Derpy%20Hooves/config.json",
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Derpy_100000/config.json",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1666
             },
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Derpy%20Hooves/kmeans_4000.pt",
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/Derpy_100000/kmeans_4000.pt",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6175535
             }
         ],
-        "Originally Acquired From": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsZip/Derpy_100000.zip"
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Discord",
@@ -854,7 +887,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15419951
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Fluttershy",
@@ -877,7 +911,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15420527
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie",
@@ -900,7 +935,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6158511
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rainbow Dash",
@@ -923,7 +959,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15399407
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Rarity",
@@ -946,7 +983,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15406511
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Saffron Masala",
@@ -963,7 +1001,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1612
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Shining Armor",
@@ -980,25 +1019,26 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1581
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Tree Hugger",
         "Files": [
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Tree%20Hugger/G_69000.pth",
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/TreeHugger_69k/G_69000.pth",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "G_69000.pth",
                 "Size (bytes)": 542789405
             },
             {
-                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Tree%20Hugger/config.json",
+                "URL": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsFolder/TreeHugger_69k/config.json",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1671
             }
         ],
-        "Originally Acquired From": "https://huggingface.co/Amo/so-vits-svc-4.0_GA/resolve/main/ModelsZip/TreeHugger_69k.zip"
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Trixie Lulamoon",
@@ -1024,7 +1064,8 @@
                 "As": "kmeans_5000.pt",
                 "Target": "kmeans_5000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Trixie Lulamoon (singing)",
@@ -1050,7 +1091,8 @@
                 "As": "kmeans_5000.pt",
                 "Target": "kmeans_5000.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Twilight Sparkle",
@@ -1073,7 +1115,8 @@
                 "Download As": "kmeans_10000.pt",
                 "Size (bytes)": 15405551
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (angry)",
@@ -1099,7 +1142,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (annoyed)",
@@ -1125,7 +1169,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (anxious)",
@@ -1151,7 +1196,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (fearful)",
@@ -1177,7 +1223,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (happy)",
@@ -1203,7 +1250,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (neutral)",
@@ -1229,7 +1277,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (nonverbal)",
@@ -1255,7 +1304,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (sad shouting)",
@@ -1281,7 +1331,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (sad)",
@@ -1307,7 +1358,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (shouting)",
@@ -1333,7 +1385,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (surprised)",
@@ -1359,7 +1412,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (tired)",
@@ -1385,7 +1439,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Pinkie Pie (whispering)",
@@ -1411,7 +1466,8 @@
                 "As": "kmeans_600.pt",
                 "Target": "kmeans_600.pt"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Athena",
@@ -1428,7 +1484,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1575
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Cadance",
@@ -1445,7 +1502,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1612
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Arizona (TFH)",
@@ -1462,7 +1520,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1580
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Velvet (TFH)",
@@ -1479,7 +1538,8 @@
                 "Download As": "config.json",
                 "Size (bytes)": 1579
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Babs Seed",
@@ -1503,7 +1563,8 @@
                 "Size (bytes)": 2196
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Braeburn",
@@ -1527,7 +1588,8 @@
                 "Size (bytes)": 2195
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Diamond Tiara",
@@ -1551,7 +1613,8 @@
                 "Size (bytes)": 1819
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Doctor Whooves",
@@ -1569,7 +1632,8 @@
                 "Size (bytes)": 1822
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Gallus",
@@ -1587,7 +1651,8 @@
                 "Size (bytes)": 1815
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Sandbar",
@@ -1611,7 +1676,8 @@
                 "Size (bytes)": 2194
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Smolder",
@@ -1635,7 +1701,8 @@
                 "Size (bytes)": 2194
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Spike (alt)",
@@ -1659,7 +1726,8 @@
                 "Size (bytes)": 2194
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Sunny Starscout",
@@ -1683,7 +1751,8 @@
                 "Size (bytes)": 1813
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Tempest Shadow",
@@ -1707,7 +1776,8 @@
                 "Size (bytes)": 1821
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Thorax",
@@ -1731,7 +1801,8 @@
                 "Size (bytes)": 1814
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Big McIntosh",
@@ -1758,7 +1829,8 @@
                 "Target": "kmeans.pt"
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Babs Seed (alt)",
@@ -1785,7 +1857,8 @@
                 "Target": "kmeans.pt"
             }
         ],
-        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG"
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Mrs. Cake",
@@ -1808,7 +1881,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6178159
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Spike",
@@ -1831,7 +1905,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6165743
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Tirek",
@@ -1854,7 +1929,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 18485679
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Dark Rainbow Dash",
@@ -1877,7 +1953,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 6160943
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Vinyl Scratch",
@@ -1900,7 +1977,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 18485487
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Ocellus",
@@ -1923,7 +2001,9 @@
                 "Download As": "kmeans.pt",
                 "Size (bytes)": 9242991
             }
-        ]
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1pyitdHlO2-XOYC6H4iVK7AS5aRDeSuxG",
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Silverstream",
@@ -1946,7 +2026,8 @@
                 "Download As": "kmeans.pt",
                 "Size (bytes)": 9247343
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Daring Do",
@@ -1974,7 +2055,8 @@
                 "As": "config.json",
                 "Target": "config.json"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Lightning Dust",
@@ -2002,7 +2084,8 @@
                 "As": "config.json",
                 "Target": "config.json"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Moon Dancer",
@@ -2030,7 +2113,8 @@
                 "As": "config.json",
                 "Target": "config.json"
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Derpy Hooves (alt)",
@@ -2053,7 +2137,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 18485815
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Ember",
@@ -2076,7 +2161,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 18486191
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Sludge",
@@ -2099,7 +2185,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 18483055
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Sunset Shimmer",
@@ -2122,7 +2209,8 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 18485615
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
         "Model Name": "Wallflower Blush",
@@ -2145,6 +2233,7 @@
                 "Download As": "kmeans_4000.pt",
                 "Size (bytes)": 18490671
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     }
 ]

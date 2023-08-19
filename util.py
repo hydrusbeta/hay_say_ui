@@ -36,3 +36,12 @@ def internet_available():
         return True
     except Exception:
         return False
+
+
+def get_enum_by_string(enum_type, string_name, throw_exception=False):
+    # Get an enumeration instance by name. If throw_exception is True, then throw an exception if string_name does not
+    # match any of the possible enum names (otherwise, return None).
+    enum_instance = {item.name: item for item in enum_type}.get(string_name)
+    if enum_instance is None and throw_exception:
+        raise Exception(string_name + ' is not an expected value. Expected one of ' + [item.name for item in enum_type])
+    return enum_instance

@@ -1,6 +1,7 @@
 import jsonschema
 from jsonschema.exceptions import ValidationError
 
+import model_licenses
 from download import Downloader
 
 # For sample dictionaries, see:
@@ -41,10 +42,12 @@ character_schema = {
                     'required': ['As', 'Target']
                 }
             },
+            'License': {'enum': [licence_type.name for licence_type in model_licenses.License]},
+            'Creator': {'type': 'string'},
             'Originally Acquired From': {'type': 'string'}
         },
         'additionalProperties': False,
-        'required': ['Model Name', 'Files'],
+        'required': ['Model Name', 'Files', 'License'],
         'dependentRequired': {
             'Symlinks': ['Multi-speaker Model Dependency'],
             'Multi-speaker Model Dependency': ['Symlinks']

@@ -115,29 +115,28 @@ def unzip_file(zip_file_path, unzip_type):
 
 
 def get_downloader(download_type):
-    if download_type == DownloadType.GDOWN.name:
-        return gdown_downloader
-    elif download_type == DownloadType.HUGGINGFACE_HUB.name:
-        return huggingface_hub_downloader
-    elif download_type == DownloadType.MEGA.name:
-        return mega_downloader
-    elif download_type == DownloadType.REQUESTS.name:
-        return requests_downloader
-    else:
+    downloader = {
+        DownloadType.GDOWN: gdown_downloader,
+        DownloadType.HUGGINGFACE_HUB: huggingface_hub_downloader,
+        DownloadType.MEGA: mega_downloader,
+        DownloadType.REQUESTS: requests_downloader
+    }.get(download_type)
+    if downloader is None:
         raise Exception('Unknown download type "' + download_type + '"')
+    return downloader
 
 
 def get_unzipper(unzip_type):
-    if unzip_type == UnzipType.UNZIP_IN_PLACE.name:
-        return unzip_in_place
-    elif unzip_type == UnzipType.FLATTEN.name:
-        return unzip_flattened
-    elif unzip_type == UnzipType.REMOVE_OUTERMOST_DIR.name:
-        return unzip_and_remove_outermost_dir
-    elif unzip_type is None:
-        return no_unzip
-    else:
+    unzipper = {
+        UnzipType.UNZIP_IN_PLACE: unzip_in_place,
+        UnzipType.FLATTEN: unzip_flattened,
+        UnzipType.REMOVE_OUTERMOST_DIR: unzip_and_remove_outermost_dir,
+    }.get(unzip_type)
+    if unzip_type is None:
+        unzipper = no_unzip
+    if unzipper is None:
         raise Exception('Unknown unzip type "' + unzip_type + '"')
+    return unzipper
 
 
 # === Parsing the JSON files ===
@@ -156,9 +155,9 @@ def extract_character_metadata(character_model_info):
 
 def extract_file_metadata(file):
     url = file['URL']
-    download_type = file['Download With']
+    download_type = util.get_enum_by_string(DownloadType, file['Download With'])
     relative_file_path = file['Download As']
-    unzip_type = file.get('Unzip Strategy')
+    unzip_type = util.get_enum_by_string(UnzipType, file.get('Unzip Strategy'))
     return url, download_type, relative_file_path, unzip_type
 
 
@@ -172,13 +171,14 @@ def gdown_downloader(url, target_filepath):
 
 
 def huggingface_hub_downloader(url, target_filepath):
-    repo_id, download_filename = parse_huggingface_url(url)
+    repo_id, download_filename, repo_type = parse_huggingface_url(url)
     # With hf_hub_download, we do not have control over the name of the downloaded file, so we have to rename it
     # afterward. To prevent the rare case where the download name clashes with the name of a file that already exists
     # in the target directory, download the file into a temp directory first and then simultaneously rename and move it
     # to the target directory.
     with tempfile.TemporaryDirectory() as tempdir:
-        hf_hub_download(repo_id=repo_id, filename=download_filename, local_dir=tempdir, local_dir_use_symlinks=False)
+        hf_hub_download(repo_id=repo_id, filename=download_filename, repo_type=repo_type,
+                        local_dir=tempdir, local_dir_use_symlinks=False)
         download_filepath = os.path.join(tempdir, download_filename)
         shutil.move(download_filepath, target_filepath)
 
@@ -196,10 +196,15 @@ def requests_downloader(url, target_filepath):
 def parse_huggingface_url(url):
     parsed_url = urlparse(url)
     parts = parsed_url.path.split('/')
-    repo_id = '/'.join(parts[1:parts.index('resolve')])
+    if parts[1] == 'datasets':
+        repo_type = 'dataset'
+        repo_id = '/'.join(parts[2:parts.index('resolve')])
+    else:
+        repo_type = 'model'
+        repo_id = '/'.join(parts[1:parts.index('resolve')])
     filename = '/'.join(parts[parts.index('main')+1:])
     # "unquote" means to unescape strings from a URL. e.g. "%20" becomes a space character, " ".
-    return unquote(repo_id), unquote(filename)
+    return unquote(repo_id), unquote(filename), unquote(repo_type)
 
 
 # === Unzippers ===

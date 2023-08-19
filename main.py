@@ -771,6 +771,6 @@ if __name__ == '__main__':
     app = construct_main_app(args, available_tabs)
     add_model_management_components_if_needed(args, app, available_tabs)
 
-    app.run(host='0.0.0.0', port=6573, debug=True)
+    app.run(host='0.0.0.0', port=6573)
 
 
