@@ -508,7 +508,7 @@ so-vits-svc 3.0:
 
 #### Additional Required Steps for Windows Users
 
-Windows users must complete additional steps to free disk space after following any of the above methods. You have a 
+Windows users must complete additional steps to free disk space after deleting characters or architectures. You have a 
 couple of options:
 
 ###### Option 1: Shrink the WSL2 virtual disk manually
