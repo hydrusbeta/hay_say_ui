@@ -74,7 +74,7 @@ def register_model_manager_callbacks(available_tabs):
         # selected character for each architecture in case it was deleted, refresh the deletable characters lists, and
         # deselect the selections in the deletable character lists.
         return [tab.downloadable_character_options() for tab in available_tabs] + \
-            [tab.deletable_character_options for tab in available_tabs] + \
+            [tab.characters for tab in available_tabs] + \
             [None for tab in available_tabs] + \
             [tab.deletable_character_options for tab in available_tabs] +\
             [[] for tab in available_tabs]
