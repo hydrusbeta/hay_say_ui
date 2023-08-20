@@ -164,7 +164,7 @@ class RvcTab(AbstractTab):
         )
         def show_license_note(character):
             model_metadata = next(iter([model_info for model_info in self.read_character_model_infos()
-                                        if model_info['Model Name'] == character]), None)
+                                        if model_info['Model Name'] == character]), {})
             license_name = model_metadata.get('License')
             license_enum = model_licenses.get_license_enum(license_name)
             additional_text = model_metadata.get('Creator')

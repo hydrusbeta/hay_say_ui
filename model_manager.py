@@ -10,7 +10,6 @@ def construct_model_manager(available_tabs):
         # todo: move styles to css file
         [html.H2('Select models you would like to delete:')] +
         [html.Div(list_models(tab)) for tab in available_tabs] +
-        [html.Div('0 bytes', 'delete-size')] +
         [html.Button('Delete Selected Models', id='delete-models-button')] +
         [html.Br()] +
         [html.Br()] +
@@ -77,7 +76,7 @@ def register_model_manager_callbacks(available_tabs):
         return [tab.downloadable_character_options() for tab in available_tabs] + \
             [tab.deletable_character_options for tab in available_tabs] + \
             [None for tab in available_tabs] + \
-            [tab.characters for tab in available_tabs] +\
+            [tab.deletable_character_options for tab in available_tabs] +\
             [[] for tab in available_tabs]
 
     # If a user has recently downloaded a new model, we need to refresh the download list when they navigate to the
