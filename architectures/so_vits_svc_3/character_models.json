@@ -196,6 +196,12 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1564
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_3/Trixie%20Lulamoon/speaker.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "speaker.json",
+                "Size (bytes)": 26
             }
         ],
         "Originally Acquired From": "https://mega.nz/file/u3Q3yapZ#2-wyakRPAqZUI-_yhUTHyFs2AiBOz7lS_HX-w_U0Np8",
