@@ -33,7 +33,7 @@ Before you install Hay Say, I recommend you take a look at the Testing Data / Be
 page to get a ballpark figure on how fast or slow Hay Say might be on your machine.
 
 ### Required Hardware
-* At least 100 GB free Hard drive space 
+* At least 50 GB free Hard drive space (additional space is required for any models you download within the application)
 * 12 GB System RAM (Hay Say only uses up to ~8 GB RAM, but don't forget that your OS needs RAM too)
 
 ### Recommended Hardware and Software
