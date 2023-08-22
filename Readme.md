@@ -179,6 +179,8 @@ Note: you must be in the folder where docker-compose.yaml is located (you downlo
 you execute that command. cd to that directory first if necessary.
 
 ## Updating Hay Say
+Note: if you last installed/updated Hay Say before Aug 19, 2023, please see 
+[Special Instructions for the Aug 19, 2023 update](#special-instructions-for-the-aug-19-2023-update)
 
 ### 1. Grab the latest docker-compose file 
 To update Hay Say, it is recommended that you first download the latest docker-compose file in case new entries have 
@@ -199,19 +201,6 @@ MacOS:
 ```commandline
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 ```
-### 1.5. Special Instructions for the Aug 19, 2023 update
-Following the update on Aug 19, 2023, Hay Say now expects the presence of a "models" docker volume. If you installed Hay
-Say before that date, then you must also execute the following command to create that volume:
-
-Linux:
-```commandline
-sudo docker volume create models
-```
-
-Windows and MacOS:
-```commandline
-docker volume create models
-```
 
 ### 2. Pull the latest images
 Next, execute the following commands to make sure that your containers are stopped, to pull the latest images, and to 
@@ -230,8 +219,40 @@ docker compose pull
 docker compose up
 ```
 
+### Special Instructions for the Aug 19, 2023 update
+Following the update on Aug 19, 2023, the "model pack" images are obsolete and can be removed. Furthermore, every other 
+image has been updated, so you can save some space by deleting all of your existing Hay Say Docker images first and then 
+re-downloading them (doing so will prevent "dangling" images from being left over). Lastly, Hay Say now expects the 
+presence of a "models" docker volume, so you must create it. If you installed Hay Say before Aug 19, 2023, please
+execute these commands instead:
 
+Linux:
+```commandline
+sudo docker compose down --rmi all
+wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+sudo docker volume create models
+sudo docker compose up
+```
 
+MacOS:
+```commandline
+docker compose down --rmi all
+curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+docker volume create models
+docker compose up
+```
+
+Windows:
+```commandline
+docker compose down --rmi all
+```
+Now follow the steps in [Additional Required Steps for Windows Users](#additional-required-steps-for-windows-users) to 
+clear disk space. After that:
+```commandline
+curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+docker volume create models
+docker compose up
+```
 
 ## Advanced Topics
 
@@ -508,8 +529,8 @@ so-vits-svc 3.0:
 
 #### Additional Required Steps for Windows Users
 
-Windows users must complete additional steps to free disk space after deleting characters or architectures. You have a 
-couple of options:
+Windows users must complete additional steps to free disk space after deleting characters or images. You have a couple 
+of options:
 
 ###### Option 1: Shrink the WSL2 virtual disk manually
 
