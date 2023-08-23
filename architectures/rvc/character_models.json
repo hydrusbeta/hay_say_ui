@@ -1103,5 +1103,65 @@
         ],
         "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C",
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Limestone Pie",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Limestone_Pie/resolve/main/MLP_Limestone.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Limestone.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 62866971
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Limestone_Pie/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 20
+            }
+        ],
+        "License": "CC_UNSPECIFIC",
+        "Creator": "KenDoStudio"
+    },
+    {
+        "Model Name": "Shining Armor",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Shining_Armor/resolve/main/MLP_Shining_Armor_e480_s3360.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Shining_Armor_e480_s3360.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 73718023
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Shining_Armor/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 26
+            }
+        ],
+        "License": "OPEN_RAIL_M",
+        "Creator": "KenDoStudio"
+    },
+    {
+        "Model Name": "Doughnut Joe",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Dounut_Joe-alt/resolve/main/MLP_Doughnut_Joe_e155_s2635.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Doughnut_Joe_e155_s2635.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 118279175
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Dounut_Joe-alt/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 20
+            }
+        ],
+        "License": "CC_UNSPECIFIC",
+        "Creator": "KenDoStudio"
     }
 ]
