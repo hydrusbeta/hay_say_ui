@@ -219,12 +219,30 @@ docker compose pull
 docker compose up
 ```
 
+### 3. (Optional) Remove "dangling" images to save disk space
+When you pull an updated Docker image, the old image is not automatically deleted. The old image, which is no longer 
+used, is referred to as a "dangling" image. You can remove dangling images to save space by executing the following 
+command:
+
+Linux:
+```commandline
+sudo docker image prune
+```
+
+Windows and MacOS:
+```commandline
+docker image prune
+```
+Windows users must also follow the instructions in 
+[Additional Required Steps for Windows Users](#additional-required-steps-for-windows-users) afterwards to finish freeing
+disk space.
+
 ### Special Instructions for the Aug 19, 2023 update
 Following the update on Aug 19, 2023, the "model pack" images are obsolete and can be removed. Furthermore, every other 
 image has been updated, so you can save some space by deleting all of your existing Hay Say Docker images first and then 
-re-downloading them (doing so will prevent "dangling" images from being left over). Lastly, Hay Say now expects the 
-presence of a "models" docker volume, so you must create it. If you installed Hay Say before Aug 19, 2023, please
-execute these commands instead:
+re-downloading them (doing so will prevent "dangling" images from taking up excessive space during the update). Lastly, 
+Hay Say now expects the presence of a "models" docker volume, so you must create it. If you installed Hay Say before Aug
+19, 2023, please execute these commands instead:
 
 Linux:
 ```commandline
@@ -247,7 +265,7 @@ Windows:
 docker compose down --rmi all
 ```
 Now follow the steps in [Additional Required Steps for Windows Users](#additional-required-steps-for-windows-users) to 
-clear disk space. After that:
+clear disk space. After that, open Docker Desktop again. Once it has loaded, execute the following commands:
 ```commandline
 curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 docker volume create models
