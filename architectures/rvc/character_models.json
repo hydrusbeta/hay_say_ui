@@ -1163,5 +1163,131 @@
         ],
         "License": "CC_UNSPECIFIC",
         "Creator": "KenDoStudio"
+    },
+    {
+        "Model Name": "Apple Bloom",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Applebloom/Apple%20Bloom.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Apple Bloom.pth",
+                "Size (bytes)": 57584411
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Applebloom/added_IVF256_Flat_nprobe_1_Apple%20Bloom_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF256_Flat_nprobe_1_Apple%20Bloom_v2.index",
+                "Size (bytes)": 31588619
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack (s1)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/ApplejackS1/ApplejackS1.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "ApplejackS1.pth",
+                "Size (bytes)": 57584411
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/ApplejackS1/added_IVF1706_Flat_nprobe_1_ApplejackS1_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1706_Flat_nprobe_1_ApplejackS1_v2.index",
+                "Size (bytes)": 210274819
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Daring Do",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Daring%20Do/Daring%20Do.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Daring Do.pth",
+                "Size (bytes)": 57583493
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Daring%20Do/added_IVF329_Flat_nprobe_1_Daring%20Do_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF329_Flat_nprobe_1_Daring%20Do_v2.index",
+                "Size (bytes)": 40566819
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie (shouting)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Pinkie_Shouting/Pinkie_Shouting.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Pinkie_Shouting.pth",
+                "Size (bytes)": 57586247
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Pinkie_Shouting/added_IVF882_Flat_nprobe_1_Pinkie_Shouting_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF882_Flat_nprobe_1_Pinkie_Shouting_v2.index",
+                "Size (bytes)": 108742619
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash (s1)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/RainbowDashS1/RainbowDashS1.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "RainbowDashS1.pth",
+                "Size (bytes)": 57585329
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/RainbowDashS1/added_IVF1357_Flat_nprobe_1_RainbowDashS1_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1357_Flat_nprobe_1_RainbowDashS1_v2.index",
+                "Size (bytes)": 167278019
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scootaloo",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Scootaloo/Scootaloo.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Scootaloo.pth",
+                "Size (bytes)": 57583493
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Scootaloo/added_IVF3839_Flat_nprobe_1_Scootaloo_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF3839_Flat_nprobe_1_Scootaloo_v2.index",
+                "Size (bytes)": 472971099
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Spitfire",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Spitfire/Spitfire.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Spitfire.pth",
+                "Size (bytes)": 57583034
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Spitfire/added_IVF596_Flat_nprobe_1_Spitfire_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF596_Flat_nprobe_1_Spitfire_v2.index",
+                "Size (bytes)": 73482779
+            }
+        ],
+        "License": "UNSPECIFIED"
     }
 ]
