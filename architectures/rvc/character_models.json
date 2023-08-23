@@ -1078,5 +1078,30 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Snap Shutter",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Snap%20Shutter/Snap-Shutter.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Snap-Shutter.pth",
+                "Size (bytes)": 57584870
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Snap%20Shutter/added_IVF125_Flat_nprobe_1_Snap-Shutter_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF125_Flat_nprobe_1_Snap-Shutter_v2.index",
+                "Size (bytes)": 15514099
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Snap%20Shutter/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 283
+            }
+        ],
+        "Originally Acquired From": "https://drive.google.com/drive/folders/1F0_Idv8G3s0R7RWxF_PctdxnAWUeyH_C",
+        "License": "UNSPECIFIED"
     }
 ]
