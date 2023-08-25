@@ -1289,5 +1289,57 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "King Sombra (s9)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1RH0mmqe4cKDTRY8gTS5hwjH4hme81SpW",
+                "Download With": "GDOWN",
+                "Download As": "kingsombraseason9.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 60511258
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Chrysalis",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1fc1mTJPwT64AkDZSehJcqxxketej3STe",
+                "Download With": "GDOWN",
+                "Download As": "queenchrysalis.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 66762490
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Tirek",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1j4CGS7PO65DJ7A8rgmwMD3AWRnb8Oy0i",
+                "Download With": "GDOWN",
+                "Download As": "lordtirekmiddleform.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 64351109
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Grogar",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1LHp7-Dm-qPOqhJDGg27RbQzGXc3LHaLo",
+                "Download With": "GDOWN",
+                "Download As": "Grogar.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 52112355
+            }
+        ],
+        "License": "UNSPECIFIED"
     }
 ]
