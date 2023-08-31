@@ -1341,5 +1341,18 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Mrs. Cake",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_mrs-cake-chiffon-swirl/resolve/main/MLP_mrs_cake-swirl_e475_s2375.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_mrs_cake-swirl_e475_s2375.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 66869898
+            }
+        ],
+        "License": "OPEN_RAIL_M"
     }
 ]
