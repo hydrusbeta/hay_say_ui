@@ -143,6 +143,19 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Gilda",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1z0JmBWzhQ-H8IWxWEBhHL2HldpWbOX3F",
+                "Download With": "GDOWN",
+                "Download As": "Gilda_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107008442
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Granny Smith",
         "Files": [
             {
