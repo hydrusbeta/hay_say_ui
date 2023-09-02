@@ -38,7 +38,7 @@ def construct_main_interface(tab_buttons, tabs_contents):
             html.H2('Input'),
             dcc.Textarea(id='text-input', placeholder="Enter some text you would like a pony to say."),
             html.P('And/or provide a voice recording that you would like to ponify:'),
-            dcc.Upload([html.Div('Drag and drop file or click to Upload...')], id='file-picker'),
+            dcc.Upload([html.Div('Drag and drop file or click to Upload...')], id='file-picker', multiple=True),
             dcc.Loading(
                 html.Table([
                     html.Tr(
