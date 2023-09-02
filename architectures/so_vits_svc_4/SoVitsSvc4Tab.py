@@ -63,6 +63,13 @@ class SoVitsSvc4Tab(AbstractTab):
             ], title="Using an f0 predictor that was trained alongside the main model, predict the character's pitch "
                      "instead of using the reference audio's actual pitch. Note: Keep this disabled for songs."),
             html.Tr([
+                html.Td(html.Label('Noise Scale', htmlFor=self.input_ids[8]), className='option-label'),
+                html.Tr([
+                    html.Td(dcc.Input(type='range', min=0, max=5, value="0.4", id=self.input_ids[8], step='0.01')),
+                    html.Td(html.Div('0', id='noise-scale-number')),
+                ])
+            ], title='Scales the generated noise added at the "TextEncoder" step.'),
+            html.Tr([
                 html.Td(html.Label('Slice Length (seconds)', htmlFor=self.input_ids[3]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(type='range', min=0, max=20, value="0", id=self.input_ids[3], step='0.01')),
@@ -98,7 +105,7 @@ class SoVitsSvc4Tab(AbstractTab):
                 html.Td(dcc.Checklist([''], id=self.input_ids[7]))
             ], title='Runs the output audio through an additional AI network, nsf_hifigan. May improve output quality '
                      'for characters that were trained on a limited data set. However, this option often degrades '
-                     'quality for well-trained characters.'),
+                     'quality for well-trained characters.')
         ], className='spaced-table')
 
     def register_callbacks(self, enable_model_management):
@@ -160,6 +167,16 @@ class SoVitsSvc4Tab(AbstractTab):
                 raise PreventUpdate
             return float(slice_length) < 0.01
 
+        @callback(
+            Output('noise-scale-number', 'children'),
+            Input(self.input_ids[8], 'value')
+        )
+        def adjust_noise_scale(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
+
     @property
     def input_ids(self):
         return [self.id+'-character',
@@ -170,6 +187,7 @@ class SoVitsSvc4Tab(AbstractTab):
                 self.id+'-character-likeness',
                 self.id+'-reduce-hoarseness',
                 self.id+'-apply-nsf-hifigan',
+                self.id+'-reduce-noise'
                 ]
 
     def construct_input_dict(self, *args):
@@ -185,4 +203,5 @@ class SoVitsSvc4Tab(AbstractTab):
             'Character Likeness': args[5],
             'Reduce Hoarseness': True if args[6] else False,
             'Apply nsf_hifigan': True if args[7] else False,
+            'Noise Scale': args[8]
         }
