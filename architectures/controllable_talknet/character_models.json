@@ -13,6 +13,32 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Apple Bloom (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1hdYMe9sapEmDqzuIahTO6f8lleZBjMlz",
+                "Download With": "GDOWN",
+                "Download As": "Apple Bloom (singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107096940
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Apple Bloom (singing, version 2)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1rA5_2xiBvctMFp13EThjsOlU2Noe0mKC",
+                "Download With": "GDOWN",
+                "Download As": "Apple Bloom (Hybrid)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107096373
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Applejack",
         "Files": [
             {
@@ -34,6 +60,32 @@
                 "Download As": "Applejack (singing).zip",
                 "Unzip Strategy": "UNZIP_IN_PLACE",
                 "Size (bytes)": 103214756
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Athena",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1sU4Pv5vkyjm3ZpH5ARWj_b5ZWHbTWsxv",
+                "Download With": "GDOWN",
+                "Download As": "Athena_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107002314
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Autumn Blaze (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1RE_6aRcLdmCb3wX0eTANF6u4Lr8AJZbO",
+                "Download With": "GDOWN",
+                "Download As": "Autumn Blaze (Singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107098967
             }
         ],
         "License": "UNSPECIFIED"
@@ -65,6 +117,32 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Cadance (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1wQoqjSO9Vc4UIEGMtpTRfHxoQZF7ATcA",
+                "Download With": "GDOWN",
+                "Download As": "Cadance (Hybrid)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107098246
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cadance (singing, alt)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1TVHyXfdiQAXNTnX0WKUD7Cn9XXASMrhY",
+                "Download With": "GDOWN",
+                "Download As": "Princess Cadance (singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107096695
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Celestia",
         "Files": [
             {
@@ -73,6 +151,32 @@
                 "Download As": "Celestia.zip",
                 "Unzip Strategy": "UNZIP_IN_PLACE",
                 "Size (bytes)": 107017347
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1KYvmiinfG_V7ljJToSy-9mdRyWLluzEf",
+                "Download With": "GDOWN",
+                "Download As": "Celestia (singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107095452
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cheese Sandwich (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1-CV-OWv4g8uUHQsdGGBguF4YeRRl9uoF",
+                "Download With": "GDOWN",
+                "Download As": "Cheese Sandwich (Singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107097733
             }
         ],
         "License": "UNSPECIFIED"
@@ -91,6 +195,19 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Countess Coloratura (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1dsF4GJlSd6zIV4879xEbBhsLqoR_mj5c",
+                "Download With": "GDOWN",
+                "Download As": "Countess Coloratura (Singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107098021
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Cozy Glow",
         "Files": [
             {
@@ -99,6 +216,32 @@
                 "Download As": "Cozy Glow.zip",
                 "Unzip Strategy": "UNZIP_IN_PLACE",
                 "Size (bytes)": 107005574
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cozy Glow (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1QHNNVR9jAHqdin-7w9BxfH1ipxoBelXx",
+                "Download With": "GDOWN",
+                "Download As": "Cozy Glow (Singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107098719
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Diamond Tiara (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1SCR8cjfUTHXAUCDjxLLEn7_XQRiI6V7f",
+                "Download With": "GDOWN",
+                "Download As": "Diamond Tiara (Singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107098096
             }
         ],
         "License": "UNSPECIFIED"
@@ -177,6 +320,19 @@
                 "Download As": "Luna.zip",
                 "Unzip Strategy": "UNZIP_IN_PLACE",
                 "Size (bytes)": 107007643
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Luna (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1Bi9LxTCNLWB7E-RoD3k5P-_ISPbT6000",
+                "Download With": "GDOWN",
+                "Download As": "Luna (Aloma Steele) (singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107096457
             }
         ],
         "License": "UNSPECIFIED"
@@ -286,6 +442,19 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Rarity (singing, version 2)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1pkrV4bqR93Ok3YKBZ4wnReptFOaN2UPn",
+                "Download With": "GDOWN",
+                "Download As": "Rarity (singing 2)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107097199
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Scootaloo",
         "Files": [
             {
@@ -294,6 +463,32 @@
                 "Download As": "Scootaloo.zip",
                 "Unzip Strategy": "UNZIP_IN_PLACE",
                 "Size (bytes)": 107016441
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scootaloo (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1RxC88Mjub96PHURElWWFK2m69qniSKlW",
+                "Download With": "GDOWN",
+                "Download As": "Scootaloo (singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107089598
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scootaloo (singing, version 2)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1IuUnttjQeAgbMuX7oJvdA7m0VxlMa6pD",
+                "Download With": "GDOWN",
+                "Download As": "Scootaloo (hybrid)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107095139
             }
         ],
         "License": "UNSPECIFIED"
@@ -325,6 +520,32 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Spike (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1g_J1LLzJVkLvIhVQPlNhbwl1vbAvWJuV",
+                "Download With": "GDOWN",
+                "Download As": "Spike (singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107098936
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Spike (singing, version 2)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1GsvPinjjc0gaaPIx1Qy9BUC7OmUtHSL-",
+                "Download With": "GDOWN",
+                "Download As": "Spike (Hybrid)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107097102
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Starlight Glimmer",
         "Files": [
             {
@@ -333,6 +554,19 @@
                 "Download As": "Starlight Glimmer.zip",
                 "Unzip Strategy": "UNZIP_IN_PLACE",
                 "Size (bytes)": 107021173
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1zMfWqvMVkXf-SeBroSsn4NrjN5qmbnPv",
+                "Download With": "GDOWN",
+                "Download As": "Starlight Glimmer (singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107097727
             }
         ],
         "License": "UNSPECIFIED"
@@ -364,6 +598,19 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Sweetie Belle (singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1Y_1e12VWG-AA6Zeufj_5J4GxWbpZtfHI",
+                "Download With": "GDOWN",
+                "Download As": "Sweetie Belle (singing)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107100858
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Tirek",
         "Files": [
             {
@@ -385,6 +632,19 @@
                 "Download As": "Trixie.zip",
                 "Unzip Strategy": "UNZIP_IN_PLACE",
                 "Size (bytes)": 107014260
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Trixie (BFDIanon version)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1Abz2A2dAwFNhFmqMsyBXRuv9KUhmewEf",
+                "Download With": "GDOWN",
+                "Download As": "Trixie_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107012858
             }
         ],
         "License": "UNSPECIFIED"
@@ -437,6 +697,19 @@
                 "Download As": "Twilight Sparkle (whispering).zip",
                 "Unzip Strategy": "UNZIP_IN_PLACE",
                 "Size (bytes)": 103213954
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Vinyl Scratch (Nowacking fan VA, singing)",
+        "Files": [
+            {
+                "URL": "https://drive.google.com/uc?id=1FvoQUlKx8pNDHyQNXbsmMvl_ffrWgyhS",
+                "Download With": "GDOWN",
+                "Download As": "Vinyl Scratch (Hybrid)_TalkNet.zip",
+                "Unzip Strategy": "UNZIP_IN_PLACE",
+                "Size (bytes)": 107095184
             }
         ],
         "License": "UNSPECIFIED"
