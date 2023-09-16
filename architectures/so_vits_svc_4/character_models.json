@@ -2322,5 +2322,29 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Maud Pie",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Maud%20Pie%20(speaking)/G_55000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_55000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Maud%20Pie%20(speaking)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1621
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Maud%20Pie%20(speaking)/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 6164207
+            }
+        ],
+        "License": "UNSPECIFIED"
     }
 ]
