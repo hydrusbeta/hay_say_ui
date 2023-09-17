@@ -6,19 +6,19 @@
                 "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/G_101600.pth",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "G_101600.pth",
-                "Size (bytes)": 1111
+                "Size (bytes)": 542789405
             },
             {
                 "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/config.json",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
-                "Size (bytes)": 1111
+                "Size (bytes)": 1958
             },
             {
                 "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Pony1/kmeans_4000.pt",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "kmeans_4000.pt",
-                "Size (bytes)": 1111
+                "Size (bytes)": 74079855
             }
         ]
     },
@@ -158,6 +158,29 @@
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "config.json",
                 "Size (bytes)": 1670
+            }
+        ]
+    },
+    {
+        "Model Name": "Flim and Flam",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/FlimFlam/G_39000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_39000.pth",
+                "Size (bytes)": 548687645
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/FlimFlam/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1659
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/FlimFlam/kmeans_500.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_500.pt",
+                "Size (bytes)": 4624815
             }
         ]
     }
