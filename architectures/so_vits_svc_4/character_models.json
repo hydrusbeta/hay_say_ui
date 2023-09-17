@@ -2457,7 +2457,7 @@
         "Symlinks": [
             {
                 "As": "G_65000.pth",
-                "Target": "G_40000.pth"
+                "Target": "G_65000.pth"
             },
             {
                 "As": "config.json",
@@ -2484,7 +2484,7 @@
         "Symlinks": [
             {
                 "As": "G_65000.pth",
-                "Target": "G_40000.pth"
+                "Target": "G_65000.pth"
             },
             {
                 "As": "config.json",
