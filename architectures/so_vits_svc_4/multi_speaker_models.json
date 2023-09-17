@@ -183,5 +183,28 @@
                 "Size (bytes)": 4624815
             }
         ]
+    },
+    {
+        "Model Name": "Starlight Glimmer (good) and Starlight Glimmer (evil)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20Glimmer%20(speaking)/G_65000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "G_65000.pth",
+                "Size (bytes)": 542789405
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20Glimmer%20(speaking)/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.json",
+                "Size (bytes)": 1679
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20Glimmer%20(speaking)/kmeans_4000.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "kmeans_4000.pt",
+                "Size (bytes)": 12334703
+            }
+        ]
     }
 ]

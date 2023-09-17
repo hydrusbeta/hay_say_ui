@@ -2444,25 +2444,55 @@
         "License": "UNSPECIFIED"
     },
     {
-        "Model Name": "Starlight Glimmer",
+        "Model Name": "Starlight Glimmer (good)",
+        "Multi-speaker Model Dependency": "Starlight Glimmer (good) and Starlight Glimmer (evil)",
         "Files": [
             {
-                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20Glimmer%20(speaking)/G_65000.pth",
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Starlight%20Glimmer%20(good)/speaker.json",
                 "Download With": "HUGGINGFACE_HUB",
-                "Download As": "G_65000.pth",
-                "Size (bytes)": 542789405
+                "Download As": "speaker.json",
+                "Size (bytes)": 52
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_65000.pth",
+                "Target": "G_40000.pth"
             },
             {
-                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20Glimmer%20(speaking)/config.json",
-                "Download With": "HUGGINGFACE_HUB",
-                "Download As": "config.json",
-                "Size (bytes)": 1679
+                "As": "config.json",
+                "Target": "config.json"
             },
             {
-                "URL": "https://huggingface.co/therealvul/so-vits-svc-4.0/resolve/main/Starlight%20Glimmer%20(speaking)/kmeans_4000.pt",
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Starlight Glimmer (evil)",
+        "Multi-speaker Model Dependency": "Starlight Glimmer (good) and Starlight Glimmer (evil)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/so_vits_svc_4/Starlight%20Glimmer%20(evil)/speaker.json",
                 "Download With": "HUGGINGFACE_HUB",
-                "Download As": "kmeans_4000.pt",
-                "Size (bytes)": 12334703
+                "Download As": "speaker.json",
+                "Size (bytes)": 52
+            }
+        ],
+        "Symlinks": [
+            {
+                "As": "G_65000.pth",
+                "Target": "G_40000.pth"
+            },
+            {
+                "As": "config.json",
+                "Target": "config.json"
+            },
+            {
+                "As": "kmeans_4000.pt",
+                "Target": "kmeans_4000.pt"
             }
         ],
         "License": "UNSPECIFIED"
