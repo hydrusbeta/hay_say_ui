@@ -628,7 +628,7 @@ models or architectures.
 The user interface code for Hay Say runs in its own Docker container, hay_say_ui, and the UI is accessed by the user via
 a web browser. Each AI architecture (e.g. so-vits-svc or ControllableTalkNet) is installed in its own container and a 
 simple Flask web server runs in each one, listening for connections. Each Flask web server defines a /generate method 
-which invokes the AI archtecture to generate an audio file.
+which invokes the AI architecture to generate an audio file.
 
 ![diagram of Hay Say's networking setup, showing that the main UI container communicates with the AI Architecture containers by sharing files and by using webservice calls to trigger audio generation](documentation%20images/design%20diagram.png)
 
