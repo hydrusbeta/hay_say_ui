@@ -1,16 +1,14 @@
-import os
-
 from celery import Celery, bootsteps
 from click import Option
 from dash import Input, Output, State, CeleryManager, callback
 
 import download.Downloader as Downloader
 import util
+from hay_say_common.cache import RedisImpl
 from main import architecture_map, select_architecture_tabs
 
 # Set up a background callback manager
-MESSAGE_BROKER = os.environ.get('REDIS_URL', 'redis://redis:6379')
-celery_app = Celery(__name__, broker=MESSAGE_BROKER, backend=MESSAGE_BROKER)
+celery_app = Celery(__name__, broker=RedisImpl.REDIS_URL, backend=RedisImpl.REDIS_URL)
 background_callback_manager = CeleryManager(celery_app)
 
 # Add a command-line argument that lets the user select specific architectures to register with the celery worker

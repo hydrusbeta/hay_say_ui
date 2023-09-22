@@ -2,7 +2,6 @@ import argparse
 import base64
 import hashlib
 import json
-import os
 import re
 import traceback
 from datetime import datetime
@@ -13,14 +12,16 @@ import dash_bootstrap_components as dbc
 from dash import Dash, html, dcc, Input, Output, State, ctx, callback
 from dash.exceptions import PreventUpdate
 
+import download.Downloader as Downloader
+import hay_say_common.cache
+from hay_say_common.cache import Stage, CACHE_MIMETYPE, TIMESTAMP_FORMAT
+import model_migrator as Migrator
 from architectures.controllable_talknet.ControllableTalknetTab import ControllableTalknetTab
 from architectures.rvc.RvcTab import RvcTab
 from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
 from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
 from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
 from hay_say_common import *
-import model_migrator as Migrator
-import download.Downloader as Downloader
 
 # todo: so-vits output is much louder than controllable talknet. Should the output volume be equalized?
 
@@ -164,16 +165,15 @@ def construct_main_interface(tab_buttons, tabs_contents):
     ]
 
 
-def register_main_callbacks(available_tabs):
+def register_main_callbacks(available_tabs, cache):
     @callback(
         Output('message', 'children', allow_duplicate=True),
         Input('delete-postprocessed', 'n_clicks'),
         prevent_initial_call=True
     )
     def delete_all_postprocessed(_):
-        for filename in os.listdir(POSTPROCESSED_DIR):
-            path = os.path.join(POSTPROCESSED_DIR, filename)
-            os.remove(path)
+        cache.delete_all_files_at_stage(Stage.POSTPROCESSED)
+        return ''
 
     @callback(
         [Output(tab.id, 'hidden') for tab in available_tabs] +
@@ -216,6 +216,45 @@ def register_main_callbacks(available_tabs):
             save_raw_audio_to_cache(filename, raw_array, raw_samplerate)
             return update_dropdown(filename)
 
+    def append_index_if_needed(filename):
+        # Appends an index to the end of the filename, like 'my file.wav (2)', if the file already exists.
+        # todo: I think putting something after the extension might break stuff. Do this instead: 'my file (2).wav'
+        raw_metadata = cache.read_metadata(Stage.RAW)
+        similar_filenames = [value['User File']
+                             for value in raw_metadata.values()
+                             if value['User File'].startswith(filename)
+                             and (re.match(r' \([0-9]+\)', value['User File'][
+                                                           len(filename):])  # file with same name but ending with ' (#)'
+                                  or not value['User File'][len(filename):])]  # file with exactly the same name
+        index = 1
+        while filename in similar_filenames:
+            index += 1
+            filename = filename + ' (' + str(index) + ')'
+        return filename
+
+    def save_raw_audio_to_cache(filename, raw_array, raw_samplerate):
+        hash_raw = hashlib.sha256(raw_array).hexdigest()[:20]
+        if cache.file_is_already_cached(Stage.RAW, hash_raw):
+            pass
+        else:
+            cache.save_audio_to_cache(Stage.RAW, hash_raw, raw_array, raw_samplerate)
+            write_raw_metadata(hash_raw, filename)
+
+    def write_raw_metadata(hash_80_bits, filename):
+        raw_metadata = cache.read_metadata(Stage.RAW)
+        raw_metadata[hash_80_bits] = {
+            'User File': filename,
+            'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
+        }
+        cache.write_metadata(Stage.RAW, raw_metadata)
+
+    def update_dropdown(filename):
+        raw_metadata = cache.read_metadata(Stage.RAW)
+        filenames = [value['User File'] for value in raw_metadata.values()]
+        currently_selected_file = filename if filename else filenames[0] if filenames else None
+        hidden = currently_selected_file is None
+        return filenames, currently_selected_file, hidden
+
     @callback(
         [Output('input-playback', 'src'),
          Output('input-playback', 'hidden')],
@@ -224,10 +263,10 @@ def register_main_callbacks(available_tabs):
     def update_playback(selected_file):
         if selected_file is None:
             return None, True
-        metadata = read_metadata(RAW_DIR)
+        metadata = cache.read_metadata(Stage.RAW)
         reverse_lookup = {metadata[key]['User File']: key for key in metadata}
         hash_raw = reverse_lookup[selected_file]
-        bytes_raw = read_file_bytes(RAW_DIR, hash_raw)
+        bytes_raw = cache.read_file_bytes(Stage.RAW, hash_raw)
         src = prepare_src_attribute(bytes_raw, CACHE_MIMETYPE)
         return src, False
 
@@ -274,12 +313,266 @@ def register_main_callbacks(available_tabs):
                        traceback.format_exc(), 'Generate!'
         else:
             highlight_first = False
-        sorted_hashes = get_hashes_sorted_by_timestamp(POSTPROCESSED_DIR)
+        sorted_hashes = cache.get_hashes_sorted_by_timestamp(Stage.POSTPROCESSED)
         first_output = [
             prepare_postprocessed_display(sorted_hashes[0], highlight=highlight_first)] if sorted_hashes else []
         remaining_outputs = [prepare_postprocessed_display(hash_postprocessed) for hash_postprocessed in
                              reversed(sorted_hashes[1:])]
         return remaining_outputs + first_output, 'Generate!'
+
+    def preprocess_if_needed(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
+        if selected_file is None:
+            hash_preprocessed = None
+        else:
+            hash_preprocessed = preprocess(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
+        return hash_preprocessed
+
+    def preprocess(filename, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
+        # Get hashes and determine file locations. Delegate actual preprocessing work to preprocess_file
+        # filename must not be None.
+
+        debug_pitch, reduce_noise, crop_silence = convert_to_bools(debug_pitch, reduce_noise, crop_silence)
+
+        hash_raw = lookup_filehash(filename)
+        hash_preprocessed = compute_next_hash(hash_raw, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
+        preprocess_file(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise,
+                        crop_silence)
+        return hash_preprocessed
+
+    def preprocess_file(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
+        # Handle file operations and write to metadata file. Delegate actual preprocessing work to preprocess_bytes
+
+        if cache.file_is_already_cached(Stage.PREPROCESSED, hash_preprocessed):
+            return
+
+        data_raw, sr_raw = cache.read_audio_from_cache(Stage.RAW, hash_raw)
+        data_preprocessed, sr_preprocessed = preprocess_bytes(data_raw, sr_raw, semitone_pitch, debug_pitch,
+                                                              reduce_noise, crop_silence)
+        cache.save_audio_to_cache(Stage.PREPROCESSED, hash_preprocessed, data_preprocessed, sr_preprocessed)
+        write_preprocessed_metadata(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise,
+                                    crop_silence)
+
+    def preprocess_bytes(bytes_raw, sr_raw, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
+        # todo: implement this
+        return bytes_raw, sr_raw
+
+    def write_preprocessed_metadata(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch,
+                                    reduce_noise, crop_silence):
+        preprocessed_metadata = cache.read_metadata(Stage.PREPROCESSED)
+        preprocessed_metadata[hash_preprocessed] = {
+            'Raw File': hash_raw,
+            'Options':
+                {
+                    'Semitone Pitch': semitone_pitch,
+                    'Debug Pitch': debug_pitch,
+                    'Reduce Noise': reduce_noise,
+                    'Crop Silence': crop_silence
+                },
+            'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
+        }
+        cache.write_metadata(Stage.PREPROCESSED, preprocessed_metadata)
+
+    def lookup_filehash(selected_file):
+        raw_metadata = cache.read_metadata(Stage.RAW)
+        reverse_lookup = {raw_metadata[key]['User File']: key for key in raw_metadata}
+        return reverse_lookup.get(selected_file)
+
+    def process(user_text, hash_preprocessed, tab_object, relevant_inputs):
+        """Send a JSON payload to a container, instructing it to perform processing"""
+
+        hash_output = compute_next_hash(hash_preprocessed, user_text, relevant_inputs)
+        payload = construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output)
+
+        host = tab_object.id + '_server'
+        port = tab_object.port
+        send_payload(payload, host, port)
+
+        # Uncomment this for local testing only. It writes a mock output file by copying the input file.
+        # data_preprocessed, sr_preprocessed = cache.read_audio_from_cache(Stage.PREPROCESSED, hash_preprocessed)
+        # cache.save_audio_to_cache(Stage.OUTPUT, hash_output, data_preprocessed, sr_preprocessed)
+
+        verify_output_exists(hash_output)
+        write_output_metadata(hash_preprocessed, user_text, hash_output, tab_object, relevant_inputs)
+        return hash_output
+
+    def construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output):
+        return {
+            'Inputs': {
+                'User Text': user_text,
+                'User Audio': hash_preprocessed
+            },
+            'Options': tab_object.construct_input_dict(*relevant_inputs),
+            'Output File': hash_output
+        }
+
+    def send_payload(payload, host, port):
+        connection = HTTPConnection(host + ':' + str(port))
+        headers = {'Content-type': 'application/json'}
+        connection.request('POST', '/generate', json.dumps(payload), headers)
+        response = connection.getresponse()
+        code = response.status
+
+        if code != 200:
+            # Something went wrong, so throw an Exception.
+            # The Exception will be caught in the generate() method and displayed to the user.
+            message = extract_message(response)
+            raise Exception(message)
+
+    def extract_message(response):
+        json_response = json.loads(response.read().decode('utf-8'))
+        base64_encoded_message = json_response['message']
+        return base64.b64decode(base64_encoded_message).decode('utf-8')
+
+    def verify_output_exists(hash_output):
+        try:
+            cache.read_audio_from_cache(Stage.OUTPUT, hash_output)
+        except Exception as e:
+            raise Exception("Payload was sent, but output file was not produced.") from e
+
+    def write_output_metadata(hash_preprocessed, user_text, hash_output, tab_object, relevant_inputs):
+        output_metadata = cache.read_metadata(Stage.OUTPUT)
+
+        output_metadata[hash_output] = {
+            'Inputs': {
+                'Preprocessed File': hash_preprocessed,
+                'User Text': user_text
+            },
+            'Options': tab_object.construct_input_dict(*relevant_inputs),
+            'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
+        }
+        cache.write_metadata(Stage.OUTPUT, output_metadata)
+
+    def postprocess(hash_output, reduce_metallic_noise, auto_tune_output, output_speed_adjustment):
+        # Convert data types to something more digestible
+        reduce_metallic_noise, auto_tune_output = convert_to_bools(reduce_metallic_noise, auto_tune_output)
+        output_speed_adjustment = float(
+            output_speed_adjustment)  # Dash's Range Input supplies a string, so cast to float
+
+        # Check whether the postprocessed file already exists
+        hash_postprocessed = compute_next_hash(hash_output, reduce_metallic_noise, auto_tune_output,
+                                               output_speed_adjustment)
+        if cache.file_is_already_cached(Stage.POSTPROCESSED, hash_postprocessed):
+            return hash_postprocessed
+
+        # Perform postprocessing
+        data_output, sr_output = cache.read_audio_from_cache(Stage.OUTPUT, hash_output)
+        data_postprocessed, sr_postprocessed = postprocess_bytes(data_output, sr_output, reduce_metallic_noise,
+                                                                 auto_tune_output, output_speed_adjustment)
+
+        # write the postprocessed data to file
+        cache.save_audio_to_cache(Stage.POSTPROCESSED, hash_postprocessed, data_postprocessed, sr_postprocessed)
+
+        # write metadata file
+        write_postprocessed_metadata(hash_output, hash_postprocessed, reduce_metallic_noise, auto_tune_output,
+                                     output_speed_adjustment)
+
+        return hash_postprocessed
+
+    def write_postprocessed_metadata(hash_output, hash_postprocessed, reduce_metallic_noise, auto_tune_output,
+                                     output_speed_adjustment):
+        processing_options, user_text, hash_preprocessed = get_process_info(hash_output)
+        selected_file, preprocess_options = get_preprocess_info(hash_preprocessed)
+
+        postprocessed_metadata = cache.read_metadata(Stage.POSTPROCESSED)
+        postprocessed_metadata[hash_postprocessed] = {
+            'Inputs': {
+                'User File': selected_file,
+                'User Text': user_text
+            },
+            'Preprocessing Options': preprocess_options,
+            'Processing Options': processing_options,
+            'Postprocessing Options': {
+                'Reduce Metallic Noise': reduce_metallic_noise,
+                'Auto Tune Output': auto_tune_output,
+                'Adjust Output Speed': output_speed_adjustment
+            },
+            'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
+        }
+        cache.write_metadata(Stage.POSTPROCESSED, postprocessed_metadata)
+
+    def get_process_info(hash_output):
+        output_metadata = cache.read_metadata(Stage.OUTPUT)
+        processing_options = output_metadata.get(hash_output).get('Options')
+        user_text = output_metadata.get(hash_output).get('Inputs').get('User Text')
+        hash_preprocessed = output_metadata.get(hash_output).get('Inputs').get('Preprocessed File')
+        return processing_options, user_text, hash_preprocessed
+
+    def get_preprocess_info(hash_preprocessed):
+        if hash_preprocessed is None:
+            selected_file = None
+            preprocess_options = None
+        else:
+            preprocess_metadata = cache.read_metadata(Stage.PREPROCESSED)
+            preprocess_options = preprocess_metadata.get(hash_preprocessed).get('Options')
+            hash_raw = preprocess_metadata.get(hash_preprocessed).get('Raw File')
+
+            raw_metadata = cache.read_metadata(Stage.RAW)
+            selected_file = raw_metadata.get(hash_raw).get('User File')
+        return selected_file, preprocess_options
+
+    def prepare_postprocessed_display(hash_postprocessed, highlight=False):
+        # todo: color-code the architecture or something to make it easier to tell the difference.
+        bytes_postprocessed = cache.read_file_bytes(Stage.POSTPROCESSED, hash_postprocessed)
+
+        metadata = cache.read_metadata(Stage.POSTPROCESSED)[hash_postprocessed]
+        selected_file = metadata['Inputs']['User File']
+        user_text = metadata['Inputs']['User Text']
+        if metadata['Preprocessing Options']:
+            semitone_pitch = metadata['Preprocessing Options']['Semitone Pitch']
+            reduce_noise = metadata['Preprocessing Options']['Reduce Noise']
+            crop_silence = metadata['Preprocessing Options']['Crop Silence']
+        else:  # i.e. There was no input audio to preprocess
+            semitone_pitch = 'N/A'
+            reduce_noise = False
+            crop_silence = False
+        inputs = metadata['Processing Options']
+        output_speed_adjustment = metadata['Postprocessing Options']['Adjust Output Speed']
+        reduce_metallic_noise = metadata['Postprocessing Options']['Reduce Metallic Noise']
+        auto_tune_output = metadata['Postprocessing Options']['Auto Tune Output']
+        timestamp = metadata['Time of Creation']
+
+        display = html.Div([
+            html.Div(style={'height': '30px'}),  # todo: There's got to be a better way to add spacing
+            html.Table([
+                html.Tr(
+                    # This table entry serves the special purpose of alerting screen readers that generation is complete.
+                    html.Td('New Output Generated:' if highlight else '', role='status' if highlight else None,
+                            colSpan=2)
+                ),
+                html.Tr(
+                    html.Td(html.Audio(src=prepare_src_attribute(bytes_postprocessed, CACHE_MIMETYPE), controls=True),
+                            colSpan=2)
+                ),
+                html.Tr([
+                    html.Td('Inputs:', className='output-label'),
+                    html.Td((selected_file or 'None')
+                            + ((' | ' + user_text[0:20]) if user_text is not None else ''), className='output-value')
+                ]),
+                html.Tr([
+                    html.Td('Pre-processing Options:', className='output-label'),
+                    html.Td('Pitch adjustment = ' + str(semitone_pitch) + (
+                        ' semitone(s)' if semitone_pitch != 'N/A' else '')
+                            + (' | Reduce Noise' if reduce_noise else '')
+                            + (' | Crop Silence' if crop_silence else ''), className='output-value')
+                ]),
+                html.Tr([
+                    html.Td('Processing Options:', className='output-label'),
+                    html.Td(prettify_inputs(inputs), className='output-value')
+                ]),
+                html.Tr([
+                    html.Td('Post-processing Options:', className='output-label'),
+                    html.Td('Output Speed factor = ' + str(output_speed_adjustment)
+                            + (' | Reduce Metallic Sound' if reduce_metallic_noise else '')
+                            + (' | Auto Tune Output' if auto_tune_output else ''), className='output-value')
+                ]),
+                html.Tr([
+                    html.Td('Creation Time:', className='output-label'),
+                    html.Td(timestamp, className='output-value')
+                ]),
+            ], className='output-table-highlighted' if highlight else 'output-table'),
+            html.Div(style={'height': '30px'}),  # todo: There's got to be a better way to add spacing
+        ], className='centered')
+        return display
 
     @callback(
         Output('generate-button', 'disabled'),
@@ -318,125 +611,14 @@ def register_main_callbacks(available_tabs):
         hash_preprocessed = preprocess(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
 
         # return src
-        bytes_preprocessed = read_file_bytes(PREPROCESSED_DIR, hash_preprocessed)
+        bytes_preprocessed = cache.read_file_bytes(Stage.PREPROCESSED, hash_preprocessed)
         hash_raw = lookup_filehash(selected_file)
         return prepare_src_attribute(bytes_preprocessed, CACHE_MIMETYPE)
-
-
-def update_dropdown(filename):
-    raw_metadata = read_metadata(RAW_DIR)
-    filenames = [value['User File'] for value in raw_metadata.values()]
-    currently_selected_file = filename if filename else filenames[0] if filenames else None
-    hidden = currently_selected_file is None
-    return filenames, currently_selected_file, hidden
-
-
-def append_index_if_needed(filename):
-    # Appends an index to the end of the filename, like 'my file.wav (2)', if the file already exists.
-    # todo: I think putting something after the extension might break stuff. Do this instead: 'my file (2).wav'
-    raw_metadata = read_metadata(RAW_DIR)
-    similar_filenames = [value['User File']
-                         for value in raw_metadata.values()
-                         if value['User File'].startswith(filename)
-                         and (re.match(r' \([0-9]+\)', value['User File'][len(filename):])  # file with same name but ending with ' (#)'
-                              or not value['User File'][len(filename):])]  # file with exactly the same name
-    index = 1
-    while filename in similar_filenames:
-        index += 1
-        filename = filename + ' (' + str(index) + ')'
-    return filename
-
-
-def save_raw_audio_to_cache(filename, raw_array, raw_samplerate):
-    hash_raw = hashlib.sha256(raw_array).hexdigest()[:20]
-    if file_is_already_cached(RAW_DIR, hash_raw):
-        pass
-    else:
-        save_audio_to_cache(RAW_DIR, hash_raw, raw_array, raw_samplerate)
-        write_raw_metadata(hash_raw, filename)
-
-
-def read_file_bytes(folder, filename):
-    path = os.path.join(folder, filename + CACHE_EXTENSION)
-    with open(path, 'rb') as file:
-        byte_data = file.read()
-    return byte_data
-
-
-def write_raw_metadata(hash_80_bits, filename):
-    raw_metadata = read_metadata(RAW_DIR)
-    raw_metadata[hash_80_bits] = {
-        'User File': filename,
-        'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
-    }
-    write_metadata(RAW_DIR, raw_metadata)
 
 
 def prepare_src_attribute(src_bytes, mimetype):
     binary_contents = b'data:' + mimetype.encode('utf-8') + b',' + base64.b64encode(src_bytes)
     return binary_contents.decode('utf-8')
-
-
-def prepare_postprocessed_display(hash_postprocessed, highlight=False):
-    # todo: color-code the architecture or something to make it easier to tell the difference.
-    bytes_postprocessed = read_file_bytes(POSTPROCESSED_DIR, hash_postprocessed)
-
-    metadata = read_metadata(POSTPROCESSED_DIR)[hash_postprocessed]
-    selected_file = metadata['Inputs']['User File']
-    user_text = metadata['Inputs']['User Text']
-    if metadata['Preprocessing Options']:
-        semitone_pitch = metadata['Preprocessing Options']['Semitone Pitch']
-        reduce_noise = metadata['Preprocessing Options']['Reduce Noise']
-        crop_silence = metadata['Preprocessing Options']['Crop Silence']
-    else:  # i.e. There was no input audio to preprocess
-        semitone_pitch = 'N/A'
-        reduce_noise = False
-        crop_silence = False
-    inputs = metadata['Processing Options']
-    output_speed_adjustment = metadata['Postprocessing Options']['Adjust Output Speed']
-    reduce_metallic_noise = metadata['Postprocessing Options']['Reduce Metallic Noise']
-    auto_tune_output = metadata['Postprocessing Options']['Auto Tune Output']
-    timestamp = metadata['Time of Creation']
-
-    display = html.Div([
-        html.Div(style={'height': '30px'}),  # todo: There's got to be a better way to add spacing
-        html.Table([
-            html.Tr(
-                # This table entry serves the special purpose of alerting screen readers that generation is complete.
-                html.Td('New Output Generated:' if highlight else '', role='status' if highlight else None, colSpan=2)
-            ),
-            html.Tr(
-                html.Td(html.Audio(src=prepare_src_attribute(bytes_postprocessed, CACHE_MIMETYPE), controls=True), colSpan=2)
-            ),
-            html.Tr([
-                html.Td('Inputs:', className='output-label'),
-                html.Td((selected_file or 'None')
-                        + ((' | ' + user_text[0:20]) if user_text is not None else ''), className='output-value')
-            ]),
-            html.Tr([
-                html.Td('Pre-processing Options:', className='output-label'),
-                html.Td('Pitch adjustment = ' + str(semitone_pitch) + (' semitone(s)' if semitone_pitch != 'N/A' else '')
-                        + (' | Reduce Noise' if reduce_noise else '')
-                        + (' | Crop Silence' if crop_silence else ''), className='output-value')
-            ]),
-            html.Tr([
-                html.Td('Processing Options:', className='output-label'),
-                html.Td(prettify_inputs(inputs), className='output-value')
-            ]),
-            html.Tr([
-                html.Td('Post-processing Options:', className='output-label'),
-                html.Td('Output Speed factor = ' + str(output_speed_adjustment)
-                        + (' | Reduce Metallic Sound' if reduce_metallic_noise else '')
-                        + (' | Auto Tune Output' if auto_tune_output else ''), className='output-value')
-            ]),
-            html.Tr([
-                html.Td('Creation Time:', className='output-label'),
-                html.Td(timestamp, className='output-value')
-            ]),
-        ], className='output-table-highlighted' if highlight else 'output-table'),
-        html.Div(style={'height': '30px'}),  # todo: There's got to be a better way to add spacing
-    ], className='centered')
-    return display
 
 
 def prettify_inputs(inputs):
@@ -466,161 +648,9 @@ def get_inputs_for_selected_tab(tab_object, args):
     return [args[i] for i in indices_of_relevant_inputs]
 
 
-def preprocess_if_needed(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
-    if selected_file is None:
-        hash_preprocessed = None
-    else:
-        hash_preprocessed = preprocess(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
-    return hash_preprocessed
-
-
-def postprocess(hash_output, reduce_metallic_noise, auto_tune_output, output_speed_adjustment):
-    # Convert data types to something more digestible
-    reduce_metallic_noise, auto_tune_output = convert_to_bools(reduce_metallic_noise, auto_tune_output)
-    output_speed_adjustment = float(output_speed_adjustment)  # Dash's Range Input supplies a string, so cast to float
-
-    # Check whether the postprocessed file already exists
-    hash_postprocessed = compute_next_hash(hash_output, reduce_metallic_noise, auto_tune_output, output_speed_adjustment)
-    if file_is_already_cached(POSTPROCESSED_DIR, hash_postprocessed):
-        return hash_postprocessed
-
-    # Perform postprocessing
-    data_output, sr_output = read_audio_from_cache(OUTPUT_DIR, hash_output)
-    data_postprocessed, sr_postprocessed = postprocess_bytes(data_output, sr_output, reduce_metallic_noise, auto_tune_output, output_speed_adjustment)
-
-    # write the postprocessed data to file
-    save_audio_to_cache(POSTPROCESSED_DIR, hash_postprocessed, data_postprocessed, sr_postprocessed)
-
-    # write metadata file
-    write_postprocessed_metadata(hash_output, hash_postprocessed, reduce_metallic_noise, auto_tune_output, output_speed_adjustment)
-
-    return hash_postprocessed
-
-
-def write_postprocessed_metadata(hash_output, hash_postprocessed, reduce_metallic_noise, auto_tune_output, output_speed_adjustment):
-    processing_options, user_text, hash_preprocessed = get_process_info(hash_output)
-    selected_file, preprocess_options = get_preprocess_info(hash_preprocessed)
-
-    postprocessed_metadata = read_metadata(POSTPROCESSED_DIR)
-    postprocessed_metadata[hash_postprocessed] = {
-        'Inputs': {
-            'User File': selected_file,
-            'User Text': user_text
-        },
-        'Preprocessing Options': preprocess_options,
-        'Processing Options': processing_options,
-        'Postprocessing Options': {
-            'Reduce Metallic Noise': reduce_metallic_noise,
-            'Auto Tune Output': auto_tune_output,
-            'Adjust Output Speed': output_speed_adjustment
-        },
-        'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
-    }
-    write_metadata(POSTPROCESSED_DIR, postprocessed_metadata)
-
-
-def get_preprocess_info(hash_preprocessed):
-    if hash_preprocessed is None:
-        selected_file = None
-        preprocess_options = None
-    else:
-        preprocess_metadata = read_metadata(PREPROCESSED_DIR)
-        preprocess_options = preprocess_metadata.get(hash_preprocessed).get('Options')
-        hash_raw = preprocess_metadata.get(hash_preprocessed).get('Raw File')
-
-        raw_metadata = read_metadata(RAW_DIR)
-        selected_file = raw_metadata.get(hash_raw).get('User File')
-    return selected_file, preprocess_options
-
-
-def get_process_info(hash_output):
-    output_metadata = read_metadata(OUTPUT_DIR)
-    processing_options = output_metadata.get(hash_output).get('Options')
-    user_text = output_metadata.get(hash_output).get('Inputs').get('User Text')
-    hash_preprocessed = output_metadata.get(hash_output).get('Inputs').get('Preprocessed File')
-    return processing_options, user_text, hash_preprocessed
-
-
 def postprocess_bytes(bytes_output, sr_output, reduce_metallic_noise, auto_tune_output, output_speed_adjustment):
     # todo: implement this
     return bytes_output, sr_output
-
-
-def process(user_text, hash_preprocessed, tab_object, relevant_inputs):
-    """Send a JSON payload to a container, instructing it to perform processing"""
-
-    hash_output = compute_next_hash(hash_preprocessed, user_text, relevant_inputs)
-    payload = construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output)
-
-    host = tab_object.id + '_server'
-    port = tab_object.port
-    send_payload(payload, host, port)
-
-    # Uncomment this for local testing only. It writes a mock output file by copying the input file.
-    # data_preprocessed, sr_preprocessed = read_audio_from_cache(PREPROCESSED_DIR, hash_preprocessed)
-    # save_audio_to_cache(OUTPUT_DIR, hash_output, data_preprocessed, sr_preprocessed)
-
-    verify_output_exists(hash_output)
-    write_output_metadata(hash_preprocessed, user_text, hash_output, tab_object, relevant_inputs)
-    return hash_output
-
-
-def verify_output_exists(hash_output):
-    try:
-        read_audio_from_cache(OUTPUT_DIR, hash_output)
-    except Exception as e:
-        raise Exception("Payload was sent, but output file was not produced.") from e
-
-
-def send_payload(payload, host, port):
-    connection = HTTPConnection(host + ':' + str(port))
-    headers = {'Content-type': 'application/json'}
-    connection.request('POST', '/generate', json.dumps(payload), headers)
-    response = connection.getresponse()
-    code = response.status
-
-    if code != 200:
-        # Something went wrong, so throw an Exception.
-        # The Exception will be caught in the generate() method and displayed to the user.
-        message = extract_message(response)
-        raise Exception(message)
-
-
-def extract_message(response):
-    json_response = json.loads(response.read().decode('utf-8'))
-    base64_encoded_message = json_response['message']
-    return base64.b64decode(base64_encoded_message).decode('utf-8')
-
-
-def write_output_metadata(hash_preprocessed, user_text, hash_output, tab_object, relevant_inputs):
-    output_metadata = read_metadata(OUTPUT_DIR)
-
-    output_metadata[hash_output] = {
-        'Inputs': {
-            'Preprocessed File': hash_preprocessed,
-            'User Text': user_text
-        },
-        'Options': tab_object.construct_input_dict(*relevant_inputs),
-        'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
-    }
-    write_metadata(OUTPUT_DIR, output_metadata)
-
-
-def construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output):
-    return {
-        'Inputs': {
-            'User Text': user_text,
-            'User Audio': hash_preprocessed
-        },
-        'Options': tab_object.construct_input_dict(*relevant_inputs),
-        'Output File': hash_output
-    }
-
-
-def lookup_filehash(selected_file):
-    raw_metadata = read_metadata(RAW_DIR)
-    reverse_lookup = {raw_metadata[key]['User File']: key for key in raw_metadata}
-    return reverse_lookup.get(selected_file)
 
 
 def compute_next_hash(current_hash, *args):
@@ -630,56 +660,9 @@ def compute_next_hash(current_hash, *args):
     return hashlib.sha256(base_string.encode('utf-8')).hexdigest()[:20]
 
 
-def preprocess(filename, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
-    # Get hashes and determine file locations. Delegate actual preprocessing work to preprocess_file
-    # filename must not be None.
-
-    debug_pitch, reduce_noise, crop_silence = convert_to_bools(debug_pitch, reduce_noise, crop_silence)
-
-    hash_raw = lookup_filehash(filename)
-    hash_preprocessed = compute_next_hash(hash_raw, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
-    preprocess_file(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise,
-                    crop_silence)
-    return hash_preprocessed
-
-
 def convert_to_bools(*args):
     # intended for converting a list of checklist items from ['']/None to True/False, respectively
     return [arg is not None for arg in args]
-
-
-def preprocess_file(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
-    # Handle file operations and write to metadata file. Delegate actual preprocessing work to preprocess_bytes
-
-    if file_is_already_cached(PREPROCESSED_DIR, hash_preprocessed):
-        return
-
-    data_raw, sr_raw = read_audio_from_cache(RAW_DIR, hash_raw)
-    data_preprocessed, sr_preprocessed = preprocess_bytes(data_raw, sr_raw, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
-    save_audio_to_cache(PREPROCESSED_DIR, hash_preprocessed, data_preprocessed, sr_preprocessed)
-    write_preprocessed_metadata(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
-
-
-def write_preprocessed_metadata(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch,
-                                reduce_noise, crop_silence):
-    preprocessed_metadata = read_metadata(PREPROCESSED_DIR)
-    preprocessed_metadata[hash_preprocessed] = {
-        'Raw File': hash_raw,
-        'Options':
-            {
-                'Semitone Pitch': semitone_pitch,
-                'Debug Pitch': debug_pitch,
-                'Reduce Noise': reduce_noise,
-                'Crop Silence': crop_silence
-            },
-        'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
-    }
-    write_metadata(PREPROCESSED_DIR, preprocessed_metadata)
-
-
-def preprocess_bytes(bytes_raw, sr_raw, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
-    # todo: implement this
-    return bytes_raw, sr_raw
 
 def construct_tab_buttons(available_tabs):
     return [html.Td(
@@ -694,27 +677,35 @@ def construct_tabs_interface(available_tabs, enable_model_management):
     return tab_buttons, tabs_contents
 
 
-def parse_arguments():
-    parser = argparse.ArgumentParser(prog='Hay Say', description='A Unified Interface for Pony Voice Generation')
-    parser.add_argument('--update_model_lists_on_startup', action='store_true', default=False, help='Causes Hay Say to download the latest model lists so that all the latest models appear in the character download menus.')
-    parser.add_argument('--enable_model_management', action='store_true', default=False, help='Enables the user to download and delete models')
-    parser.add_argument('--migrate_models', action='store_true', default=False, help='Automatically move models from the model pack directories and custom model directory to the new models directory when Hay Say starts.')
-    parser.add_argument('--architectures', nargs='*', choices=architecture_map.keys(), default=architecture_map.keys(), help='Selects which architectures are shown in the Hay Say UI')
-    return parser.parse_args()
-
-
 architecture_map = {'ControllableTalkNet': ControllableTalknetTab(),
                     'SoVitsSvc3': SoVitsSvc3Tab(),
                     'SoVitsSvc4': SoVitsSvc4Tab(),
                     'SoVitsSvc5': SoVitsSvc5Tab(),
                     'Rvc': RvcTab()}
 
+cache_implementation_map = {'mongo': hay_say_common.cache.MongoImpl,
+                            'file': hay_say_common.cache.FileImpl}
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(prog='Hay Say', description='A Unified Interface for Pony Voice Generation')
+    parser.add_argument('--update_model_lists_on_startup', action='store_true', default=False, help='Causes Hay Say to download the latest model lists so that all the latest models appear in the character download menus.')
+    parser.add_argument('--enable_model_management', action='store_true', default=False, help='Enables the user to download and delete models')
+    parser.add_argument('--cache_implementation', default='file', choices=['file', 'mongo'], help='Selects an implementation for the audio cache, e.g. saving them to files or to a database')
+    parser.add_argument('--migrate_models', action='store_true', default=False, help='Automatically move models from the model pack directories and custom model directory to the new models directory when Hay Say starts.')
+    parser.add_argument('--architectures', nargs='*', choices=architecture_map.keys(), default=architecture_map.keys(), help='Selects which architectures are shown in the Hay Say UI')
+    return parser.parse_args()
+
 
 def select_architecture_tabs(choices):
     return [architecture_map[choice] for choice in choices]
 
 
-def construct_main_app(args, available_tabs):
+def select_cache_implementation(choice):
+    return cache_implementation_map[choice]
+
+
+def construct_main_app(args, available_tabs, cache_implementation):
     app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
 
     tab_buttons, tabs_contents = construct_tabs_interface(available_tabs, args.enable_model_management)
@@ -722,7 +713,7 @@ def construct_main_app(args, available_tabs):
         tab.register_callbacks(args.enable_model_management)
 
     app.layout = html.Div(construct_main_interface(tab_buttons, tabs_contents))
-    register_main_callbacks(available_tabs)
+    register_main_callbacks(available_tabs, cache_implementation)
     app.title = 'Hay Say'
     return app
 
@@ -766,9 +757,10 @@ if __name__ == '__main__':
     args = parse_arguments()
 
     available_tabs = select_architecture_tabs(args.architectures)
+    cache_implementation = select_cache_implementation(args.cache_implementation)
     Migrator.migrate_models_if_specified(args, available_tabs)
     Downloader.update_model_lists_if_specified(args, available_tabs)
-    app = construct_main_app(args, available_tabs)
+    app = construct_main_app(args, available_tabs, cache_implementation)
     add_model_management_components_if_needed(args, app, available_tabs)
 
     app.run(host='0.0.0.0', port=6573)

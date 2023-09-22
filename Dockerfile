@@ -23,7 +23,8 @@ RUN python -m pip install \
     hay_say_common==0.2.0 \
     gdown==4.7.1 \
     jsonschema==4.17.3 \
-    huggingface_hub==0.15.1
+    huggingface_hub==0.15.1 \
+    pymongo==4.5.0
 
 # Expose port 6573, the port that Hay Say uses
 EXPOSE 6573

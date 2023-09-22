@@ -76,6 +76,10 @@ services:
         max_attempts: 3
         window: 30s
 
+  # Mongo is a document-oriented database, perfect for storing python data dictionaries.
+  mongo:
+    image: mongo:jammy
+
   # This container runs the main UI
   hay_say_ui:
     depends_on:
