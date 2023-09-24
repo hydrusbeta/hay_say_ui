@@ -156,7 +156,7 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     ]
 
 
-def register_main_callbacks(available_tabs, cache):
+def register_main_callbacks(args, available_tabs, cache):
     from celery_generate import CacheSelection
     CacheSelection(None, args.cache_implementation, args.architectures)
 
@@ -311,17 +311,16 @@ def register_main_callbacks(available_tabs, cache):
         if selected_file is None:
             raise PreventUpdate
 
-        hash_preprocessed = preprocess(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
+        hash_preprocessed = preprocess(cache, selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
 
         # return src
         bytes_preprocessed = cache.read_file_bytes(Stage.PREPROCESSED, session_data['id'], hash_preprocessed)
-        hash_raw = lookup_filehash(selected_file)
+        hash_raw = lookup_filehash(cache, selected_file, session_data)
         return prepare_src_attribute(bytes_preprocessed, CACHE_MIMETYPE)
 
-
-def get_selected_tab_object(hidden_states):
-    # Get the tab that is *not* hidden (i.e. hidden == False)
-    return {hidden: tab for hidden, tab in zip(hidden_states, available_tabs)}.get(False)
+    def get_selected_tab_object(hidden_states):
+        # Get the tab that is *not* hidden (i.e. hidden == False)
+        return {hidden: tab for hidden, tab in zip(hidden_states, available_tabs)}.get(False)
 
 
 def construct_tab_buttons(available_tabs):
@@ -336,15 +335,17 @@ def construct_tabs_interface(available_tabs, enable_model_management):
     tabs_contents = [tab.tab_contents(enable_model_management) for tab in available_tabs]
     return tab_buttons, tabs_contents
 
-def parse_arguments():
-    parser = argparse.ArgumentParser(prog='Hay Say', description='A Unified Interface for Pony Voice Generation.')
+
+def parse_arguments(arguments):
+    parser = argparse.ArgumentParser(prog='wsgi.py', description='A Unified Interface for Pony Voice Generation.')
     parser.add_argument('--update_model_lists_on_startup', action='store_true', default=False, help='Causes Hay Say to download the latest model lists so that all the latest models appear in the character download menus.')
     parser.add_argument('--enable_model_management', action='store_true', default=False, help='Enables the user to download and delete models.')
     parser.add_argument('--enable_session_caches', action='store_true', default=False, help='Maintain separate caches for each session. If not enabled, a single cache is used for all sessions.')
     parser.add_argument('--cache_implementation', default='file', choices=cache_implementation_map.keys(), help='Selects an implementation for the audio cache, e.g. saving them to files or to a database.')
     parser.add_argument('--migrate_models', action='store_true', default=False, help='Automatically move models from the model pack directories and custom model directory to the new models directory when Hay Say starts.')
     parser.add_argument('--architectures', nargs='*', choices=architecture_map.keys(), default=architecture_map.keys(), help='Selects which architectures are shown in the Hay Say UI')
-    return parser.parse_args()
+    return parser.parse_args(arguments)
+
 
 def construct_main_app(args, available_tabs, cache_implementation, enable_session_caches):
     app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
@@ -354,7 +355,7 @@ def construct_main_app(args, available_tabs, cache_implementation, enable_sessio
         tab.register_callbacks(args.enable_model_management)
 
     app.layout = html.Div(construct_main_interface(tab_buttons, tabs_contents, enable_session_caches))
-    register_main_callbacks(available_tabs, cache_implementation)
+    register_main_callbacks(args, available_tabs, cache_implementation)
     app.title = 'Hay Say'
     return app
 
@@ -394,8 +395,16 @@ def add_model_management_components(args, app, available_tabs):
     add_toolbar(app)
 
 
-if __name__ == '__main__':
-    args = parse_arguments()
+def build_app(update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=False,
+              cache_implementation='file', migrate_models=False, architectures=architecture_map.keys()):
+    arguments = ['--update_model_lists_on_startup' if update_model_lists_on_startup else None,
+                 '--enable_model_management' if enable_model_management else None,
+                 '--enable_session_caches' if enable_session_caches else None,
+                 '--cache_implementation', cache_implementation,
+                 '--migrate_models' if migrate_models else None,
+                 '--architectures', *architectures]
+    arguments = [arg for arg in arguments if arg]  # Removes all 'None' objects in the list
+    args = parse_arguments(arguments)
 
     available_tabs = select_architecture_tabs(args.architectures)
     cache_implementation = select_cache_implementation(args.cache_implementation)
@@ -403,7 +412,6 @@ if __name__ == '__main__':
     Downloader.update_model_lists_if_specified(args, available_tabs)
     app = construct_main_app(args, available_tabs, cache_implementation, args.enable_session_caches)
     add_model_management_components_if_needed(args, app, available_tabs)
-
-    app.run(host='0.0.0.0', port=6573)
+    return app
 
 

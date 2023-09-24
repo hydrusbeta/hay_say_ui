@@ -101,61 +101,9 @@ class CacheSelection(bootsteps.Step):
             if selected_file is None:
                 hash_preprocessed = None
             else:
-                hash_preprocessed = preprocess(selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence,
-                                               session_data)
+                hash_preprocessed = preprocess(cache, selected_file, semitone_pitch, debug_pitch, reduce_noise,
+                                               crop_silence, session_data)
             return hash_preprocessed
-
-        def preprocess(filename, semitone_pitch, debug_pitch, reduce_noise, crop_silence, session_data):
-            # Get hashes and determine file locations. Delegate actual preprocessing work to preprocess_file
-            # filename must not be None.
-
-            debug_pitch, reduce_noise, crop_silence = convert_to_bools(debug_pitch, reduce_noise, crop_silence)
-
-            hash_raw = lookup_filehash(filename, session_data)
-            hash_preprocessed = compute_next_hash(hash_raw, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
-            preprocess_file(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise,
-                            crop_silence, session_data)
-            return hash_preprocessed
-
-        def lookup_filehash(selected_file, session_data):
-            raw_metadata = cache.read_metadata(Stage.RAW, session_data['id'])
-            reverse_lookup = {raw_metadata[key]['User File']: key for key in raw_metadata}
-            return reverse_lookup.get(selected_file)
-
-        def preprocess_file(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise, crop_silence,
-                            session_data):
-            # Handle file operations and write to metadata file. Delegate actual preprocessing work to preprocess_bytes
-
-            if cache.file_is_already_cached(Stage.PREPROCESSED, session_data['id'], hash_preprocessed):
-                return
-
-            data_raw, sr_raw = cache.read_audio_from_cache(Stage.RAW, session_data['id'], hash_raw)
-            data_preprocessed, sr_preprocessed = preprocess_bytes(data_raw, sr_raw, semitone_pitch, debug_pitch,
-                                                                  reduce_noise, crop_silence)
-            cache.save_audio_to_cache(Stage.PREPROCESSED, session_data['id'], hash_preprocessed, data_preprocessed,
-                                      sr_preprocessed)
-            write_preprocessed_metadata(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch, reduce_noise,
-                                        crop_silence, session_data)
-
-        def preprocess_bytes(bytes_raw, sr_raw, semitone_pitch, debug_pitch, reduce_noise, crop_silence):
-            # todo: implement this
-            return bytes_raw, sr_raw
-
-        def write_preprocessed_metadata(hash_raw, hash_preprocessed, semitone_pitch, debug_pitch,
-                                        reduce_noise, crop_silence, session_data):
-            preprocessed_metadata = cache.read_metadata(Stage.PREPROCESSED, session_data['id'])
-            preprocessed_metadata[hash_preprocessed] = {
-                'Raw File': hash_raw,
-                'Options':
-                    {
-                        'Semitone Pitch': semitone_pitch,
-                        'Debug Pitch': debug_pitch,
-                        'Reduce Noise': reduce_noise,
-                        'Crop Silence': crop_silence
-                    },
-                'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
-            }
-            cache.write_metadata(Stage.PREPROCESSED, session_data['id'], preprocessed_metadata)
 
         def process(user_text, hash_preprocessed, tab_object, relevant_inputs, session_data):
             """Send a JSON payload to a container, instructing it to perform processing"""
