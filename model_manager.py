@@ -81,7 +81,8 @@ def register_model_manager_callbacks(available_tabs):
 
     # If a user has recently downloaded a new model, we need to refresh the download list when they navigate to the
     # model manager. Note: we cannot merge this callback into the generate_download_callback method of main.py because
-    # the elements with id "tab.id + '-delete-checklist'" will not exist for that callback if local_mode is false.
+    # the elements with id "tab.id + '-delete-checklist'" will not exist for that callback if enable_model_management
+    # is false.
     @callback(
         [Output(tab.id + '-delete-checklist', 'options') for tab in available_tabs],
         Input('model-manager-outer-div', 'hidden')

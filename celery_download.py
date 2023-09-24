@@ -1,14 +1,15 @@
+from billiard.process import current_process
 from celery import Celery, bootsteps
 from click import Option
 from dash import Input, Output, State, CeleryManager, callback
 
 import download.Downloader as Downloader
 import util
-from hay_say_common.cache import RedisImpl
-from main import architecture_map, select_architecture_tabs
+from plotly_celery_common import *
 
 # Set up a background callback manager
-celery_app = Celery(__name__, broker=RedisImpl.REDIS_URL, backend=RedisImpl.REDIS_URL)
+REDIS_URL = 'redis://redis:6379/0'
+celery_app = Celery(__name__, broker=REDIS_URL, backend=REDIS_URL)
 background_callback_manager = CeleryManager(celery_app)
 
 # Add a command-line argument that lets the user select specific architectures to register with the celery worker
@@ -47,9 +48,10 @@ class ArchitectureSelection(bootsteps.Step):
                           Output(tab.id + '-download-text', 'children')],
                 background=True,
                 manager=background_callback_manager,
-                prevent_initial_call=True
+                prevent_initial_call=True,
             )
             def begin_downloading(set_progress, _, character_names):
+                print("begin_downloading: " + str(current_process().index), flush=True)
                 if not util.internet_available():
                     return 'No internet connection detected', '0', tab.downloadable_character_options(), [], tab.characters, ''
                 num_characters = str(len(character_names))

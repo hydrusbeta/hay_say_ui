@@ -220,9 +220,8 @@ class MongoImpl:
 
 class RedisImpl:
     # todo: implement this class (but MongoImpl is definitely higher priority)
-
-    REDIS_URL = 'redis://redis:6379'
-    redis_db = redis.StrictRedis.from_url(REDIS_URL)
+    # REDIS_URL = 'redis://redis:6379'
+    # redis_db = redis.StrictRedis.from_url(REDIS_URL)
     # Note: Redis databases are limited to 25 GB each.
     @classmethod
     def read_metadata(cls, stage):

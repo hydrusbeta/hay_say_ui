@@ -103,11 +103,12 @@ services:
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
     # Override the CMD in the Docker file to enable model management, update model lists on startup, and automatically
-    # migrate all models to the models folder. If updating model lists on startup causes issues, users can disable it
-    # by removing the --update_model_lists_on_startup flag.
+    # migrate all models to the models folder. Also spin up 2 instances of celery, with 5 workers for downloading models
+    # and a single worker for generating output.
     command: ["/bin/sh", "-c", "
-              celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO --include_architecture ControllableTalkNet --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
-              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --architectures ControllableTalkNet SoVitsSvc3 SoVitsSvc4 SoVitsSvc5 Rvc
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker --loglevel=INFO --concurrency 5 --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
+              celery --workdir ~/hay_say/hay_say_ui -A celery_generate:celery_app worker --loglevel=INFO --concurrency 1 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
+              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --cache_implementation file --architectures ControllableTalkNet SoVitsSvc3 SoVitsSvc4 SoVitsSvc5 Rvc
               "]
 
   # This container provides a web service interface to so-vits-svc 3.0.
