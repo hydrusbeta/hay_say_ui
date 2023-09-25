@@ -24,7 +24,8 @@ RUN python -m pip install \
     gdown==4.7.1 \
     jsonschema==4.17.3 \
     huggingface_hub==0.15.1 \
-    pymongo==4.5.0
+    pymongo==4.5.0 \
+    gunicorn==21.2.0
 
 # Expose port 6573, the port that Hay Say uses
 EXPOSE 6573
@@ -32,8 +33,9 @@ EXPOSE 6573
 # download Hay Say
 RUN git clone -b main --single-branch -q https://github.com/hydrusbeta/hay_say_ui ~/hay_say/hay_say_ui/
 
-# Start a Celery worker for background callbacks and run the Hay Say Flask server
-CMD ["/bin/sh", "-c", "celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO & python /root/hay_say/hay_say_ui/main.py"]
-
-# Todo: use a production server, like gunicorn
-# CMD gunicorn --workers=? --threads=? --bind 0.0.0.0:6573 python /root/hay_say/hay_say_ui/main.py:app
+# Start Celery workers for background callbacks and run Hay Say on a gunicorn server
+CMD ["/bin/sh", "-c", " \
+      celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker --loglevel=INFO --concurrency 5 & \
+      celery --workdir ~/hay_say/hay_say_ui -A celery_generate:celery_app worker --loglevel=INFO --concurrency 1 & \
+      gunicorn --workers 1 --bind 0.0.0.0:6573 'wsgi:get_server()' \
+      "]

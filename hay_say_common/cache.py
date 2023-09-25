@@ -129,9 +129,9 @@ class FileImpl:
     def delete_all_files_at_stage(cls, stage, session_id):
         """Deletes all files, including the metadata file, at the specified stage
         'stage' should be one of the Stage enums"""
-        path = os.path.join(cls.map_folder(stage, session_id))
-        for filename in os.listdir(path):
-            path = os.path.join(path, filename)
+        base_path = os.path.join(cls.map_folder(stage, session_id))
+        for filename in os.listdir(base_path):
+            path = os.path.join(base_path, filename)
             os.remove(path)
 
     @classmethod

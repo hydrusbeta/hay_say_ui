@@ -1,6 +1,6 @@
 import json
 import traceback
-from datetime import datetime
+import datetime
 from http.client import HTTPConnection
 from numbers import Number
 
@@ -167,7 +167,7 @@ class CacheSelection(bootsteps.Step):
                     'User Text': user_text
                 },
                 'Options': tab_object.construct_input_dict(*relevant_inputs),
-                'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
+                'Time of Creation': datetime.datetime.now().strftime(TIMESTAMP_FORMAT)
             }
             cache.write_metadata(Stage.OUTPUT, session_data['id'], output_metadata)
 
@@ -221,7 +221,7 @@ class CacheSelection(bootsteps.Step):
                     'Auto Tune Output': auto_tune_output,
                     'Adjust Output Speed': output_speed_adjustment
                 },
-                'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
+                'Time of Creation': datetime.datetime.now().strftime(TIMESTAMP_FORMAT)
             }
             cache.write_metadata(Stage.POSTPROCESSED, session_data['id'], postprocessed_metadata)
 
