@@ -145,7 +145,7 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                     ),
                     html.Tr(
                         html.Td(
-                            html.Span("", id='generate-message'),
+                            html.Span('Waiting in queue...', id='generate-message', hidden=True),
                             className='centered'
                         ),
                     )],
