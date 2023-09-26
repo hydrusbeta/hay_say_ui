@@ -134,7 +134,7 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                     id='postprocessing-options',
                     className='spaced-table'
                 ),
-                html.Table(
+                html.Table([
                     html.Tr(
                         html.Td(
                             dcc.Loading(
@@ -143,6 +143,12 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                             ),
                         ),
                     ),
+                    html.Tr(
+                        html.Td(
+                            html.Span("", id='generate-message'),
+                            className='centered'
+                        ),
+                    )],
                     className='generate-table'
                 ),
             ], className='box-div'),

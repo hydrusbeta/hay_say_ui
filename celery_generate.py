@@ -53,15 +53,20 @@ class CacheSelection(bootsteps.Step):
                    State('adjust-output-speed', 'value')] +
                   [State(tab.id, 'hidden') for tab in selected_architectures] +
                   [State(item, 'value') for sublist in [tab.input_ids for tab in selected_architectures] for item in sublist], # Add every architecture's inputs as States to the callback:
+            running=[(Output('generate-message', 'hidden'), False, True)],
+            progress=Output('generate-message', 'children'),
+            progress_default='Waiting in queue...',
             background=True,
             manager=background_callback_manager,
             prevent_initial_call=True
         )
-        def generate(clicks, session_data, user_text, selected_file, semitone_pitch, debug_pitch, reduce_noise,
-                     crop_silence, reduce_metallic_noise, auto_tune_output, output_speed_adjustment, *args):
+        def generate(set_progress, clicks, session_data, user_text, selected_file, semitone_pitch, debug_pitch,
+                     reduce_noise, crop_silence, reduce_metallic_noise, auto_tune_output, output_speed_adjustment,
+                     *args):
             print("generate: " + str(current_process().index), flush=True)
             if clicks is not None:
                 try:
+                    set_progress('generating...')
                     selected_tab_object = get_selected_tab_object(args[0:len(selected_architectures)])
                     relevant_inputs = get_inputs_for_selected_tab(selected_tab_object, args[len(selected_architectures):])
                     hash_preprocessed = preprocess_if_needed(selected_file, semitone_pitch, debug_pitch, reduce_noise,
