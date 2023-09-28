@@ -195,6 +195,7 @@ services:
       - models:/root/hay_say/models
       - custom_models:/root/hay_say/custom_models
       - audio_cache:/root/hay_say/audio_cache
+    command: ["/bin/sh", "-c", "/root/hay_say/.venvs/rvc_server/bin/python /root/hay_say/rvc_server/main.py --cache_implementation file"]
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
     # Uncomment the lines below to enable it for RVC if you wish.
     # deploy:

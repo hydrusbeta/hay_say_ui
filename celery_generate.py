@@ -10,7 +10,8 @@ from celery import Celery, bootsteps
 from click import Option
 from dash import html, Input, Output, State, callback, CeleryManager
 
-from hay_say_common.cache import Stage, CACHE_MIMETYPE, TIMESTAMP_FORMAT
+from hay_say_common.cache import Stage, CACHE_MIMETYPE, TIMESTAMP_FORMAT, \
+    select_cache_implementation, cache_implementation_map
 from plotly_celery_common import *
 
 # Set up a background callback manager
@@ -63,7 +64,11 @@ class CacheSelection(bootsteps.Step):
         def generate(set_progress, clicks, session_data, user_text, selected_file, semitone_pitch, debug_pitch,
                      reduce_noise, crop_silence, reduce_metallic_noise, auto_tune_output, output_speed_adjustment,
                      *args):
-            print("generate: " + str(current_process().index), flush=True)
+            # todo: create a second generate() method which sets the gpu_id to an empty string and give its celery queue
+            #  a more workers than this generate() method. That generate() method will use the CPU instead of GPU.
+            gpu_id = current_process().index
+            # gpu_id = ''
+            print("generate: " + str(gpu_id), flush=True)
             if clicks is not None:
                 try:
                     set_progress('generating...')
@@ -72,7 +77,7 @@ class CacheSelection(bootsteps.Step):
                     hash_preprocessed = preprocess_if_needed(selected_file, semitone_pitch, debug_pitch, reduce_noise,
                                                              crop_silence, session_data)
                     hash_output = process(user_text, hash_preprocessed, selected_tab_object, relevant_inputs,
-                                          session_data)
+                                          session_data, gpu_id)
                     hash_postprocessed = postprocess(hash_output, reduce_metallic_noise, auto_tune_output,
                                                      output_speed_adjustment, session_data)
                     highlight_first = True
@@ -110,11 +115,12 @@ class CacheSelection(bootsteps.Step):
                                                crop_silence, session_data)
             return hash_preprocessed
 
-        def process(user_text, hash_preprocessed, tab_object, relevant_inputs, session_data):
+        def process(user_text, hash_preprocessed, tab_object, relevant_inputs, session_data, gpu_id):
             """Send a JSON payload to a container, instructing it to perform processing"""
 
             hash_output = compute_next_hash(hash_preprocessed, user_text, relevant_inputs)
-            payload = construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output)
+            payload = construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output,
+                                        session_data, gpu_id)
 
             host = tab_object.id + '_server'
             port = tab_object.port
@@ -129,14 +135,17 @@ class CacheSelection(bootsteps.Step):
             write_output_metadata(hash_preprocessed, user_text, hash_output, tab_object, relevant_inputs, session_data)
             return hash_output
 
-        def construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output):
+        def construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output,
+                              session_data, gpu_id):
             return {
                 'Inputs': {
                     'User Text': user_text,
                     'User Audio': hash_preprocessed
                 },
                 'Options': tab_object.construct_input_dict(*relevant_inputs),
-                'Output File': hash_output
+                'Output File': hash_output,
+                'GPU ID': gpu_id,
+                'Session ID': session_data['id']
             }
 
         def send_payload(payload, host, port):

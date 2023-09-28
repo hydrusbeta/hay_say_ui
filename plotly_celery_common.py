@@ -10,13 +10,6 @@ from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
 from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
 from hay_say_common.cache import Stage
 
-cache_implementation_map = {'mongo': hay_say_common.cache.MongoImpl,
-                            'file': hay_say_common.cache.FileImpl}
-
-
-def select_cache_implementation(choice):
-    return cache_implementation_map[choice]
-
 
 architecture_map = {'ControllableTalkNet': ControllableTalknetTab(),
                     'SoVitsSvc3': SoVitsSvc3Tab(),

@@ -20,7 +20,7 @@ RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1
 RUN python -m pip install \
     dash[celery]==2.11.0 \
     dash-bootstrap-components==1.4.1 \
-    hay_say_common==0.2.0 \
+    hay_say_common==1.0.1 \
     gdown==4.7.1 \
     jsonschema==4.17.3 \
     huggingface_hub==0.15.1 \
