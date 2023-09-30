@@ -18,6 +18,8 @@ RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1
 # often than the hay_say_ui code itself. Cloning the repo after installing the requirements helps the Docker cache
 # optimize build time. See https://docs.docker.com/build/cache
 RUN python -m pip install \
+    --timeout=300 \
+    --no-cache-dir \
     dash[celery]==2.11.0 \
     dash-bootstrap-components==1.4.1 \
     hay_say_common==1.0.1 \

@@ -198,10 +198,10 @@ class SoVitsSvc4Tab(AbstractTab):
             # Note: A checklist option is initially None, but if you toggle it on and then back off, it becomes an empty
             # list, []. The expression "True if args[x] else False" maps both None and [] to False and [''] to True.
             'Predict Pitch': True if args[2] else False,
-            'Slice Length': args[3],
-            'Cross-Fade Length': args[4],
-            'Character Likeness': args[5],
+            'Slice Length': float(args[3]),
+            'Cross-Fade Length': float(args[4]),
+            'Character Likeness': float(args[5]),
             'Reduce Hoarseness': True if args[6] else False,
             'Apply nsf_hifigan': True if args[7] else False,
-            'Noise Scale': args[8]
+            'Noise Scale': float(args[8])
         }
