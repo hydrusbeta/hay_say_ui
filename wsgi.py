@@ -1,7 +1,7 @@
 import sys
 
 from main import build_app, architecture_map, parse_arguments
-
+from server_initialization import initialize_app
 
 # todo: There's got to be a less repetitive way to do this.
 
@@ -25,6 +25,7 @@ def get_server(update_model_lists_on_startup=False, enable_model_management=Fals
 # See the parse_arguments method.
 if __name__ == '__main__':
     args = parse_arguments(sys.argv[1:])
+    initialize_app(args.architectures, args.migrate_models, args.update_model_lists_on_startup)
     app = build_app(args.update_model_lists_on_startup, args.enable_model_management, args.enable_session_caches,
                     args.cache_implementation, args.migrate_models, args.architectures)
     app.run(host='0.0.0.0', port=6573, debug=True)

@@ -8,8 +8,6 @@ from dash.exceptions import PreventUpdate
 from hay_say_common import *
 from hay_say_common.cache import CACHE_MIMETYPE, TIMESTAMP_FORMAT
 
-import model_migrator as migrator
-import util
 from deletion_scheduler import register_cache_cleanup_callback
 from plotly_celery_common import *
 
@@ -471,24 +469,15 @@ def register_cache_cleanup_callback_if_needed(enable_session_caches, cache_type)
         register_cache_cleanup_callback(cache_type)
 
 
-def update_model_lists_if_specified(update_model_lists_on_startup, architectures):
-    if update_model_lists_on_startup and util.internet_available():
-        update_model_lists(architectures)
-
-
-def update_model_lists(architectures):
-    available_tabs = select_architecture_tabs(architectures)
-    for tab in available_tabs:
-        tab.update_multi_speaker_infos_file()
-        tab.update_character_infos_file()
-
-
 def build_app(update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=False,
               cache_type='file', migrate_models=False, architectures=architecture_map.keys()):
-    migrator.migrate_models_if_specified(migrate_models, architectures)
-    update_model_lists_if_specified(update_model_lists_on_startup, architectures)
     app = construct_app_layout(enable_model_management, cache_type, architectures, enable_session_caches)
     register_app_callbacks(architectures, enable_model_management, enable_session_caches, cache_type)
     add_model_management_components_if_needed(enable_model_management, architectures, app)
     register_cache_cleanup_callback_if_needed(enable_session_caches, cache_type)
+
+    # Save some of the command-line options to the server object so that the server hook methods can get to them:
+    app.server.update_model_lists_on_startup = update_model_lists_on_startup
+    app.server.migrate_models = migrate_models
+    app.server.architectures = architectures
     return app
