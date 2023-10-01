@@ -9,10 +9,10 @@ from urllib.parse import urlparse, unquote
 
 import gdown
 import requests
+from hay_say_common import character_dir, multispeaker_model_dir, create_link
 from huggingface_hub import hf_hub_download
 
 import util
-from hay_say_common import character_dir, multispeaker_model_dir, create_link
 
 
 class DownloadType(Enum):
@@ -287,17 +287,3 @@ def flatten_directory(target_dir):
 
 def no_unzip(*_):
     pass
-
-
-# === Model lists update logic ===
-
-
-def update_model_lists_if_specified(args, available_tabs):
-    if args.update_model_lists_on_startup and util.internet_available():
-        update_model_lists(available_tabs)
-
-
-def update_model_lists(available_tabs):
-    for tab in available_tabs:
-        tab.update_multi_speaker_infos_file()
-        tab.update_character_infos_file()

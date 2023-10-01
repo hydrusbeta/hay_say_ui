@@ -1,16 +1,16 @@
 import argparse
 import re
 import uuid
-from datetime import datetime
 
 import dash_bootstrap_components as dbc
 from dash import Dash, html, dcc, Input, Output, State, ctx, callback
 from dash.exceptions import PreventUpdate
-
-import download.Downloader as Downloader
-import model_migrator as Migrator
 from hay_say_common import *
 from hay_say_common.cache import CACHE_MIMETYPE, TIMESTAMP_FORMAT
+
+import model_migrator as migrator
+import util
+from deletion_scheduler import register_cache_cleanup_callback
 from plotly_celery_common import *
 
 # todo: so-vits output is much louder than controllable talknet. Should the output volume be equalized?
@@ -24,7 +24,8 @@ TAB_CELL_SUFFIX = '-tab-cell'
 def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     return [
         html.Div([
-            dcc.Store(id='session', storage_type='session', data={'id': uuid.uuid4().hex if enable_session_caches else None}),
+            html.Div(id='dummy'),
+            dcc.Store(id='session', storage_type='session'),
             html.H1('Hay Say'),
             html.H2('A Unified Interface for Pony Voice Generation', className='subtitle'),
             html.H2('Input'),
@@ -57,12 +58,15 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                 parent_className='dropdown-container-loader'
             ),
             html.H2('Preprocessing'),
-            dcc.Checklist([SHOW_INPUT_OPTIONS_LABEL], id='show-preprocessing-options', value=[], inputStyle={'margin-right': '10px'}),
-            # For future ref, this is how you do a vertical checklist with spacing, in case I want to try doing that again:
-            # dcc.Checklist(['Debug pitch', 'Reduce noise', 'Crop Silence'], ['Debug pitch'], id='test', labelStyle={'display': 'block', 'margin': '20px'}),
+            dcc.Checklist([SHOW_INPUT_OPTIONS_LABEL], id='show-preprocessing-options', value=[],
+                          inputStyle={'margin-right': '10px'}),
+            # For future ref, this is how you do a vertical checklist with spacing, in case I want to try that again:
+            # dcc.Checklist(['Debug pitch', 'Reduce noise', 'Crop Silence'], ['Debug pitch'], id='test',
+            #                labelStyle={'display': 'block', 'margin': '20px'}),
             html.Table([
                 html.Tr(
-                    html.Td("Note: There are currently no options available. Adding pre-processing options is on the to-do list!",
+                    html.Td('Note: There are currently no options available. ' +
+                            'Adding pre-processing options is on the to-do list!',
                             colSpan=2, className='centered')
                 ),
                 html.Tr([
@@ -110,12 +114,14 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                 ),
                 html.Table([
                     html.H2('Postprocessing'),
-                    dcc.Checklist([SHOW_OUTPUT_OPTIONS_LABEL], id='show-output-options', value=[], inputStyle={'margin-right': '10px'})
+                    dcc.Checklist([SHOW_OUTPUT_OPTIONS_LABEL], id='show-output-options', value=[],
+                                  inputStyle={'margin-right': '10px'})
                     ],
                 ),
                 html.Table([
                     html.Tr(
-                        html.Td("Note: There are currently no options available. Adding post-processing options is on the to-do list!",
+                        html.Td('Note: There are currently no options available. ' +
+                                'Adding post-processing options is on the to-do list!',
                                 colSpan=2, className='centered')
                     ),
                     html.Tr([
@@ -129,7 +135,8 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                     html.Tr([
                         html.Td('Adjust speed of output', className='option-label'),
                         html.Td(html.Div('20', id='output-speed-adjustment')),
-                        html.Td(dcc.Input(type='range', min=0.25, max=4, value="1", id='adjust-output-speed', step='0.01')),
+                        html.Td(dcc.Input(type='range', min=0.25, max=4, value="1", id='adjust-output-speed',
+                                          step='0.01')),
                     ], hidden=True)],
                     id='postprocessing-options',
                     className='spaced-table'
@@ -162,10 +169,24 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     ]
 
 
-def register_main_callbacks(args, available_tabs, cache):
+def register_main_callbacks(enable_session_caches, cache_type, architectures):
     from celery_generate import CacheSelection
-    CacheSelection(None, args.cache_implementation, args.architectures)
+    CacheSelection(None, cache_type, architectures)
+    cache = select_cache_implementation(cache_type)
+    available_tabs = select_architecture_tabs(architectures)
 
+    @callback(
+        Output('session', 'data'),
+        Input('dummy', 'n_clicks'),
+        State('session', 'data')
+    )
+    def initialize_session_data(n_clicks, existing_data):
+        if n_clicks is None:
+            return {'id': uuid.uuid4().hex if enable_session_caches else None}
+        else:
+            print('Warning! initialize_session_data was called outside of initialization. Ignoring request.',
+                  flush=True)
+            return existing_data
 
     @callback(
         Output('message', 'children', allow_duplicate=True),
@@ -248,7 +269,7 @@ def register_main_callbacks(args, available_tabs, cache):
         raw_metadata = cache.read_metadata(Stage.RAW, session_data['id'])
         raw_metadata[hash_80_bits] = {
             'User File': filename,
-            'Time of Creation': datetime.now().strftime(TIMESTAMP_FORMAT)
+            'Time of Creation': datetime.datetime.now().strftime(TIMESTAMP_FORMAT)
         }
         cache.write_metadata(Stage.RAW, session_data['id'], raw_metadata)
 
@@ -336,10 +357,17 @@ def construct_tab_buttons(available_tabs):
         for tab in available_tabs]
 
 
-def construct_tabs_interface(available_tabs, enable_model_management):
+def construct_tabs_interface(architectures, enable_model_management):
+    available_tabs = select_architecture_tabs(architectures)
     tab_buttons = construct_tab_buttons(available_tabs)
     tabs_contents = [tab.tab_contents(enable_model_management) for tab in available_tabs]
     return tab_buttons, tabs_contents
+
+
+def register_tab_callbacks(architectures, enable_model_management):
+    available_tabs = select_architecture_tabs(architectures)
+    for tab in available_tabs:
+        tab.register_callbacks(enable_model_management)
 
 
 def parse_arguments(arguments):
@@ -353,25 +381,24 @@ def parse_arguments(arguments):
     return parser.parse_args(arguments)
 
 
-def construct_main_app(args, available_tabs, cache_implementation, enable_session_caches):
+def construct_main_app(enable_model_management, cache_type, architectures, enable_session_caches):
     app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
 
-    tab_buttons, tabs_contents = construct_tabs_interface(available_tabs, args.enable_model_management)
-    for tab in available_tabs:
-        tab.register_callbacks(args.enable_model_management)
+    tab_buttons, tabs_contents = construct_tabs_interface(architectures, enable_model_management)
+    register_tab_callbacks(architectures, enable_model_management)
 
     app.layout = html.Div(construct_main_interface(tab_buttons, tabs_contents, enable_session_caches))
-    register_main_callbacks(args, available_tabs, cache_implementation)
+    register_main_callbacks(enable_session_caches, cache_type, architectures)
     app.title = 'Hay Say'
     return app
 
 
-def register_download_callbacks(args):
+def register_download_callbacks(architectures):
     # The import statement is located here, to make sure that the download callbacks are not loaded at all unless this
     # method is called.
     from celery_download import ArchitectureSelection
     # Instantiate ArchitectureSelection to instantiate the download callbacks.
-    ArchitectureSelection(None, args.architectures)
+    ArchitectureSelection(None, architectures)
 
 
 def add_model_manager_page(app, available_tabs):
@@ -390,34 +417,40 @@ def add_toolbar(app):
     register_toolbar_callbacks()
 
 
-def add_model_management_components_if_needed(args, app, available_tabs):
-    if args.enable_model_management:
-        add_model_management_components(args, app, available_tabs)
+def add_model_management_components_if_needed(enable_model_management, architectures, app):
+    if enable_model_management:
+        available_tabs = select_architecture_tabs(architectures)
+        add_model_management_components(architectures, app, available_tabs)
 
 
-def add_model_management_components(args, app, available_tabs):
-    register_download_callbacks(args)
+def add_model_management_components(architectures, app, available_tabs):
+    register_download_callbacks(architectures)
     add_model_manager_page(app, available_tabs)
     add_toolbar(app)
 
 
+def register_cache_cleanup_callback_if_needed(enable_session_caches, cache_type):
+    if enable_session_caches:
+        register_cache_cleanup_callback(cache_type)
+
+
+def update_model_lists_if_specified(update_model_lists_on_startup, architectures):
+    if update_model_lists_on_startup and util.internet_available():
+        update_model_lists(architectures)
+
+
+def update_model_lists(architectures):
+    available_tabs = select_architecture_tabs(architectures)
+    for tab in available_tabs:
+        tab.update_multi_speaker_infos_file()
+        tab.update_character_infos_file()
+
+
 def build_app(update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=False,
-              cache_implementation='file', migrate_models=False, architectures=architecture_map.keys()):
-    arguments = ['--update_model_lists_on_startup' if update_model_lists_on_startup else None,
-                 '--enable_model_management' if enable_model_management else None,
-                 '--enable_session_caches' if enable_session_caches else None,
-                 '--cache_implementation', cache_implementation,
-                 '--migrate_models' if migrate_models else None,
-                 '--architectures', *architectures]
-    arguments = [arg for arg in arguments if arg]  # Removes all 'None' objects in the list
-    args = parse_arguments(arguments)
-
-    available_tabs = select_architecture_tabs(args.architectures)
-    cache_implementation = select_cache_implementation(args.cache_implementation)
-    Migrator.migrate_models_if_specified(args, available_tabs)
-    Downloader.update_model_lists_if_specified(args, available_tabs)
-    app = construct_main_app(args, available_tabs, cache_implementation, args.enable_session_caches)
-    add_model_management_components_if_needed(args, app, available_tabs)
+              cache_type='file', migrate_models=False, architectures=architecture_map.keys()):
+    migrator.migrate_models_if_specified(migrate_models, architectures)
+    update_model_lists_if_specified(update_model_lists_on_startup, architectures)
+    app = construct_main_app(enable_model_management, cache_type, architectures, enable_session_caches)
+    add_model_management_components_if_needed(enable_model_management, architectures, app)
+    register_cache_cleanup_callback_if_needed(enable_session_caches, cache_type)
     return app
-
-

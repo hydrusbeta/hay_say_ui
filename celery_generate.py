@@ -1,6 +1,5 @@
 import json
 import traceback
-import datetime
 from http.client import HTTPConnection
 from numbers import Number
 
@@ -9,9 +8,9 @@ from billiard.process import current_process
 from celery import Celery, bootsteps
 from click import Option
 from dash import html, Input, Output, State, callback, CeleryManager
-
-from hay_say_common.cache import Stage, CACHE_MIMETYPE, TIMESTAMP_FORMAT, \
+from hay_say_common.cache import CACHE_MIMETYPE, TIMESTAMP_FORMAT, \
     select_cache_implementation, cache_implementation_map
+
 from plotly_celery_common import *
 
 # Set up a background callback manager
@@ -42,24 +41,25 @@ class CacheSelection(bootsteps.Step):
             output=[Output('message', 'children'),
                     Output('generate-button', 'children')],  # To activate the spinner
             inputs=[Input('generate-button', 'n_clicks'),
-                   State('session', 'data'),
-                   State('text-input', 'value'),
-                   State('file-dropdown', 'value'),
-                   State('semitone-pitch', 'value'),
-                   State('debug-pitch', 'value'),
-                   State('reduce-noise', 'value'),
-                   State('crop-silence', 'value'),
-                   State('reduce-metallic-sound', 'value'),
-                   State('auto-tune-output', 'value'),
-                   State('adjust-output-speed', 'value')] +
-                  [State(tab.id, 'hidden') for tab in selected_architectures] +
-                  [State(item, 'value') for sublist in [tab.input_ids for tab in selected_architectures] for item in sublist], # Add every architecture's inputs as States to the callback:
+                    State('session', 'data'),
+                    State('text-input', 'value'),
+                    State('file-dropdown', 'value'),
+                    State('semitone-pitch', 'value'),
+                    State('debug-pitch', 'value'),
+                    State('reduce-noise', 'value'),
+                    State('crop-silence', 'value'),
+                    State('reduce-metallic-sound', 'value'),
+                    State('auto-tune-output', 'value'),
+                    State('adjust-output-speed', 'value')] +
+                   [State(tab.id, 'hidden') for tab in selected_architectures] +
+                   [State(item, 'value') for sublist in   # Add every architecture's inputs as States to the callback
+                    [tab.input_ids for tab in selected_architectures]
+                    for item in sublist],
             running=[(Output('generate-message', 'hidden'), False, True)],
             progress=Output('generate-message', 'children'),
             progress_default='Waiting in queue...',
             background=True,
             manager=background_callback_manager,
-            prevent_initial_call=True
         )
         def generate(set_progress, clicks, session_data, user_text, selected_file, semitone_pitch, debug_pitch,
                      reduce_noise, crop_silence, reduce_metallic_noise, auto_tune_output, output_speed_adjustment,
@@ -92,9 +92,8 @@ class CacheSelection(bootsteps.Step):
             first_output = [
                 prepare_postprocessed_display(sorted_hashes[0], session_data,
                                               highlight=highlight_first)] if sorted_hashes else []
-            remaining_outputs = [prepare_postprocessed_display(hash_postprocessed, session_data) for hash_postprocessed
-                                 in
-                                 reversed(sorted_hashes[1:])]
+            remaining_outputs = [prepare_postprocessed_display(hash_postprocessed, session_data)
+                                 for hash_postprocessed in reversed(sorted_hashes[1:])]
             return remaining_outputs + first_output, 'Generate!'
 
         def get_selected_tab_object(hidden_states):
@@ -260,7 +259,7 @@ class CacheSelection(bootsteps.Step):
             return selected_file, preprocess_options
 
         def prepare_postprocessed_display(hash_postprocessed, session_data, highlight=False):
-            # todo: color-code the architecture or something to make it easier to tell the difference.
+            # todo: color-code the information in the display.
             bytes_postprocessed = cache.read_file_bytes(Stage.POSTPROCESSED, session_data['id'], hash_postprocessed)
 
             metadata = cache.read_metadata(Stage.POSTPROCESSED, session_data['id'])[hash_postprocessed]
@@ -295,27 +294,30 @@ class CacheSelection(bootsteps.Step):
                     ),
                     html.Tr([
                         html.Td('Inputs:', className='output-label'),
-                        html.Td((selected_file or 'None')
-                                + ((' | ' + user_text[0:20]) if user_text is not None else ''),
+                        html.Td('Audio = ' + (selected_file or 'None')
+                                + ((' | Text = ' + user_text[0:20] + ('...' if len(user_text) > 20 else ''))
+                                   if user_text is not None else ''),
                                 className='output-value')
                     ]),
-                    html.Tr([
-                        html.Td('Pre-processing Options:', className='output-label'),
-                        html.Td('Pitch adjustment = ' + str(semitone_pitch) + (
-                            ' semitone(s)' if semitone_pitch != 'N/A' else '')
-                                + (' | Reduce Noise' if reduce_noise else '')
-                                + (' | Crop Silence' if crop_silence else ''), className='output-value')
-                    ]),
+                    # Commenting this out for now because there are no pre-processing options available.
+                    # html.Tr([
+                    #     html.Td('Pre-processing Options:', className='output-label'),
+                    #     html.Td('Pitch adjustment = ' + str(semitone_pitch) + (
+                    #         ' semitone(s)' if semitone_pitch != 'N/A' else '')
+                    #             + (' | Reduce Noise' if reduce_noise else '')
+                    #             + (' | Crop Silence' if crop_silence else ''), className='output-value')
+                    # ]),
                     html.Tr([
                         html.Td('Processing Options:', className='output-label'),
                         html.Td(prettify_inputs(inputs), className='output-value')
                     ]),
-                    html.Tr([
-                        html.Td('Post-processing Options:', className='output-label'),
-                        html.Td('Output Speed factor = ' + str(output_speed_adjustment)
-                                + (' | Reduce Metallic Sound' if reduce_metallic_noise else '')
-                                + (' | Auto Tune Output' if auto_tune_output else ''), className='output-value')
-                    ]),
+                    # Commenting this out for now because there are no post-processing options available.
+                    # html.Tr([
+                    #     html.Td('Post-processing Options:', className='output-label'),
+                    #     html.Td('Output Speed factor = ' + str(output_speed_adjustment)
+                    #             + (' | Reduce Metallic Sound' if reduce_metallic_noise else '')
+                    #             + (' | Auto Tune Output' if auto_tune_output else ''), className='output-value')
+                    # ]),
                     html.Tr([
                         html.Td('Creation Time:', className='output-label'),
                         html.Td(timestamp, className='output-value')
