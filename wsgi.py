@@ -13,7 +13,8 @@ from main import build_app, architecture_map, parse_arguments
 # See the parse_arguments method.
 def get_server(update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=False,
                cache_implementation='file', migrate_models=False, architectures=architecture_map.keys()):
-    app = build_app(update_model_lists_on_startup, enable_model_management, enable_session_caches, cache_implementation, migrate_models, architectures)
+    app = build_app(update_model_lists_on_startup, enable_model_management, enable_session_caches,
+                    cache_implementation, migrate_models, architectures)
     return app.server
 
 
