@@ -211,7 +211,7 @@ button:disabled{
     color: #666;
 }
 
-#generate-button{
+.generate-button{
     font-family: Equestria;
     font-size: 36px;
     margin: 0px;
@@ -230,4 +230,8 @@ button:disabled{
 .checklist-input-style{
     margin-right: 10px;
     margin-left: 15px;
+}
+
+.no-padding{
+    padding: 0px;
 }

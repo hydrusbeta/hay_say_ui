@@ -25,7 +25,7 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     return [
         html.Div([
             html.Div(id='dummy'),
-            dcc.Store(id='session', storage_type='session'),
+            dcc.Store(id='session', storage_type='memory', data={'id': None}),
             html.H1('Hay Say'),
             html.H2('A Unified Interface for Pony Voice Generation', className='subtitle'),
             html.H2('Input'),
@@ -144,10 +144,30 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                 html.Table([
                     html.Tr(
                         html.Td(
+                            html.Div('Generate with:'), className='centered'
+                        ),
+                    ),
+                    html.Tr(
+                        html.Td(
+                            dcc.RadioItems(['GPU', 'CPU'], id='hardware-selector', value='CPU'), className='centered'
+                        ),
+                    ),
+                    html.Tr(
+                        html.Td(
                             dcc.Loading(
-                                html.Button('Generate!', id='generate-button'),
+                                html.Button('Generate!', id='generate-button-gpu', className='generate-button'),
                                 type='default'  # circle, graph, cube, circle, dot, default
                             ),
+                            className='no-padding'
+                        ),
+                    ),
+                    html.Tr(
+                        html.Td(
+                            dcc.Loading(
+                                html.Button('Generate!', id='generate-button-cpu', className='generate-button'),
+                                type='default'  # circle, graph, cube, circle, dot, default
+                            ),
+                            className='no-padding'
                         ),
                     ),
                     html.Tr(
@@ -169,9 +189,14 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     ]
 
 
+def register_generate_callbacks(cache_type, architectures):
+    import celery_generate_gpu
+    import celery_generate_cpu
+    celery_generate_gpu.CacheSelection(None, cache_type, architectures)
+    celery_generate_cpu.CacheSelection(None, cache_type, architectures)
+
+
 def register_main_callbacks(enable_session_caches, cache_type, architectures):
-    from celery_generate import CacheSelection
-    CacheSelection(None, cache_type, architectures)
     cache = select_cache_implementation(cache_type)
     available_tabs = select_architecture_tabs(architectures)
 
@@ -187,6 +212,14 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
             print('Warning! initialize_session_data was called outside of initialization. Ignoring request.',
                   flush=True)
             return existing_data
+
+    @callback(
+        [Output('generate-button-gpu', 'hidden'),
+         Output('generate-button-cpu', 'hidden')],
+        Input('hardware-selector', 'value')
+    )
+    def select_generate_button(hardware_selection):
+        return hardware_selection != 'GPU', hardware_selection != 'CPU'
 
     @callback(
         Output('message', 'children', allow_duplicate=True),
@@ -304,7 +337,8 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         return SHOW_OUTPUT_OPTIONS_LABEL not in value
 
     @callback(
-        Output('generate-button', 'disabled'),
+        [Output('generate-button-gpu', 'disabled'),
+         Output('generate-button-cpu', 'disabled')],
         [Input('text-input', 'value'),
          Input('file-dropdown', 'value')] +
         [Input(tab.id, 'hidden') for tab in available_tabs] +
@@ -317,11 +351,12 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         character_selections = hidden_states_and_character_selections[len(available_tabs):]
         tab_object = get_selected_tab_object(hidden_states)
         if tab_object is None:
-            return True
+            return True, True
         else:
             index = hidden_states.index(False)
             selected_character = character_selections[index]
-            return not tab_object.meets_requirements(user_text, selected_file, selected_character)
+            hidden = not tab_object.meets_requirements(user_text, selected_file, selected_character)
+            return hidden, hidden
 
     # todo: disable the preview button if no audio file is selected.
     @callback(
@@ -381,16 +416,18 @@ def parse_arguments(arguments):
     return parser.parse_args(arguments)
 
 
-def construct_main_app(enable_model_management, cache_type, architectures, enable_session_caches):
+def construct_app_layout(enable_model_management, cache_type, architectures, enable_session_caches):
     app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
-
     tab_buttons, tabs_contents = construct_tabs_interface(architectures, enable_model_management)
-    register_tab_callbacks(architectures, enable_model_management)
-
     app.layout = html.Div(construct_main_interface(tab_buttons, tabs_contents, enable_session_caches))
-    register_main_callbacks(enable_session_caches, cache_type, architectures)
     app.title = 'Hay Say'
     return app
+
+
+def register_app_callbacks(architectures, enable_model_management, enable_session_caches, cache_type):
+    register_tab_callbacks(architectures, enable_model_management)
+    register_main_callbacks(enable_session_caches, cache_type, architectures)
+    register_generate_callbacks(cache_type, architectures)
 
 
 def register_download_callbacks(architectures):
@@ -450,7 +487,8 @@ def build_app(update_model_lists_on_startup=False, enable_model_management=False
               cache_type='file', migrate_models=False, architectures=architecture_map.keys()):
     migrator.migrate_models_if_specified(migrate_models, architectures)
     update_model_lists_if_specified(update_model_lists_on_startup, architectures)
-    app = construct_main_app(enable_model_management, cache_type, architectures, enable_session_caches)
+    app = construct_app_layout(enable_model_management, cache_type, architectures, enable_session_caches)
+    register_app_callbacks(architectures, enable_model_management, enable_session_caches, cache_type)
     add_model_management_components_if_needed(enable_model_management, architectures, app)
     register_cache_cleanup_callback_if_needed(enable_session_caches, cache_type)
     return app
