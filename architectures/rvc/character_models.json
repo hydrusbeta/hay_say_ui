@@ -88,9 +88,9 @@
         "Files": [
             {
                 "URL": "https://files.catbox.moe/2xh15a.zip",
-                "Download With": "HUGGINGFACE_HUB",
+                "Download With": "REQUESTS",
                 "Download As": "2xh15a.zip",
-                "Unzip Strategy": "REMOVE_OUTERMOST_DIR",
+                "Unzip Strategy": "FLATTEN",
                 "Size (bytes)": 170764494
             }
         ],
@@ -1062,6 +1062,24 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Tree Hugger",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TreeHugger/TreeHugger.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "TreeHugger.pth",
+                "Size (bytes)": 57583952
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TreeHugger/added_IVF106_Flat_nprobe_1_TreeHugger_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF106_Flat_nprobe_1_TreeHugger_v2.index",
+                "Size (bytes)": 39507299
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Snap Shutter",
         "Files": [
             {
@@ -1562,5 +1580,23 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+    "Model Name": "Gilda",
+    "Files": [
+        {
+            "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Gilda/Gilda.pth",
+            "Download With": "HUGGINGFACE_HUB",
+            "Download As": "Gilda.pth",
+            "Size (bytes)": 57552537
+        },
+        {
+            "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Gilda/added_IVF320_Flat_nprobe_1_Gilda_v2.index",
+            "Download With": "HUGGINGFACE_HUB",
+            "Download As": "added_IVF320_Flat_nprobe_1_Gilda_v2.index",
+            "Size (bytes)": 39507299
+        }
+    ],
+    "License": "UNSPECIFIED"
     }
 ]
