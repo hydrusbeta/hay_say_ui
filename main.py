@@ -147,7 +147,10 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                     ),
                     html.Tr(
                         html.Td(
-                            dcc.RadioItems(['GPU', 'CPU'], id='hardware-selector', value='CPU'), className='centered'
+                            dcc.RadioItems([
+                                {'value': 'GPU', 'label': 'GPU', 'disabled': False},
+                                {'value': 'CPU', 'label': 'CPU', 'disabled': False}
+                            ], id='hardware-selector', value='CPU'), className='centered'
                         ),
                     ),
                     html.Tr(

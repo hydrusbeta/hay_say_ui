@@ -1,0 +1,129 @@
+# This docker-compose file is intended for use when running Hay say on a server for others to use.
+
+services:
+  redis:
+    image: redis
+    command: redis-server
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 30s
+  hay_say_ui:
+    depends_on:
+      - redis
+    image: hydrusbeta/hay_say:hay_say_ui
+    build: ./hay_say_ui
+    ports:
+      - 80:6573
+    working_dir: /root/hay_say/hay_say_ui
+    volumes:
+      - models:/root/hay_say/models
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    command: ["/bin/sh", "-c", "
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker --loglevel=INFO --concurrency 5 --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_gpu:celery_app worker --loglevel=INFO --concurrency 4 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_cpu:celery_app worker --loglevel=INFO --concurrency 24 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
+              gunicorn --config=server_initialization.py --workers 24 --bind 0.0.0.0:6573 'wsgi:get_server(update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=True, migrate_models=False, cache_implementation=\"file\", architectures=[\"ControllableTalkNet\", \"SoVitsSvc3\", \"SoVitsSvc4\", \"SoVitsSvc5\", \"Rvc\"])'
+              "]
+  so_vits_svc_3_server:
+    depends_on:
+      - redis
+    image: hydrusbeta/hay_say:so_vits_svc_3_server
+    build: ./so_vits_svc_3_server
+    working_dir: /root/hay_say/so_vits_svc_3
+    volumes:
+      - models:/root/hay_say/models
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    command: ["/bin/sh", "-c", "/root/hay_say/.venvs/so_vits_svc_3_server/bin/python /root/hay_say/so_vits_svc_3_server/main.py --cache_implementation file"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+  so_vits_svc_4_server:
+    depends_on:
+      - redis
+    image: hydrusbeta/hay_say:so_vits_svc_4_server
+    build: ./so_vits_svc_4_server
+    working_dir: /root/hay_say/so_vits_svc_4
+    volumes:
+      - models:/root/hay_say/models
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    command: ["/bin/sh", "-c", "/root/hay_say/.venvs/so_vits_svc_4_server/bin/python /root/hay_say/so_vits_svc_4_server/main.py --cache_implementation file"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+  so_vits_svc_5_server:
+    depends_on:
+      - redis
+    image: hydrusbeta/hay_say:so_vits_svc_5_server
+    build: ./so_vits_svc_5_server
+    working_dir: /root/hay_say/so_vits_svc_5
+    volumes:
+      - models:/root/hay_say/models
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    command: ["/bin/sh", "-c", "/root/hay_say/.venvs/so_vits_svc_5_server/bin/python /root/hay_say/so_vits_svc_5_server/main.py --cache_implementation file"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+  rvc_server:
+    depends_on:
+      - redis
+    image: hydrusbeta/hay_say:rvc_server
+    build: ./rvc_server
+    working_dir: /root/hay_say/rvc
+    volumes:
+      - models:/root/hay_say/models
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    command: ["/bin/sh", "-c", "/root/hay_say/.venvs/rvc_server/bin/python /root/hay_say/rvc_server/main.py --cache_implementation file"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+  controllable_talknet_server:
+    depends_on:
+      - redis
+    image: hydrusbeta/hay_say:controllable_talknet_server
+    build: ./controllable_talknet_server
+    working_dir: /root/hay_say/controllable_talknet
+    volumes:
+      - models:/root/hay_say/models
+      - custom_models:/root/hay_say/custom_models
+      - audio_cache:/root/hay_say/audio_cache
+    command: ["/bin/sh", "-c", "/root/hay_say/.venvs/controllable_talknet_server/bin/python /root/hay_say/controllable_talknet_server/main.py --cache_implementation file"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  models:
+    external: true
+  custom_models:
+    external: true
+  audio_cache:
+    external: true
+
