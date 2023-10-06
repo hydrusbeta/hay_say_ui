@@ -1062,24 +1062,6 @@
         "License": "UNSPECIFIED"
     },
     {
-        "Model Name": "Tree Hugger",
-        "Files": [
-            {
-                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TreeHugger/TreeHugger.pth",
-                "Download With": "HUGGINGFACE_HUB",
-                "Download As": "TreeHugger.pth",
-                "Size (bytes)": 57583952
-            },
-            {
-                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TreeHugger/added_IVF104_Flat_nprobe_1_TreeHugger_v2.index",
-                "Download With": "HUGGINGFACE_HUB",
-                "Download As": "added_IVF104_Flat_nprobe_1_TreeHugger_v2.index",
-                "Size (bytes)": 12871459
-            }
-        ],
-        "License": "UNSPECIFIED"
-    },
-    {
         "Model Name": "Snap Shutter",
         "Files": [
             {
