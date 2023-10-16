@@ -183,11 +183,12 @@ Note: if you last installed/updated Hay Say before Aug 19, 2023, please see
 [Special Instructions for the Aug 19, 2023 update](#special-instructions-for-the-aug-19-2023-update)
 
 ### 1. Grab the latest docker-compose file 
-To update Hay Say, it is recommended that you first download the latest docker-compose file in case new entries have 
-been added (which will happen when new architecture and model packs have been added to Hay Say). To download the latest 
-docker-compose file, execute the following command. Please note that it will overwrite your existing docker-compose 
-file. If you made any edits to your old docker-compose file (e.g. to make it download only specific architectures), 
-you will need to make the same edits to the new file:
+To update Hay Say, it is recommended that you first download the latest docker-compose.yaml file in case new entries 
+have been added (which will happen when new architecture and model packs have been added to Hay Say). To download the 
+latest docker-compose file, execute the following command. Please note that this will overwrite your existing 
+docker-compose file. If you made any edits to your old docker-compose file (e.g. uncommenting lines to enable Hay Say to
+use your Cuda GPU or commenting out lines to make it download only specific architectures), you will need to make the 
+same edits to the new file:
 
 Linux:
 ```commandline
