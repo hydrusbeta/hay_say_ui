@@ -3,7 +3,7 @@
 
 services:
   synthapp:
-    image: synthapp
+    image: hydrusbeta/synthapp
     ports:
       - 3334:3334
       - 3335:3335
