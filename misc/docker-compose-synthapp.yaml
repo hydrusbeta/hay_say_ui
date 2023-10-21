@@ -1,0 +1,18 @@
+# This is a docker-compose configuration file for Synth App, which is not associated with Hay Say as of the time of this
+# writing. Synth App is a UI for the text-to-speech architecture "Tacotron".
+
+services:
+  synthapp:
+    image: synthapp
+    build: .
+    ports:
+      - 3334:3334
+      - 3335:3335
+    volumes:
+      - synthapp_models:/home/luna/synthapp/models
+    working_dir: /home/luna/synthapp
+    command: ["/bin/sh", "-c", "/home/luna/synthapp/run_linux"]
+
+volumes:
+  synthapp_models:
+    external: true
