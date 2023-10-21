@@ -4,7 +4,6 @@
 services:
   synthapp:
     image: synthapp
-    build: .
     ports:
       - 3334:3334
       - 3335:3335
