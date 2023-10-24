@@ -10,16 +10,7 @@ services:
     volumes:
       - synthapp_models:/home/luna/synthapp/models
     working_dir: /home/luna/synthapp
-    # run_linux only starts the rpyc ThreadedServer, due to modifications that were made to webapplauncher.py in
-    # the Dockerfile. This lets us start the main application in gunicorn.
-    command: ["/bin/sh", "-c", "
-               ./run_linux &
-               ./bin/micromamba-linux-64 run -n synthapp1 
-                  --root-prefix /home/luna/micromamba/ gunicorn
-                  --workers 1 
-                  --bind 0.0.0.0:3334 
-                  --chdir ./website/ponyonline/ 
-               ponyonline.wsgi:application"]
+    command: ["/bin/sh", "-c", "/home/luna/synthapp/run_linux"]
 
 volumes:
   synthapp_models:
