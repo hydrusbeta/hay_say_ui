@@ -12,7 +12,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
     python3.9-venv \
     wget
 
-# Install the official Mega command line, to download the zip file
+# Install the official Mega command line for downloading the zip file
 RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
     dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
     wget https://mega.nz/linux/repo/Debian_11/amd64/megacmd-Debian_11_amd64.deb && \
@@ -23,20 +23,33 @@ RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1
 RUN useradd --create-home --shell /bin/bash luna
 USER luna
 
-# Install the application and configure it to listen on all addresses (0.0.0.0) instead of only loopback (127.0.0.1)
-# Also download the base hifigan models ahead of time for quicker first startup.
+# Install the application, configure the main application for a production setting,
+# and download the base hifigan models ahead of time for quicker first startup.
 RUN mkdir /home/luna/synthapp
 WORKDIR /home/luna/synthapp
 RUN mega-get https://mega.nz/folder/Zu8HmQhY#mCot1ZTzF64Z2Z4TlXgeig /home/luna/synthapp/ && \
 	unzip ./Builds/pony_synth_app_r1d.zip && \
 	rm -rf Builds/ && \
 	chmod u+x run_linux bin/linux_install_packages bin/micromamba-linux-64 bin/run_webapp && \
-	sed -i 's/127.0.0.1/0.0.0.0/' config.py && \
+    printf "\n    - gunicorn==21.2.0" >> bin/f.yaml && \
+    sed -i 's\DEBUG = True\DEBUG = False\' ./website/ponyonline/ponyonline/settings.py && \
+    sed -i 's\po = Popen('"'"'./bin/run_webapp'"'"', shell=True)\pass\' bin/webapplauncher.py && \
     export CONDA_ALWAYS_YES="true" && \
     ./bin/micromamba-linux-64 create -f bin/f.yaml && \
     mkdir -p models_base/sr/ models_base/hfg/ && \
     wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=14fOprFAIlCQkVRxsfInhEPG0n-xN4QOa' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=14fOprFAIlCQkVRxsfInhEPG0n-xN4QOa" -O models_base/sr/Superres_Twilight_33000 && rm -rf /tmp/cookies.txt &&\
-    wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1-cQw1xpZpxZAh5NwfKm_HN5Ga3PP-zi-' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1-cQw1xpZpxZAh5NwfKm_HN5Ga3PP-zi-" -O models_base/hfg/Rarity_HiFiGAN_11000 && rm -rf /tmp/cookies.txt
+    wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1-cQw1xpZpxZAh5NwfKm_HN5Ga3PP-zi-' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1-cQw1xpZpxZAh5NwfKm_HN5Ga3PP-zi-" -O models_base/hfg/Rarity_HiFiGAN_11000 && rm -rf /tmp/cookies.txt && \
+    mkdir website/ponyonline/clips
 
-# Execute the server on startup
-CMD ["/bin/sh", "-c", "/home/luna/synthapp/run_linux"]
+
+# Execute the helper application on an rpyc ThreadedServer and the main application on gunicorn.
+# The gunicorn server listens on all addresses (0.0.0.0) instead of only loopback (127.0.0.1) so you can reach it from outside of the container.
+CMD ["/bin/sh", "-c", " \
+     export CONDA_ALWAYS_YES="true" && \
+     ./run_linux & \
+     ./bin/micromamba-linux-64 run -n synthapp1 \
+        --root-prefix /home/luna/micromamba/ gunicorn \
+        --workers 1 \
+        --bind 0.0.0.0:3334 \
+        --chdir ./website/ponyonline/ \
+        ponyonline.wsgi:application"]
