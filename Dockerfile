@@ -22,7 +22,7 @@ RUN python -m pip install \
     --no-cache-dir \
     dash[celery]==2.11.0 \
     dash-bootstrap-components==1.4.1 \
-    hay_say_common==1.0.2 \
+    hay_say_common==1.0.7 \
     gdown==4.7.1 \
     jsonschema==4.17.3 \
     huggingface_hub==0.15.1 \

@@ -1,14 +1,15 @@
 import argparse
 import re
 import uuid
+import numpy
 
 import dash_bootstrap_components as dbc
 from dash import Dash, html, dcc, Input, Output, State, ctx, callback
 from dash.exceptions import PreventUpdate
-from hay_say_common import *
 from hay_say_common.cache import CACHE_MIMETYPE, TIMESTAMP_FORMAT
 
 from deletion_scheduler import register_cache_cleanup_callback
+from hay_say_common import *
 from plotly_celery_common import *
 
 # todo: so-vits output is much louder than controllable talknet. Should the output volume be equalized?
@@ -147,10 +148,7 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                     ),
                     html.Tr(
                         html.Td(
-                            dcc.RadioItems([
-                                {'value': 'GPU', 'label': 'GPU', 'disabled': False},
-                                {'value': 'CPU', 'label': 'CPU', 'disabled': False}
-                            ], id='hardware-selector', value='CPU'), className='centered'
+                            dcc.RadioItems(id='hardware-selector'), className='centered'
                         ),
                     ),
                     html.Tr(
@@ -221,13 +219,26 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
 
     @callback(
         [Output(tab.id, 'hidden') for tab in available_tabs] +
-        [Output(tab.id + TAB_CELL_SUFFIX, 'className') for tab in available_tabs],
-        [Input(tab.id + TAB_BUTTON_PREFIX, 'n_clicks') for tab in available_tabs]
+        [Output(tab.id + TAB_CELL_SUFFIX, 'className') for tab in available_tabs] +
+        [Output('hardware-selector', 'options')] +
+        [Output('hardware-selector', 'value')],
+        [State('hardware-selector', 'value')] +
+        [Input(tab.id + TAB_BUTTON_PREFIX, 'n_clicks') for tab in available_tabs],
     )
-    def hide_unused_tabs(*_):
-        return [not (tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id) for tab in available_tabs] + \
-            ['tab-cell' if not tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id else 'tab-cell-selected'
-             for tab in available_tabs]
+    def hide_unused_tabs(current_hardware_selection, *_):
+        if current_hardware_selection is None:
+            hidden_states = [True for tab in available_tabs]
+            tabs_css_classes = ['tab-cell' for tab in available_tabs]
+            hardware_options = [[]]
+            hardware_selection = ['CPU']
+        else:
+            hidden_states = [not (tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id) for tab in available_tabs]
+            selected_tab = get_selected_tab_object(hidden_states)
+            tabs_css_classes = ['tab-cell' if not tab.id + TAB_BUTTON_PREFIX == ctx.triggered_id else
+                                'tab-cell-selected' for tab in available_tabs]
+            hardware_options = [selected_tab.hardware_options]
+            hardware_selection = ['CPU'] if 'GPU' not in numpy.squeeze(hardware_options) else [current_hardware_selection]
+        return hidden_states + tabs_css_classes + hardware_options + hardware_selection
 
     @callback(
         Output('output-speed-adjustment', 'children'),

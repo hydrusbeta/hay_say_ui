@@ -1,17 +1,18 @@
+import json
+import os
+import shutil
+import sys
+import tempfile
+from abc import ABC, abstractmethod
+
+import dash_bootstrap_components as dbc
+import requests
+from dash import html, dcc, Input, Output, State, callback
+from dash.exceptions import PreventUpdate
 from hay_say_common import model_dirs, character_dir, multispeaker_model_dir
+
 import download.Downloader as Downloader
 import util
-
-from dash import html, dcc, Input, Output, State, callback
-import dash_bootstrap_components as dbc
-from dash.exceptions import PreventUpdate
-
-from abc import ABC, abstractmethod
-import os
-import sys
-import json
-import tempfile
-import shutil
 
 SHOW_CHARACTER_DOWNLOAD_MENU = '▷ Show Character Download Menu'
 HIDE_CHARACTER_DOWNLOAD_MENU = '▽ Hide Character Download Menu'
@@ -118,6 +119,34 @@ class AbstractTab(ABC):
         return [{'label': os.path.basename(entry[0]) + ' [' + util.scale_bytes(entry[1]) + ']',
                  'value': os.path.basename(entry[0])}
                 for entry in model_paths_and_sizes]
+
+    @property
+    def hardware_options(self):
+        return [*((['GPU']) if self.is_gpu_available else ()), 'CPU']
+
+    @property
+    def is_gpu_available(self):
+        # todo: If there are multiple GPUs on the system, this method will return True if pytorch can see *any* of them.
+        #  However, it is possible that one of the invisible CUDA GPUs is selected by the the celery worker (the celery
+        #  worker doesn't know which architectures support which GPUs). We need to somehow make sure that that never
+        #  happens. Is there some way to communicate to celery that a particular job should only be picked up by
+        #  particular workers? Alternatively, maybe we can add a supported_gpus argument containing the GPU IDs of all
+        #  supported GPUs to the generate() method and have the celery worker check whether the GPU it is assigned to is
+        #  listed in supported_gpus. If it is not, then have it place the job back on the queue (if that is something
+        #  celery can do). A third option would be to refactor GPU management so that each celery worker is not just
+        #  assigned a single GPU at the start but can use any GPU and places a "lock" on the one it wants to use. Then
+        #  it just makes sure to select from among the GPUs listed in supported_gpus.
+        response = requests.get(f'http://{self.id + "_server"}:{self.port}/gpu-info')
+        code = response.status_code
+
+        if code != 200:
+            # Something probably went wrong, so log a message and assume that GPU is not available.
+            print(f'Warning! is_gpu_available returned the unexpected http code {code}. Assuming GPU is not available. '
+                  f'Please inform the maintainers of Hay Say.')
+            return False
+        else:
+            gpu_info = response.json()
+            return len(gpu_info) > 0
 
     def tab_contents(self, enable_model_management):
         return html.Tr([
