@@ -1,9 +1,11 @@
 import click
+import numpy
 from celery import Celery, bootsteps
 from click import Option
-from dash import Input, Output, State, callback, CeleryManager
+from dash import Input, Output, State, callback, CeleryManager, ctx
 from hay_say_common.cache import cache_implementation_map
 
+import main
 from generator import generate_and_prepare_postprocessed_display
 from plotly_celery_common import *
 
@@ -64,6 +66,28 @@ class CacheSelection(bootsteps.Step):
                                                               selected_file, semitone_pitch, debug_pitch, reduce_noise,
                                                               crop_silence, reduce_metallic_noise, auto_tune_output,
                                                               output_speed_adjustment, args)
+
+        @callback(
+            [Output('hardware-selector', 'options')] +
+            [Output('hardware-selector', 'value')],
+            [State('hardware-selector', 'value')] +
+            [Input(tab.id + main.TAB_BUTTON_PREFIX, 'n_clicks') for tab in selected_architectures],
+        )
+        def hide_unused_tabs(current_hardware_selection, *_):
+            if current_hardware_selection is None:
+                hardware_options = [[]]
+                hardware_selection = ['CPU']
+            else:
+                hidden_states = [not (tab.id + main.TAB_BUTTON_PREFIX == ctx.triggered_id) for tab in selected_architectures]
+                selected_tab = get_selected_tab_object(hidden_states)
+                hardware_options = [selected_tab.hardware_options]
+                hardware_selection = ['CPU'] if 'GPU' not in numpy.squeeze(hardware_options) else [
+                    current_hardware_selection]
+            return hardware_options + hardware_selection
+
+        def get_selected_tab_object(hidden_states):
+            # Get the tab that is *not* hidden (i.e. hidden == False)
+            return {hidden: tab for hidden, tab in zip(hidden_states, selected_architectures)}.get(False)
 
 
 celery_app.steps['worker'].add(CacheSelection)
