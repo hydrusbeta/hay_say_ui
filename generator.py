@@ -1,9 +1,13 @@
+import base64
+import datetime
 import json
-from http.client import HTTPConnection
-from hay_say_common import select_cache_implementation
-from hay_say_common.cache import TIMESTAMP_FORMAT
-from plotly_celery_common import *
 import traceback
+from http.client import HTTPConnection
+
+from hay_say_common.cache import Stage
+
+import hay_say_common as hsc
+import plotly_celery_common as pcc
 from postprocessed_display import prepare_postprocessed_display
 
 
@@ -27,7 +31,7 @@ def generate_and_prepare_postprocessed_display(clicks, set_progress, message, ca
                    traceback.format_exc(), 'Generate!'
     else:
         highlight_first = False
-    cache = select_cache_implementation(cache_type)
+    cache = hsc.select_cache_implementation(cache_type)
     sorted_hashes = cache.get_hashes_sorted_by_timestamp(Stage.POSTPROCESSED, session_data['id'])
     first_output = [
         prepare_postprocessed_display(cache, sorted_hashes[0], session_data,
@@ -41,7 +45,7 @@ def generate(cache_type, gpu_id, session_data, selected_architectures, user_text
              debug_pitch, reduce_noise, crop_silence, reduce_metallic_noise, auto_tune_output, output_speed_adjustment,
              args):
     print('generating on ' + ('CPU' if gpu_id == '' else ('GPU #' + str(gpu_id))), flush=True)
-    cache = select_cache_implementation(cache_type)
+    cache = hsc.select_cache_implementation(cache_type)
     selected_tab_object = get_selected_tab_object(selected_architectures, args[0:len(selected_architectures)])
     relevant_inputs = get_inputs_for_selected_tab(selected_architectures, selected_tab_object,
                                                   args[len(selected_architectures):])
@@ -69,7 +73,7 @@ def preprocess_if_needed(cache, selected_file, semitone_pitch, debug_pitch, redu
     if selected_file is None:
         hash_preprocessed = None
     else:
-        hash_preprocessed = preprocess(cache, selected_file, semitone_pitch, debug_pitch, reduce_noise,
+        hash_preprocessed = pcc.preprocess(cache, selected_file, semitone_pitch, debug_pitch, reduce_noise,
                                        crop_silence, session_data)
     return hash_preprocessed
 
@@ -77,7 +81,7 @@ def preprocess_if_needed(cache, selected_file, semitone_pitch, debug_pitch, redu
 def process(cache, user_text, hash_preprocessed, tab_object, relevant_inputs, session_data, gpu_id):
     """Send a JSON payload to a container, instructing it to perform processing"""
 
-    hash_output = compute_next_hash(hash_preprocessed, user_text, relevant_inputs)
+    hash_output = pcc.compute_next_hash(hash_preprocessed, user_text, relevant_inputs)
     payload = construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output,
                                 session_data, gpu_id)
 
@@ -145,19 +149,19 @@ def write_output_metadata(cache, hash_preprocessed, user_text, hash_output, tab_
             'User Text': user_text
         },
         'Options': tab_object.construct_input_dict(*relevant_inputs),
-        'Time of Creation': datetime.datetime.now().strftime(TIMESTAMP_FORMAT)
+        'Time of Creation': datetime.datetime.now().strftime(hsc.cache.TIMESTAMP_FORMAT)
     }
     cache.write_metadata(Stage.OUTPUT, session_data['id'], output_metadata)
 
 
 def postprocess(cache, hash_output, reduce_metallic_noise, auto_tune_output, output_speed_adjustment, session_data):
     # Convert data types to something more digestible
-    reduce_metallic_noise, auto_tune_output = convert_to_bools(reduce_metallic_noise, auto_tune_output)
+    reduce_metallic_noise, auto_tune_output = pcc.convert_to_bools(reduce_metallic_noise, auto_tune_output)
     output_speed_adjustment = float(
         output_speed_adjustment)  # Dash's Range Input supplies a string, so cast to float
 
     # Check whether the postprocessed file already exists
-    hash_postprocessed = compute_next_hash(hash_output, reduce_metallic_noise, auto_tune_output,
+    hash_postprocessed = pcc.compute_next_hash(hash_output, reduce_metallic_noise, auto_tune_output,
                                            output_speed_adjustment)
     if cache.file_is_already_cached(Stage.POSTPROCESSED, session_data['id'], hash_postprocessed):
         return hash_postprocessed
@@ -201,7 +205,7 @@ def write_postprocessed_metadata(cache, hash_output, hash_postprocessed, reduce_
             'Auto Tune Output': auto_tune_output,
             'Adjust Output Speed': output_speed_adjustment
         },
-        'Time of Creation': datetime.datetime.now().strftime(TIMESTAMP_FORMAT)
+        'Time of Creation': datetime.datetime.now().strftime(hsc.cache.TIMESTAMP_FORMAT)
     }
     cache.write_metadata(Stage.POSTPROCESSED, session_data['id'], postprocessed_metadata)
 

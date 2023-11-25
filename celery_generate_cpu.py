@@ -3,11 +3,11 @@ import numpy
 from celery import Celery, bootsteps
 from click import Option
 from dash import Input, Output, State, callback, CeleryManager, ctx
-from hay_say_common.cache import cache_implementation_map
 
+import hay_say_common as hsc
 import main
+import plotly_celery_common as pcc
 from generator import generate_and_prepare_postprocessed_display
-from plotly_celery_common import *
 
 # Set up a background callback manager
 REDIS_URL = 'redis://redis:6379/2'
@@ -17,12 +17,12 @@ background_callback_manager = CeleryManager(celery_app)
 # Add a command-line argument for selecting the cache implementation
 celery_app.user_options['worker'].add(
     Option(('--cache_implementation',), default='file', show_default=True,
-           type=click.Choice(cache_implementation_map.keys(), case_sensitive=False),
+           type=click.Choice(hsc.cache.cache_implementation_map.keys(), case_sensitive=False),
            help='Selects an implementation for the audio cache, e.g. saving them to files or to a database.'))
 
 # Add a command-line argument that lets the user select specific architectures to register with the celery worker
 celery_app.user_options['worker'].add(
-    Option(('--include_architecture',), multiple=True, default=architecture_map.keys(), show_default=True,
+    Option(('--include_architecture',), multiple=True, default=pcc.architecture_map.keys(), show_default=True,
            help='Add an architecture for which the download callback will be registered'))
 
 
@@ -30,7 +30,7 @@ celery_app.user_options['worker'].add(
 class CacheSelection(bootsteps.Step):
     def __init__(self, parent, cache_implementation, include_architecture, **options):
         super().__init__(parent, **options)
-        selected_architectures = select_architecture_tabs(include_architecture)
+        selected_architectures = pcc.select_architecture_tabs(include_architecture)
 
         @callback(
             output=[Output('message', 'children'),

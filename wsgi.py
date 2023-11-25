@@ -1,7 +1,9 @@
 import sys
 
-from main import build_app, architecture_map, parse_arguments
+import plotly_celery_common as pcc
+from main import build_app, parse_arguments
 from server_initialization import initialize_app
+
 
 # todo: There's got to be a less repetitive way to do this.
 
@@ -12,7 +14,7 @@ from server_initialization import initialize_app
 # gunicorn --workers 1 --bind 0.0.0.0:6573 'wsgi:get_server(enable_model_management=True)'
 # See the parse_arguments method.
 def get_server(update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=False,
-               cache_implementation='file', migrate_models=False, architectures=architecture_map.keys()):
+               cache_implementation='file', migrate_models=False, architectures=pcc.architecture_map.keys()):
     app = build_app(update_model_lists_on_startup, enable_model_management, enable_session_caches,
                     cache_implementation, migrate_models, architectures)
     return app.server

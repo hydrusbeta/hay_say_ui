@@ -1,7 +1,10 @@
 from numbers import Number
-from dash import html, Input, Output, State, callback, CeleryManager
-from plotly_celery_common import *
-from hay_say_common.cache import CACHE_MIMETYPE
+
+from dash import html
+from hay_say_common.cache import Stage
+
+import hay_say_common as hsc
+import plotly_celery_common as pcc
 
 
 def prepare_postprocessed_display(cache, hash_postprocessed, session_data, highlight=False):
@@ -36,7 +39,7 @@ def prepare_postprocessed_display(cache, hash_postprocessed, session_data, highl
             html.Tr([
                 html.Td(''),
                 html.Td([
-                    html.Audio(src=prepare_src_attribute(bytes_postprocessed, CACHE_MIMETYPE), controls=True),
+                    html.Audio(src=pcc.prepare_src_attribute(bytes_postprocessed, hsc.cache.CACHE_MIMETYPE), controls=True),
                 ]),
                 html.Td(
                     html.Button('Download', id={'type': 'output-download-button', 'index': hash_postprocessed}),

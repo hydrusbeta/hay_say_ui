@@ -2,9 +2,9 @@ import base64
 import datetime
 import hashlib
 
-import hay_say_common
 from hay_say_common.cache import Stage
 
+import hay_say_common as hsc
 from architectures.controllable_talknet.ControllableTalknetTab import ControllableTalknetTab
 from architectures.rvc.RvcTab import RvcTab
 from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
@@ -91,6 +91,6 @@ def write_preprocessed_metadata(cache, hash_raw, hash_preprocessed, semitone_pit
                 'Reduce Noise': reduce_noise,
                 'Crop Silence': crop_silence
             },
-        'Time of Creation': datetime.datetime.now().strftime(hay_say_common.cache.TIMESTAMP_FORMAT)
+        'Time of Creation': datetime.datetime.now().strftime(hsc.cache.TIMESTAMP_FORMAT)
     }
     cache.write_metadata(Stage.PREPROCESSED, session_data['id'], preprocessed_metadata)

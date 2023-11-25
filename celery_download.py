@@ -4,8 +4,8 @@ from click import Option
 from dash import Input, Output, State, CeleryManager, callback
 
 import download.Downloader as Downloader
+import plotly_celery_common as pcc
 import util
-from plotly_celery_common import *
 
 # Set up a background callback manager
 REDIS_URL = 'redis://redis:6379/0'
@@ -14,7 +14,7 @@ background_callback_manager = CeleryManager(celery_app)
 
 # Add a command-line argument that lets the user select specific architectures to register with the celery worker
 celery_app.user_options['worker'].add(
-    Option(('--include_architecture',), multiple=True, default=architecture_map.keys(), show_default=True,
+    Option(('--include_architecture',), multiple=True, default=pcc.architecture_map.keys(), show_default=True,
            help='Add an architecture for which the download callback will be registered'))
 
 
@@ -22,7 +22,7 @@ celery_app.user_options['worker'].add(
 class ArchitectureSelection(bootsteps.Step):
     def __init__(self, parent, include_architecture, **options):
         super().__init__(parent, **options)
-        selected_architectures = select_architecture_tabs(include_architecture)
+        selected_architectures = pcc.select_architecture_tabs(include_architecture)
 
         # Create background callbacks for the "Download Selected Models" button in each Tab. First, define a generator
         # for the callback:

@@ -8,8 +8,8 @@ from enum import Enum, auto
 from urllib.parse import urlparse, unquote
 
 import gdown
+import hay_say_common as hsc
 import requests
-from hay_say_common import character_dir, multispeaker_model_dir, create_link
 from huggingface_hub import hf_hub_download
 
 import util
@@ -51,14 +51,14 @@ def download_character(architecture, character_model_info, multi_speaker_model_i
 def download_multi_speaker_model_if_needed(architecture, multi_speaker_model_info):
     if multi_speaker_model_info is not None:
         multi_speaker_model_name, multi_speaker_model_files = extract_multi_speaker_model_metadata(multi_speaker_model_info)
-        multi_speaker_model_directory = multispeaker_model_dir(architecture, multi_speaker_model_name)
+        multi_speaker_model_directory = hsc.multispeaker_model_dir(architecture, multi_speaker_model_name)
         if not os.path.exists(multi_speaker_model_directory):
             download_model_files(multi_speaker_model_directory, multi_speaker_model_files)
 
 
 def download_character_model(architecture, character_model_info):
     character_name, character_files, _ = extract_character_metadata(character_model_info)
-    character_directory = character_dir(architecture, character_name)
+    character_directory = hsc.character_dir(architecture, character_name)
     download_model_files(character_directory, character_files)
 
 
@@ -66,8 +66,8 @@ def create_symlinks_if_needed(architecture, character_model_info, multi_speaker_
     if multi_speaker_model_info is not None:
         character_name, _, symlinks = extract_character_metadata(character_model_info)
         multi_speaker_model_name, _ = extract_multi_speaker_model_metadata(multi_speaker_model_info)
-        multi_speaker_model_directory = multispeaker_model_dir(architecture, multi_speaker_model_name)
-        character_directory = character_dir(architecture, character_name)
+        multi_speaker_model_directory = hsc.multispeaker_model_dir(architecture, multi_speaker_model_name)
+        character_directory = hsc.character_dir(architecture, character_name)
         for symlink in symlinks:
             existing_filename, symlink_filename = extract_symlink_metadata(symlink)
             existing_path = os.path.join(multi_speaker_model_directory, existing_filename)
@@ -77,7 +77,7 @@ def create_symlinks_if_needed(architecture, character_model_info, multi_speaker_
                                 'character_models.json and multi_speaker_models.json for inconsistencies in the ' +
                                 architecture + ' architecture.')
             symlink_path = os.path.join(character_directory, symlink_filename)
-            create_link(existing_path, symlink_path)
+            hsc.create_link(existing_path, symlink_path)
 
 
 def download_model_files(target_dir, files):

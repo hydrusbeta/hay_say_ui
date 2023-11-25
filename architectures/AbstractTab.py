@@ -6,10 +6,10 @@ import tempfile
 from abc import ABC, abstractmethod
 
 import dash_bootstrap_components as dbc
+import hay_say_common as hsc
 import requests
 from dash import html, dcc, Input, Output, State, callback
 from dash.exceptions import PreventUpdate
-from hay_say_common import model_dirs, character_dir, multispeaker_model_dir
 
 import download.Downloader as Downloader
 import util
@@ -190,12 +190,9 @@ class AbstractTab(ABC):
     @property
     def model_directory_paths(self):
         # A list of all the individual character model folders for this architecture.
-        # Loop through all the directories in model_dirs(architecture_name), call os.listdir(model_dir), and flatten the
-        # result into a single list. Ignore files; we're only interested in folders that bear character names.
-        return [character_path
-                for character_path_list in ([os.path.join(model_dir, character) for character in os.listdir(model_dir)]
-                                            for model_dir in model_dirs(self.id))
-                for character_path in character_path_list if not os.path.isfile(character_path)]
+        characters_dir = hsc.characters_dir(self.id)
+        return [os.path.join(characters_dir, character) for character in os.listdir(characters_dir)
+                if not os.path.isfile(os.path.join(characters_dir, character))]
 
     @property
     def character_dropdown(self):
@@ -242,7 +239,7 @@ class AbstractTab(ABC):
 
     def determine_files_required_for_character_alone(self, character_model_info):
         # Return a dictionary with entries of the form {'<path/to/file>': <file_size_in_bytes>}.
-        model_directory = character_dir(self.id, character_model_info['Model Name'])
+        model_directory = hsc.character_dir(self.id, character_model_info['Model Name'])
         return {os.path.join(model_directory, file['Download As']): file['Size (bytes)']
                 for file in character_model_info['Files']}
 
@@ -250,7 +247,7 @@ class AbstractTab(ABC):
         # Return a dictionary with entries of the form {'<path/to/file>': <file_size_in_bytes>}.
         # If the multi speaker model is already downloaded, return an empty dictionary.
         if multi_speaker_model_info is not None:
-            model_directory = multispeaker_model_dir(self.id, multi_speaker_model_info['Model Name'])
+            model_directory = hsc.multispeaker_model_dir(self.id, multi_speaker_model_info['Model Name'])
             if not os.path.exists(model_directory):
                 return {os.path.join(model_directory, file['Download As']): file['Size (bytes)']
                         for file in multi_speaker_model_info['Files']}

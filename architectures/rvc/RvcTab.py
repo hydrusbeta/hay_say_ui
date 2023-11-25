@@ -1,13 +1,12 @@
 import os
 
-from architectures.AbstractTab import AbstractTab
-from hay_say_common import get_model_path
-import model_licenses
-
+import dash_bootstrap_components as dbc
+import hay_say_common as hsc
 from dash import html, dcc, Input, Output, callback
 from dash.exceptions import PreventUpdate
 
-import dash_bootstrap_components as dbc
+import model_licenses
+from architectures.AbstractTab import AbstractTab
 
 
 class RvcTab(AbstractTab):
@@ -172,7 +171,7 @@ class RvcTab(AbstractTab):
                 not model_licenses.is_ui_notice_required(license_enum)
 
     def get_index_path(self, character):
-        character_dir = get_model_path(self.id, character)
+        character_dir = hsc.character_dir(self.id, character)
         return os.path.join(character_dir, character + '.index')
 
     @property

@@ -1,10 +1,10 @@
-from hay_say_common import get_model_path
-from architectures.AbstractTab import AbstractTab
+import os
 
+import hay_say_common as hsc
 from dash import html, dcc, Input, Output, State, callback
 from dash.exceptions import PreventUpdate
 
-import os
+from architectures.AbstractTab import AbstractTab
 
 
 class SoVitsSvc4Tab(AbstractTab):
@@ -151,7 +151,7 @@ class SoVitsSvc4Tab(AbstractTab):
             # todo: Account for the possibility of multiple kmeans models for multi-speaker models
             if character is None:
                 raise PreventUpdate
-            character_dir = get_model_path(self.id, character)
+            character_dir = hsc.character_dir(self.id, character)
             potential_names = [file for file in os.listdir(character_dir) if file.startswith('kmeans')]
             if len(potential_names) == 0:
                 return True, 0

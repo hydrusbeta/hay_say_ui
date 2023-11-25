@@ -1,4 +1,6 @@
 import argparse
+import datetime
+import hashlib
 import os
 import re
 import tempfile
@@ -8,11 +10,11 @@ import dash_bootstrap_components as dbc
 import soundfile
 from dash import Dash, html, dcc, Input, Output, State, ctx, callback, ALL
 from dash.exceptions import PreventUpdate
-from hay_say_common.cache import CACHE_MIMETYPE, TIMESTAMP_FORMAT, CACHE_EXTENSION
+from hay_say_common.cache import Stage
 
+import hay_say_common as hsc
+import plotly_celery_common as pcc
 from deletion_scheduler import register_cache_cleanup_callback
-from hay_say_common import *
-from plotly_celery_common import *
 
 # todo: so-vits output is much louder than controllable talknet. Should the output volume be equalized?
 
@@ -203,8 +205,8 @@ def register_generate_callbacks(cache_type, architectures):
 
 
 def register_main_callbacks(enable_session_caches, cache_type, architectures):
-    cache = select_cache_implementation(cache_type)
-    available_tabs = select_architecture_tabs(architectures)
+    cache = hsc.select_cache_implementation(cache_type)
+    available_tabs = pcc.select_architecture_tabs(architectures)
 
     @callback(
         [Output('generate-button-gpu', 'hidden'),
@@ -264,7 +266,7 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         else:
             for file_contents, filename in zip(file_contents_list, filename_list):
                 filename = append_index_if_needed(filename, session_data)
-                raw_array, raw_samplerate = get_audio_from_src_attribute(file_contents, 'utf-8')
+                raw_array, raw_samplerate = hsc.get_audio_from_src_attribute(file_contents, 'utf-8')
                 save_raw_audio_to_cache(filename, raw_array, raw_samplerate, session_data)
             return update_dropdown(filename_list[0], session_data)
 
@@ -296,7 +298,7 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         raw_metadata = cache.read_metadata(Stage.RAW, session_data['id'])
         raw_metadata[hash_80_bits] = {
             'User File': filename,
-            'Time of Creation': datetime.datetime.now().strftime(TIMESTAMP_FORMAT)
+            'Time of Creation': datetime.datetime.now().strftime(hsc.cache.TIMESTAMP_FORMAT)
         }
         cache.write_metadata(Stage.RAW, session_data['id'], raw_metadata)
 
@@ -320,7 +322,7 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         reverse_lookup = {metadata[key]['User File']: key for key in metadata}
         hash_raw = reverse_lookup[selected_file]
         bytes_raw = cache.read_file_bytes(Stage.RAW, session_data['id'], hash_raw)
-        src = prepare_src_attribute(bytes_raw, CACHE_MIMETYPE)
+        src = pcc.prepare_src_attribute(bytes_raw, hsc.cache.CACHE_MIMETYPE)
         return src, False
 
     @callback(
@@ -367,12 +369,12 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         if selected_file is None:
             raise PreventUpdate
 
-        hash_preprocessed = preprocess(cache, selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
+        hash_preprocessed = pcc.preprocess(cache, selected_file, semitone_pitch, debug_pitch, reduce_noise, crop_silence)
 
         # return src
         bytes_preprocessed = cache.read_file_bytes(Stage.PREPROCESSED, session_data['id'], hash_preprocessed)
-        hash_raw = lookup_filehash(cache, selected_file, session_data)
-        return prepare_src_attribute(bytes_preprocessed, CACHE_MIMETYPE)
+        hash_raw = pcc.lookup_filehash(cache, selected_file, session_data)
+        return pcc.prepare_src_attribute(bytes_preprocessed, hsc.cache.CACHE_MIMETYPE)
 
     def get_selected_tab_object(hidden_states):
         # Get the tab that is *not* hidden (i.e. hidden == False)
@@ -391,7 +393,7 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
             # A download button was actually clicked, so return a download.
             hash_postprocessed = ctx.triggered_id['index']
             with tempfile.TemporaryDirectory() as tempdir:
-                path = os.path.join(tempdir, hash_postprocessed + CACHE_EXTENSION)
+                path = os.path.join(tempdir, hash_postprocessed + hsc.cache.CACHE_EXTENSION)
                 data, sr = cache.read_audio_from_cache(Stage.POSTPROCESSED, session_data['id'], hash_postprocessed)
                 soundfile.write(path, data, sr)
                 return dcc.send_file(path)
@@ -407,14 +409,14 @@ def construct_tab_buttons(available_tabs):
 
 
 def construct_tabs_interface(architectures, enable_model_management):
-    available_tabs = select_architecture_tabs(architectures)
+    available_tabs = pcc.select_architecture_tabs(architectures)
     tab_buttons = construct_tab_buttons(available_tabs)
     tabs_contents = [tab.tab_contents(enable_model_management) for tab in available_tabs]
     return tab_buttons, tabs_contents
 
 
 def register_tab_callbacks(architectures, enable_model_management):
-    available_tabs = select_architecture_tabs(architectures)
+    available_tabs = pcc.select_architecture_tabs(architectures)
     for tab in available_tabs:
         tab.register_callbacks(enable_model_management)
 
@@ -424,9 +426,9 @@ def parse_arguments(arguments):
     parser.add_argument('--update_model_lists_on_startup', action='store_true', default=False, help='Causes Hay Say to download the latest model lists so that all the latest models appear in the character download menus.')
     parser.add_argument('--enable_model_management', action='store_true', default=False, help='Enables the user to download and delete models.')
     parser.add_argument('--enable_session_caches', action='store_true', default=False, help='Maintain separate caches for each session. If not enabled, a single cache is used for all sessions.')
-    parser.add_argument('--cache_implementation', default='file', choices=cache_implementation_map.keys(), help='Selects an implementation for the audio cache, e.g. saving them to files or to a database.')
+    parser.add_argument('--cache_implementation', default='file', choices=hsc.cache_implementation_map.keys(), help='Selects an implementation for the audio cache, e.g. saving them to files or to a database.')
     parser.add_argument('--migrate_models', action='store_true', default=False, help='Automatically move models from the model pack directories and custom model directory to the new models directory when Hay Say starts.')
-    parser.add_argument('--architectures', nargs='*', choices=architecture_map.keys(), default=architecture_map.keys(), help='Selects which architectures are shown in the Hay Say UI')
+    parser.add_argument('--architectures', nargs='*', choices=pcc.architecture_map.keys(), default=pcc.architecture_map.keys(), help='Selects which architectures are shown in the Hay Say UI')
     return parser.parse_args(arguments)
 
 
@@ -470,7 +472,7 @@ def add_toolbar(app):
 
 def add_model_management_components_if_needed(enable_model_management, architectures, app):
     if enable_model_management:
-        available_tabs = select_architecture_tabs(architectures)
+        available_tabs = pcc.select_architecture_tabs(architectures)
         add_model_management_components(architectures, app, available_tabs)
 
 
@@ -486,7 +488,7 @@ def register_cache_cleanup_callback_if_needed(enable_session_caches, cache_type)
 
 
 def build_app(update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=False,
-              cache_type='file', migrate_models=False, architectures=architecture_map.keys()):
+              cache_type='file', migrate_models=False, architectures=pcc.architecture_map.keys()):
     app = construct_app_layout(enable_model_management, cache_type, architectures, enable_session_caches)
     register_app_callbacks(architectures, enable_model_management, enable_session_caches, cache_type)
     add_model_management_components_if_needed(enable_model_management, architectures, app)

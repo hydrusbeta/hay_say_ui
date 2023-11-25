@@ -1,8 +1,9 @@
+import shutil
+
 from dash import html, dcc, Input, Output, State, callback
 from dash.exceptions import PreventUpdate
-from hay_say_common import get_model_path, model_dirs
-import shutil
-import os
+
+import hay_say_common as hsc
 
 
 def construct_model_manager(available_tabs):
@@ -65,7 +66,7 @@ def register_model_manager_callbacks(available_tabs):
     def delete_selected_models(n_clicks, *model_lists_to_delete):
         if n_clicks is None:
             raise PreventUpdate
-        models_to_delete = [get_model_path(available_tabs[idx].id, model_to_delete)
+        models_to_delete = [hsc.character_dir(available_tabs[idx].id, model_to_delete)
                             for idx, model_list_to_delete in enumerate(model_lists_to_delete)
                             for model_to_delete in model_list_to_delete]
         for model in models_to_delete:

@@ -3,7 +3,7 @@ from datetime import datetime
 from apscheduler.executors.pool import ThreadPoolExecutor
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from hay_say_common import *
+import hay_say_common as hsc
 
 executors = {
     'default': ThreadPoolExecutor(1)
@@ -14,7 +14,7 @@ scheduler.start()
 
 
 def register_cache_cleanup_callback(cache_type):
-    cache = select_cache_implementation(cache_type)
+    cache = hsc.select_cache_implementation(cache_type)
 
     @scheduler.scheduled_job(trigger='interval', seconds=3600, next_run_time=datetime.now())
     def print_hi():
