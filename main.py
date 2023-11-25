@@ -1,6 +1,7 @@
 import argparse
 import datetime
 import hashlib
+import json
 import os
 import re
 import tempfile
@@ -22,13 +23,23 @@ SHOW_INPUT_OPTIONS_LABEL = 'Show pre-processing options'
 SHOW_OUTPUT_OPTIONS_LABEL = 'Show post-processing options'
 TAB_BUTTON_PREFIX = '-tab-button'
 TAB_CELL_SUFFIX = '-tab-cell'
-
+ANNOUNCEMENT_CHECK_INTERVAL = 60000  # milliseconds
 
 def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     return [
         html.Div([
             dcc.Store(id='session', storage_type='memory',
                       data={'id': uuid.uuid4().hex if enable_session_caches else None}),
+            dcc.Interval(interval=ANNOUNCEMENT_CHECK_INTERVAL, id='announcement-checker'),
+            html.Div(
+                dcc.Markdown('Banner Announcements will appear here', id='banner-announcement'),
+                id='banner-announcement-wrapper', hidden=True),
+            dbc.Modal([
+                dbc.ModalHeader(dbc.ModalTitle("Announcement"), close_button=False),
+                dbc.ModalBody("Modal Announcements will appear here", id='modal-announcement-body'),
+                dbc.ModalFooter(
+                    dbc.Button("Close", id='modal-announcement-close'))
+            ], id='modal-announcement', is_open=False),
             html.H1('Hay Say'),
             html.H2('A Unified Interface for Pony Voice Generation', className='subtitle'),
             html.H2('Input'),
@@ -207,6 +218,55 @@ def register_generate_callbacks(cache_type, architectures):
 def register_main_callbacks(enable_session_caches, cache_type, architectures):
     cache = hsc.select_cache_implementation(cache_type)
     available_tabs = pcc.select_architecture_tabs(architectures)
+
+    @callback(
+        [Output('banner-announcement', 'children'),
+         Output('banner-announcement-wrapper', 'hidden'),
+         Output('modal-announcement-body', 'children'),
+         Output('modal-announcement', 'is_open')],
+        [State('modal-announcement', 'is_open'),
+         Input('announcement-checker', 'n_intervals')],
+    )
+    def display_announcements(current_modal_open, _):
+        time_now_utc = datetime.datetime.now(datetime.timezone.utc)
+        announcements_file = os.path.join(os.path.dirname(__file__), 'running as server', 'announcements.json')
+        print('announcements_file', flush=True)
+        print(announcements_file, flush=True)
+        banner_announcements, banner_hidden, modal_announcements, modal_open = [], True, [], current_modal_open
+        if os.path.isfile(announcements_file):
+            try:
+                with open(announcements_file, 'r') as file:
+                    json_contents = json.load(file)
+                for announcement in json_contents:
+                    time_format = '%Y-%m-%d %H:%M:%S%z'  # e.g. "2023-11-25 19:01:11+0000"
+                    effective_time = datetime.datetime.strptime(announcement['Effective Time'], time_format)
+                    expiration_time = datetime.datetime.strptime(announcement['Expiration Time'], time_format)
+                    message = announcement['Message']
+                    if effective_time <= time_now_utc < expiration_time:
+                        # Announcement is active.
+                        if announcement.get('Modal') and time_now_utc < effective_time + \
+                                datetime.timedelta(milliseconds=ANNOUNCEMENT_CHECK_INTERVAL-1):
+                            # A modal announcements is only displayed if it just went active within the last
+                            # ANNOUNCEMENT_CHECK_INTERVAL milliseconds.
+                            modal_announcements += [message]
+                        if announcement.get('Banner'):
+                            banner_announcements += [message]
+                if banner_announcements:
+                    banner_hidden = False
+                if modal_announcements:
+                    modal_open = True
+            except:
+                # If there's any problem with parsing the announcements file, don't display any announcements.
+                banner_announcements, banner_hidden, modal_announcements, modal_open = [], True, [], current_modal_open
+        return '\n\n'.join(banner_announcements), banner_hidden, '\n\n'.join(modal_announcements), modal_open
+
+    @callback(
+        Output('modal-announcement', 'is_open', allow_duplicate=True),
+        Input('modal-announcement-close', 'n_clicks'),
+        prevent_initial_call=True
+    )
+    def close_modal_announcements(_):
+        return False
 
     @callback(
         [Output('generate-button-gpu', 'hidden'),

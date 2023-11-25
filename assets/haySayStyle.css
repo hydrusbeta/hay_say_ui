@@ -239,3 +239,16 @@ button:disabled{
 .no-padding{
     padding: 0px;
 }
+
+#banner-announcement{
+    text-align: center;
+    margin: 0;
+    background-color: #222222;
+    border-width: 5px;
+    border-color: #3960bc;
+    border-style: solid;
+}
+
+:target{
+    scroll-margin-top: 40px; /* Adds an offset to scrolling with hashtags in the URL, to account for the toolbar.*/
+}
