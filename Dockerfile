@@ -4,7 +4,7 @@ ENV TZ=Etc/GMT
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone.
 
 # Install git, to download code
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install --no-install-recommends -y git
 
 # Install the official Mega command line, for downloading models stored on the Mega service.
 RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb &&\

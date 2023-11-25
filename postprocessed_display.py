@@ -31,19 +31,24 @@ def prepare_postprocessed_display(cache, hash_postprocessed, session_data, highl
             html.Tr(
                 # This table entry serves the special purpose of alerting screen readers that generation is complete.
                 html.Td('New Output Generated:' if highlight else '', role='status' if highlight else None,
-                        colSpan=2)
+                        colSpan=3)
             ),
-            html.Tr(
-                html.Td(
+            html.Tr([
+                html.Td(''),
+                html.Td([
                     html.Audio(src=prepare_src_attribute(bytes_postprocessed, CACHE_MIMETYPE), controls=True),
-                    colSpan=2)
+                ]),
+                html.Td(
+                    html.Button('Download', id={'type': 'output-download-button', 'index': hash_postprocessed}),
+                    className='download-cell'
+                )]
             ),
             html.Tr([
                 html.Td('Inputs:', className='output-label'),
                 html.Td('Audio = ' + (selected_file or 'None')
                         + ((' | Text = ' + user_text[0:20] + ('...' if len(user_text) > 20 else ''))
                            if user_text is not None else ''),
-                        className='output-value')
+                        className='output-value', colSpan=2)
             ]),
             # Commenting this out for now because there are no pre-processing options available.
             # html.Tr([
@@ -55,7 +60,7 @@ def prepare_postprocessed_display(cache, hash_postprocessed, session_data, highl
             # ]),
             html.Tr([
                 html.Td('Processing Options:', className='output-label'),
-                html.Td(prettify_inputs(inputs), className='output-value')
+                html.Td(prettify_inputs(inputs), className='output-value', colSpan=2)
             ]),
             # Commenting this out for now because there are no post-processing options available.
             # html.Tr([
@@ -66,7 +71,7 @@ def prepare_postprocessed_display(cache, hash_postprocessed, session_data, highl
             # ]),
             html.Tr([
                 html.Td('Creation Time:', className='output-label'),
-                html.Td(timestamp, className='output-value')
+                html.Td(timestamp, className='output-value', colSpan=2)
             ]),
         ], className='output-table-highlighted' if highlight else 'output-table'),
         html.Div(style={'height': '30px'}),  # todo: There's got to be a better way to add spacing

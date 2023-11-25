@@ -1,11 +1,14 @@
 import argparse
+import os
 import re
+import tempfile
 import uuid
 
 import dash_bootstrap_components as dbc
-from dash import Dash, html, dcc, Input, Output, State, ctx, callback
+import soundfile
+from dash import Dash, html, dcc, Input, Output, State, ctx, callback, ALL
 from dash.exceptions import PreventUpdate
-from hay_say_common.cache import CACHE_MIMETYPE, TIMESTAMP_FORMAT
+from hay_say_common.cache import CACHE_MIMETYPE, TIMESTAMP_FORMAT, CACHE_EXTENSION
 
 from deletion_scheduler import register_cache_cleanup_callback
 from hay_say_common import *
@@ -186,6 +189,7 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
             html.H2('Output'),
             # todo: hide this delete button if there's nothing to delete?
             html.Button('Delete all generated audio', id='delete-postprocessed'),
+            dcc.Download(id='output-download'),
             html.Div(id='message'),
         ], id='hay-say-outer-div', className='outer-div')
     ]
@@ -373,6 +377,26 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
     def get_selected_tab_object(hidden_states):
         # Get the tab that is *not* hidden (i.e. hidden == False)
         return {hidden: tab for hidden, tab in zip(hidden_states, available_tabs)}.get(False)
+
+    @callback(
+        Output('output-download', 'data'),
+        State('session', 'data'),
+        Input({'type': 'output-download-button', 'index': ALL}, 'n_clicks'),
+        prevent_initial_call=True
+    )
+    def download_postprocessed_audio(session_data, n_clicks):
+        # todo: I'm not sure this is a very robust way of checking that a button was actually clicked. Find supporting
+        #  documentation stating that n_clicks will always get reset to None, or develop a more robust way.
+        if set(n_clicks).difference({None}):
+            # A download button was actually clicked, so return a download.
+            hash_postprocessed = ctx.triggered_id['index']
+            with tempfile.TemporaryDirectory() as tempdir:
+                path = os.path.join(tempdir, hash_postprocessed + CACHE_EXTENSION)
+                data, sr = cache.read_audio_from_cache(Stage.POSTPROCESSED, session_data['id'], hash_postprocessed)
+                soundfile.write(path, data, sr)
+                return dcc.send_file(path)
+        else:
+            return None
 
 
 def construct_tab_buttons(available_tabs):
