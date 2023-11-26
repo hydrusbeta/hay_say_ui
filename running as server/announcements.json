@@ -9,7 +9,7 @@
 	{
 		"Effective Time": "2023-11-24 19:01:11+0000",
 		"Expiration Time": "2023-11-25 19:01:11+0000",
-		"Message": "Here is another example announcment message. You can define as many announcement messages as you want in this file.",
+		"Message": "Here is another example announcement message. You can define as many announcement messages as you want in this file.",
 		"Modal": true,
 		"Banner": true
 	}
