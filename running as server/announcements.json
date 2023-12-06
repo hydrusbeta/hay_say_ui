@@ -2,7 +2,7 @@
 	{
 		"Effective Time": "2023-11-24 19:01:11+0000",
 		"Expiration Time": "2023-11-25 19:01:11+0000",
-		"Message": "Here is an example announcement message you can use as a template. The expiration date is in the past, so this message won't be displayed. Effective and Expiration Times are expressed in Coordinated Universal Time (UTC) plus an offset in the format +HHMM ('+0000' in this example) so you can shift it over to your local timezone if you want. If 'Modal' is true, then current users will see a modal window appear with the announcement message soon after it becomes effective. The modal window will only appear once. If 'Banner' is true, then the message will be displayed at the top of the Hay Say UI. 'Modal' and 'Banner' may both be true.",
+		"Message": "Here is an example announcement message you can use as a template. The expiration date is in the past, so this message won't be displayed. Effective and Expiration Times are expressed in Coordinated Universal Time (UTC) plus an offset in the format +/-HHMM ('+0000' in this example) so you can shift it over to your local timezone if you want. For example, if you live in the United States Mountain Time Zone, set the offset to -0700 so you can specify the date and time in Mountain time. If 'Modal' is true, then current users will see a modal window appear with the announcement message soon after it becomes effective. The modal window will only appear once. If 'Banner' is true, then the message will be displayed at the top of the Hay Say UI. 'Modal' and 'Banner' may both be true.",
 		"Modal": true,
 		"Banner": false
 	},
