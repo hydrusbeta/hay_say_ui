@@ -58,7 +58,7 @@ class RvcTab(AbstractTab):
                      'female voice conversion, a value of around 12 is recommended.'),
             html.Tr([
                 html.Td(html.Label('f0 Extraction Method', htmlFor=self.input_ids[2]), className='option-label'),
-                html.Td(dbc.Select(options=['crepe', 'harvest', 'parselmouth'], id=self.input_ids[2],
+                html.Td(dbc.Select(options=['crepe', 'harvest', 'parselmouth', 'rmvpe'], id=self.input_ids[2],
                                    className='option-dropdown', value='harvest'))
             ], title='Select a method for extracting fundamentals frequencies. parselmouth is the fastest, but crepe '
                      'and harvest tend to produce higher quality results.'),
