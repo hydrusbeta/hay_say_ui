@@ -1,0 +1,30 @@
+# This is a docker-compose configuration file for Synth App, which is not associated with Hay Say as of the time of this
+# writing. Synth App is a UI for the text-to-speech architecture "Tacotron".
+
+services:
+  nginx:
+    image: hydrusbeta/nginx:synthapp
+    user: root
+    depends_on:
+      - synthapp
+    ports:
+      - 3334:3334
+
+  synthapp:
+    image: hydrusbeta/synthapp
+    volumes:
+      - synthapp_models:/home/luna/synthapp/models
+    working_dir: /home/luna/synthapp
+    # run_linux now only starts the rpyc ThreadedServer, due to modifications that were made in the Dockerfile.
+    # This lets us start the main application in gunicorn.
+    command: ["/bin/sh", "-c", "
+               ./run_linux &
+               ./bin/micromamba-linux-64 run -n synthapp1 
+                  --root-prefix /home/luna/micromamba/ gunicorn
+                  --workers 6
+                  --bind 0.0.0.0:3334 
+                  --chdir ./website/ponyonline/ 
+                  ponyonline.wsgi:application"]
+volumes:
+  synthapp_models:
+    external: true

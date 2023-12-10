@@ -183,11 +183,12 @@ Note: if you last installed/updated Hay Say before Aug 19, 2023, please see
 [Special Instructions for the Aug 19, 2023 update](#special-instructions-for-the-aug-19-2023-update)
 
 ### 1. Grab the latest docker-compose file 
-To update Hay Say, it is recommended that you first download the latest docker-compose file in case new entries have 
-been added (which will happen when new architecture and model packs have been added to Hay Say). To download the latest 
-docker-compose file, execute the following command. Please note that it will overwrite your existing docker-compose 
-file. If you made any edits to your old docker-compose file (e.g. to make it download only specific architectures), 
-you will need to make the same edits to the new file:
+To update Hay Say, it is recommended that you first download the latest docker-compose.yaml file in case new entries 
+have been added (which will happen when new architecture and model packs have been added to Hay Say). To download the 
+latest docker-compose file, execute the following command. Please note that this will overwrite your existing 
+docker-compose file. If you made any edits to your old docker-compose file (e.g. uncommenting lines to enable Hay Say to
+use your Cuda GPU or commenting out lines to make it download only specific architectures), you will need to make the 
+same edits to the new file:
 
 Linux:
 ```commandline
@@ -628,7 +629,7 @@ models or architectures.
 The user interface code for Hay Say runs in its own Docker container, hay_say_ui, and the UI is accessed by the user via
 a web browser. Each AI architecture (e.g. so-vits-svc or ControllableTalkNet) is installed in its own container and a 
 simple Flask web server runs in each one, listening for connections. Each Flask web server defines a /generate method 
-which invokes the AI archtecture to generate an audio file.
+which invokes the AI architecture to generate an audio file.
 
 ![diagram of Hay Say's networking setup, showing that the main UI container communicates with the AI Architecture containers by sharing files and by using webservice calls to trigger audio generation](documentation%20images/design%20diagram.png)
 

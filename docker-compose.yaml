@@ -1,6 +1,5 @@
-# This is a static docker-compose file intended for the Alpha Release version of Hay Say.
-# In the future, the docker-compose file will be dynamically generated according to user selections 
-# in a launcher UI.
+# This is a static docker-compose file intended for local installations of Hay Say.
+# In the future, a docker-compose file will be dynamically generated according to user selections in a launcher UI.
 
 services:
   # Hay Say used to download character models via Docker by downloading special, data-only images called "model packs".
