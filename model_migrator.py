@@ -13,7 +13,6 @@ def migrate_models_if_specified(migrate_models, architectures):
 def migrate_all_models(architectures):
     available_tabs = select_architecture_tabs(architectures)
     for tab in available_tabs:
-        migrate_model_dir_if_exists(hsc.custom_model_dir(tab.id), hsc.characters_dir(tab.id))  # migrates custom models
         for model_pack_dir in hsc.model_pack_dirs(tab.id):
             migrate_model_dir_if_exists(model_pack_dir, hsc.characters_dir(tab.id))  # migrates model_pack models
 
