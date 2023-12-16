@@ -5,7 +5,7 @@ services:
   nginx:
     depends_on:
       - hay_say_ui
-      - synthapp
+      # - synthapp
     image: hydrusbeta/nginx:synthapp
     user: root
     ports:
@@ -41,40 +41,40 @@ services:
                        proxy_set_header Cookie \\$$http_cookie;\\n
                     }\\n
                  }\\n
-                 \\n
-                 server {\\n
-                    listen 80;\\n
-                    server_name .synthapp.*;\\n
-                    location / {\\n
-                       limit_req zone=mylimit burst=50 nodelay;\\n
-                       proxy_pass http://synthapp:3334;\\n
-                       proxy_set_header Host \\$$host;\\n
-                    }\\n
-                    location /static {\\n
-                       limit_req zone=mylimit burst=50 nodelay;\\n
-                       autoindex on;\\n
-                       alias /home/luna/synthapp/website/ponyonline/static;\\n
-                    }\\n
-                 }\\n\" 
+                 # \\n
+                 # server {\\n
+                 #    listen 80;\\n
+                 #    server_name .synthapp.*;\\n
+                 #    location / {\\n
+                 #       limit_req zone=mylimit burst=50 nodelay;\\n
+                 #       proxy_pass http://synthapp:3334;\\n
+                 #       proxy_set_header Host \\$$host;\\n
+                 #    }\\n
+                 #    location /static {\\n
+                 #       limit_req zone=mylimit burst=50 nodelay;\\n
+                 #       autoindex on;\\n
+                 #       alias /home/luna/synthapp/website/ponyonline/static;\\n
+                 #    }\\n
+                 # }\\n\" 
                > /etc/nginx/conf.d/synthapp.conf && 
                nginx -g 'daemon off;'"]
 
-  synthapp:
-    image: hydrusbeta/synthapp
-    volumes:
-      - synthapp_models:/home/luna/synthapp/models
-    working_dir: /home/luna/synthapp
-    # run_linux only starts the rpyc ThreadedServer, due to modifications that were made to webapplauncher.py in
-    # the Dockerfile. This lets us start the main application in gunicorn.
-    command: ["/bin/sh", "-c", "
-               sed -i \"s/ALLOWED_HOSTS = \\['127.0.0.1', 'localhost'\\]/ALLOWED_HOSTS = ['.synthapp.*']/\" website/ponyonline/ponyonline/settings.py &&
-               ./run_linux &
-               ./bin/micromamba-linux-64 run -n synthapp1 
-                  --root-prefix /home/luna/micromamba/ gunicorn
-                  --workers 6
-                  --bind 0.0.0.0:3334 
-                  --chdir ./website/ponyonline/ 
-                  ponyonline.wsgi:application"]
+#  synthapp:
+#    image: hydrusbeta/synthapp
+#    volumes:
+#      - synthapp_models:/home/luna/synthapp/models
+#    working_dir: /home/luna/synthapp
+#    # run_linux only starts the rpyc ThreadedServer, due to modifications that were made to webapplauncher.py in
+#    # the Dockerfile. This lets us start the main application in gunicorn.
+#    command: ["/bin/sh", "-c", "
+#               sed -i \"s/ALLOWED_HOSTS = \\['127.0.0.1', 'localhost'\\]/ALLOWED_HOSTS = ['.synthapp.*']/\" website/ponyonline/ponyonline/settings.py &&
+#               ./run_linux &
+#               ./bin/micromamba-linux-64 run -n synthapp1
+#                  --root-prefix /home/luna/micromamba/ gunicorn
+#                  --workers 6
+#                  --bind 0.0.0.0:3334
+#                  --chdir ./website/ponyonline/
+#                  ponyonline.wsgi:application"]
 
 
   # The Redis container provides an in-memory data store that can be shared between applications.
@@ -98,8 +98,6 @@ services:
   # This container runs the main UI
   hay_say_ui:
     depends_on:
-      limited_user_migration:
-        condition: service_completed_successfully
       redis:
         condition: service_healthy
     image: hydrusbeta/hay_say:hay_say_ui
@@ -126,8 +124,6 @@ services:
   # This container provides a web service interface to so-vits-svc 3.0.
   so_vits_svc_3_server:
     depends_on:
-      limited_user_migration:
-        condition: service_completed_successfully
       redis:
         condition: service_healthy
     image: hydrusbeta/hay_say:so_vits_svc_3_server
@@ -152,8 +148,6 @@ services:
   # This container provides a web service interface to so-vits-svc 4.0.
   so_vits_svc_4_server:
     depends_on:
-      limited_user_migration:
-        condition: service_completed_successfully
       redis:
         condition: service_healthy
     image: hydrusbeta/hay_say:so_vits_svc_4_server
@@ -178,8 +172,6 @@ services:
   # This container provides a web service interface to so-vits-svc 5.0.
   so_vits_svc_5_server:
     depends_on:
-      limited_user_migration:
-        condition: service_completed_successfully
       redis:
         condition: service_healthy
     image: hydrusbeta/hay_say:so_vits_svc_5_server
@@ -204,8 +196,6 @@ services:
   # This container provides a web service interface to Retrieval-based Voice Conversion (RVC).
   rvc_server:
     depends_on:
-      limited_user_migration:
-        condition: service_completed_successfully
       redis:
         condition: service_healthy
     image: hydrusbeta/hay_say:rvc_server
@@ -230,8 +220,6 @@ services:
   # This container provides a web service interface to Controllable TalkNet.
   controllable_talknet_server:
     depends_on:
-      limited_user_migration:
-        condition: service_completed_successfully
       redis:
         condition: service_healthy
     image: hydrusbeta/hay_say:controllable_talknet_server

@@ -185,6 +185,55 @@ If you own a domain name, you can configure DNS to point it at the EC2 instance.
    1. The exact instructions for doing this vary by DNS provider. In general, you will need to login to your account 
    with your DNS provider (which may also be your domain name registrar) and configure the settings for your domain.
 
+### Include SynthApp in a subdomain
+There is a web UI for Tacotron text-to-speech models called "synth.app" which is unafiliated with Hay Say but 
+has been made available in Docker and can be deployed alongside your Hay Say server. SynthApp requires its own domain
+name or a subdomain, so this feature is only possible if you have your own domain.
+
+1. Add DNS A-Records for a subdomain of the form `synthapp.[yourdomain.com_or_ai_or_whatever]` to associate it with the
+same Elastic IP address that you set up for Hay Say.
+2. In the docker-compose.yaml file, un-comment the following lines under the nginx service:
+   ```yaml
+   # - synthapp
+   ```
+   ```yaml
+                    # \\n
+                    # server {\\n
+                    #    listen 80;\\n
+                    #    server_name .synthapp.*;\\n
+                    #    location / {\\n
+                    #       limit_req zone=mylimit burst=50 nodelay;\\n
+                    #       proxy_pass http://synthapp:3334;\\n
+                    #       proxy_set_header Host \\$$host;\\n
+                    #    }\\n
+                    #    location /static {\\n
+                    #       limit_req zone=mylimit burst=50 nodelay;\\n
+                    #       autoindex on;\\n
+                    #       alias /home/luna/synthapp/website/ponyonline/static;\\n
+                    #    }\\n
+                    # }\\n\" 
+   ```
+   and un-comment the entire synthapp service:
+   ```yaml
+   #  synthapp:
+   #    image: hydrusbeta/synthapp
+   #    volumes:
+   #      - synthapp_models:/home/luna/synthapp/models
+   #    working_dir: /home/luna/synthapp
+   #    # run_linux only starts the rpyc ThreadedServer, due to modifications that were made to webapplauncher.py in
+   #    # the Dockerfile. This lets us start the main application in gunicorn.
+   #    command: ["/bin/sh", "-c", "
+   #               sed -i \"s/ALLOWED_HOSTS = \\['127.0.0.1', 'localhost'\\]/ALLOWED_HOSTS = ['.synthapp.*']/\" website/ponyonline/ponyonline/settings.py &&
+   #               ./run_linux &
+   #               ./bin/micromamba-linux-64 run -n synthapp1
+   #                  --root-prefix /home/luna/micromamba/ gunicorn
+   #                  --workers 6
+   #                  --bind 0.0.0.0:3334
+   #                  --chdir ./website/ponyonline/
+   #                  ponyonline.wsgi:application"]
+   ```
+After you've started your server, you should be able to access SynthApp by going to http://synthapp.[yourdomain.whatever]
+
 ### Enable SSL
 Note: with any of the three options below, you will eventually be asked to provide a "Common Name" and "Subject Alt 
 Names". The Common Name should be your domain name by itself (for example, I use haysay.ai). For the Subject Alt Names, 
@@ -258,35 +307,7 @@ file(s) (.pem or .crt).
 
 #### Configure the docker-compose file to use your certificate
 Whichever option you used above, you must now configure the docker-compose.yaml file to use your certificate. 
-1. Locate the `command` directive under the nginx service and uncomment the following lines:
-    ```yaml
-        # server {\\n
-        #    listen 80;\\n
-        #    server_name _;\\n
-        #    return 301 https://\\$$host\\$$request_uri;\\n
-        # }\\n
-    ```
-2. Change the following line:
-    ```
-    listen 80 default_server;\\n
-    ```
-    to this:
-    ```
-    listen 443 ssl default_server;\\n
-    ssl_certificate /etc/pki/tls/certs/fullchain.pem;\\n
-    ssl_certificate_key /etc/pki/tls/private/privkey.pem;\\n
-    ```
-3. Similarly, change the following line:
-    ```
-    listen 80;\\n
-    ```
-    to this:
-    ```
-    listen 443 ssl;\\n
-    ssl_certificate /etc/pki/tls/certs/fullchain.pem;\\n
-    ssl_certificate_key /etc/pki/tls/private/privkey.pem;\\n
-    ```
-4. Uncomment the following lines:
+1. Uncomment the following lines:
     ```yaml
         #    volumes:
         #      - type: bind
@@ -296,6 +317,35 @@ Whichever option you used above, you must now configure the docker-compose.yaml 
         #        source: /etc/pki/tls/private
         #        target: /etc/pki/tls/private
     ```
+2. Locate the `command` directive under the nginx service and uncomment the following lines under it:
+    ```yaml
+        # server {\\n
+        #    listen 80;\\n
+        #    server_name _;\\n
+        #    return 301 https://\\$$host\\$$request_uri;\\n
+        # }\\n
+    ```
+3. Change the following line:
+    ```
+    listen 80 default_server;\\n
+    ```
+    to this:
+    ```
+    listen 443 ssl default_server;\\n
+    ssl_certificate /etc/pki/tls/certs/fullchain.pem;\\n
+    ssl_certificate_key /etc/pki/tls/private/privkey.pem;\\n
+    ```
+4. Similarly, change the *second instance* of the following line:
+    ```
+    listen 80;\\n
+    ```
+    to this:
+    ```
+    listen 443 ssl;\\n
+    ssl_certificate /etc/pki/tls/certs/fullchain.pem;\\n
+    ssl_certificate_key /etc/pki/tls/private/privkey.pem;\\n
+    ```
+   
 For clarity, the nginx section of your docker-compose file should now look like this:
 ```yaml
   nginx:
@@ -417,7 +467,7 @@ If it doesn't seem to be working, look for errors in the log at
 There are a few places in the docker-compose.yaml file where a wildcard is used for hostname matching. To prevent host 
 header attacks and cache poisoning, I strongly recommend replacing the wildcard expressions with absolute values. For 
 example, if the Public IPv4 DNS name of your instance is ec2-WWW-XXX-YYY-ZZZ.region.compute.amazonaws.com, then:
-1. Replace this:
+1. Replace the *second instance* of this line:
     ```
     server_name _;\\n
     ```
@@ -460,7 +510,7 @@ instance, then you can go to http://[yourDomainNameHere] instead.
 ## 11. Configure Hay Say, Part 3/3
 1. Open docker-compose.yaml again and search for `enable_model_management=True`. Change that to 
 `enable_model_management=False` instead. This prevents end users from deleting models.
-2. Optional, but recommended: Two lines above that, there should be a line that starts with:
+2. Optional, but recommended: Three lines above that, there should be a line that starts with:
     ```
     celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker ... 
     ```
