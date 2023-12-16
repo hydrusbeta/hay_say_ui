@@ -183,8 +183,8 @@ provided: not found`, then cd to that directory first.
 ## Updating Hay Say
 Note: if you last installed/updated Hay Say before Aug 19, 2023, please see 
 [Special Instructions for the Aug 19, 2023 update](#special-instructions-for-the-aug-19-2023-update)
-If you last installed/updated Hay Say between Aug 19, 2023 and Dec 11, 2023, please see [Special Instructions for the 
-Dec 11, 2023 update](#special-instructions-for-the-dec-10-2023-update)
+If you last installed/updated Hay Say between Aug 19, 2023 and Dec 12, 2023, please see [Special Instructions for the 
+Dec 12, 2023 update](#special-instructions-for-the-dec-10-2023-update)
 
 ### 1. Grab the latest docker-compose file 
 To update Hay Say, first download the latest docker-compose.yaml file by executing the following command. Please note 
@@ -275,10 +275,10 @@ docker volume create models
 docker compose up
 ```
 
-### Special Instructions for the Dec 11, 2023 update
-Every Docker image in the Hay Say project was updated in the Dec 11 update, so you can save some space by deleting all 
+### Special Instructions for the Dec 12, 2023 update
+Every Docker image in the Hay Say project was updated in the Dec 12 update, so you can save some space by deleting all 
 of your existing Hay Say Docker images first and then re-downloading them (doing so will prevent "dangling" images from 
-taking up excessive space during the update). If you last installed or updated Hay Say between Aug 19 and Dec 11, 2023, 
+taking up excessive space during the update). If you last installed or updated Hay Say between Aug 19 and Dec 12, 2023, 
 please execute these commands instead:
 
 Linux:
@@ -404,20 +404,26 @@ Cuda-capable GPU. If you do have a Cuda-capable GPU on a Windows or Linux machin
    * On Linux, follow the instructions at https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html. Note: Unless you know you are using CRI-O or Podman, you do not need to follow the instructions under "Configuring CRI-O" or "Configuring Podman".
    * On Windows, make sure you are using a recent NVIDIA driver and then follow the instructions under the section "CUDA Support for WSL 2" at https://docs.nvidia.com/cuda/wsl-user-guide/index.html#cuda-support-for-wsl-2
    * On MacOS, as far as I can tell, Cuda GPU integration is no longer supported. See https://developer.nvidia.com/nvidia-cuda-toolkit-11_6_0-developer-tools-mac-hosts  
-2. Edit the docker-compose.yaml 
-file. There are several places (one under each architecture) where you will see the following lines:
-    ```yaml
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: all
-    #           capabilities: [gpu]
-    ```
-    To enable GPU for that architecture, uncomment those lines. i.e. remove the hashtags so that they look like this instead:
+2. Edit the docker-compose.yaml file. There are several places (one under each architecture) where you will see the 
+   following lines:
     ```yaml
     deploy:
+      restart_policy:
+        condition: on-failure
+        window: 30s
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: all
+    #          capabilities: [gpu]
+    ```
+    Remove the hashtags so that it looks like this instead:
+    ```yaml
+    deploy:
+      restart_policy:
+        condition: on-failure
+        window: 30s
       resources:
         reservations:
           devices:
