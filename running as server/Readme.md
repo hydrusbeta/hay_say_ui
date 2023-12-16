@@ -434,7 +434,7 @@ example, if the Public IPv4 DNS name of your instance is ec2-WWW-XXX-YYY-ZZZ.reg
     ```
     sed -i \"s/ALLOWED_HOSTS = \\['127.0.0.1', 'localhost'\\]/ALLOWED_HOSTS = ['.synthapp.ec2-WWW-XXX-YYY-ZZZ.region.compute.amazonaws.com']/\" website/ponyonline/ponyonline/settings.py &&
     ```
-If you followed the steps in the [Optional Steps](#8.-optional-steps) section above to use your own domain, replace the 
+If you followed the steps in the [Optional Steps](#8-optional-steps) section above to use your own domain, replace the 
 wildcards with your own domain name instead.
 
 ## 10. Download character models
@@ -445,7 +445,7 @@ installation. There is a hyphen between "docker" and "compose" here)
     ```
 2. Open the UI and download all models for all architectures . You can get to the UI by pasting the Public IPv4 DNS name
 of your instance (e.g. http://ec2-WWW-XXX-YYY-ZZZ.region.compute.amazonaws.com) into the URL bar of your favorite 
-browser. If you followed the [Optional Steps](#8.-optional-steps) above to point your own domain name at the EC2 
+browser. If you followed the [Optional Steps](#8-optional-steps) above to point your own domain name at the EC2 
 instance, then you can go to http://[yourDomainNameHere] instead.
 3. The Hay Say UI should come up. Go to each architecture and download all the character models. 
 4. Stop Hay Say by typing CTRL+C into the terminal.
