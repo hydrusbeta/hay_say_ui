@@ -183,8 +183,8 @@ provided: not found`, then cd to that directory first.
 ## Updating Hay Say
 Note: if you last installed/updated Hay Say before Aug 19, 2023, please see 
 [Special Instructions for the Aug 19, 2023 update](#special-instructions-for-the-aug-19-2023-update)
-If you last installed/updated Hay Say between Aug 19, 2023 and Dec 15, 2023, please see [Special Instructions for the 
-Dec 15, 2023 update](#special-instructions-for-the-dec-15-2023-update)
+If you last installed/updated Hay Say between Aug 19, 2023 and Dec 16, 2023, please see [Special Instructions for the 
+Dec 16, 2023 update](#special-instructions-for-the-dec-16-2023-update)
 
 ### 1. Grab the latest docker-compose file 
 To update Hay Say, first download the latest docker-compose.yaml file by executing the following command. Please note 
@@ -275,10 +275,10 @@ docker volume create models
 docker compose up
 ```
 
-### Special Instructions for the Dec 15, 2023 update
-Every Docker image in the Hay Say project was updated in the Dec 15 update, so you can save some space by deleting all 
+### Special Instructions for the Dec 16, 2023 update
+Every Docker image in the Hay Say project was updated in the Dec 16 update, so you can save some space by deleting all 
 of your existing Hay Say Docker images first and then re-downloading them (doing so will prevent "dangling" images from 
-taking up excessive space during the update). If you last installed or updated Hay Say between Aug 19 and Dec 15, 2023, 
+taking up excessive space during the update). If you last installed or updated Hay Say between Aug 19 and Dec 16, 2023, 
 please execute these commands instead:
 
 Linux:
