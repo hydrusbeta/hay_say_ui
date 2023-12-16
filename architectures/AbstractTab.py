@@ -1,17 +1,18 @@
-from hay_say_common import model_dirs, character_dir, multispeaker_model_dir
-import download.Downloader as Downloader
-import util
+import json
+import os
+import shutil
+import sys
+import tempfile
+from abc import ABC, abstractmethod
 
-from dash import html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
+import hay_say_common as hsc
+import requests
+from dash import html, dcc, Input, Output, State, callback
 from dash.exceptions import PreventUpdate
 
-from abc import ABC, abstractmethod
-import os
-import sys
-import json
-import tempfile
-import shutil
+import download.Downloader as Downloader
+import util
 
 SHOW_CHARACTER_DOWNLOAD_MENU = '▷ Show Character Download Menu'
 HIDE_CHARACTER_DOWNLOAD_MENU = '▽ Hide Character Download Menu'
@@ -119,6 +120,34 @@ class AbstractTab(ABC):
                  'value': os.path.basename(entry[0])}
                 for entry in model_paths_and_sizes]
 
+    @property
+    def hardware_options(self):
+        return [*((['GPU']) if self.is_gpu_available else ()), 'CPU']
+
+    @property
+    def is_gpu_available(self):
+        # todo: If there are multiple GPUs on the system, this method will return True if pytorch can see *any* of them.
+        #  However, it is possible that one of the invisible CUDA GPUs is selected by the the celery worker (the celery
+        #  worker doesn't know which architectures support which GPUs). We need to somehow make sure that that never
+        #  happens. Is there some way to communicate to celery that a particular job should only be picked up by
+        #  particular workers? Alternatively, maybe we can add a supported_gpus argument containing the GPU IDs of all
+        #  supported GPUs to the generate() method and have the celery worker check whether the GPU it is assigned to is
+        #  listed in supported_gpus. If it is not, then have it place the job back on the queue (if that is something
+        #  celery can do). A third option would be to refactor GPU management so that each celery worker is not just
+        #  assigned a single GPU at the start but can use any GPU and places a "lock" on the one it wants to use. Then
+        #  it just makes sure to select from among the GPUs listed in supported_gpus.
+        response = requests.get(f'http://{self.id + "_server"}:{self.port}/gpu-info')
+        code = response.status_code
+
+        if code != 200:
+            # Something probably went wrong, so log a message and assume that GPU is not available.
+            print(f'Warning! is_gpu_available returned the unexpected http code {code}. Assuming GPU is not available. '
+                  f'Please inform the maintainers of Hay Say.')
+            return False
+        else:
+            gpu_info = response.json()
+            return len(gpu_info) > 0
+
     def tab_contents(self, enable_model_management):
         return html.Tr([
             html.Td([
@@ -161,12 +190,9 @@ class AbstractTab(ABC):
     @property
     def model_directory_paths(self):
         # A list of all the individual character model folders for this architecture.
-        # Loop through all the directories in model_dirs(architecture_name), call os.listdir(model_dir), and flatten the
-        # result into a single list. Ignore files; we're only interested in folders that bear character names.
-        return [character_path
-                for character_path_list in ([os.path.join(model_dir, character) for character in os.listdir(model_dir)]
-                                            for model_dir in model_dirs(self.id))
-                for character_path in character_path_list if not os.path.isfile(character_path)]
+        characters_dir = hsc.characters_dir(self.id)
+        return [os.path.join(characters_dir, character) for character in os.listdir(characters_dir)
+                if not os.path.isfile(os.path.join(characters_dir, character))]
 
     @property
     def character_dropdown(self):
@@ -213,7 +239,7 @@ class AbstractTab(ABC):
 
     def determine_files_required_for_character_alone(self, character_model_info):
         # Return a dictionary with entries of the form {'<path/to/file>': <file_size_in_bytes>}.
-        model_directory = character_dir(self.id, character_model_info['Model Name'])
+        model_directory = hsc.character_dir(self.id, character_model_info['Model Name'])
         return {os.path.join(model_directory, file['Download As']): file['Size (bytes)']
                 for file in character_model_info['Files']}
 
@@ -221,7 +247,7 @@ class AbstractTab(ABC):
         # Return a dictionary with entries of the form {'<path/to/file>': <file_size_in_bytes>}.
         # If the multi speaker model is already downloaded, return an empty dictionary.
         if multi_speaker_model_info is not None:
-            model_directory = multispeaker_model_dir(self.id, multi_speaker_model_info['Model Name'])
+            model_directory = hsc.multispeaker_model_dir(self.id, multi_speaker_model_info['Model Name'])
             if not os.path.exists(model_directory):
                 return {os.path.join(model_directory, file['Download As']): file['Size (bytes)']
                         for file in multi_speaker_model_info['Files']}

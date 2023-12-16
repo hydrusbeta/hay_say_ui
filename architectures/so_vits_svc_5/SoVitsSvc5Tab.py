@@ -39,10 +39,12 @@ class SoVitsSvc5Tab(AbstractTab):
     def options(self):
         return html.Table([
             html.Tr([
-                html.Td("Note: \"mane6\" = combined Mane Six singing model", colSpan=2, className='centered')
+                html.Td('Note: "mane6" and "ext1" are multi-speaker models.', colSpan=2, className='centered')
             ]),
             html.Tr([
-                html.Td("Note: \"ext1\" = combined Non-Mane-Six model", colSpan=2, className='centered')
+                html.Td('Note: Pinkie Pie (singing), all "ext1" models and all "mane6" models were trained using an '
+                        'older version of so-vits-svc 5. All other models, including Pinkie Pie (singing, v2), use the '
+                        'newer version', colSpan=2, className='centered')
             ]),
             html.Tr([
                 html.Td(html.Label('Character', htmlFor=self.input_ids[0]), className='option-label'),

@@ -202,6 +202,10 @@ option {
     text-align: center;
 }
 
+.download-cell{
+    text-align: left;
+}
+
 button{
     background-color: rgba(0,0,0,0.25);
 }
@@ -211,7 +215,7 @@ button:disabled{
     color: #666;
 }
 
-#generate-button{
+.generate-button{
     font-family: Equestria;
     font-size: 36px;
     margin: 0px;
@@ -230,4 +234,21 @@ button:disabled{
 .checklist-input-style{
     margin-right: 10px;
     margin-left: 15px;
+}
+
+.no-padding{
+    padding: 0px;
+}
+
+#banner-announcement{
+    text-align: center;
+    margin: 0;
+    background-color: #222222;
+    border-width: 5px;
+    border-color: #3960bc;
+    border-style: solid;
+}
+
+:target{
+    scroll-margin-top: 40px; /* Adds an offset to scrolling with hashtags in the URL, to account for the toolbar.*/
 }

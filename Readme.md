@@ -1,15 +1,17 @@
-# Hay Say, A Unified Interface for Pony Voice Generation
+![image showing the Hay Say UI](documentation%20images/Hay%20Say%20UI.png) 
+
 ## What is Hay Say?
 
-Hay Say is a user interface for generating pony voices. From a single UI, you can generate voices from AI architectures, 
-such as so-vits-svc (https://github.com/svc-develop-team/so-vits-svc) and Controllable TalkNet 
-(https://github.com/SortAnon/ControllableTalkNet). At the moment, all supported AI architectures can run locally and do 
+Hay Say is a user interface for generating pony voices. From a single UI, you can generate voices or perform voice 
+conversion from AI architectures such as so-vits-svc (https://github.com/svc-develop-team/so-vits-svc), Controllable 
+TalkNet (https://github.com/SortAnon/ControllableTalkNet) and RVC 
+(https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI). At the moment, all supported AI architectures can run locally and do 
 not require an internet connection except to download character models.
 
 ## The Motivation Behind Hay Say
 
-Over the past few years, many AI architectures have emerged for accomplishing text-to-speech (TTS) generation and voice 
-modification ("speech-to-speech"). Many of these new technologies did not have a graphical user interface when they 
+Over the past few years, many AI architectures have emerged for accomplishing text-to-speech generation and voice 
+conversion ("speech-to-speech"). Many of these new technologies did not have a graphical user interface when they 
 first became available. Each time a new technology has entered into the awareness of the Pony Preservation Project 
 thread at /mlp on 4chan, someone has had to develop a new UI to make the technology accessible to others. This has lead 
 to a collection of user interfaces over time, each one unique to a particular AI architecture and with features that are
@@ -56,17 +58,15 @@ Macs with Intel chips.
 1. Install Docker Desktop:  
 	https://www.docker.com/
 2. Start Docker Desktop and wait until it has finished loading.
-	If you get a popup window stating "Docker Desktop requires a newer WSL kernel version", open a command prompt, 
-3. execute the following command, and then start docker desktop again:
-	`wsl --update`
+	If you get a popup window stating "Docker Desktop requires a newer WSL kernel version", then open a command prompt, 
+execute the command `wsl --update`, and then start Docker Desktop again.
 3. Open a command prompt and execute the following commands:
-```commandline
-curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
-docker volume create models
-docker volume create custom_models
-docker volume create audio_cache
-docker compose up
-```
+    ```
+    curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+    docker volume create models
+    docker volume create audio_cache
+    docker compose up
+    ```
 
 Note: You might get a Windows Defender Firewall popup. You can safely close that window. No special firewall rules are 
 required to run Hay Say.
@@ -90,29 +90,30 @@ taskbar:
 ![image showing the Docker whale icon in a Windows Taskbar](documentation%20images/windows%20docker%20icon.png)  
 If it is not running, you can start it by launching Docker Desktop. 
 Then, open Command Prompt and type the following command:
-```commandline
+```
 docker compose up
 ```
-Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when 
-you execute that command. cd to that directory first if necessary.
+Note: When you run that command, you must be in the folder where docker-compose.yaml is located (you downloaded it 
+earlier when you executed the `curl` command in step 3 above). If you get an error stating `no configuration file 
+provided: not found`, then cd to that directory first.
 
 
 ### Linux Installation Instructions
 
 1. Install Docker Engine. This can be done in several ways according to preference. See 
-https://docs.docker.com/engine/install/ubuntu. I recommend following the instructions under the section "Install using 
-the apt repository". Note: Docker usually needs to be run as a superuser. However, it is possible to install it in a way
-that lets you run it in rootless mode (see https://docs.docker.com/engine/security/rootless). Hay Say has not been 
-tested in a rootless configuration.
+https://docs.docker.com/engine/install/ubuntu. Note: By default, Docker needs to be run with superuser privileges. 
+However, it is possible to install it in a way that lets you run it in rootless mode if you prefer (see 
+https://docs.docker.com/engine/security/rootless/). Hay Say will run in a rootless configuration just fine on CPU, but 
+if you want it to use a Cuda GPU, then you will need to perform some additional configuration. See 
+[Enabling GPU Integration](#enabling-gpu-integration).
 
 2. Open a terminal and execute the following commands:
-```commandline
-wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
-sudo docker volume create models
-sudo docker volume create custom_models
-sudo docker volume create audio_cache
-sudo docker compose up
-```
+    ```shell
+    wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+    sudo docker volume create models
+    sudo docker volume create audio_cache
+    sudo docker compose up
+    ```
 
 Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the 
 following:  
@@ -127,11 +128,12 @@ seconds for Docker to gracefully shut down all of the containers.
 
 #### Starting Hay Say Again 
 To start Hay Say again, open a terminal and type the following command:
-```commandline
+```shell
 sudo docker compose up
 ```
-Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 2 above) when 
-you execute that command. cd to that directory first if necessary.
+Note: When you run that command, you must be in the folder where docker-compose.yaml is located (you downloaded it 
+earlier when you executed the `wget` command in step 2 above). If you get an error stating `no configuration file 
+provided: not found`, then cd to that directory first.
 
 
 
@@ -145,10 +147,9 @@ version for Apple Silicon):
 	https://www.docker.com/
 2. Start Docker Desktop and wait until it has finished loading.
 3. Open a terminal and execute the following commands:
-```commandline
+```zsh
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 docker volume create models
-docker volume create custom_models
 docker volume create audio_cache
 docker compose up
 ```
@@ -172,34 +173,35 @@ taskbar:
 ![image showing the Docker whale icon in a MacOS Taskbar](documentation%20images/macOS%20docker%20icon.png)  
 If it is not running, you can start it by launching Docker Desktop
 Then open a terminal and type the following command
-```commandline
+```zsh
 sudo docker compose up
 ```
-Note: you must be in the folder where docker-compose.yaml is located (you downloaded it earlier in step 3 above) when 
-you execute that command. cd to that directory first if necessary.
+Note: When you run that command, you must be in the folder where docker-compose.yaml is located (you downloaded it 
+earlier when you executed the `curl` command in step 3 above). If you get an error stating `no configuration file 
+provided: not found`, then cd to that directory first.
 
 ## Updating Hay Say
 Note: if you last installed/updated Hay Say before Aug 19, 2023, please see 
 [Special Instructions for the Aug 19, 2023 update](#special-instructions-for-the-aug-19-2023-update)
+If you last installed/updated Hay Say between Aug 19, 2023 and Dec 16, 2023, please see [Special Instructions for the 
+Dec 16, 2023 update](#special-instructions-for-the-dec-16-2023-update)
 
 ### 1. Grab the latest docker-compose file 
-To update Hay Say, it is recommended that you first download the latest docker-compose.yaml file in case new entries 
-have been added (which will happen when new architecture and model packs have been added to Hay Say). To download the 
-latest docker-compose file, execute the following command. Please note that this will overwrite your existing 
-docker-compose file. If you made any edits to your old docker-compose file (e.g. uncommenting lines to enable Hay Say to
-use your Cuda GPU or commenting out lines to make it download only specific architectures), you will need to make the 
-same edits to the new file:
+To update Hay Say, first download the latest docker-compose.yaml file by executing the following command. Please note 
+that this will overwrite your existing docker-compose file. If you made any edits to your old docker-compose file (e.g. 
+uncommenting lines to enable Hay Say to use your Cuda GPU or commenting out lines to make it download only specific 
+architectures), you will need to make the same edits to the new file:
 
 Linux:
-```commandline
+```shell
 wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml  
 ```
 Windows:
-```commandline
+```
 curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 ```
 MacOS:
-```commandline
+```zsh
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 ```
 
@@ -208,13 +210,13 @@ Next, execute the following commands to make sure that your containers are stopp
 start Hay Say again:  
 
 Linux:
-```commandline
+```shell
 sudo docker compose stop
 sudo docker compose pull
 sudo docker compose up
 ```
 Windows and MacOS:
-```commandline
+```zsh
 docker compose stop
 docker compose pull
 docker compose up
@@ -226,12 +228,12 @@ used, is referred to as a "dangling" image. You can remove dangling images to sa
 command:
 
 Linux:
-```commandline
+```shell
 sudo docker image prune
 ```
 
 Windows and MacOS:
-```commandline
+```zsh
 docker image prune
 ```
 Windows users must also follow the instructions in 
@@ -239,14 +241,14 @@ Windows users must also follow the instructions in
 disk space.
 
 ### Special Instructions for the Aug 19, 2023 update
-Following the update on Aug 19, 2023, the "model pack" images are obsolete and can be removed. Furthermore, every other 
-image has been updated, so you can save some space by deleting all of your existing Hay Say Docker images first and then 
-re-downloading them (doing so will prevent "dangling" images from taking up excessive space during the update). Lastly, 
-Hay Say now expects the presence of a "models" docker volume, so you must create it. If you installed Hay Say before Aug
-19, 2023, please execute these commands instead:
+Following the update on Aug 19, 2023, the "model pack" images have become obsolete and can be removed. Furthermore, 
+every other image has been updated, so you can save some space by deleting all of your existing Hay Say Docker images 
+first and then re-downloading them (doing so will prevent "dangling" images from taking up excessive space during the 
+update). Lastly, Hay Say now expects the presence of a "models" docker volume, so you must create it. If you installed 
+Hay Say before Aug 19, 2023, please execute these commands instead:
 
 Linux:
-```commandline
+```shell
 sudo docker compose down --rmi all
 wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 sudo docker volume create models
@@ -254,7 +256,7 @@ sudo docker compose up
 ```
 
 MacOS:
-```commandline
+```zsh
 docker compose down --rmi all
 curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 docker volume create models
@@ -262,14 +264,45 @@ docker compose up
 ```
 
 Windows:
-```commandline
+```
 docker compose down --rmi all
 ```
 Now follow the steps in [Additional Required Steps for Windows Users](#additional-required-steps-for-windows-users) to 
 clear disk space. After that, open Docker Desktop again. Once it has loaded, execute the following commands:
-```commandline
+```
 curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 docker volume create models
+docker compose up
+```
+
+### Special Instructions for the Dec 16, 2023 update
+Every Docker image in the Hay Say project was updated in the Dec 16 update, so you can save some space by deleting all 
+of your existing Hay Say Docker images first and then re-downloading them (doing so will prevent "dangling" images from 
+taking up excessive space during the update). If you last installed or updated Hay Say between Aug 19 and Dec 16, 2023, 
+please execute these commands instead:
+
+Linux:
+```shell
+sudo docker compose down --rmi all
+wget https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+sudo docker compose up
+```
+
+MacOS:
+```zsh
+docker compose down --rmi all
+curl --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
+docker compose up
+```
+
+Windows:
+```
+docker compose down --rmi all
+```
+Now follow the steps in [Additional Required Steps for Windows Users](#additional-required-steps-for-windows-users) to 
+clear disk space. After that, open Docker Desktop again. Once it has loaded, execute the following commands:
+```
+curl.exe --output docker-compose.yaml https://raw.githubusercontent.com/hydrusbeta/hay_say_ui/main/docker-compose.yaml
 docker compose up
 ```
 
@@ -289,14 +322,14 @@ following lines:
 #so_vits_svc_3_model_pack_1:  
 #  image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1  
 #  volumes:  
-#    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1  
+#    - so_vits_svc_3_model_pack_1:/home/luna/hay_say/so_vits_svc_3_model_pack_1  
 ```
 So that they look like this instead:
 ```yaml
 so_vits_svc_3_model_pack_1:  
   image: hydrusbeta/hay_say:so_vits_svc_3_model_pack_1  
   volumes:  
-    - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1  
+    - so_vits_svc_3_model_pack_1:/home/luna/hay_say/so_vits_svc_3_model_pack_1  
 ```
 Be sure to save the file, then restart Hay Say (type ctrl+c in Hay Say's terminal if it is running and then execute 
 "docker compose up" again). 
@@ -318,31 +351,21 @@ Here is a table showing which characters are included in each model pack:
 ### Loading Custom Models
 If you have acquired or trained a model that is not included with Hay Say, you can add it to Hay Say by copying it to 
 the relevant characters folder inside the main docker container:  
-/root/hay_say/models/[architecture]/characters/  
+/home/luna/hay_say/models/[architecture]/characters/  
 where [architecture] is one of: controllable_talknet, rvc, so_vits_svc_3, so_vits_svc_4, or so_vits_svc_5 
 1. First, make sure Hay Say is running. 
 2. Execute the following command in a terminal or Command Prompt. It will display information about all of the running 
 Docker containers:
-```
-docker container ls
-```
-Note: You may need to expand the command window to properly display the output, which is arranged like a wide table. You
-should see a column titled "IMAGE" in the output. Look for the entry "hydrusbeta/hay_say:hay_say_ui" and find the 
-corresponding container name under the "NAMES" column. You will need that name in a moment:
-![Screenshots showing one possible output of "docker container ls"](documentation%20images/main%20container%20name.png)
-The name you see might be a little different. For example, another name I have seen on someone else's machine was 
-"hay_say_ui-hay_say_ui-1".  
-3. Create a folder for each of the architectures within the custom_models folder by executing the following commands in 
-a new terminal (or Command Prompt if you are using Windows). Replace [container-name] with the name you found in step 
-2.:
-```
-docker exec [container-name] -p /root/hay_say/custom_models/so_vits_svc_3
-docker exec [container-name] mkdir -p /root/hay_say/custom_models/so_vits_svc_4
-docker exec [container-name] mkdir -p /root/hay_say/custom_models/so_vits_svc_5
-docker exec [container-name] mkdir -p /root/hay_say/custom_models/controllable_talknet
-docker exec [container-name] mkdir -p /root/hay_say/custom_models/rvc
-```
-4. Arrange and rename your files to match the expected format:  
+    ```shell
+    docker container ls
+    ```
+    Note: You may need to expand the command window to properly display the output, which is arranged like a wide table. You
+    should see a column titled "IMAGE" in the output. Look for the entry "hydrusbeta/hay_say:hay_say_ui" and find the 
+    corresponding container name under the "NAMES" column. You will need that name in a moment:
+    ![Screenshots showing one possible output of "docker container ls"](documentation%20images/main%20container%20name.png)
+    The name you see might be a little different. For example, another name I have seen on someone else's machine was 
+    "hay_say_ui-hay_say_ui-1".
+3. Arrange and rename your files to match the expected format:  
 ![Screenshots showing the expected file structures for each architecture's models](documentation%20images/CustomModelFileOrganization.png)  
 Additional restrictions: 
    * Only a single speaker is supported per character folder. 
@@ -353,48 +376,65 @@ Additional restrictions:
        speaker to use. The contents of the file should look like this:
        ```json
        {
-       "speaker": "<name of speaker>"
+          "speaker": "<name of speaker>"
        }
        ```
        where `<name of speaker>` should match one of the strings under "spk" in the config.json file.
-5. Next, copy the folder containing your custom model into the desired architecture folder using the "docker cp" 
+4. Next, copy the folder containing your custom model into the desired architecture folder using the `docker cp` 
    command. For example, if you have a folder named "Rainbowshine_Custom" on your desktop containing a so-vits-svc 4.0 
    model, you can copy it by executing the following on Linux or MacOS:
-    ```commandline
-    docker cp ~/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/models/so_vits_svc_4/characters/RainbowShine_Custom
+    ```shell
+    docker cp ~/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/home/luna/hay_say/models/so_vits_svc_4/characters/RainbowShine_Custom
     ```
     or the following command on Windows:
-    ```commandline
-    docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/root/hay_say/models/so_vits_svc_4/characters/RainbowShine_Custom
     ```
-    Note #1: The dot at the end of "~/Desktop/Rainbowshine_Custom/." is not a typo, so don't leave it out. It instructs 
+    docker cp %HOMEDRIVE%%HOMEPATH%/Desktop/Rainbowshine_Custom/. hydrusbeta-hay_say_ui-1:/home/luna/hay_say/models/so_vits_svc_4/characters/RainbowShine_Custom
+    ```
+    * Note: The dot at the end of "~/Desktop/Rainbowshine_Custom/." is not a typo, so don't leave it out. It instructs 
     Docker to copy all the contents of the Rainbowshine_Custom folder.  
-    Note #2: I recommend that you name the folder with "_Custom" appended to the end as I have done in this example. 
+    * Note: I recommend that you name the folder with "_Custom" appended to the end as I have done in this example. 
     That will avoid a name clash in case the character becomes available for download in the future.  
-6. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
+5. Finally, restart Hay Say (type ctrl+c in Hay Say's terminal and then execute "docker compose up" again)
 
 
 ### Enabling GPU Integration
 GPU integration is turned off by default in Hay Say. This is to prevent an error for users who do not have a 
-Cuda-capable GPU. If you do have a Cuda-capable GPU, you can enable GPU integration by editing the docker-compose.yaml 
-file. There are several place (one under each architecture) where you will see the following lines:
-```yaml
-# resources:
-#   reservations:
-#     devices:
-#       - driver: nvidia
-#         count: all
-#         capabilities: [gpu]
-```
-To enable GPU for that architecture, uncomment those lines. i.e. remove the hashtags so that they look like this instead:
-```yaml
-resources:
-  reservations:
-    devices:
-      - driver: nvidia
-        count: all
-        capabilities: [gpu]
-```
+Cuda-capable GPU. If you do have a Cuda-capable GPU on a Windows or Linux machine, you can enable GPU integration:
+1. Install the NVIDIA Container Toolkit
+   * On Linux, follow the instructions at https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html. Note: Unless you know you are using CRI-O or Podman, you do not need to follow the instructions under "Configuring CRI-O" or "Configuring Podman".
+   * On Windows, make sure you are using a recent NVIDIA driver and then follow the instructions under the section "CUDA Support for WSL 2" at https://docs.nvidia.com/cuda/wsl-user-guide/index.html#cuda-support-for-wsl-2
+   * On MacOS, as far as I can tell, Cuda GPU integration is no longer supported. See https://developer.nvidia.com/nvidia-cuda-toolkit-11_6_0-developer-tools-mac-hosts  
+2. Edit the docker-compose.yaml file. There are several places (one under each architecture) where you will see the 
+   following lines:
+    ```yaml
+    deploy:
+      restart_policy:
+        condition: on-failure
+        window: 30s
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: all
+    #          capabilities: [gpu]
+    ```
+    Remove the hashtags so that it looks like this instead:
+    ```yaml
+    deploy:
+      restart_policy:
+        condition: on-failure
+        window: 30s
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    ```
+3. For Linux users only, if you are running Docker in rootless mode on Linux (i.e. so you can run `docker compose up` 
+instead of `sudo docker compose up`), then you will need to follow additional steps to work around a permissions issue. 
+See https://stackoverflow.com/questions/74554143.
+
 
 ### Reducing Disk Space usage
 There are a couple of ways you can reduce the disk usage of Hay Say. 
@@ -410,23 +450,22 @@ This will open a screen where you can delete characters.
 
 #### Method 2: Deleting architectures
 By default, Hay Say downloads all supported AI architectures. This currently includes Controllable TalkNet, so-vits-svc 
-3.0, so-vits-svc 4.0, so-vits-svc 5.0, and RVC. Each of those take about 10GB. If you want to reclaim some disk space by
-deleting undesired architectures, you must first disable the architecture so that Hay Say does not automatically 
-re-download it. Open the docker-compose.yaml file and look for sections named like architectureName_server. For example,
-here is the section that defines the so-vits-svc 3.0 server:
+3.0, so-vits-svc 4.0, so-vits-svc 5.0, and Retrieval-based Voice Conversion (RVC). Each of those take about 10GB. If you
+want to reclaim some disk space by deleting undesired architectures, you must first disable the architecture so that Hay
+Say does not automatically re-download it. Open the docker-compose.yaml file and look for sections named like 
+architectureName_server. For example, here is the section that defines the so-vits-svc 3.0 server:
 ```yaml
   # This container provides a web service interface to so-vits-svc 3.0.
   so_vits_svc_3_server:
     depends_on:
       - redis
     image: hydrusbeta/hay_say:so_vits_svc_3_server
-    working_dir: /root/hay_say/so_vits_svc_3
+    working_dir: /home/luna/hay_say/so_vits_svc_3
     volumes:
-      - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
-      - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
-      - models:/root/hay_say/models
-      - custom_models:/root/hay_say/custom_models
-      - audio_cache:/root/hay_say/audio_cache
+      - so_vits_svc_3_model_pack_0:/home/luna/hay_say/so_vits_svc_3_model_pack_0
+      - so_vits_svc_3_model_pack_1:/home/luna/hay_say/so_vits_svc_3_model_pack_1
+      - models:/home/luna/hay_say/models
+      - audio_cache:/home/luna/hay_say/audio_cache
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
     # Uncomment the lines below to enable it for so-vits-svc 3.0 if you wish.
     # deploy:
@@ -445,13 +484,12 @@ make it look like this:
     # depends_on:
     #   - redis
     # image: hydrusbeta/hay_say:so_vits_svc_3_server
-    # working_dir: /root/hay_say/so_vits_svc_3
+    # working_dir: /home/luna/hay_say/so_vits_svc_3
     # volumes:
-    #   - so_vits_svc_3_model_pack_0:/root/hay_say/so_vits_svc_3_model_pack_0
-    #   - so_vits_svc_3_model_pack_1:/root/hay_say/so_vits_svc_3_model_pack_1
-    #   - models:/root/hay_say/models
-    #   - custom_models:/root/hay_say/custom_models
-    #   - audio_cache:/root/hay_say/audio_cache
+    #   - so_vits_svc_3_model_pack_0:/home/luna/hay_say/so_vits_svc_3_model_pack_0
+    #   - so_vits_svc_3_model_pack_1:/home/luna/hay_say/so_vits_svc_3_model_pack_1
+    #   - models:/home/luna/hay_say/models
+    #   - audio_cache:/home/luna/hay_say/audio_cache
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
     # Uncomment the lines below to enable it for so-vits-svc 3.0 if you wish.
     # deploy:
@@ -462,19 +500,19 @@ make it look like this:
     #           count: all
     #           capabilities: [gpu]
 ```
-Next, delete both the Docker contain and Docker image for so-vits-svc 3.0 to free disk space. Open a command prompt or 
+Next, delete both the Docker container and Docker image for so-vits-svc 3.0 to free disk space. Open a command prompt or 
 terminal and execute the following command to list all containers:
-```commandline
+```shell
 docker container ls -a
 ```
 The output should be similar to the following:
-```commandline
+```shell
 CONTAINER ID   IMAGE                                                  COMMAND                  CREATED       STATUS                              PORTS     NAMES
-4d3098ae4c2f   hydrusbeta/hay_say:so_vits_svc_3_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_3_server-1
-0c6c9eac8573   hydrusbeta/hay_say:so_vits_svc_5_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_5_server-1
-7defd670649c   hydrusbeta/hay_say:controllable_talknet_server         "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-controllable_talknet_server-1
-9b85ad39fea9   hydrusbeta/hay_say:so_vits_svc_4_server                "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_4_server-1
-48bc80452718   hydrusbeta/hay_say:rvc_server                          "/bin/sh -c '/root/h…"   9 days ago    Exited (137) 9 days ago                       hay_say-rvc_server-1
+4d3098ae4c2f   hydrusbeta/hay_say:so_vits_svc_3_server                "/bin/sh -c '/home/l…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_3_server-1
+0c6c9eac8573   hydrusbeta/hay_say:so_vits_svc_5_server                "/bin/sh -c '/home/l…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_5_server-1
+7defd670649c   hydrusbeta/hay_say:controllable_talknet_server         "/bin/sh -c '/home/l…"   9 days ago    Exited (137) 9 days ago                       hay_say-controllable_talknet_server-1
+9b85ad39fea9   hydrusbeta/hay_say:so_vits_svc_4_server                "/bin/sh -c '/home/l…"   9 days ago    Exited (137) 9 days ago                       hay_say-so_vits_svc_4_server-1
+48bc80452718   hydrusbeta/hay_say:rvc_server                          "/bin/sh -c '/home/l…"   9 days ago    Exited (137) 9 days ago                       hay_say-rvc_server-1
 d0343f8f00d4   hydrusbeta/hay_say:hay_say_ui                          "/bin/sh -c 'python …"   9 days ago    Exited (137) 9 days ago                       hay_say-hay_say_ui-1
 d82816c5889a   redis                                                  "docker-entrypoint.s…"   9 days ago    Exited (0) 9 days ago                         hay_say-redis-1
 c26692c3240b   hydrusbeta/hay_say:so_vits_svc_4_model_pack_1          "/bin/sh"                9 days ago    Exited (0) 9 days ago                         hay_say-so_vits_svc_4_model_pack_1-1
@@ -489,20 +527,20 @@ d4824c05694a   hydrusbeta/hay_say:rvc_model_pack_1                    "/bin/sh" 
 ```
 In the NAMES column, look for the name of the architecture you want to delete, followed by "_server". In this case, we 
 have hay_say-**so_vits_svc_3_server**-1. Delete that container by executing the following command:
-```commandline
+```shell
 docker container rm <name of the container you want to delete>
 ```
 In this case,
-```commandline
+```shell
 docker container rm hay_say-so_vits_svc_3_server-1
 ```
 
 Next, execute the following command to list all Docker images:
-```commandline
+```shell
 docker image ls
 ```
 The output should be similar to the following:
-```commandline
+```shell
 REPOSITORY               TAG                                 IMAGE ID       CREATED        SIZE
 redis                    latest                              8e69fcb59ff4   5 weeks ago    130MB
 hydrusbeta/hay_say       hay_say_ui                          381f9d276433   6 weeks ago    1.47GB
@@ -520,30 +558,34 @@ hydrusbeta/hay_say       controllable_talknet_model_pack_0   972e53accb49   3 mo
 Look for the desired architecture name in the "TAG" column and then delete the desired architecture by executing the 
 following 
 command:
-```commandline
+```shell
 docker image rm hydrusbeta/hay_say:<tag of image you would like to delete>
 ```
 So, for so-vits-svc 3.0 for example, that would be:
-```commandline
+```shell
 docker image rm hydrusbeta/hay_say:so_vits_svc_3_server
 ```
 
 Optional Step: You can hide the architecture in the UI by editing the docker-compose.yaml file. Look for the following
 lines:
 ```yaml
-    command: ["/bin/sh", "-c", "
-              celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO --include_architecture ControllableTalkNet --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
-              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --architectures ControllableTalkNet SoVitsSvc3 SoVitsSvc4 SoVitsSvc5 Rvc
-              "]
+command: ["/bin/sh", "-c", "
+          celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker --loglevel=INFO --concurrency 5 --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
+          celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_gpu:celery_app worker --loglevel=INFO --concurrency 1 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
+          celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_cpu:celery_app worker --loglevel=INFO --concurrency 1 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
+          gunicorn --config=server_initialization.py --workers 1 --bind 0.0.0.0:6573 'wsgi:get_server(enable_model_management=True, update_model_lists_on_startup=True, enable_session_caches=False, migrate_models=True, cache_implementation=\"file\", architectures=[\"ControllableTalkNet\", \"SoVitsSvc3\", \"SoVitsSvc4\", \"SoVitsSvc5\", \"Rvc\"])'
+          "]
 ```
-There are two places where your architecture's name will appear. Delete `"--include_architecture <architectureName>"` 
-and also delete the architecture name after the `"--architectures"` flag. For example, here's the result after removing 
-so-vits-svc 3.0:
+The architecture's name will appear four times. Delete `"--include_architecture <architectureName>"` on the 2nd, 3rd,
+and 4th lines and also delete the architecture name after the `"--architectures"` flag on the 5th line. For example, 
+here's the result after removing so-vits-svc 3.0:
 ```yaml
-    command: ["/bin/sh", "-c", "
-              celery --workdir ~/hay_say/hay_say_ui/ -A celery_component:celery_app worker --loglevel=INFO --include_architecture ControllableTalkNet --include_architecture ControllableTalkNet --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
-              python /root/hay_say/hay_say_ui/main.py --enable_model_management --update_model_lists_on_startup --migrate_models --architectures ControllableTalkNet SoVitsSvc4 SoVitsSvc5 Rvc
-              "]
+command: ["/bin/sh", "-c", "
+          celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker --loglevel=INFO --concurrency 5 --include_architecture ControllableTalkNet --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
+          celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_gpu:celery_app worker --loglevel=INFO --concurrency 1 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
+          celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_cpu:celery_app worker --loglevel=INFO --concurrency 1 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
+          gunicorn --config=server_initialization.py --workers 1 --bind 0.0.0.0:6573 'wsgi:get_server(enable_model_management=True, update_model_lists_on_startup=True, enable_session_caches=False, migrate_models=True, cache_implementation=\"file\", architectures=[\"ControllableTalkNet\", \"SoVitsSvc4\", \"SoVitsSvc5\", \"Rvc\"])'
+          "]
 ```
 
 #### Additional Required Steps for Windows Users
@@ -588,14 +630,14 @@ operation is successful
 1. Install [wslcompact](https://github.com/okibcn/wslcompact). Below are instructions on how to install it as a Scoop 
 app.
    1. Open a PowerShell window and execute the following to install wslcompact as a Scoop app:
-       ```commandline
+       ```shell
        irm get.scoop.sh | iex
        scoop bucket add .oki https://github.com/okibcn/Bucket
        scoop install wslcompact
        ```
 2. If your primary drive does not have enough space to save a copy of the vhdi file, set the "TEMP" environment 
 variable to a folder on a drive with enough space. For example, if you have space on drive letter Z:
-    ```commandline
+    ```shell
    $env:TEMP="Z:/specify/a/folder/on/the/drive" 
    ```
 3. Shut down Hay Say (type CTRL+c into the Command Prompt window that you started Hay Say from).
@@ -607,7 +649,7 @@ Desktop". Wait until the whale icon disappears.
     ```
 It is possible that your WSL distro name is different. If the command in step 5 does not work, then execute the 
 following to list all distro names:
-```commandline
+```shell
 wslcompact -l
 ```
 and search for a distro name with the word "docker" or "ubuntu" in it.
@@ -646,8 +688,7 @@ Weights for the neural networks are stored in Docker volumes that are named like
 "so_vits_svc_4_model_pack_1". Within each volume is a collection of folders, one for each pony character. Each character
 folder contains files with the model weights for that character. The volumes are initially populated by pulling a Docker
 image containing models for many characters and mounting the corresponding model_pack volume to that image, which 
-automatically copies all the models from the image to the volume. There is also a "custom models" volume where the user 
-can manually add character weights that are not yet present in any model packs. See the Advanced Topics section.
+automatically copies all the models from the image to the volume.
 
 Hay say also has an "audio_cache" volume for maintaining a small cache of audio files. Any time the user uploads an 
 audio file to Hay Say, the file is saved to audio_cache/raw. When a file is preprocessed, the result is saved to 
@@ -667,28 +708,29 @@ various other code repositories on hydrusbeta's account. See https://github.com/
 ## "Roadmap"
 
 Here are some tasks I consider important. I intend to work on them "soon", in no particular order:
-1. There are currently no preprocessing or postprocessing options. I need to do requirements gathering and start adding 
-   some options. 
-2. I forsee a need for a "Hay Say launcher" that lets the user select which characters and architectures they want to 
-   download and run. That way, the user doesn't have to download *everything* if all they want is, say, the TTS 
-   solutions like controllable talknet for specific characters. This also gives the user some control over memory usage 
-   on a resource-constrained machine, and would be a good place for downloading updates.
-3. Add another text-to-speech option. A couple of possibilities include:
+1. Add some preprocessing and postprocessing options.
+2. I forsee a need for a "Hay Say launcher" that lets the user select which architectures they want to install. That 
+   way, the user doesn't have to download *everything* if all they want is, say, the TTS solutions like controllable 
+   talknet. This also gives the user some control over memory usage on a resource-constrained machine, and would be a 
+   good place for downloading updates and running the WSL cleanup operation on Windows. Ideally, the user would never 
+   need to open a command prompt or terminal again.
+3. Add another text-to-speech option. A few possibilities include:
     * BarkAI
-    * tkinterAnon's TTS tool
+    * tacotron
+    * tortoise TTS
 4. Hay Say runs terribly on Apple Silicon. I'd like to see whether performance can be improved by re-building the images 
-   using a different base image.
+   using a MacOS-native base image and installing ARM-specific python packages. 
 5. Write up more documentation on the technical details of Hay Say and tutorials for developers on: adding a new 
    architecture, adding a model pack, and adding pre/postprocessing options.
 6. Currently, the "Generate!" button becomes disabled if a required input has not been provided yet. This might be 
    confusing for users. Instead, let them hit the "Generate!" button and then highlight the missing, required fields in 
    red, along with a useful error message.
+7. Every time a user clicks the "Generate!" button, the selected architecture is loaded from scratch, executed, and then
+   shut down. Performance could be vastly improved by keeping architectures loaded between generation tasks. This kind
+   of performance improvement should be implemented carefully, as loading too many architectures at the same time could
+   overload a user's memory (either in RAM or in GPU memory).
 
 Plus, there are numerous minor code improvement opportunities that I have marked with "todo" throughout the codebase.
-
-### A note on Google Colab
-I have decided to focus on developing locally-running software and have no plans to port this project over to Google 
-Collab. If someone else wants to work on doing that, however, I would be happy to provide support.
 
 
 ## Testing Data / Benchmarks
@@ -715,13 +757,13 @@ disabled, so the CPU was used exclusively.
 Note: Generating Audio with any architecture was noticeably slower for the first audio output and faster on subsequent 
 generations, even with a different character selected.
 
-| Machine Name          | Age of Computer (years) |       CPU        |       RAM        | Loading time for a short audio recording (s) | Controllable TalkNet Generation time (s) | so-vits-svc 3.0 Generation time (s) | so-vits-svc 4.0 Generation time (s) |
-|-----------------------|:-----------------------:|:----------------:|:----------------:|:--------------------------------------------:|:----------------------------------------:|:-----------------------------------:|:-----------------------------------:|
-| Custom Built Tower    |           0.5           |   13th gen i9    | 32 GB (6000 MHz) |                      0                       |                    8                     |                  5                  |                  6                  |
-| Aspire TC-895         |            2            |   10th gen i5    | 12 GB (2600 MHz) |                      3                       |                   26.5                   |                30.5                 |                27.5                 |
-| Dell XPS 13 9380      |            4            |    8th gen i7    | 16 GB (1200 MHz) |                      1                       |                    44                    |                 38                  |                 41                  |
-| Toshiba Qosmio laptop |           10            |    4th gen i7    | 16 GB (1600 MHz) |                      10                      |                   198                    |                 174                 |                 227                 |
-| Mac Mini              |            0            | M2 Apple Silicon |       8 GB       |                      27                      |                 N/A [1]                  |                 589                 |                 575                 |  
+| Machine Name          | Age of Computer (years) as of May 2023 |       CPU        |       RAM        | Loading time for a short audio recording (s) | Controllable TalkNet Generation time (s) | so-vits-svc 3.0 Generation time (s) | so-vits-svc 4.0 Generation time (s) |
+|-----------------------|:--------------------------------------:|:----------------:|:----------------:|:--------------------------------------------:|:----------------------------------------:|:-----------------------------------:|:-----------------------------------:|
+| Custom Built Tower    |                  0.5                   |   13th gen i9    | 32 GB (6000 MHz) |                      0                       |                    8                     |                  5                  |                  6                  |
+| Aspire TC-895         |                   2                    |   10th gen i5    | 12 GB (2600 MHz) |                      3                       |                   26.5                   |                30.5                 |                27.5                 |
+| Dell XPS 13 9380      |                   4                    |    8th gen i7    | 16 GB (1200 MHz) |                      1                       |                    44                    |                 38                  |                 41                  |
+| Toshiba Qosmio laptop |                   10                   |    4th gen i7    | 16 GB (1600 MHz) |                      10                      |                   198                    |                 174                 |                 227                 |
+| Mac Mini              |                   0                    | M2 Apple Silicon |       8 GB       |                      27                      |                 N/A [1]                  |                 589                 |                 575                 |  
 
 [1] Test failed with an error. Unable to generate audio.
 

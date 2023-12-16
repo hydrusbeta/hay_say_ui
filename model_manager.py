@@ -1,8 +1,9 @@
+import shutil
+
 from dash import html, dcc, Input, Output, State, callback
 from dash.exceptions import PreventUpdate
-from hay_say_common import get_model_path, model_dirs
-import shutil
-import os
+
+import hay_say_common as hsc
 
 
 def construct_model_manager(available_tabs):
@@ -65,7 +66,7 @@ def register_model_manager_callbacks(available_tabs):
     def delete_selected_models(n_clicks, *model_lists_to_delete):
         if n_clicks is None:
             raise PreventUpdate
-        models_to_delete = [get_model_path(available_tabs[idx].id, model_to_delete)
+        models_to_delete = [hsc.character_dir(available_tabs[idx].id, model_to_delete)
                             for idx, model_list_to_delete in enumerate(model_lists_to_delete)
                             for model_to_delete in model_list_to_delete]
         for model in models_to_delete:
@@ -81,7 +82,8 @@ def register_model_manager_callbacks(available_tabs):
 
     # If a user has recently downloaded a new model, we need to refresh the download list when they navigate to the
     # model manager. Note: we cannot merge this callback into the generate_download_callback method of main.py because
-    # the elements with id "tab.id + '-delete-checklist'" will not exist for that callback if local_mode is false.
+    # the elements with id "tab.id + '-delete-checklist'" will not exist for that callback if enable_model_management
+    # is false.
     @callback(
         [Output(tab.id + '-delete-checklist', 'options') for tab in available_tabs],
         Input('model-manager-outer-div', 'hidden')

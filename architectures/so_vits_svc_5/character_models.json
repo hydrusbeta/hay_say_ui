@@ -339,5 +339,275 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Apple Bloom (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Apple%20Bloom/Apple%20Bloom_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Apple Bloom_1980.pt",
+                "Size (bytes)": 636965419
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Apple%20Bloom/singer/Apple%20Bloom.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Apple Bloom.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Applejack/Applejack_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Applejack_1980.pt",
+                "Size (bytes)": 636956919
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Applejack/singer/Applejack.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Applejack.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Celestia/Celestia_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Celestia_1980.pt",
+                "Size (bytes)": 636952669
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Celestia/singer/Celestia.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Celestia.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cozy Glow (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Cozy%20Glow/Cozy%20Glow_1440.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Cozy Glow_1440.pt",
+                "Size (bytes)": 636956919
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Cozy%20Glow/singer/Cozy%20Glow.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Cozy Glow.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Fluttershy (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Fluttershy/Fluttershy_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Fluttershy_1980.pt",
+                "Size (bytes)": 636961169
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Fluttershy/singer/Fluttershy.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Fluttershy.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Luna (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Luna/Luna_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Luna_1980.pt",
+                "Size (bytes)": 636935669
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Luna/singer/Luna.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Luna.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie (singing, v2)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Pinkie/Pinkie_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Pinkie_1980.pt",
+                "Size (bytes)": 636944169
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Pinkie/singer/Pinkie.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Pinkie.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Rainbow/Rainbow_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Rainbow_1980.pt",
+                "Size (bytes)": 636948419
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Rainbow/singer/Rainbow.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Rainbow.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rarity (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Rarity/Rarity_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Rarity_1980.pt",
+                "Size (bytes)": 636944169
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Rarity/singer/Rarity.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Rarity.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scootaloo (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Scootaloo/Scootaloo_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Scootaloo_1980.pt",
+                "Size (bytes)": 636956919
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Scootaloo/singer/Scootaloo.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Scootaloo.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Starlight Glimmer (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Starlight/Starlight_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Starlight_1980.pt",
+                "Size (bytes)": 636956919
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Starlight/singer/Starlight.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Starlight.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sweetie Belle (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Sweetie%20Belle/Sweetie%20Belle_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Sweetie Belle_1980.pt",
+                "Size (bytes)": 636973919
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Sweetie%20Belle/singer/Sweetie%20Belle.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Sweetie Belle.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Trixie Lulamoon (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Trixie/Trixie_1980.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Trixie_1980.pt",
+                "Size (bytes)": 636944169
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Trixie/singer/Trixie.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Trixie.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Twilight%20Speaking/Twilight_0150.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Twilight_0150.pt",
+                "Size (bytes)": 636939265
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Twilight%20Speaking/singer/Twilight.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Twilight.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Twilight/Twilight_1860.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Twilight_1860.pt",
+                "Size (bytes)": 636952669
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Twilight/singer/Twilight.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Twilight.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
     }
 ]
