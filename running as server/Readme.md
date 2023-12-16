@@ -110,7 +110,7 @@ sudo usermod -a -G docker ec2-user
 ```
 
 ## 5. Explicitly install docker-compose
-The version of Docker that you install with either amzaon-linux-extras or yum doesn't come with docker compose, so you must
+The version of Docker that you install with either amazon-linux-extras or yum doesn't come with docker compose, so you must
 separately install it.
 ```shell
 sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
@@ -156,7 +156,6 @@ If you are using an EC2 instance that has GPUs, edit docker-compose.yaml to enab
 To do this, uncomment the following set of lines wherever they appear (this group of lines appears once for each
 architecture throughout the docker-compose file):
 ```yaml
-# deploy:
 #   resources:
 #     reservations:
 #       devices:
@@ -237,17 +236,25 @@ check /etc/letsencrypt/live/[domainName])
 
 #### Option 3: Obtain a certificate the old-fashioned way:
 1. Create a private key
-    cd /etc/pki/tls/private
-    sudo opensll genrsa -out haysay.key 4096
-    sudo chown root:root /etc/pki/tls/private/haysay.key
-    sudo chmod 600 /etc/pki/tls/private/haysay.key
+   ```shell
+   cd /etc/pki/tls/private
+   sudo opensll genrsa -out haysay.key 4096
+   sudo chown root:root /etc/pki/tls/private/haysay.key
+   sudo chmod 600 /etc/pki/tls/private/haysay.key
+   ```
 2. Create a Certificate Signing Request (CSR)
-    sudo openssl req -new -key haysay.key -out csr.pem
-    Note: you will be prompted for a bunch of info. only Common Name is required, but I recommend entering Subject Alt Names too (see earlier note).
-3. Send the CSR to a certificate authority through whatever channel they require. They will send back the certificate file(s) (.pem or .crt).
+   ```shell
+   sudo openssl req -new -key haysay.key -out csr.pem
+   ```
+   Note: you will be prompted for a bunch of info. only Common Name is required, but I recommend entering Subject Alt 
+   Names too (see earlier note).
+3. Send the CSR to a certificate authority through whatever channel they require. They will send back the certificate 
+file(s) (.pem or .crt).
 4. Place the CA-provided files in /etc/pki/tls/certs then tighten the permissions:
+    ```shell
     sudo chown root:root /etc/pki/tls/certs/mycert.crt
     sudo chmod 600 /etc/pki/tls/certs/mycert.crt
+    ```
 
 #### Configure the docker-compose file to use your certificate
 Whichever option you used above, you must now configure the docker-compose.yaml file to use your certificate. 
@@ -289,7 +296,7 @@ Whichever option you used above, you must now configure the docker-compose.yaml 
         #        source: /etc/pki/tls/private
         #        target: /etc/pki/tls/private
     ```
-For clarity, the nginx section of your docker-compose file should look like this:
+For clarity, the nginx section of your docker-compose file should now look like this:
 ```yaml
   nginx:
     depends_on:
@@ -448,18 +455,19 @@ of your instance (e.g. http://ec2-WWW-XXX-YYY-ZZZ.region.compute.amazonaws.com) 
 browser. If you followed the [Optional Steps](#8-optional-steps) above to point your own domain name at the EC2 
 instance, then you can go to http://[yourDomainNameHere] instead.
 3. The Hay Say UI should come up. Go to each architecture and download all the character models. 
-4. Stop Hay Say by typing CTRL+C into the terminal.
+4. Stop Hay Say by typing CTRL+c into the terminal.
 
 ## 11. Configure Hay Say, Part 3/3
-1. Open docker-compose.yaml again and search for the string "enable_model_management". Make sure it is set to False. This 
-prevents end users from deleting models.
+1. Open docker-compose.yaml again and search for `enable_model_management=True`. Change that to 
+`enable_model_management=False` instead. This prevents end users from deleting models.
 2. Optional, but recommended: Two lines above that, there should be a line that starts with:
     ```
     celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker ... 
     ```
-	Delete that line. 
+	Delete that line. This frees up some resources that are usually devoted to downloading character models.
 
-Todo: include instructions on locking down synthapp. i.e., hiding the model download menu and such
+Todo: include instructions on locking down synthapp. i.e., hiding the model download menu and such. Also add steps for 
+downloading the synthapp models.
 
 ## 12. Launch Hay Say
 Start Hay Say again:
