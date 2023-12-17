@@ -491,7 +491,7 @@ example, if the Public IPv4 DNS name of your instance is ec2-WWW-XXX-YYY-ZZZ.reg
     ```
     sed -i \"s/ALLOWED_HOSTS = \\['127.0.0.1', 'localhost'\\]/ALLOWED_HOSTS = ['.synthapp.ec2-WWW-XXX-YYY-ZZZ.region.compute.amazonaws.com']/\" website/ponyonline/ponyonline/settings.py &&
     ```
-If you followed the steps in the [Optional Steps](#8-optional-steps) section above to use your own domain, replace the 
+If you followed the steps in the [optional step to use your own domain name](#use-your-own-domain-name), replace the 
 wildcards with your own domain name instead.
 
 ## 10. Download character models
@@ -502,10 +502,12 @@ installation. There is a hyphen between "docker" and "compose" here)
     ```
 2. Open the UI and download all models for all architectures . You can get to the UI by pasting the Public IPv4 DNS name
 of your instance (e.g. http://ec2-WWW-XXX-YYY-ZZZ.region.compute.amazonaws.com) into the URL bar of your favorite 
-browser. If you followed the [Optional Steps](#8-optional-steps) above to point your own domain name at the EC2 
-instance, then you can go to http://[yourDomainNameHere] instead.
+browser. If you followed the [optional step to use your own domain name](#use-your-own-domain-name), then you can go to 
+http://[yourDomainNameHere] instead.
 3. The Hay Say UI should come up. Go to each architecture and download all the character models. 
-4. Stop Hay Say by typing CTRL+c into the terminal.
+4. If you followed the [optional step to include SynthApp in a subdomain](#include-synthapp-in-a-subdomain), then go to 
+http://synthapp.[yourDomainHere] and download all the character models for SynthApp.
+5. Stop Hay Say by typing CTRL+c into the terminal.
 
 ## 11. Configure Hay Say, Part 3/3
 1. Open docker-compose.yaml again and search for `enable_model_management=True`. Change that to 
@@ -516,10 +518,30 @@ instance, then you can go to http://[yourDomainNameHere] instead.
     ```
 	Delete that line. This frees up some resources that are usually devoted to downloading character models.
 
-Todo: include instructions on locking down synthapp. i.e., hiding the model download menu and such. Also add steps for 
-downloading the synthapp models.
+## 12. Tighten security on SynthApp
+This step only applies if you followed the 
+[optional step to include SynthApp in a subdomain](#include-synthapp-in-a-subdomain).  
+In the docker-compose.yaml file, there are several lines in the `command` directive under the synthapp service that are 
+effectively commented out by being wrapped in an `echo` statement:
+```yaml
+               echo \"sed -i '22i \\ \\ \\ \\ -->' ./website/ponyonline/templates/ttsapp.html\" &&
+               echo \"sed -i '19i \\ \\ \\ \\ <!--' ./website/ponyonline/templates/ttsapp.html\" &&
+               echo \"sed -i '93s/@never_cache/#@never_cache/' ./website/ponyonline/tts/views.py\" &&
+               echo \"sed -i '23s/path/#path/' ./website/ponyonline/ponyonline/urls.py\" &&
+               echo \"sed -i '28,30s/path/#path/' ./website/ponyonline/ponyonline/urls.py\" &&
+```
+On each line, remove `echo \"` at the beginning and the `\"` at the end so that they look like this instead:
+```yaml
+               sed -i '22i \\ \\ \\ \\ -->' ./website/ponyonline/templates/ttsapp.html &&
+               sed -i '19i \\ \\ \\ \\ <!--' ./website/ponyonline/templates/ttsapp.html &&
+               sed -i '93s/@never_cache/#@never_cache/' ./website/ponyonline/tts/views.py &&
+               sed -i '23s/path/#path/' ./website/ponyonline/ponyonline/urls.py &&
+               sed -i '28,30s/path/#path/' ./website/ponyonline/ponyonline/urls.py &&
+```
+These lines tighten the security of the app by removing end users' ability to download models and save model 
+configurations. It also allows a method for retrieving model information to be cached.
 
-## 12. Launch Hay Say
+## 13. Launch Hay Say
 Start Hay Say again:
 ```shell
 sudo /usr/local/bin/docker-compose up

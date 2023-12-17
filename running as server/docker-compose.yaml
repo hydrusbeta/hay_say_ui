@@ -68,6 +68,11 @@ services:
 #    # the Dockerfile. This lets us start the main application in gunicorn.
 #    command: ["/bin/sh", "-c", "
 #               sed -i \"s/ALLOWED_HOSTS = \\['127.0.0.1', 'localhost'\\]/ALLOWED_HOSTS = ['.synthapp.*']/\" website/ponyonline/ponyonline/settings.py &&
+#               echo \"sed -i '22i \\ \\ \\ \\ -->' ./website/ponyonline/templates/ttsapp.html\" &&
+#               echo \"sed -i '19i \\ \\ \\ \\ <!--' ./website/ponyonline/templates/ttsapp.html\" &&
+#               echo \"sed -i '93s/@never_cache/#@never_cache/' ./website/ponyonline/tts/views.py\" &&
+#               echo \"sed -i '23s/path/#path/' ./website/ponyonline/ponyonline/urls.py\" &&
+#               echo \"sed -i '28,30s/path/#path/' ./website/ponyonline/ponyonline/urls.py\" &&
 #               ./run_linux &
 #               ./bin/micromamba-linux-64 run -n synthapp1
 #                  --root-prefix /home/luna/micromamba/ gunicorn
@@ -103,7 +108,6 @@ services:
     image: hydrusbeta/hay_say:hay_say_ui
     working_dir: /home/luna/hay_say/hay_say_ui
     volumes:
-      # The container needs access to any model pack volumes so it can migrate their models to the models volume.
       - models:/home/luna/hay_say/models
       - audio_cache:/home/luna/hay_say/audio_cache
     # Override the CMD in the Docker file to enable model management, update model lists on startup, and automatically
