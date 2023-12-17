@@ -28,8 +28,8 @@ ANNOUNCEMENT_CHECK_INTERVAL = 60000  # milliseconds
 def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     return [
         html.Div([
-            dcc.Store(id='session', storage_type='memory',
-                      data={'id': uuid.uuid4().hex if enable_session_caches else None}),
+            html.Div(id='dummy'),
+            dcc.Store(id='session', storage_type='memory', data={'id': None}),
             dcc.Interval(interval=ANNOUNCEMENT_CHECK_INTERVAL, id='announcement-checker'),
             html.Div(
                 dcc.Markdown('Banner Announcements will appear here', id='banner-announcement'),
@@ -218,6 +218,19 @@ def register_generate_callbacks(cache_type, architectures):
 def register_main_callbacks(enable_session_caches, cache_type, architectures):
     cache = hsc.select_cache_implementation(cache_type)
     available_tabs = pcc.select_architecture_tabs(architectures)
+
+    @callback(
+        Output('session', 'data'),
+        Input('dummy', 'n_clicks'),
+        State('session', 'data')
+    )
+    def initialize_session_data(n_clicks, existing_data):
+        if n_clicks is None:
+            return {'id': uuid.uuid4().hex if enable_session_caches else None}
+        else:
+            print('Warning! initialize_session_data was called outside of initialization. Ignoring request.',
+                  flush=True)
+            return existing_data
 
     @callback(
         [Output('banner-announcement', 'children'),
