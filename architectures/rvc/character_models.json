@@ -702,11 +702,17 @@
         "Model Name": "Sweetie Belle",
         "Files": [
             {
-                "URL": "https://drive.google.com/uc?id=1Bj2quFGEpLq6uaQhsA-WwkRRA3EfWpbI",
-                "Download With": "GDOWN",
+                "URL": "https://huggingface.co/KenDoStudio/Sweetie_Belle/resolve/main/MLP_Sweetie%20Belle%20(rvc).zip",
+                "Download With": "HUGGINGFACE_HUB",
                 "Download As": "MLP_Sweetie Belle (rvc).zip",
                 "Size (bytes)": 87963134,
                 "Unzip Strategy": "FLATTEN"
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/Sweetie_Belle/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 21
             }
         ],
         "License": "GPL"
@@ -1598,5 +1604,57 @@
         }
     ],
     "License": "UNSPECIFIED"
+    },
+        {
+        "Model Name": "Sweetie Bot",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/RVC2-M/resolve/main/FIW_SweetieBot/FIWSweetieBotRVC.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "FIWSweetieBotRVC.pth",
+                "Size (bytes)": 57587157
+            },
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/RVC2-M/resolve/main/FIW_SweetieBot/added_IVF184_Flat_nprobe_1_FIWSweetieBotRVC_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF184_Flat_nprobe_1_FIWSweetieBotRVC_v2.index",
+                "Size (bytes)": 22776739
+            }
+        ]
+    },
+        {
+        "Model Name": "Athena",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/RVC2-M/resolve/main/Athena/AthenaRVC.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "AthenaRVC.pth",
+                "Size (bytes)": 57583930
+            },
+            {
+                "URL": "https://huggingface.co/datasets/HazySkies/RVC2-M/resolve/main/Athena/added_IVF518_Flat_nprobe_1_AthenaRVC_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF518_Flat_nprobe_1_AthenaRVC_v2.index",
+                "Size (bytes)": 63836219
+            }
+        ]
+    },
+    {
+        "Model Name": "Octavia Melody",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Octavia%20Melody/OctaviaMelody.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "OctaviaMelody.pth",
+                "Size (bytes)": 55128157
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Octavia%20Melody/added_IVF34_Flat_nprobe_2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF34_Flat_nprobe_2.index",
+                "Size (bytes)": 1441843
+            }
+        ],
+        "License": "UNSPECIFIED"
     }
 ]
