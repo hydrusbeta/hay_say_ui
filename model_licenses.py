@@ -17,6 +17,7 @@ class License(Enum):
     CC_BY_NC_ND_2 = auto()
     CC_BY_NC_ND_3 = auto()
     ARTISTIC_2 = auto()
+    MIT = auto()
 
 
 def get_license_enum(license_name):
