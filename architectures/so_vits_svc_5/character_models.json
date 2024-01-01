@@ -609,5 +609,23 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Diamond Tiara",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Diamond%20Tiara/Diamond%20Tiara_1740.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Diamond_Tiara_1740.pt",
+                "Size (bytes)": 636987430
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Diamond%20Tiara/singer/Diamond%20Tiara.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/Diamond_Tiara.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
     }
 ]

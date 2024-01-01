@@ -1605,7 +1605,7 @@
     ],
     "License": "UNSPECIFIED"
     },
-        {
+    {
         "Model Name": "Sweetie Bot",
         "Files": [
             {
@@ -1620,9 +1620,10 @@
                 "Download As": "added_IVF184_Flat_nprobe_1_FIWSweetieBotRVC_v2.index",
                 "Size (bytes)": 22776739
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
-        {
+    {
         "Model Name": "Athena",
         "Files": [
             {
@@ -1637,22 +1638,450 @@
                 "Download As": "added_IVF518_Flat_nprobe_1_AthenaRVC_v2.index",
                 "Size (bytes)": 63836219
             }
-        ]
+        ],
+        "License": "UNSPECIFIED"
     },
     {
-        "Model Name": "Octavia Melody",
+        "Model Name": "Maud Pie",
         "Files": [
             {
-                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Octavia%20Melody/OctaviaMelody.pth",
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Maud_Pie/resolve/main/MLP_Maud_Pie_Dataset.zip_e570_s9120.pth",
                 "Download With": "HUGGINGFACE_HUB",
-                "Download As": "OctaviaMelody.pth",
-                "Size (bytes)": 55128157
+                "Download As": "MLP_Maud_Pie_Dataset.zip_e570_s9120.pth",
+                "Size (bytes)": 55236748
             },
             {
-                "URL": "https://huggingface.co/therealvul/RVC/resolve/main/Octavia%20Melody/added_IVF34_Flat_nprobe_2.index",
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Maud_Pie/resolve/main/README.md",
                 "Download With": "HUGGINGFACE_HUB",
-                "Download As": "added_IVF34_Flat_nprobe_2.index",
-                "Size (bytes)": 1441843
+                "Download As": "README.md",
+                "Size (bytes)": 21
+            }
+        ],
+        "License": "MIT"
+    },
+    {
+        "Model Name": "Roseluck",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Roseluck/resolve/main/MLP_Roseluck_e170_s2380.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Roseluck_e170_s2380.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 75839819
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Roseluck/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 21
+            }
+        ],
+        "License": "MIT"
+    },
+    {
+        "Model Name": "Vinyl Scratch (from 0s reference audio)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Vinal_Scratch-Dj_Pon3/resolve/main/DJ_Pon3_e270_s6210.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "DJ_Pon3_e270_s6210.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 97009499
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Vinal_Scratch-Dj_Pon3/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 20
+            }
+        ],
+        "License": "CC_UNSPECIFIC"
+    },
+    {
+        "Model Name": "Lyra Heartstrings-Bridesmare",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Lyra-Bridesmare/resolve/main/MLP_Lyra_Wedding._e310_s10230.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Lyra_Wedding._e310_s10230.pth",
+                "Size (bytes)": 57593214
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Uncle Curio",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLP_Uncle_Crio/resolve/main/MLP_Uncle_Curio.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Uncle_Curio.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 127641591
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cheese Sandwich",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLPg4_Cheese_sandwich/resolve/main/MLP_Cheese-Sandwich_e190_s3040.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Cheese-Sandwich_e190_s3040.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 79517412
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLPg4_Cheese_sandwich/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 21
+            }
+        ],
+        "License": "MIT"
+    },
+    {
+        "Model Name": "Vinyl Scratch (alt 2)",
+        "Files": [
+            {
+                "URL": "https://files.catbox.moe/t5ev8t.zip",
+                "Download With": "REQUESTS",
+                "Download As": "t5ev8t.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 97963320
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Chrysalis (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLPg4_Queen_Chrysalis/resolve/main/MLPg4_Queen-Chrysalis_e460_s8740.zip",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLPg4_Queen-Chrysalis_e460_s8740.zip",
+                "Unzip Strategy": "FLATTEN",
+                "Size (bytes)": 88366238
+            },
+            {
+                "URL": "https://huggingface.co/KenDoStudio/MLPg4_Queen_Chrysalis/resolve/main/README.md",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.md",
+                "Size (bytes)": 21
+            }
+        ],
+        "License": "MIT"
+    },
+    {
+        "Model Name": "Tirek (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TirekPowered/TirekPowered.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "TirekPowered.pth",
+                "Size (bytes)": 57584870
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TirekPowered/added_IVF120_Flat_nprobe_1_PoweredTirek_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF120_Flat_nprobe_1_PoweredTirek_v2.index",
+                "Size (bytes)": 14796459
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Zecora",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Zecora/Zecora.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Zecora.pth",
+                "Size (bytes)": 57575716
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Zecora/added_IVF1213_Flat_nprobe_1_Zecora_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1213_Flat_nprobe_1_Zecora_v2.index",
+                "Size (bytes)": 149527979
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Trixie Lulamoon",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Trixie/Trixie.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Trixie.pth",
+                "Size (bytes)": 57575716
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Trixie/added_IVF4611_Flat_nprobe_1_Trixie_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF4611_Flat_nprobe_1_Trixie_v2.index",
+                "Size (bytes)": 568118459
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Petunia Petals",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/PetuniaPetals/Petunia%20Petals.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Petunia_Petals.pth",
+                "Size (bytes)": 57585788
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/PetuniaPetals/added_IVF223_Flat_nprobe_1_Petunia%20Petals_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF223_Flat_nprobe_1_Petunia_Petals_v2.index",
+                "Size (bytes)": 27581539
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Torque Wrench",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Torque%20Wrench/Torque%20Wrench.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Torque_Wrench.pth",
+                "Size (bytes)": 57585329
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Torque%20Wrench/added_IVF44_Flat_nprobe_1_Torque%20Wrench_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF44_Flat_nprobe_1_Torque_Wrench_v2.index",
+                "Size (bytes)": 5537979
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Kerfluffle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Kerfuffle/Kerfuffle.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Kerfuffle.pth",
+                "Size (bytes)": 57583493
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Kerfuffle/added_IVF128_Flat_nprobe_1_Kerfuffle_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF128_Flat_nprobe_1_Kerfuffle_v2.index",
+                "Size (bytes)": 15840579
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Skystar",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Skystar/Skystar.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Skystar.pth",
+                "Size (bytes)": 57581999
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Skystar/added_IVF153_Flat_nprobe_1_Skystar_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF153_Flat_nprobe_1_Skystar_v2.index",
+                "Size (bytes)": 18960619
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Tempest Shadow (v2)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TempestShadowv2/TempestShadowv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "TempestShadowv2.pth",
+                "Size (bytes)": 57586247
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TempestShadowv2/added_IVF165_Flat_nprobe_1_TempestShadowv2_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF165_Flat_nprobe_1_TempestShadowv2_v2.index",
+                "Size (bytes)": 20395899
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia (alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Celestia%20alt/Celestia%20alt.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Celestia_alt.pth",
+                "Size (bytes)": 57584870
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/Celestia%20alt/added_IVF3026_Flat_nprobe_1_Celestia%20alt_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF3026_Flat_nprobe_1_Celestia%20alt_v2.index",
+                "Size (bytes)": 372904979
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Little Pipp (Nowacking fan VA)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Littlepip%20(Nowacking%20fan%20VA)/FO_E_Littlepip.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "FO_E_Littlepip.pth",
+                "Size (bytes)": 55226492
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Littlepip%20(Nowacking%20fan%20VA)/trained_IVF977_Flat_nprobe_1_FO_E_Littlepip_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "trained_IVF977_Flat_nprobe_1_FO_E_Littlepip_v2.index",
+                "Size (bytes)": 3001483
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Littlepip%20(Nowacking%20fan%20VA)/README.txt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "README.txt",
+                "Size (bytes)": 309
+            }
+        ],
+        "License": "UNSPECIFIED",
+        "Originally Acquired From": "https://drive.google.com/file/d/1UuzHOFcUitJDDPKtwYQQfvvWo9qxMDLF/view"
+    },
+    {
+        "Model Name": "Applejack (singing, v2)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/ApplejackSingingv2/ApplejackSingingv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "ApplejackSingingv2.pth",
+                "Size (bytes)": 57586706
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/ApplejackSingingv2/added_IVF553_Flat_nprobe_1_ApplejackSInging_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF553_Flat_nprobe_1_ApplejackSInging_v2.index",
+                "Size (bytes)": 68188259
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Fluttershy (singing, v2)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/FluttershySingingv2/FluttershySingingv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "FluttershySingingv2.pth",
+                "Size (bytes)": 57587165
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/FluttershySingingv2/added_IVF528_Flat_nprobe_1_FluttershySinging_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF528_Flat_nprobe_1_FluttershySinging_v2.index",
+                "Size (bytes)": 65163699
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie (singing, v2)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/PinkiePieSingingv2/PinkiePieSingingv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "PinkiePieSingingv2.pth",
+                "Size (bytes)": 57586706
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/PinkiePieSingingv2/added_IVF1141_Flat_nprobe_1_PinkiePieSinging_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1141_Flat_nprobe_1_PinkiePieSinging_v2.index",
+                "Size (bytes)": 140605219
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash (singing, v2)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/RainbowDashSingingv2/RainbowDashSingingv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "RainbowDashSingingv2.pth",
+                "Size (bytes)": 57587624
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/RainbowDashSingingv2/added_IVF1428_Flat_nprobe_1_RainbowDashSinging_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1428_Flat_nprobe_1_RainbowDashSinging_v2.index",
+                "Size (bytes)": 176031379
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash (singing, v2, alt)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/RainbowDashSingingAltv2/RainbowDashSingingAltv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "RainbowDashSingingAltv2.pth",
+                "Size (bytes)": 57589001
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/RainbowDashSingingAltv2/added_IVF433_Flat_nprobe_1_RainbowDashSingingAlt_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF433_Flat_nprobe_1_RainbowDashSingingAlt_v2.index",
+                "Size (bytes)": 53345739
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rarity (singing, v2)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/RaritySingingv2/RaritySingingv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "RaritySingingv2.pth",
+                "Size (bytes)": 57585329
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/RaritySingingv2/added_IVF627_Flat_nprobe_1_RaritySinging_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF627_Flat_nprobe_1_RaritySinging_v2.index",
+                "Size (bytes)": 77258859
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle (singing, v2.1)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TwilightSingingv2.1/TwilightSingingv2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "TwilightSingingv2.pth",
+                "Size (bytes)": 57590442
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/RVCv2/resolve/main/TwilightSingingv2.1/added_IVF1521_Flat_nprobe_1_TwilightSparkleSingingv2_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF1521_Flat_nprobe_1_TwilightSparkleSingingv2_v2.index",
+                "Size (bytes)": 187402739
             }
         ],
         "License": "UNSPECIFIED"
