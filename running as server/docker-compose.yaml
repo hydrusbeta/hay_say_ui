@@ -115,10 +115,10 @@ services:
     # generating with GPU and one for downloading models), with 5 workers for downloading models and a single worker
     # each for generating output with GPU and CPU.
     command: ["/bin/sh", "-c", "
-              celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker --loglevel=INFO --concurrency 5 --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc & 
-              celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_gpu:celery_app worker --loglevel=INFO --concurrency 1 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
-              celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_cpu:celery_app worker --loglevel=INFO --concurrency 24 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc &
-              gunicorn --config=server_initialization.py --workers 24 --bind 0.0.0.0:6573 'wsgi:get_server(enable_model_management=True, update_model_lists_on_startup=True, enable_session_caches=False, migrate_models=True, cache_implementation=\"file\", architectures=[\"ControllableTalkNet\", \"SoVitsSvc3\", \"SoVitsSvc4\", \"SoVitsSvc5\", \"Rvc\"])'
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_download:celery_app worker --loglevel=INFO --concurrency 5 --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc --include_architecture StyleTTS2 & 
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_gpu:celery_app worker --loglevel=INFO --concurrency 1 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc --include_architecture StyleTTS2 &
+              celery --workdir ~/hay_say/hay_say_ui/ -A celery_generate_cpu:celery_app worker --loglevel=INFO --concurrency 24 --cache_implementation file --include_architecture ControllableTalkNet --include_architecture SoVitsSvc3 --include_architecture SoVitsSvc4 --include_architecture SoVitsSvc5 --include_architecture Rvc --include_architecture StyleTTS2 &
+              gunicorn --config=server_initialization.py --workers 24 --bind 0.0.0.0:6573 'wsgi:get_server(enable_model_management=True, update_model_lists_on_startup=True, enable_session_caches=False, migrate_models=True, cache_implementation=\"file\", architectures=[\"ControllableTalkNet\", \"SoVitsSvc3\", \"SoVitsSvc4\", \"SoVitsSvc5\", \"Rvc\", \"StyleTTS2\"])'
               "]
     deploy:
       restart_policy:
@@ -232,6 +232,32 @@ services:
       - models:/home/luna/hay_say/models
       - audio_cache:/home/luna/hay_say/audio_cache
     command: ["/bin/sh", "-c", "/home/luna/hay_say/.venvs/controllable_talknet_server/bin/python /home/luna/hay_say/controllable_talknet_server/main.py --cache_implementation file"]
+    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+    # Uncomment the lines below to enable it for Controllable TalkNet if you wish.
+    deploy:
+      restart_policy:
+        condition: on-failure
+        window: 30s
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: all
+#              capabilities: [gpu]
+
+# This container provides a web service interface to StyleTTS2.
+  styletts_2_server:
+    depends_on:
+      limited_user_migration:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    image: hydrusbeta/hay_say:styletts_2_server
+    working_dir: /home/luna/hay_say/styletts_2
+    volumes:
+      - models:/home/luna/hay_say/models
+      - audio_cache:/home/luna/hay_say/audio_cache
+    command: ["/bin/sh", "-c", "/home/luna/hay_say/.venvs/styletts_2_server/bin/python /home/luna/hay_say/styletts_2_server/main.py --cache_implementation file"]
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
     # Uncomment the lines below to enable it for Controllable TalkNet if you wish.
     deploy:
