@@ -27,7 +27,7 @@ Docker and pull the pre-built images.
 
 ## Installation Instructions
 
-Important: Be aware that Hay Say will need to download at least 41 GB of compressed Docker images, so expect it to take 
+Important: Be aware that Hay Say will need to download at least 49 GB of compressed Docker images, so expect it to take 
 a while to start up the first time you run it. It should come up quickly after that. The exact amount of time required 
 for the initial startup depends, of course, on your internet speed. 
 
@@ -35,7 +35,7 @@ Before you install Hay Say, I recommend you take a look at the Testing Data / Be
 page to get a ballpark figure on how fast or slow Hay Say might be on your machine.
 
 ### Required Hardware
-* At least 50 GB free Hard drive space (additional space is required for any models you download within the application)
+* At least 60 GB free Hard drive space (additional space is required for any models you download within the application)
 * 12 GB System RAM (Hay Say only uses up to ~8 GB RAM, but don't forget that your OS needs RAM too)
 
 ### Recommended Hardware and Software
@@ -71,7 +71,7 @@ execute the command `wsl --update`, and then start Docker Desktop again.
 Note: You might get a Windows Defender Firewall popup. You can safely close that window. No special firewall rules are 
 required to run Hay Say.
 
-Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the 
+Hay Say will take time to download the large Docker images (~49 GB). Once it is done, you should see output like the 
 following:
 ![](documentation%20images/Windows%20ready%20to%20roll.png)
 
@@ -115,7 +115,7 @@ if you want it to use a Cuda GPU, then you will need to perform some additional 
     sudo docker compose up
     ```
 
-Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the 
+Hay Say will take time to download the large Docker images (~49 GB). Once it is done, you should see output like the 
 following:  
 ![](documentation%20images/Linux%20ready%20to%20roll.png)
 
@@ -154,7 +154,7 @@ docker volume create audio_cache
 docker compose up
 ```
 
-Hay Say will take time to download the large Docker images (~41 GB). Once it is done, you should see output like the 
+Hay Say will take time to download the large Docker images (~49 GB). Once it is done, you should see output like the 
 following:
 ![](documentation%20images/macOS%20ready%20to%20roll.png)
 
