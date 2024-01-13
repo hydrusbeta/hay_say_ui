@@ -51,22 +51,21 @@ class StyleTTS2Tab(AbstractTab):
             html.Tr([
                 html.Td(html.Label('Noise', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[1], type='number', min=0, max=3, step=0.1, value=0.3)),
+                    html.Td(dcc.Input(id=self.input_ids[1], type='range', min=0, max=3, step=0.1, value=0.3)),
                     html.Td(html.Div('0', id=self.id + '-noise-number')),
                 ])
             ], title='Randomness applied to the style predictor.'),
             html.Tr([
                 html.Td(html.Label('Diffusion Steps', htmlFor=self.input_ids[2]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[2], type='number', min=0, max=5, step=0.1, value=1.0)),
-                    html.Td(html.Div('0', id=self.id + '-diffusion-steps-number')),
+                    html.Td(dcc.Input(id=self.input_ids[2], type='number', min=2, max=100, step=1, value=5.0)),
                 ])
             ], title="I think this controls how many diffusion steps are applied when predicting the text's style. "
                      "This tooltip will be updated in the near future."),  # todo
             html.Tr([
                 html.Td(html.Label('Embedding Scale', htmlFor=self.input_ids[3]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[3], type='number', min=0, max=5, step=0.1, value=1.0)),
+                    html.Td(dcc.Input(id=self.input_ids[3], type='range', min=0, max=5, step=0.1, value=1.0)),
                     html.Td(html.Div('0', id=self.id + '-embedding-scale-number')),
                 ])
             ], title='I have no idea what this does, lol. This tooltip will be updated in the near future.'),  # todo
@@ -75,12 +74,12 @@ class StyleTTS2Tab(AbstractTab):
                 html.Td(dcc.Checklist([''], id=self.input_ids[4]))
             ],
                 title='Splits the input text into individual sentences, converts each sentence, and merges the results '
-                      'back together. The style of one sentence influences the style of the next sentence; the degree'
+                      'back together. The style of one sentence influences the style of the next sentence; the degree '
                       'to which that happens is controlled by the "Style Blend" option.'),
             html.Tr([
                 html.Td(html.Label('Style Blend', htmlFor=self.input_ids[5]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[5], type='number', min=0, max=1, step=0.1, value=0.5)),
+                    html.Td(dcc.Input(id=self.input_ids[5], type='range', min=0, max=1, step=0.1, value=0.5)),
                     html.Td(html.Div('0', id=self.id + '-style-blend-number')),
                 ])
             ], title='The degree to which the style of one sentence affects the style of the next sentence. This has '
@@ -94,6 +93,7 @@ class StyleTTS2Tab(AbstractTab):
             if adjustment is None:
                 raise PreventUpdate
             # cast to float first, then round to 2 decimal places
+            print("{:3.2f}".format(float(adjustment)), flush=True)
             return "{:3.2f}".format(float(adjustment))
 
         @callback(
@@ -101,28 +101,21 @@ class StyleTTS2Tab(AbstractTab):
             Input(self.input_ids[1], 'value')
         )
         def adjust_noise(adjustment):
-            do_adjustment(adjustment)
-
-        @callback(
-            Output(self.id + '-diffusion-steps-number', 'children'),
-            Input(self.input_ids[2], 'value')
-        )
-        def adjust_diffusion_steps(adjustment):
-            do_adjustment(adjustment)
+            return do_adjustment(adjustment)
 
         @callback(
             Output(self.id + '-embedding-scale-number', 'children'),
             Input(self.input_ids[3], 'value')
         )
         def adjust_embedding_scale(adjustment):
-            do_adjustment(adjustment)
+            return do_adjustment(adjustment)
 
         @callback(
             Output(self.id + '-style-blend-number', 'children'),
             Input(self.input_ids[5], 'value')
         )
         def adjust_style_blend(adjustment):
-            do_adjustment(adjustment)
+            return do_adjustment(adjustment)
 
         @callback(
             Output(self.input_ids[5], 'disabled'),
@@ -160,12 +153,12 @@ class StyleTTS2Tab(AbstractTab):
             'Architecture': self.id,
             'Character': args[0],
             'Noise': float(args[1]),
-            'Style Blend': float(args[2]),
-            'Diffusion Steps': int(args[3]),
+            'Diffusion Steps': int(args[2]),
+            'Embedding Scale': float(args[3]),
             # Note: A checklist option is initially None, but if you toggle it on and then back off, it becomes an empty
             # list, []. The expression "True if args[x] else False" maps both None and [] to False and [''] to True.
             'Use Long Form': True if args[4] else False,
-            'Embedding Scale': float(args[5]),
+            'Style Blend': float(args[5]),
         }
         return input_dict
 
