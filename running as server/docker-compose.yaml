@@ -248,8 +248,6 @@ services:
 # This container provides a web service interface to StyleTTS2.
   styletts_2_server:
     depends_on:
-      limited_user_migration:
-        condition: service_completed_successfully
       redis:
         condition: service_healthy
     image: hydrusbeta/hay_say:styletts_2_server
