@@ -1,6 +1,6 @@
 [
     {
-        "Model Name": "Twilight Sparkle (experimental)",
+        "Model Name": "Twilight Sparkle (proof-of-concept)",
         "Files": [
             {
                 "URL": "https://huggingface.co/therealvul/StyleTTS2/resolve/main/Twilight0/epoch_2nd_00009.pth",
