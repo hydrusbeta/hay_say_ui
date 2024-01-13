@@ -1,0 +1,20 @@
+[
+    {
+        "Model Name": "Twilight Sparkle (proof-of-concept)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/StyleTTS2/resolve/main/Twilight0/epoch_2nd_00009.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Twilight0.pth",
+                "Size (bytes)": 2091494993
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/StyleTTS2/resolve/main/Twilight0/config.yml",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.yml",
+                "Size (bytes)": 3934
+            }
+        ],
+        "License": "UNSPECIFIED"
+    }
+]

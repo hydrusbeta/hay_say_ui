@@ -2,6 +2,7 @@ import base64
 import datetime
 import json
 import traceback
+import uuid
 from http.client import HTTPConnection
 
 from hay_say_common.cache import Stage
@@ -81,7 +82,13 @@ def preprocess_if_needed(cache, selected_file, semitone_pitch, debug_pitch, redu
 def process(cache, user_text, hash_preprocessed, tab_object, relevant_inputs, session_data, gpu_id):
     """Send a JSON payload to a container, instructing it to perform processing"""
 
-    hash_output = pcc.compute_next_hash(hash_preprocessed, user_text, relevant_inputs)
+    # todo: A nonce is added to the arguments of compute_next_hash so that generating output multiple times using the
+    #  same input arguments will result in multiple outputs being displayed in the UI. Without it, architectures with
+    #  nondeterministic output can't display multiple outputs. However, this has the side effect of making the
+    #  postprocessing cache useless. It's kinda useless anyways at the moment since there are no postprocessing options
+    #  yet, but is there a better way to handle this?
+    nonce = uuid.uuid4().hex
+    hash_output = pcc.compute_next_hash(hash_preprocessed, user_text, relevant_inputs, nonce)
     payload = construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs, hash_output,
                                 session_data, gpu_id)
 

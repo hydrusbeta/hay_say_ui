@@ -117,6 +117,7 @@ def instantiate_tabs_for_testing():
     from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
     from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
     from architectures.rvc.RvcTab import RvcTab
+    from architectures.styletts_2.StyleTTS2Tab import StyleTTS2Tab
     from architectures.sample_architecture.SampleArchitectureTab import SampleTab
     return [
         ControllableTalknetTab(),
@@ -124,6 +125,7 @@ def instantiate_tabs_for_testing():
         SoVitsSvc4Tab(),
         SoVitsSvc5Tab(),
         RvcTab(),
+        StyleTTS2Tab(),
         SampleTab()
     ]
 

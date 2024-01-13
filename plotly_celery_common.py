@@ -10,12 +10,14 @@ from architectures.rvc.RvcTab import RvcTab
 from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
 from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
 from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
+from architectures.styletts_2.StyleTTS2Tab import StyleTTS2Tab
 
 architecture_map = {'ControllableTalkNet': ControllableTalknetTab(),
                     'SoVitsSvc3': SoVitsSvc3Tab(),
                     'SoVitsSvc4': SoVitsSvc4Tab(),
                     'SoVitsSvc5': SoVitsSvc5Tab(),
-                    'Rvc': RvcTab()}
+                    'Rvc': RvcTab(),
+                    'StyleTTS2': StyleTTS2Tab()}
 
 
 def select_architecture_tabs(choices):
