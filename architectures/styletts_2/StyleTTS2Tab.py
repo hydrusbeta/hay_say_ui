@@ -54,24 +54,28 @@ class StyleTTS2Tab(AbstractTab):
                     html.Td(dcc.Input(id=self.input_ids[1], type='range', min=0, max=3, step=0.1, value=0.3)),
                     html.Td(html.Div('0', id=self.id + '-noise-number')),
                 ])
-            ], title='Randomness applied to the style predictor.'),
+            ], title='Randomness applied to the style predictor. "Style" refers to various vocal qualities such as '
+                     'prosody, lexical stress, formant transitions, and speaking rate.'),
             html.Tr([
                 html.Td(html.Label('Diffusion Steps', htmlFor=self.input_ids[2]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[2], type='number', min=2, max=100, step=1, value=5.0)),
+                    html.Td(dcc.Input(id=self.input_ids[2], type='number', min=2, max=32, step=1, value=5.0)),
                 ])
-            ], title="I think this controls how many diffusion steps are applied when predicting the text's style. "
-                     "This tooltip will be updated in the near future."),  # todo
+            ], title="The number of diffusion steps that are applied to predict the text's style. Good quality results "
+                     "are observed with as few as 3 steps. The quality does not noticeably increase above 5 steps, "
+                     "although diversity of the style increases up until about 16 steps."),
             html.Tr([
                 html.Td(html.Label('Embedding Scale', htmlFor=self.input_ids[3]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[3], type='range', min=0, max=5, step=0.1, value=1.0)),
+                    html.Td(dcc.Input(id=self.input_ids[3], type='range', min=0, max=5, step=0.1, value=1.5)),
                     html.Td(html.Div('0', id=self.id + '-embedding-scale-number')),
                 ])
-            ], title='I have no idea what this does, lol. This tooltip will be updated in the near future.'),  # todo
+            ], title='Also called the "Classifier-free guidance (CFG) scale". Increasing this value causes the style '
+                     'prediction to adhere more closely to the input text, causing it to sound more expressive/'
+                     'emotional, but the quality drops off when the value goes too high.'),
             html.Tr([
-                html.Td(html.Label('Use Long Form', htmlFor=self.input_ids[4]), className='option-label'),
-                html.Td(dcc.Checklist([''], id=self.input_ids[4]))
+                html.Td(html.Label('Split Into Sentences', htmlFor=self.input_ids[4]), className='option-label'),
+                html.Td(dcc.Checklist([''], value=[''], id=self.input_ids[4]))
             ],
                 title='Splits the input text into individual sentences, converts each sentence, and merges the results '
                       'back together. The style of one sentence influences the style of the next sentence; the degree '
@@ -83,7 +87,7 @@ class StyleTTS2Tab(AbstractTab):
                     html.Td(html.Div('0', id=self.id + '-style-blend-number')),
                 ])
             ], title='The degree to which the style of one sentence affects the style of the next sentence. This has '
-                     'no effect if "Use Long Form" is disabled.'),
+                     'no effect if "Split Into Sentences" is disabled.'),
         ], className='spaced-table')
 
     def register_callbacks(self, enable_model_management):
