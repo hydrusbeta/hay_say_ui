@@ -88,6 +88,28 @@ class StyleTTS2Tab(AbstractTab):
                 ])
             ], title='The degree to which the style of one sentence affects the style of the next sentence. This has '
                      'no effect if "Split Into Sentences" is disabled.'),
+            html.Tr([
+                html.Td(html.Label('Enable Reference Audio', htmlFor=self.input_ids[6]), className='option-label'),
+                html.Td(dcc.Checklist([''], value=[], id=self.input_ids[6]))
+            ],
+                title=''),
+            html.Tr([
+                html.Td(html.Label('Blend with Reference Timbre', htmlFor=self.input_ids[7]), className='option-label'),
+                html.Tr([
+                    html.Td(dcc.Input(id=self.input_ids[7], type='range', min=0, max=1, step=0.1, value=0.5)),
+                    html.Td(html.Div('0', id=self.id + '-timbre-blend-number')),
+                ])
+            ], title="The degree to which the generated audio mimics the timbre of the reference audio. Use higher "
+                     "numbers to make the generated audio sound more like the character in the reference audio."),
+            html.Tr([
+                html.Td(html.Label('Blend with Reference Prosody', htmlFor=self.input_ids[8]), className='option-label'),
+                html.Tr([
+                    html.Td(dcc.Input(id=self.input_ids[8], type='range', min=0, max=1, step=0.1, value=0.9)),
+                    html.Td(html.Div('0', id=self.id + '-prosody-blend-number')),
+                ])
+            ], title="The degree to which the generated audio mimics the prosody of the reference audio. Use higher "
+                     "numbers to make the generated audio sound like the selected character is *imitating* the "
+                     "character in the reference audio."),
         ], className='spaced-table')
 
     def register_callbacks(self, enable_model_management):
@@ -122,11 +144,39 @@ class StyleTTS2Tab(AbstractTab):
             return do_adjustment(adjustment)
 
         @callback(
+            Output(self.id + '-timbre-blend-number', 'children'),
+            Input(self.input_ids[7], 'value')
+        )
+        def adjust_timbre_blend(adjustment):
+            return do_adjustment(adjustment)
+
+        @callback(
+            Output(self.id + '-prosody-blend-number', 'children'),
+            Input(self.input_ids[8], 'value')
+        )
+        def adjust_prosody_blend(adjustment):
+            return do_adjustment(adjustment)
+
+        @callback(
             Output(self.input_ids[5], 'disabled'),
             Input(self.input_ids[4], 'value')
         )
         def disable_style_blend(use_long_form):
             return not use_long_form
+
+        @callback(
+            Output(self.input_ids[7], 'disabled'),
+            Input(self.input_ids[6], 'value')
+        )
+        def disable_timbre_blend(use_reference_audio):
+            return not use_reference_audio
+
+        @callback(
+            Output(self.input_ids[8], 'disabled'),
+            Input(self.input_ids[6], 'value')
+        )
+        def disable_prosoxy_blend(use_reference_audio):
+            return not use_reference_audio
 
         @callback(
             [Output(self.id + '-license-note', 'children'),
@@ -150,6 +200,9 @@ class StyleTTS2Tab(AbstractTab):
                 self.id+'-embedding-scale',
                 self.id+'-use-long-form',
                 self.id+'-style-blend',
+                self.id+'-enable-reference-audio',
+                self.id+'-timbre-reference-blend',
+                self.id+'-prosody-reference-blend',
                 ]
 
     def construct_input_dict(self, *args):
@@ -163,6 +216,9 @@ class StyleTTS2Tab(AbstractTab):
             # list, []. The expression "True if args[x] else False" maps both None and [] to False and [''] to True.
             'Use Long Form': True if args[4] else False,
             'Style Blend': float(args[5]),
+            'Enable Reference Audio': True if args[6] else False,
+            'Timbre Reference Blend': 1.0 - float(args[7]),
+            'Prosody Reference Blend': 1.0 - float(args[8]),
         }
         return input_dict
 
