@@ -153,8 +153,8 @@ class RvcTab(AbstractTab):
         def disable_character_likeness(character):
             if character is None:
                 raise PreventUpdate
-            index_path = self.get_index_path(character)
-            return not os.path.isfile(index_path)
+            index_paths = self.get_index_paths(character)
+            return len(index_paths) == 0
 
         @callback(
             [Output(self.id + '-license-note', 'children'),
@@ -170,9 +170,10 @@ class RvcTab(AbstractTab):
             return model_licenses.get_verbiage(license_enum, additional_text), \
                 not model_licenses.is_ui_notice_required(license_enum)
 
-    def get_index_path(self, character):
+    def get_index_paths(self, character):
+        # Note: Hay Say only supports one index path. The UI just checks whether there's 0 or not.
         character_dir = hsc.character_dir(self.id, character)
-        return os.path.join(character_dir, character + '.index')
+        return hsc.get_files_with_extension(character_dir, '.index')
 
     @property
     def input_ids(self):
