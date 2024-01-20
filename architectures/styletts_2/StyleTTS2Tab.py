@@ -31,7 +31,9 @@ class StyleTTS2Tab(AbstractTab):
     @property
     def requirements(self):
         return html.P(
-            html.Em('This architecture requires a text input. Audio inputs are ignored.')
+            html.Em("This architecture requires a text input. You may optionally provide a reference audio and select"
+                    "the \"Enable Reference Audio\" checkbox to make the generated output mimic the reference audio's "
+                    "timbre and prosody.")
         )
 
     def meets_requirements(self, user_text, user_audio, selected_character):
@@ -100,7 +102,8 @@ class StyleTTS2Tab(AbstractTab):
                     html.Td(html.Div('0', id=self.id + '-timbre-blend-number')),
                 ])
             ], title="The degree to which the generated audio mimics the timbre of the reference audio. Use higher "
-                     "numbers to make the generated audio sound more like the character in the reference audio."),
+                     "numbers to make the voice of the generated output sound more like the character in the reference "
+                     "audio. Note: This value is equal to 1-alpha from StyleTTS's Inference_LibriTTS.ipynb script."),
             html.Tr([
                 html.Td(html.Label('Blend with Reference Prosody', htmlFor=self.input_ids[8]), className='option-label'),
                 html.Tr([
@@ -108,8 +111,9 @@ class StyleTTS2Tab(AbstractTab):
                     html.Td(html.Div('0', id=self.id + '-prosody-blend-number')),
                 ])
             ], title="The degree to which the generated audio mimics the prosody of the reference audio. Use higher "
-                     "numbers to make the generated audio sound like the selected character is *imitating* the "
-                     "character in the reference audio."),
+                     "numbers to make the intonation, stress, rhythm, and speaking pace of the generated output sound "
+                     "more like that of the reference audio. Note: This value is equal to 1-beta from StyleTTS's "
+                     "Inference_LibriTTS.ipynb script"),
         ], className='spaced-table')
 
     def register_callbacks(self, enable_model_management):
