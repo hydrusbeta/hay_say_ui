@@ -68,8 +68,8 @@ services:
 #    # the Dockerfile. This lets us start the main application in gunicorn.
 #    command: ["/bin/sh", "-c", "
 #               sed -i \"s/ALLOWED_HOSTS = \\['127.0.0.1', 'localhost'\\]/ALLOWED_HOSTS = ['.synthapp.*']/\" website/ponyonline/ponyonline/settings.py &&
-#               echo \"sed -i '22i \\ \\ \\ \\ -->' ./website/ponyonline/templates/ttsapp.html\" &&
-#               echo \"sed -i '19i \\ \\ \\ \\ <!--' ./website/ponyonline/templates/ttsapp.html\" &&
+#               sed -i 's/^\\ \\ \\ \\ <button id=\"save_model\" class=\"right padup\">Save Model<\\/button>/\\ \\ \\ \\ <!--<button id=\"save_model\" class=\"right padup\">Save Model<\\/button>/' ./website/ponyonline/templates/ttsapp.html &&
+#               sed -i 's/\\ \\ \\ \\ <a href=\"download\" style=\"font-size: 14px;\">Get more voices<\\/a>$/\\ \\ \\ \\ <a href=\"download\" style=\"font-size: 14px;\">Get more voices<\\/a> -->/' ./website/ponyonline/templates/ttsapp.html &&
 #               echo \"sed -i '93s/@never_cache/#@never_cache/' ./website/ponyonline/tts/views.py\" &&
 #               echo \"sed -i '23s/path/#path/' ./website/ponyonline/ponyonline/urls.py\" &&
 #               echo \"sed -i '28,30s/path/#path/' ./website/ponyonline/ponyonline/urls.py\" &&
