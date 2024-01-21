@@ -31,7 +31,7 @@ class StyleTTS2Tab(AbstractTab):
     @property
     def requirements(self):
         return html.P(
-            html.Em("This architecture requires a text input. You may optionally provide a reference audio and select"
+            html.Em("This architecture requires a text input. You may optionally provide a reference audio and select "
                     "the \"Enable Reference Audio\" checkbox to make the generated output mimic the reference audio's "
                     "timbre and prosody.")
         )
