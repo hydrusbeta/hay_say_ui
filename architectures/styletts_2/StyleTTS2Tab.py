@@ -17,10 +17,12 @@ DISABLE = "Disable"
 STYLE_JSON_FILENAME = 'precomputed_styles.json'
 BASE_STYLE_JSON_URL = architectures.AbstractTab.BASE_JSON_URL + STYLE_JSON_FILENAME
 
+STYLETTS2_ID = 'styletts_2'
+
 class StyleTTS2Tab(AbstractTab):
     @property
     def id(self):
-        return 'styletts_2'
+        return STYLETTS2_ID
 
     @property
     def port(self):
