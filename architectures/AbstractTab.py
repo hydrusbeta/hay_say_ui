@@ -308,8 +308,12 @@ class AbstractTab(ABC):
     def update_character_infos_file(self):
         self.update_model_infos_file(BASE_CHARACTER_JSON_URL, CHARACTER_JSON_FILENAME)
 
-    def update_model_infos_file(self, base_url, filename):
-        target_path = os.path.join(self.get_dir_of_extending_class_module(), filename)
+    def update_model_infos_file(self, base_url, filename, target_dir=None):
+        # todo: Can I just set the default directly to self.get_dir_of_extending_class_module()? Or would that get
+        #  AbstractTab's parent directory?
+        if target_dir is None:
+            target_dir = self.get_dir_of_extending_class_module()
+        target_path = os.path.join(target_dir, filename)
         url = base_url.replace("{architecture}", self.id)
         with tempfile.TemporaryDirectory() as tempdir:
             source_path = os.path.join(tempdir, filename)

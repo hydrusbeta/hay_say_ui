@@ -1,14 +1,28 @@
+import json
+import os
+
+import dash_bootstrap_components as dbc
+import hay_say_common as hsc
 from dash import html, dcc, Input, Output, callback
 from dash.exceptions import PreventUpdate
 
+import architectures
 import model_licenses
 from architectures.AbstractTab import AbstractTab
 
+PRECOMPUTED_STYLE = "Precomputed Style"
+USE_REFERENCE_AUDIO = "Use Reference Audio"
+DISABLE = "Disable"
+
+STYLE_JSON_FILENAME = 'precomputed_styles.json'
+BASE_STYLE_JSON_URL = architectures.AbstractTab.BASE_JSON_URL + STYLE_JSON_FILENAME
+
+STYLETTS2_ID = 'styletts_2'
 
 class StyleTTS2Tab(AbstractTab):
     @property
     def id(self):
-        return 'styletts_2'
+        return STYLETTS2_ID
 
     @property
     def port(self):
@@ -51,6 +65,77 @@ class StyleTTS2Tab(AbstractTab):
                 id=self.id + '-license-row', hidden=True
             ),
             html.Tr([
+                html.Td(html.Label('Reference Style', htmlFor=self.input_ids[0]), className='option-label'),
+                html.Td(
+                    dcc.RadioItems(
+                        [
+                            {
+                                "label":
+                                    [
+                                        html.Span(PRECOMPUTED_STYLE, style={'padding-left': '10px'}, title='Use a pre-computed style array for a specific character and emotion/trait'),
+                                        html.Table([
+                                            html.Tr([
+                                                html.Td(html.Label('Pony', htmlFor=self.input_ids[9]),
+                                                        className='option-label', style={'width': '20%'}),
+                                                html.Td(dbc.Select(
+                                                    options=self.style_characters(),
+                                                    value=self.style_characters()[0] if self.style_characters() else None,
+                                                    className='option-dropdown',
+                                                    id=self.input_ids[9]))
+                                            ]),
+                                            html.Tr([
+                                                html.Td(html.Label('Trait', htmlFor=self.input_ids[10]),
+                                                        className='option-label', style={'width': '20%'}),
+                                                html.Td(dbc.Select(
+                                                    options=self.style_traits(self.style_characters()[0]) if self.style_characters() else [],
+                                                    value=self.style_traits(self.style_characters()[0]) if self.style_characters() else None,
+                                                    className='option-dropdown',
+                                                    id=self.input_ids[10]))
+                                            ])],
+                                            className='spaced-table'
+                                        )
+                                    ],
+                                "value": PRECOMPUTED_STYLE
+                            },
+                            {
+                                "label":
+                                    [
+                                        html.Span(USE_REFERENCE_AUDIO, style={'padding-left': '10px'}, title='Use your selected audio input as the reference Style')
+                                    ],
+                                "value": USE_REFERENCE_AUDIO
+                            },
+                            {
+                                "label":
+                                    [
+                                        html.Span(DISABLE, style={'padding-left': '10px'}, title="Disable the reference style. This option is not allowed for multi-speaker models, which require a reference audio.")
+                                    ],
+                                "value": DISABLE
+                            }
+                        ], value=PRECOMPUTED_STYLE, id=self.input_ids[6]
+                    ), style={'border': 'thin solid', 'padding': '10px'}
+                )],  # style={'outline': 'thin solid'}
+            ),
+            html.Tr([
+                html.Td(html.Label('Blend with Reference Timbre', htmlFor=self.input_ids[7]), className='option-label'),
+                html.Tr([
+                    html.Td(dcc.Input(id=self.input_ids[7], type='range', min=0, max=1, step=0.1, value=0.5)),
+                    html.Td(html.Div('0', id=self.id + '-timbre-blend-number')),
+                ])
+            ], title="The degree to which the generated audio mimics the timbre of the reference audio. Use higher "
+                     "numbers to make the voice of the generated output sound more like the character in the reference "
+                     "audio. Note: This value is equal to 1-alpha from StyleTTS's Inference_LibriTTS.ipynb script."),
+            html.Tr([
+                html.Td(html.Label('Blend with Reference Prosody', htmlFor=self.input_ids[8]),
+                        className='option-label'),
+                html.Tr([
+                    html.Td(dcc.Input(id=self.input_ids[8], type='range', min=0, max=1, step=0.1, value=0.9)),
+                    html.Td(html.Div('0', id=self.id + '-prosody-blend-number')),
+                ])
+            ], title="The degree to which the generated audio mimics the prosody of the reference audio. Use higher "
+                     "numbers to make the intonation, stress, rhythm, and speaking pace of the generated output sound "
+                     "more like that of the reference audio. Note: This value is equal to 1-beta from StyleTTS's "
+                     "Inference_LibriTTS.ipynb script"),
+            html.Tr([
                 html.Td(html.Label('Noise', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(id=self.input_ids[1], type='range', min=0, max=3, step=0.1, value=0.3)),
@@ -90,31 +175,21 @@ class StyleTTS2Tab(AbstractTab):
                 ])
             ], title='The degree to which the style of one sentence affects the style of the next sentence. This has '
                      'no effect if "Split Into Sentences" is disabled.'),
-            html.Tr([
-                html.Td(html.Label('Enable Reference Audio', htmlFor=self.input_ids[6]), className='option-label'),
-                html.Td(dcc.Checklist([''], value=[], id=self.input_ids[6]))
-            ],
-                title=''),
-            html.Tr([
-                html.Td(html.Label('Blend with Reference Timbre', htmlFor=self.input_ids[7]), className='option-label'),
-                html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[7], type='range', min=0, max=1, step=0.1, value=0.5)),
-                    html.Td(html.Div('0', id=self.id + '-timbre-blend-number')),
-                ])
-            ], title="The degree to which the generated audio mimics the timbre of the reference audio. Use higher "
-                     "numbers to make the voice of the generated output sound more like the character in the reference "
-                     "audio. Note: This value is equal to 1-alpha from StyleTTS's Inference_LibriTTS.ipynb script."),
-            html.Tr([
-                html.Td(html.Label('Blend with Reference Prosody', htmlFor=self.input_ids[8]), className='option-label'),
-                html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[8], type='range', min=0, max=1, step=0.1, value=0.9)),
-                    html.Td(html.Div('0', id=self.id + '-prosody-blend-number')),
-                ])
-            ], title="The degree to which the generated audio mimics the prosody of the reference audio. Use higher "
-                     "numbers to make the intonation, stress, rhythm, and speaking pace of the generated output sound "
-                     "more like that of the reference audio. Note: This value is equal to 1-beta from StyleTTS's "
-                     "Inference_LibriTTS.ipynb script"),
         ], className='spaced-table')
+
+    def styles_json(self):
+        return os.path.join(hsc.guarantee_directory(os.path.join(hsc.MODELS_DIR, self.id)), STYLE_JSON_FILENAME)
+
+    def style_characters(self):
+        with open(self.styles_json(), 'r') as file:
+            json_contents = json.load(file)
+            return [item['Character'] for item in json_contents]
+
+    def style_traits(self, character):
+        with open(self.styles_json(), 'r') as file:
+            json_contents = json.load(file)
+            character_index = {character_group['Character']: i for i, character_group in enumerate(json_contents)}.get(character)
+            return [item['Trait'] for item in json_contents[character_index]['Pre-computed Styles']]
 
     def register_callbacks(self, enable_model_management):
         super().register_callbacks(enable_model_management)
@@ -123,7 +198,6 @@ class StyleTTS2Tab(AbstractTab):
             if adjustment is None:
                 raise PreventUpdate
             # cast to float first, then round to 2 decimal places
-            print("{:3.2f}".format(float(adjustment)), flush=True)
             return "{:3.2f}".format(float(adjustment))
 
         @callback(
@@ -172,15 +246,25 @@ class StyleTTS2Tab(AbstractTab):
             Output(self.input_ids[7], 'disabled'),
             Input(self.input_ids[6], 'value')
         )
-        def disable_timbre_blend(use_reference_audio):
-            return not use_reference_audio
+        def disable_timbre_blend(reference_style_source):
+            return reference_style_source == DISABLE
 
         @callback(
             Output(self.input_ids[8], 'disabled'),
             Input(self.input_ids[6], 'value')
         )
-        def disable_prosoxy_blend(use_reference_audio):
-            return not use_reference_audio
+        def disable_prosody_blend(reference_style_source):
+            return reference_style_source == DISABLE
+
+        @callback(
+            [Output(self.input_ids[10], 'options'),
+             Output(self.input_ids[10], 'value')],
+            Input(self.input_ids[9], 'value')
+        )
+        def update_precomputed_trait_options(character):
+            options = self.style_traits(character) if character else []
+            selected_option = options[0] if options else None
+            return options, selected_option
 
         @callback(
             [Output(self.id + '-license-note', 'children'),
@@ -204,9 +288,11 @@ class StyleTTS2Tab(AbstractTab):
                 self.id+'-embedding-scale',
                 self.id+'-use-long-form',
                 self.id+'-style-blend',
-                self.id+'-enable-reference-audio',
+                self.id+'-reference-style-source',
                 self.id+'-timbre-reference-blend',
                 self.id+'-prosody-reference-blend',
+                self.id+'-precomputed-style-character',
+                self.id+'-precomputed-style-trait',
                 ]
 
     def construct_input_dict(self, *args):
@@ -220,9 +306,14 @@ class StyleTTS2Tab(AbstractTab):
             # list, []. The expression "True if args[x] else False" maps both None and [] to False and [''] to True.
             'Use Long Form': True if args[4] else False,
             'Style Blend': float(args[5]),
-            'Enable Reference Audio': True if args[6] else False,
+            'Reference Style Source': args[6],
             'Timbre Reference Blend': 1.0 - float(args[7]),
             'Prosody Reference Blend': 1.0 - float(args[8]),
+            'Precomputed Style Character': args[9],
+            'Precomputed Style Trait': args[10],
         }
         return input_dict
 
+    def update_style_lists_for_styletts2(self):
+        self.update_model_infos_file(BASE_STYLE_JSON_URL, STYLE_JSON_FILENAME,
+                                     target_dir=os.path.dirname(self.styles_json()))

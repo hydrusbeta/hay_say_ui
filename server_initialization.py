@@ -1,6 +1,7 @@
 import model_migrator as migrator
-from plotly_celery_common import select_architecture_tabs
 import util
+from architectures.styletts_2.StyleTTS2Tab import STYLETTS2_ID
+from plotly_celery_common import select_architecture_tabs
 
 preload_app = True
 
@@ -31,3 +32,5 @@ def update_model_lists(architectures):
     for tab in available_tabs:
         tab.update_multi_speaker_infos_file()
         tab.update_character_infos_file()
+        if tab.id == STYLETTS2_ID:
+            tab.update_style_lists_for_styletts2()
