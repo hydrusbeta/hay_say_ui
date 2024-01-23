@@ -3,14 +3,14 @@ import os
 
 import dash_bootstrap_components as dbc
 import hay_say_common as hsc
-from dash import html, dcc, Input, Output, callback
+from dash import html, dcc, Input, Output, State, callback
 from dash.exceptions import PreventUpdate
 
 import architectures
 import model_licenses
 from architectures.AbstractTab import AbstractTab
 
-PRECOMPUTED_STYLE = "Precomputed Style"
+USE_PRECOMPUTED_STYLE = "Use Precomputed Style"
 USE_REFERENCE_AUDIO = "Use Reference Audio"
 DISABLE = "Disable"
 
@@ -18,6 +18,9 @@ STYLE_JSON_FILENAME = 'precomputed_styles.json'
 BASE_STYLE_JSON_URL = architectures.AbstractTab.BASE_JSON_URL + STYLE_JSON_FILENAME
 
 STYLETTS2_ID = 'styletts_2'
+
+CONFIG_FILE_EXTENSION = '.yml'
+CONFIG_FILE_EXTENSION_ALT = '.yaml'
 
 class StyleTTS2Tab(AbstractTab):
     @property
@@ -65,56 +68,39 @@ class StyleTTS2Tab(AbstractTab):
                 id=self.id + '-license-row', hidden=True
             ),
             html.Tr([
-                html.Td(html.Label('Reference Style', htmlFor=self.input_ids[0]), className='option-label'),
+                html.Td(html.Label('Reference Style Option', htmlFor=self.input_ids[0]), className='option-label'),
+                html.Td(dcc.RadioItems(value=USE_PRECOMPUTED_STYLE, id=self.input_ids[6]))
+            ]),
+            html.Tr([
                 html.Td(
-                    dcc.RadioItems(
-                        [
-                            {
-                                "label":
-                                    [
-                                        html.Span(PRECOMPUTED_STYLE, style={'padding-left': '10px'}, title='Use a pre-computed style array for a specific character and emotion/trait'),
-                                        html.Table([
-                                            html.Tr([
-                                                html.Td(html.Label('Pony', htmlFor=self.input_ids[9]),
-                                                        className='option-label', style={'width': '20%'}),
-                                                html.Td(dbc.Select(
-                                                    options=self.style_characters(),
-                                                    value=self.style_characters()[0] if self.style_characters() else None,
-                                                    className='option-dropdown',
-                                                    id=self.input_ids[9]))
-                                            ]),
-                                            html.Tr([
-                                                html.Td(html.Label('Trait', htmlFor=self.input_ids[10]),
-                                                        className='option-label', style={'width': '20%'}),
-                                                html.Td(dbc.Select(
-                                                    options=self.style_traits(self.style_characters()[0]) if self.style_characters() else [],
-                                                    value=self.style_traits(self.style_characters()[0]) if self.style_characters() else None,
-                                                    className='option-dropdown',
-                                                    id=self.input_ids[10]))
-                                            ])],
-                                            className='spaced-table'
-                                        )
-                                    ],
-                                "value": PRECOMPUTED_STYLE
-                            },
-                            {
-                                "label":
-                                    [
-                                        html.Span(USE_REFERENCE_AUDIO, style={'padding-left': '10px'}, title='Use your selected audio input as the reference Style')
-                                    ],
-                                "value": USE_REFERENCE_AUDIO
-                            },
-                            {
-                                "label":
-                                    [
-                                        html.Span(DISABLE, style={'padding-left': '10px'}, title="Disable the reference style. This option is not allowed for multi-speaker models, which require a reference audio.")
-                                    ],
-                                "value": DISABLE
-                            }
-                        ], value=PRECOMPUTED_STYLE, id=self.input_ids[6]
-                    ), style={'border': 'thin solid', 'padding': '10px'}
-                )],  # style={'outline': 'thin solid'}
-            ),
+                    dbc.Collapse(
+                        html.Label('Precomputed Style', htmlFor=self.input_ids[0]),
+                        id=self.id+'-precomputed-style-dropdowns-1'
+                    ), className='option-label'
+                ),
+                html.Td(
+                    dbc.Collapse(
+                        html.Table([
+                            html.Tr([
+                                html.Td(html.Label('Pony', htmlFor=self.input_ids[9]),
+                                        className='option-label', style={'width': '20%'}),
+                                html.Td(dbc.Select(
+                                    className='option-dropdown',
+                                    id=self.input_ids[9]))
+                            ]),
+                            html.Tr([
+                                html.Td(html.Label('Trait', htmlFor=self.input_ids[10]),
+                                        className='option-label', style={'width': '20%'}),
+                                html.Td(dbc.Select(
+                                    className='option-dropdown',
+                                    id=self.input_ids[10]))
+                            ])],
+                            className='spaced-table'
+                        ),
+                        id=self.id + '-precomputed-style-dropdowns-2'
+                    )
+                )
+            ]),
             html.Tr([
                 html.Td(html.Label('Blend with Reference Timbre', htmlFor=self.input_ids[7]), className='option-label'),
                 html.Tr([
@@ -180,16 +166,22 @@ class StyleTTS2Tab(AbstractTab):
     def styles_json(self):
         return os.path.join(hsc.guarantee_directory(os.path.join(hsc.MODELS_DIR, self.id)), STYLE_JSON_FILENAME)
 
-    def style_characters(self):
+    def styles_nested_dict(self):
+        # Parses the styles JSON and returns a nested dict of the form {model: {character: {trait: [vector]}}}
         with open(self.styles_json(), 'r') as file:
             json_contents = json.load(file)
-            return [item['Character'] for item in json_contents]
+            return {item['Model']: {subitem['Character']: {subsubitem['Trait']: subsubitem['Style Vector']
+                                                           for subsubitem in subitem['Pre-computed Styles']}
+                                    for subitem in item['Characters']}
+                    for item in json_contents}
 
-    def style_traits(self, character):
-        with open(self.styles_json(), 'r') as file:
-            json_contents = json.load(file)
-            character_index = {character_group['Character']: i for i, character_group in enumerate(json_contents)}.get(character)
-            return [item['Trait'] for item in json_contents[character_index]['Pre-computed Styles']]
+    def style_characters(self, model):
+        character_group_list = self.styles_nested_dict().get(model)
+        return sorted(list(character_group_list.keys())) if character_group_list else None
+
+    def style_traits(self, model, character):
+        trait_group_list = self.styles_nested_dict().get(model).get(character)
+        return sorted(list(trait_group_list.keys())) if trait_group_list else None
 
     def register_callbacks(self, enable_model_management):
         super().register_callbacks(enable_model_management)
@@ -257,12 +249,48 @@ class StyleTTS2Tab(AbstractTab):
             return reference_style_source == DISABLE
 
         @callback(
+            [Output(self.id+'-precomputed-style-dropdowns-1', 'is_open'),
+             Output(self.id+'-precomputed-style-dropdowns-2', 'is_open')],
+            Input(self.input_ids[6], 'value')
+        )
+        def hide_precomputed_style_options(reference_style_source):
+            is_open = reference_style_source == USE_PRECOMPUTED_STYLE
+            return is_open, is_open
+
+        @callback(
+            [Output(self.input_ids[6], 'options'),
+             Output(self.input_ids[6], 'value')],
+            [Input(self.input_ids[0], 'value'),
+             State(self.input_ids[6], 'value')]
+        )
+        def determine_style_options(model, current_value):
+            disabled_options = []
+            if model is None or not self.style_characters(model):
+                disabled_options.append(USE_PRECOMPUTED_STYLE)
+            if self.is_multispeaker(model):
+                disabled_options.append(DISABLE)
+            # USE_REFERENCE_AUDIO is a "safe" fallback because it will never be disabled
+            new_value = current_value if current_value not in disabled_options else USE_REFERENCE_AUDIO
+            return self.construct_reference_style_options(disabled_options), new_value
+
+        @callback(
+            [Output(self.input_ids[9], 'options'),
+             Output(self.input_ids[9], 'value')],
+            [Input(self.input_ids[0], 'value')]
+        )
+        def update_precomputed_character_options(model):
+            options = self.style_characters(model) if model else []
+            selected_option = options[0] if options else None
+            return options, selected_option
+
+        @callback(
             [Output(self.input_ids[10], 'options'),
              Output(self.input_ids[10], 'value')],
-            Input(self.input_ids[9], 'value')
+            [State(self.input_ids[0], 'value'),
+             Input(self.input_ids[9], 'value')]
         )
-        def update_precomputed_trait_options(character):
-            options = self.style_traits(character) if character else []
+        def update_precomputed_trait_options(model, character):
+            options = self.style_traits(model, character) if model and character else []
             selected_option = options[0] if options else None
             return options, selected_option
 
@@ -317,3 +345,42 @@ class StyleTTS2Tab(AbstractTab):
     def update_style_lists_for_styletts2(self):
         self.update_model_infos_file(BASE_STYLE_JSON_URL, STYLE_JSON_FILENAME,
                                      target_dir=os.path.dirname(self.styles_json()))
+
+    def construct_reference_style_options(self, disabled_options):
+        return [
+            {
+                "label": html.Span(USE_PRECOMPUTED_STYLE, style={'padding-left': '10px'},
+                                   title='Use a pre-computed style array for a specific character and emotion/trait'),
+                "value": USE_PRECOMPUTED_STYLE,
+                "disabled": USE_PRECOMPUTED_STYLE in disabled_options
+            },
+            {
+                "label": html.Span(USE_REFERENCE_AUDIO, style={'padding-left': '10px'},
+                                   title='Use your selected audio input as the reference Style'),
+                "value": USE_REFERENCE_AUDIO,
+                "disabled": USE_REFERENCE_AUDIO in disabled_options
+            },
+            {
+                "label": html.Span(DISABLE, style={'padding-left': '10px'},
+                                   title="Disable the reference style. This option is not allowed for multi-speaker "
+                                         "models, which require a reference audio."),
+                "value": DISABLE,
+                "disabled": DISABLE in disabled_options
+            }
+        ]
+
+    def get_config_file(self, model):
+        character_dir = hsc.character_dir(self.id, model)
+        try:
+            config_file = hsc.get_single_file_with_extension(character_dir, CONFIG_FILE_EXTENSION)
+        except Exception:
+            config_file = hsc.get_single_file_with_extension(character_dir, CONFIG_FILE_EXTENSION_ALT)
+        return config_file
+
+    def is_multispeaker(self, model):
+        with open(self.get_config_file(model), 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                if 'multispeaker' in line and 'true' in line:
+                    return True
+        return False
