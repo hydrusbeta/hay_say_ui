@@ -52,5 +52,23 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Multi-speaker (40 epochs) (Mane 6, CMC, Princesses, Discord, Gilda, Zecora, Trixie, Starlight, Chrysalis, Tirek, Cozy Glow, Flim, Flam, and Shining Armor)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/StyleTTS2/resolve/main/Multi0/epoch_2nd_40_1c872.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "epoch_2nd_40_1c872.pth",
+                "Size (bytes)": 2132415942
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/StyleTTS2/resolve/main/Multi0/config_40_1c872.yml",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "config.yml",
+                "Size (bytes)": 1945
+            }
+        ],
+        "License": "UNSPECIFIED"
     }
 ]

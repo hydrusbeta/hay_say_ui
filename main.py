@@ -25,6 +25,7 @@ TAB_BUTTON_PREFIX = '-tab-button'
 TAB_CELL_SUFFIX = '-tab-cell'
 ANNOUNCEMENT_CHECK_INTERVAL = 60000  # milliseconds
 
+
 def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     return [
         html.Div([
@@ -46,6 +47,7 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
             dcc.Textarea(id='text-input', placeholder="Enter some text you would like a pony to say."),
             html.P('And/or provide a voice recording that you would like to ponify:'),
             dcc.Upload([html.Div('Drag and drop file or click to Upload...')], id='file-picker', multiple=True),
+            dcc.ConfirmDialog(id='confirm-delete-inputs', message='Are you sure you want to delete all uploaded audio?'),
             dcc.Loading(
                 html.Table([
                     html.Tr(
@@ -54,12 +56,12 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                         )
                     ),
                     html.Tr(
-                        html.Td(
-                            html.Div(
-                                dbc.Select(id='file-dropdown', className='file-dropdown'),
-                                id='dropdown-container'
-                            )
-                        )
+                        html.Td(html.Div([
+                            dbc.Select(id='file-dropdown', className='file-dropdown'),
+                            html.Button('delete all uploaded files', id='delete-raw-through-output',
+                                        style={'margin-top': '20px'})],
+                            id='dropdown-container',
+                        )),
                     ),
                     html.Tr(
                         html.Td(
@@ -300,6 +302,28 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         return ''
 
     @callback(
+        [Output('file-dropdown', 'options', allow_duplicate=True),
+         Output('file-dropdown', 'value', allow_duplicate=True),
+         Output('dropdown-container', 'hidden', allow_duplicate=True)],
+        Input('confirm-delete-inputs', 'submit_n_clicks'),
+        State('session', 'data'),
+        prevent_initial_call=True
+    )
+    def delete_all_raw_through_output(_, session_data):
+        cache.delete_all_files_at_stage(Stage.RAW, session_data['id'])
+        cache.delete_all_files_at_stage(Stage.PREPROCESSED, session_data['id'])
+        cache.delete_all_files_at_stage(Stage.OUTPUT, session_data['id'])
+        return update_dropdown(None, session_data)
+
+    @callback(
+        Output('confirm-delete-inputs', 'displayed'),
+        Input('delete-raw-through-output', 'n_clicks'),
+        prevent_initial_call=True
+    )
+    def display_confirm_for_deleting_inputs(_):
+        return True
+
+    @callback(
         [Output(tab.id, 'hidden') for tab in available_tabs] +
         [Output(tab.id + TAB_CELL_SUFFIX, 'className') for tab in available_tabs] +
         [Input(tab.id + TAB_BUTTON_PREFIX, 'n_clicks') for tab in available_tabs],
@@ -328,20 +352,21 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
     @callback(
         [Output('file-dropdown', 'options'),
          Output('file-dropdown', 'value'),
-         Output('dropdown-container', 'hidden')],
+         Output('dropdown-container', 'hidden'),
+         Output('file-picker', 'contents')],  # work around for issue #816 (https://github.com/plotly/dash-core-components/issues/816)
         Input('file-picker', 'contents'),
         State('file-picker', 'filename'),
         State('session', 'data'),
     )
     def upload_file(file_contents_list, filename_list, session_data):
         if file_contents_list is None:  # initial load of page
-            return update_dropdown(None, session_data)
+            return *update_dropdown(None, session_data), None
         else:
             for file_contents, filename in zip(file_contents_list, filename_list):
                 filename = append_index_if_needed(filename, session_data)
                 raw_array, raw_samplerate = hsc.get_audio_from_src_attribute(file_contents, 'utf-8')
                 save_raw_audio_to_cache(filename, raw_array, raw_samplerate, session_data)
-            return update_dropdown(filename_list[0], session_data)
+            return *update_dropdown(filename_list[0], session_data), None
 
     def append_index_if_needed(filename, session_data):
         # Appends an index to the end of the filename, like 'my file.wav (2)', if the file already exists.
