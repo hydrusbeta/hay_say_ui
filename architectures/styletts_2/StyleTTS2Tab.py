@@ -104,7 +104,7 @@ class StyleTTS2Tab(AbstractTab):
             html.Tr([
                 html.Td(html.Label('Blend with Reference Timbre', htmlFor=self.input_ids[7]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[7], type='range', min=0, max=1, step=0.1, value=0.5)),
+                    html.Td(dcc.Input(id=self.input_ids[7], type='range', min=0, max=1, step=0.1, value=0.9)),
                     html.Td(html.Div('0', id=self.id + '-timbre-blend-number')),
                 ])
             ], title="The degree to which the generated audio mimics the timbre of the reference audio. Use higher "
