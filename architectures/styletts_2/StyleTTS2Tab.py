@@ -49,8 +49,8 @@ class StyleTTS2Tab(AbstractTab):
     def requirements(self):
         return html.P(
             html.Em("This architecture requires a text input. You may optionally provide a reference audio and select "
-                    "the \"Enable Reference Audio\" checkbox to make the generated output mimic the reference audio's "
-                    "timbre and prosody.")
+                    "the \"Use Reference Audio\" Reference Style Option to make the generated output mimic the "
+                    "reference audio's timbre and prosody.")
         )
 
     def meets_requirements(self, user_text, user_audio, selected_character):
@@ -161,6 +161,13 @@ class StyleTTS2Tab(AbstractTab):
                 ])
             ], title='The degree to which the style of one sentence affects the style of the next sentence. This has '
                      'no effect if "Split Into Sentences" is disabled.'),
+            html.Tr([
+                html.Td(html.Label('Speed', htmlFor=self.input_ids[11]), className='option-label'),
+                html.Tr([
+                    html.Td(dcc.Input(id=self.input_ids[11], type='range', min=0.1, max=5.0, step=0.1, value=1.0)),
+                    html.Td(html.Div('0', id=self.id + '-speed-number')),
+                ])
+            ], title='Modifies the speed of the generated audio, without affecting pitch. Higher number = faster.'),
         ], className='spaced-table')
 
     def styles_json(self):
@@ -225,6 +232,13 @@ class StyleTTS2Tab(AbstractTab):
             Input(self.input_ids[8], 'value')
         )
         def adjust_prosody_blend(adjustment):
+            return do_adjustment(adjustment)
+
+        @callback(
+            Output(self.id + '-speed-number', 'children'),
+            Input(self.input_ids[11], 'value')
+        )
+        def adjust_speed(adjustment):
             return do_adjustment(adjustment)
 
         @callback(
@@ -321,6 +335,7 @@ class StyleTTS2Tab(AbstractTab):
                 self.id+'-prosody-reference-blend',
                 self.id+'-precomputed-style-character',
                 self.id+'-precomputed-style-trait',
+                self.id+'-speed',
                 ]
 
     def construct_input_dict(self, *args):
@@ -339,6 +354,7 @@ class StyleTTS2Tab(AbstractTab):
             'Prosody Reference Blend': 1.0 - float(args[8]),
             'Precomputed Style Character': args[9],
             'Precomputed Style Trait': args[10],
+            'Speed': float(args[11]),
         }
         return input_dict
 
