@@ -310,10 +310,15 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         prevent_initial_call=True
     )
     def delete_all_raw_through_output(_, session_data):
+        # We must write to the cache of each stage first, to guarantee the Stage exits before deleting all its contents.
+        # todo: fix the hay_say_common method so we can call delete_all_files_at_stage by itself.
+        cache.write_metadata(Stage.RAW, session_data['id'], dict())
+        cache.write_metadata(Stage.PREPROCESSED, session_data['id'], dict())
+        cache.write_metadata(Stage.OUTPUT, session_data['id'], dict())
         cache.delete_all_files_at_stage(Stage.RAW, session_data['id'])
         cache.delete_all_files_at_stage(Stage.PREPROCESSED, session_data['id'])
         cache.delete_all_files_at_stage(Stage.OUTPUT, session_data['id'])
-        return update_dropdown(None, session_data)
+        return [], None, True
 
     @callback(
         Output('confirm-delete-inputs', 'displayed'),
