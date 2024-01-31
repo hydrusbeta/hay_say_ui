@@ -103,9 +103,7 @@ provided: not found`, then cd to that directory first.
 1. Install Docker Engine. This can be done in several ways according to preference. See 
 https://docs.docker.com/engine/install/ubuntu. Note: By default, Docker needs to be run with superuser privileges. 
 However, it is possible to install it in a way that lets you run it in rootless mode if you prefer (see 
-https://docs.docker.com/engine/security/rootless/). Hay Say will run in a rootless configuration just fine on CPU, but 
-if you want it to use a Cuda GPU, then you will need to perform some additional configuration. See 
-[Enabling GPU Integration](#enabling-gpu-integration).
+https://docs.docker.com/engine/security/rootless/).
 
 2. Open a terminal and execute the following commands:
     ```shell
@@ -401,9 +399,16 @@ Additional restrictions:
 GPU integration is turned off by default in Hay Say. This is to prevent an error for users who do not have a 
 Cuda-capable GPU. If you do have a Cuda-capable GPU on a Windows or Linux machine, you can enable GPU integration:
 1. Install the NVIDIA Container Toolkit
-   * On Linux, follow the instructions at https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html. Note: Unless you know you are using CRI-O or Podman, you do not need to follow the instructions under "Configuring CRI-O" or "Configuring Podman".
-   * On Windows, make sure you are using a recent NVIDIA driver and then follow the instructions under the section "CUDA Support for WSL 2" at https://docs.nvidia.com/cuda/wsl-user-guide/index.html#cuda-support-for-wsl-2
-   * On MacOS, as far as I can tell, Cuda GPU integration is no longer supported. See https://developer.nvidia.com/nvidia-cuda-toolkit-11_6_0-developer-tools-mac-hosts  
+   * On Linux, follow the instructions at 
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html. Note: Unless you know you 
+are using CRI-O or Podman, you do not need to follow the instructions under "Configuring CRI-O" or "Configuring Podman".
+Also, you only need to follow the steps under "Rootless mode" if you want to run Docker in rootless mode (i.e. so that 
+you can run `docker compose up` instead of `sudo docker compose up`); if that is the case, then be sure to follow the 
+steps in https://docs.docker.com/engine/security/rootless/ as well.
+   * On Windows, make sure you are using a recent NVIDIA driver and then follow the instructions under the section "CUDA
+Support for WSL 2" at https://docs.nvidia.com/cuda/wsl-user-guide/index.html#cuda-support-for-wsl-2
+   * On MacOS, as far as I can tell, Cuda GPU integration is no longer supported. See 
+https://developer.nvidia.com/nvidia-cuda-toolkit-11_6_0-developer-tools-mac-hosts  
 2. Edit the docker-compose.yaml file. There are several places (one under each architecture) where you will see the 
    following lines:
     ```yaml
@@ -431,9 +436,6 @@ Cuda-capable GPU. If you do have a Cuda-capable GPU on a Windows or Linux machin
               count: all
               capabilities: [gpu]
     ```
-3. For Linux users only, if you are running Docker in rootless mode on Linux (i.e. so you can run `docker compose up` 
-instead of `sudo docker compose up`), then you will need to follow additional steps to work around a permissions issue. 
-See https://stackoverflow.com/questions/74554143.
 
 
 ### Reducing Disk Space usage
