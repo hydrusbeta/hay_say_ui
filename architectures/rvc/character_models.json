@@ -2085,5 +2085,41 @@
             }
         ],
         "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Snips",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/RVC_v2_GA/resolve/main/models/MLP_Snips/MLP_Snips_v2.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Snips_v2.pth",
+                "Size (bytes)": 57581999
+            },
+            {
+                "URL": "https://huggingface.co/Amo/RVC_v2_GA/resolve/main/models/MLP_Snips/added_IVF267_Flat_nprobe_1_MLP_Snips_v2_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF267_Flat_nprobe_1_MLP_Snips_v2_v2.index",
+                "Size (bytes)": 32913019
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Snails",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/Amo/RVC_v2_GA/resolve/main/models/MLP_Snails/MLP_Snail.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "MLP_Snail.pth",
+                "Size (bytes)": 57581999
+            },
+            {
+                "URL": "https://huggingface.co/Amo/RVC_v2_GA/resolve/main/models/MLP_Snails/added_IVF149_Flat_nprobe_1_MLP_Snail_v2.index",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "added_IVF149_Flat_nprobe_1_MLP_Snail_v2.index",
+                "Size (bytes)": 18363099
+            }
+        ],
+        "License": "UNSPECIFIED"
     }
 ]
