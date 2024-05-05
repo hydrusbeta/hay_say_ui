@@ -521,6 +521,24 @@
         "License": "UNSPECIFIED"
     },
     {
+        "Model Name": "Starlight Glimmer (singing, evil)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Starlight%20(evil)/Starlight%20Glimmer_1600.pt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "StarlightGlimmer_1600.pt",
+                "Size (bytes)": 637004694
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/so-vits-svc-5.0/resolve/main/Starlight%20(evil)/singer/Starlight%20Glimmer.spk.npy",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "singer/StarlightGlimmer.spk.npy",
+                "Size (bytes)": 1152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
         "Model Name": "Starlight Glimmer (singing)",
         "Files": [
             {
