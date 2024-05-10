@@ -3036,5 +3036,22 @@
 				"Size (bytes)": 47296619
 			}
 		]
+	},
+    {
+		"Model Name": "Countess Coloratura",
+		"Files": [
+			{
+				"URL": "https://huggingface.co/Amo/RVC_v2_GA/resolve/main/models/MLP_Rara_mix/MLP_Rara_mix.pth",
+				"Download With": "HUGGINGFACE_HUB",
+				"Download As": "MLP_Rara_mix.pth",
+				"Size (bytes)": 57581999
+			},
+			{
+				"URL": "https://huggingface.co/Amo/RVC_v2_GA/resolve/main/models/MLP_Rara_mix/added_IVF327_Flat_nprobe_1_MLP_Rara_mix_v2.index",
+				"Download With": "HUGGINGFACE_HUB",
+				"Download As": "added_IVF327_Flat_nprobe_1_MLP_Rara_mix_v2.index",
+				"Size (bytes)": 40394339
+			}
+		]
 	}
 ]
