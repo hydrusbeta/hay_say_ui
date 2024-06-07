@@ -39,7 +39,7 @@ RUN python -m pip install \
     dash[celery]==2.11.0 \
     dash-bootstrap-components==1.4.1 \
     hay_say_common==1.0.8 \
-    gdown==4.7.1 \
+    gdown==5.2.0 \
     jsonschema==4.17.3 \
     huggingface_hub==0.15.1 \
     pymongo==4.5.0 \
