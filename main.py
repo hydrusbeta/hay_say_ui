@@ -12,7 +12,6 @@ import soundfile
 from dash import Dash, html, dcc, Input, Output, State, ctx, callback, MATCH
 from dash.exceptions import PreventUpdate
 from hay_say_common.cache import Stage
-from postprocessed_display import output_filetypes
 
 import hay_say_common as hsc
 import plotly_celery_common as pcc
@@ -26,6 +25,13 @@ TAB_BUTTON_PREFIX = '-tab-button'
 TAB_CELL_SUFFIX = '-tab-cell'
 ANNOUNCEMENT_CHECK_INTERVAL = 60000  # milliseconds
 
+output_filetypes = {
+    # {label : [soundfile_format_string, filename_extension]}
+    'flac': ['FLAC', '.flac'],
+    'mp3': ['MP3', '.mp3'],
+    'ogg': ['OGG', '.ogg'],
+    'wav': ['WAV', '.wav']
+}
 
 def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     return [
@@ -203,8 +209,21 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
             html.Br(),
             html.Hr(),
             html.H2('Output'),
-            # todo: hide this delete button if there's nothing to delete?
-            html.Button('Delete all generated audio', id='delete-postprocessed'),
+            html.Table(
+                html.Tr([
+                    # todo: hide this delete button if there's nothing to delete?
+                    html.Td(html.Button('Delete all generated audio', id='delete-postprocessed'), style={"width": "70%"}),
+                    html.Td(
+                        html.Tr([
+                            html.Td(html.Label("Download file format:", htmlFor='output-file-format')),
+                            html.Td(dbc.Select(options=['mp3', 'flac'], value='flac', id='output-file-format',
+                                               className='file-format-dropdown')),
+                        ]),
+                        style={"text-align": "right"}
+                    )
+                ]),
+                style={"width": "100%"}
+            ),
             html.Div(id='message'),
         ], id='hay-say-outer-div', className='outer-div')
     ]
@@ -486,7 +505,7 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
     @callback(
         Output({'type': 'output-download', 'index': MATCH}, 'data'),
         State('session', 'data'),
-        State({'type': 'output-file-format', 'index': MATCH}, 'value'),
+        State('output-file-format', 'value'),
         Input({'type': 'output-download-button', 'index': MATCH}, 'n_clicks'),
         prevent_initial_call=True
     )

@@ -1,7 +1,6 @@
 from numbers import Number
 
 from dash import html, dcc
-import dash_bootstrap_components as dbc
 from hay_say_common.cache import Stage
 
 import hay_say_common as hsc
@@ -9,13 +8,6 @@ import plotly_celery_common as pcc
 
 CACHE_FORMAT, CACHE_EXTENSION, CACHE_MIMETYPE = 'FLAC', '.flac', 'audio/flac;base64'
 
-output_filetypes = {
-    # {label : [soundfile_format_string, filename_extension]}
-    'flac': ['FLAC', '.flac'],
-    'mp3': ['MP3', '.mp3'],
-    'ogg': ['OGG', '.ogg'],
-    'wav': ['WAV', '.wav']
-}
 
 def prepare_postprocessed_display(cache, hash_postprocessed, session_data, highlight=False):
     # todo: color-code the information in the display.
@@ -52,16 +44,9 @@ def prepare_postprocessed_display(cache, hash_postprocessed, session_data, highl
                     html.Audio(src=pcc.prepare_src_attribute(bytes_postprocessed, hsc.cache.CACHE_MIMETYPE), controls=True),
                 ]),
                 html.Td(
-                    html.Tr([
-                        html.Td(dbc.Select(options=list(output_filetypes.keys()), className='option-dropdown',
-                                           value='flac', id={'type': 'output-file-format', 'index': hash_postprocessed})),
-                        html.Td(
-                            html.Button('Download', id={'type': 'output-download-button', 'index': hash_postprocessed}),
-                            className='download-cell'
-                        )]
-                    )
-                )]
-            ),
+                    html.Button('Download', id={'type': 'output-download-button', 'index': hash_postprocessed}),
+                    className='download-cell')
+            ]),
             html.Tr([
                 html.Td('Inputs:', className='output-label'),
                 html.Td('Audio = ' + (selected_file or 'None')
