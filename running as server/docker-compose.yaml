@@ -58,6 +58,10 @@ services:
                  # }\\n\" 
                > /etc/nginx/conf.d/synthapp.conf && 
                nginx -g 'daemon off;'"]
+    deploy:
+      restart_policy:
+        condition: on-failure
+        window: 30s
 
 #  synthapp:
 #    image: hydrusbeta/synthapp
