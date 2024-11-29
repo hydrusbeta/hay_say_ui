@@ -79,7 +79,8 @@ services:
       - controllable_talknet_model_pack_0:/home/luna/hay_say/controllable_talknet_model_pack_0
       - models:/home/luna/hay_say/models
       - audio_cache:/home/luna/hay_say/audio_cache
-    command: ["chown", "-R", "luna:luna", "/home/luna/hay_say/"]
+    command: >
+      sh -c "$(useradd luna || true) && chown -R luna:luna /home/luna/hay_say/"
 
   # The Redis container provides an in-memory data store that can be shared between applications.
   # This allows plotly to pass data to background workers.
