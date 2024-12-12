@@ -91,10 +91,10 @@ services:
     healthcheck:
       test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
       start_period: 15s
-      start_interval: 1s
-      # start_interval is not available in versions of Docker Engine earlier than 25. For backwards 
-      # compatibility, set the interval property for now. Remove the line below sometime in the future, 
+      # start_interval is not available in versions of Docker Engine earlier than 25. For backwards
+      # compatibility, set the interval property instead for now. Replace it with start_interval sometime in the future,
       # once everyone is on version 25+.
+      # start_interval: 1s
       interval: 1s
     networks:
       - internal
