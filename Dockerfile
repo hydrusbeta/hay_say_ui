@@ -47,7 +47,7 @@ RUN python -m pip install \
     apscheduler==3.10.4
 
 # Permanently add gunicorn and celery to the path
-ENV PATH "$PATH:$HOME_DIR/.local/bin"
+ENV PATH="$PATH:$HOME_DIR/.local/bin"
 
 # Clone Hay Say
 RUN git clone -b main --single-branch -q https://github.com/hydrusbeta/hay_say_ui ~/hay_say/hay_say_ui/

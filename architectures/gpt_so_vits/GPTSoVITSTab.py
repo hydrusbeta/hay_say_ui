@@ -92,12 +92,13 @@ class GPTSoVITSTab(AbstractTab):
                 title="The language of the reference audio. Seeing as how all the character models available so far were voiced in English, you almost certainly should set this parameter to English."
             ),
             # todo: Additional Reference Audios are maybe a future enhancement
-            # html.Tr([
-            #     html.Td(dbc.Collapse(html.Label('Additional Reference Audios', htmlFor=self.input_ids[4]), id=self.id+'-precomputed-style-dropdowns-2g'),
-            #             className='option-label'),
-            #     html.Td(dbc.Collapse(dcc.Checklist([''], value=[''], id=self.input_ids[4]), id=self.id+'-precomputed-style-dropdowns-2h'))],
-            #     title="Additional reference audios. The character's \"tone\" in all the files will be averaged together and be mimicked in the generated output."
-            # ),
+            html.Tr([
+                html.Td(dbc.Collapse(html.Label('Additional Reference Audios', htmlFor=self.input_ids[4]), id=self.id+'-precomputed-style-dropdowns-2g'),
+                        className='option-label'),
+                html.Td(dbc.Collapse(dcc.Checklist([''], value=[''], id=self.input_ids[4]), id=self.id+'-precomputed-style-dropdowns-2h'))],
+                title="Additional reference audios. The character's \"tone\" in all the files will be averaged together and be mimicked in the generated output.",
+                hidden=True
+            ),
             html.Tr([
                 html.Td(html.Label('Desired language of generated audio', htmlFor=self.input_ids[5]), className='option-label'),
                 html.Td(dbc.Select(className='option-dropdown', id=self.input_ids[5], options=['Chinese (Mandarin)', 'English', 'Japanese', 'Chinese (Cantonese)', 'Korean', 'Mandarin-English Mix', 'Japanese-English Mix', 'Cantonese-English Mix', 'Korean-English Mix', 'Auto Multilingual', 'Auto Multilingual (Cantonese)'], value='English'))], title="The desired language of the generated audio."
