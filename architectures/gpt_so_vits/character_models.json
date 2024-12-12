@@ -1,0 +1,645 @@
+[
+    {
+        "Model Name": "Twilight Sparkle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Twilight-SVe96-GPTe24/GPT_weights_v2/Twilight-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Twilight-e24.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Twilight-SVe96-GPTe24/SoVITS_weights_v2/Twilight_e96_s46464.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Twilight_e96_s46464.pth",
+                "Size (bytes)": 85007202
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/twilight_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "twilight_precomp.safetensors",
+                "Size (bytes)": 2079096
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Trixie Lulamoon",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Trixie-SVe24-GPTe8/GPT_weights_v2/Trixie-e8.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Trixie-e8.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Trixie-SVe24-GPTe8/SoVITS_weights_v2/Trixie_e24_s1368.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Trixie_e24_s1368.pth",
+                "Size (bytes)": 85007202
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/trixie_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "trixie_precomp.safetensors",
+                "Size (bytes)": 370816
+            }
+
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Tirek",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Tirek-SVe32-GPTe32/GPT_weights_v2/Tirek-e32.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Tirek-e32.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Tirek-SVe32-GPTe32/SoVITS_weights_v2/Tirek_e32_s608.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Tirek_e32_s608.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/tirek_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "tirek_precomp.safetensors",
+                "Size (bytes)": 93744
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sweetie Belle",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Sweetie%20Belle-SVe96-GPTe24/GPT_weights_v2/Sweetie%20Belle-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Sweetie Belle-e24.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Sweetie%20Belle-SVe96-GPTe24/SoVITS_weights_v2/Sweetie%20Belle_e96_s7296.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Sweetie Belle_e96_s7296.pth",
+                "Size (bytes)": 85007943
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/sweetiebelle_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "sweetiebelle_precomp.safetensors",
+                "Size (bytes)": 454936
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Starlight Glimmer",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Starlight-SVe96-GPTe24/GPT_weights_v2/Starlight-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Starlight-e24.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Starlight-SVe96-GPTe24/SoVITS_weights_v2/Starlight_e96_s11712.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Starlight_e96_s11712.pth",
+                "Size (bytes)": 85007202
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/starlight_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "starlight_precomp.safetensors",
+                "Size (bytes)": 872240
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Spike",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Spike-SVe24-GPTe8/GPT_weights_v2/Spike-e8.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Spike-e8.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Spike-SVe24-GPTe8/SoVITS_weights_v2/Spike_e24_s4848.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Spike_e24_s4848.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/spike_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "spike_precomp.safetensors",
+                "Size (bytes)": 751984
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scootaloo",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Scootaloo-SVe96-GPTe24/GPT_weights_v2/Scootaloo-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Scootaloo-e24.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Scootaloo-SVe96-GPTe24/SoVITS_weights_v2/Scootaloo_e96_s7872.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Scootaloo_e96_s7872.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/scootaloo_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "scootaloo_precomp.safetensors",
+                "Size (bytes)": 452376
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rarity",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Rarity-SVe96-GPTe24/GPT_weights_v2/Rarity-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Rarity-e24.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Rarity-SVe96-GPTe24/SoVITS_weights_v2/Rarity_e96_s25824.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Rarity_e96_s25824.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/rarity_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "rarity_precomp.safetensors",
+                "Size (bytes)": 1459472
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Rainbow-SVe96-GPTe24/GPT_weights_v2/Rainbow-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Rainbow-e24.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Rainbow-SVe96-GPTe24/SoVITS_weights_v2/Rainbow_e96_s26592.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Rainbow_e96_s26592.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/rainbow_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "rainbow_precomp.safetensors",
+                "Size (bytes)": 1087968
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Pinkie-SVe96-GPTe24/GPT_weights_v2/Pinkie-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Pinkie-e24.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Pinkie-SVe96-GPTe24/SoVITS_weights_v2/Pinkie_e96_s24480.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Pinkie_e96_s24480.pth",
+                "Size (bytes)": 85007202
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/pinkie_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "pinkie_precomp.safetensors",
+                "Size (bytes)": 998624
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Octavia Melody",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Octavia-SVe84-GPTe48/GPT_weights_v2/Octavia-e48.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Octavia-e48.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Octavia-SVe84-GPTe48/SoVITS_weights_v2/Octavia_e84_s588.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Octavia_e84_s588.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/octavia_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "octavia_precomp.safetensors",
+                "Size (bytes)": 10408
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Nightmare Moon",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/NightmareMoon-SVe96-GPTe32/GPT_weights_v2/NightmareMoon-e32.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "NightmareMoon-e32.ckpt",
+                "Size (bytes)": 155312359
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/NightmareMoon-SVe96-GPTe32/SoVITS_weights_v2/NightmareMoon_e96_s576.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "NightmareMoon_e96_s576.pth",
+                "Size (bytes)": 85007943
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/nightmaremoon_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "nightmaremoon_precomp.safetensors",
+                "Size (bytes)": 57016
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Mage Meadowbrook",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Meadowbrook-SVe24-GPTe48/GPT_weights_v2/Meadowbrook-e48.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Meadowbrook-e48.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Meadowbrook-SVe24-GPTe48/SoVITS_weights_v2/Meadowbrook_e24_s168.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Meadowbrook_e24_s168.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/meadowbrook_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "meadowbrook_precomp.safetensors",
+                "Size (bytes)": 14424
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Luna",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Luna-SVe96-GPTe36/GPT_weights_v2/Luna-e36.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Luna-e36.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Luna-SVe96-GPTe36/SoVITS_weights_v2/Luna_e96_s2688.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Luna_e96_s2688.pth",
+                "Size (bytes)": 85007202
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/luna_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "luna_precomp.safetensors",
+                "Size (bytes)": 182344
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Fluttershy",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Fluttershy-SVe96-GPTe24/GPT_weights_v2/Fluttershy-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Fluttershy-e24.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Fluttershy-SVe96-GPTe24/SoVITS_weights_v2/Fluttershy_e96_s18912.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Fluttershy_e96_s18912.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/fluttershy_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "fluttershy_precomp.safetensors",
+                "Size (bytes)": 993912
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Flim",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Flim-SVe96-GPTe36/GPT_weights_v2/Flim-e36.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Flim-e36.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Flim-SVe96-GPTe36/SoVITS_weights_v2/Flim_e96_s1152.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Flim_e96_s1152.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/flim_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "flim_precomp.safetensors",
+                "Size (bytes)": 83600
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Flam",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Flam-SVe96-GPTe48/GPT_weights_v2/Flam-e48.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Flam-e48.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Flam-SVe96-GPTe48/SoVITS_weights_v2/Flam_e96_s1248.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Flam_e96_s1248.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/flam_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "flam_precomp.safetensors",
+                "Size (bytes)": 74424
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Discord",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Discord-GPTe48-SVe96/GPT_weights_v2/Discord-e48.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Discord-e48.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Discord-GPTe48-SVe96/SoVITS_weights_v2/Discord_e96_s6432.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Discord_e96_s6432.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/discord_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "discord_precomp.safetensors",
+                "Size (bytes)": 327264
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Derpy Hooves",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Derpy-SVe36-GPTe48/GPT_weights_v2/Derpy-e48.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Derpy-e48.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Derpy-SVe36-GPTe48/SoVITS_weights_v2/Derpy_e36_s288.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Derpy_e36_s288.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/derpy_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "derpy_precomp.safetensors",
+                "Size (bytes)": 6200
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cozy Glow",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/CozyGlow-SVe24-GPTe48/GPT_weights_v2/Cozy%20Glow-e48.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Cozy Glow-e48.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/CozyGlow-SVe24-GPTe48/SoVITS_weights_v2/Cozy%20Glow_e48_s1104.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Cozy Glow_e48_s1104.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/cozyglow_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "cozyglow_precomp.safetensors",
+                "Size (bytes)": 139208
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Chrysalis",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Chrysalis-SVe32-GPTe8/GPT_weights_v2/Chrysalis-e8.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Chrysalis-e8.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Chrysalis-SVe32-GPTe8/SoVITS_weights_v2/Chrysalis_e32_s608.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Chrysalis_e32_s608.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/chrysalis_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "chrysalis_precomp.safetensors",
+                "Size (bytes)": 98664
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Celestia-SVe96-GPTe24/GPT_weights_v2/Celestia-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Celestia-e24.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Celestia-SVe96-GPTe24/SoVITS_weights_v2/Celestia_e96_s5376.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Celestia_e96_s5376.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/celestia_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "celestia_precomp.safetensors",
+                "Size (bytes)": 363488
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cadance",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Cadance-SVe96-GPTe24/GPT_weights_v2/Cadance-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Cadance-e24.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Cadance-SVe96-GPTe24/SoVITS_weights_v2/Cadance_e96_s1824.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Cadance_e96_s1824.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/cadance_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "cadance_precomp.safetensors",
+                "Size (bytes)": 111264
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Prince Blueblood",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Blueblood-SVe32-GPTe40/GPT_weights_v2/Blueblood1-e40.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Blueblood1-e40.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Blueblood-SVe32-GPTe40/SoVITS_weights_v2/Blueblood1_e32_s224.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Blueblood1_e32_s224.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/princeblueblood_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "princeblueblood_precomp.safetensors",
+                "Size (bytes)": 14328
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Applejack-SVe96-GPTe24/GPT_weights_v2/Applejack-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Applejack-e24.ckpt",
+                "Size (bytes)": 155312957
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Applejack-SVe96-GPTe24/SoVITS_weights_v2/Applejack_e96_s28224.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Applejack_e96_s28224.pth",
+                "Size (bytes)": 85007879
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/applejack_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "applejack_precomp.safetensors",
+                "Size (bytes)": 1206152
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Apple Bloom",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Apple%20Bloom-SVe96-GPTe24/GPT_weights_v2/Apple%20Bloom-e24.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Apple Bloom-e24.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/Apple%20Bloom-SVe96-GPTe24/SoVITS_weights_v2/Apple%20Bloom_e96_s12000.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "Apple Bloom_e96_s12000.pth",
+                "Size (bytes)": 85007943
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/models_i_trained/resolve/main/gpt_sovits_precomputed-values/applebloom_precomp.safetensors",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "applebloom_precomp.safetensors",
+                "Size (bytes)": 663920
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sweetie Belle (squeaky)",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/%20SqueakyBelle-SVe48-GPTe32/GPT_weights_v2/SqueakyBelle-e32.ckpt",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "SqueakyBelle-e32.ckpt",
+                "Size (bytes)": 155312658
+            },
+            {
+                "URL": "https://huggingface.co/therealvul/GPT-SoVITS-v2/resolve/main/%20SqueakyBelle-SVe48-GPTe32/SoVITS_weights_v2/SqueakyBelle_e48_s1056.pth",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "SqueakyBelle_e48_s1056.pth",
+                "Size (bytes)": 85007943
+            }
+        ],
+        "License": "UNSPECIFIED"
+    }
+]

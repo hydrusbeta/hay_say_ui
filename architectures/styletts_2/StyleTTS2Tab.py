@@ -68,13 +68,13 @@ class StyleTTS2Tab(AbstractTab):
                 id=self.id + '-license-row', hidden=True
             ),
             html.Tr([
-                html.Td(html.Label('Reference Style Option', htmlFor=self.input_ids[0]), className='option-label'),
+                html.Td(html.Label('Reference Style Option', htmlFor=self.input_ids[6]), className='option-label'),
                 html.Td(dcc.RadioItems(value=USE_PRECOMPUTED_STYLE, id=self.input_ids[6]))
             ]),
             html.Tr([
                 html.Td(
                     dbc.Collapse(
-                        html.Label('Precomputed Style', htmlFor=self.input_ids[0]),
+                        html.Label('Precomputed Style'),
                         id=self.id+'-precomputed-style-dropdowns-1'
                     ), className='option-label'
                 ),
@@ -278,6 +278,8 @@ class StyleTTS2Tab(AbstractTab):
              State(self.input_ids[6], 'value')]
         )
         def determine_style_options(model, current_value):
+            if model is None:  # Initial call
+                return [], None
             disabled_options = []
             if model is None or not self.style_characters(model):
                 disabled_options.append(USE_PRECOMPUTED_STYLE)
@@ -338,7 +340,7 @@ class StyleTTS2Tab(AbstractTab):
                 self.id+'-speed',
                 ]
 
-    def construct_input_dict(self, *args):
+    def construct_input_dict(self, session_data, *args):
         input_dict = {
             'Architecture': self.id,
             'Character': args[0],

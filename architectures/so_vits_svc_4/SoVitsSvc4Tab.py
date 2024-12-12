@@ -190,7 +190,7 @@ class SoVitsSvc4Tab(AbstractTab):
                 self.id+'-reduce-noise'
                 ]
 
-    def construct_input_dict(self, *args):
+    def construct_input_dict(self, session_data, *args):
         return {
             'Architecture': self.id,
             'Character': args[0],

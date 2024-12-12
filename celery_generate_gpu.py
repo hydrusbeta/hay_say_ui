@@ -21,7 +21,7 @@ celery_app.user_options['worker'].add(
 
 # Add a command-line argument that lets the user select specific architectures to register with the celery worker
 celery_app.user_options['worker'].add(
-    Option(('--include_architecture',), multiple=True, default=pcc.architecture_map.keys(), show_default=True,
+    Option(('--include_architecture',), multiple=True, default=[], show_default=True,
            help='Add an architecture for which the download callback will be registered'))
 
 
@@ -29,7 +29,7 @@ celery_app.user_options['worker'].add(
 class CacheSelection(bootsteps.Step):
     def __init__(self, parent, cache_implementation, include_architecture, **options):
         super().__init__(parent, **options)
-        selected_architectures = pcc.select_architecture_tabs(include_architecture)
+        selected_architectures = pcc.construct_architecture_tabs(include_architecture, cache_implementation)
 
         @callback(
             output=[Output('message', 'children', allow_duplicate=True),

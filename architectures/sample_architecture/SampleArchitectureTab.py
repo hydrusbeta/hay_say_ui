@@ -34,5 +34,5 @@ class SampleTab(AbstractTab):
     def input_ids(self):
         return super().input_ids
 
-    def construct_input_dict(self, *args):
+    def construct_input_dict(self, session_data, *args):
         return super().construct_input_dict

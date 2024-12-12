@@ -113,7 +113,7 @@ def construct_payload(user_text, hash_preprocessed, tab_object, relevant_inputs,
             'User Text': user_text,
             'User Audio': hash_preprocessed
         },
-        'Options': tab_object.construct_input_dict(*relevant_inputs),
+        'Options': tab_object.construct_input_dict(session_data, *relevant_inputs),
         'Output File': hash_output,
         'GPU ID': gpu_id,
         'Session ID': session_data['id']
@@ -155,7 +155,7 @@ def write_output_metadata(cache, hash_preprocessed, user_text, hash_output, tab_
             'Preprocessed File': hash_preprocessed,
             'User Text': user_text
         },
-        'Options': tab_object.construct_input_dict(*relevant_inputs),
+        'Options': tab_object.construct_input_dict(session_data, *relevant_inputs),
         'Time of Creation': datetime.datetime.now().strftime(hsc.cache.TIMESTAMP_FORMAT)
     }
     cache.write_metadata(Stage.OUTPUT, session_data['id'], output_metadata)

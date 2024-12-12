@@ -26,6 +26,19 @@ BASE_MULTISPEAKER_JSON_URL = BASE_JSON_URL + MULTI_SPEAKER_JSON_FILENAME
 
 
 class AbstractTab(ABC):
+    _cache = None
+
+    def __init__(self, cache):
+        self.cache = cache
+
+    @property
+    def cache(self):
+        return self._cache
+
+    @cache.setter
+    def cache(self, new_value):
+        self._cache = new_value
+
     @property
     @abstractmethod
     def id(self):
@@ -99,7 +112,7 @@ class AbstractTab(ABC):
                 self.id + '-best-pone']
 
     @abstractmethod
-    def construct_input_dict(self, *args):
+    def construct_input_dict(self, session_data, *args):
         # Construct JSON that will be sent to the container when the user clicks the "Generate!" button.
         # *args will be a list of values the same length of input_ids, in the respective order.
         return dict()

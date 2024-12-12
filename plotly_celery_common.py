@@ -11,17 +11,49 @@ from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
 from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
 from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
 from architectures.styletts_2.StyleTTS2Tab import StyleTTS2Tab
+from architectures.gpt_so_vits.GPTSoVITSTab import GPTSoVITSTab
 
-architecture_map = {'ControllableTalkNet': ControllableTalknetTab(),
-                    'SoVitsSvc3': SoVitsSvc3Tab(),
-                    'SoVitsSvc4': SoVitsSvc4Tab(),
-                    'SoVitsSvc5': SoVitsSvc5Tab(),
-                    'Rvc': RvcTab(),
-                    'StyleTTS2': StyleTTS2Tab()}
+_memoized_architecture_map = None
+
+
+def architecture_map(cache=None, choices=None):
+    global _memoized_architecture_map
+    # Sometimes, we just want a list of the architectures and don't have a cache object to pass in. You can't get a list
+    # of the architectures, however, until the architecture list is initialized.
+    if cache is None and _memoized_architecture_map is None:
+        raise Exception('The architecture map is not yet initialized. The first call to archtecture_map must pass a '
+                        '"cache" argument so it can be initialized.')
+    if _memoized_architecture_map is None:
+        print("THIS SHOULD ONLY HAPPEN ONCE")
+        _memoized_architecture_map = dict()
+        if 'ControllableTalkNet' in choices:
+            _memoized_architecture_map['ControllableTalkNet'] = ControllableTalknetTab(cache)
+        if 'SoVitsSvc3' in choices:
+            _memoized_architecture_map['SoVitsSvc3'] = SoVitsSvc3Tab(cache)
+        if 'SoVitsSvc4' in choices:
+            _memoized_architecture_map['SoVitsSvc4'] = SoVitsSvc4Tab(cache)
+        if 'SoVitsSvc5' in choices:
+            _memoized_architecture_map['SoVitsSvc5'] = SoVitsSvc5Tab(cache)
+        if 'Rvc' in choices:
+            _memoized_architecture_map['Rvc'] = RvcTab(cache)
+        if 'StyleTTS2' in choices:
+            _memoized_architecture_map['StyleTTS2'] = StyleTTS2Tab(cache)
+        if 'GPTSoVITS' in choices:
+            _memoized_architecture_map['GPTSoVITS'] = GPTSoVITSTab(cache)
+    return _memoized_architecture_map
+
+
+_count = 0
+def construct_architecture_tabs(choices, cache_type):
+    global _count
+    _count = _count+1
+    print("_count is: " + str(_count))
+    cache = hsc.select_cache_implementation(cache_type)
+    return [architecture_map(cache, choices)[choice] for choice in choices]
 
 
 def select_architecture_tabs(choices):
-    return [architecture_map[choice] for choice in choices]
+    return [architecture_map(None)[choice] for choice in choices]
 
 
 def convert_to_bools(*args):

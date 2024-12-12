@@ -33,6 +33,7 @@ output_filetypes = {
     'wav': ['WAV', '.wav']
 }
 
+
 def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     return [
         html.Div([
@@ -320,24 +321,92 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         cache.delete_all_files_at_stage(Stage.POSTPROCESSED, session_data['id'])
         return ''
 
-    @callback(
-        [Output('file-dropdown', 'options', allow_duplicate=True),
-         Output('file-dropdown', 'value', allow_duplicate=True),
-         Output('dropdown-container', 'hidden', allow_duplicate=True)],
-        Input('confirm-delete-inputs', 'submit_n_clicks'),
-        State('session', 'data'),
-        prevent_initial_call=True
-    )
-    def delete_all_raw_through_output(_, session_data):
-        # We must write to the cache of each stage first, to guarantee the Stage exits before deleting all its contents.
-        # todo: fix the hay_say_common method so we can call delete_all_files_at_stage by itself.
-        cache.write_metadata(Stage.RAW, session_data['id'], dict())
-        cache.write_metadata(Stage.PREPROCESSED, session_data['id'], dict())
-        cache.write_metadata(Stage.OUTPUT, session_data['id'], dict())
-        cache.delete_all_files_at_stage(Stage.RAW, session_data['id'])
-        cache.delete_all_files_at_stage(Stage.PREPROCESSED, session_data['id'])
-        cache.delete_all_files_at_stage(Stage.OUTPUT, session_data['id'])
-        return [], None, True
+    gpt_so_vits_tab = pcc.architecture_map().get('GPTSoVITS', None)
+    if gpt_so_vits_tab is not None:
+        @callback(
+            [Output('file-dropdown', 'options', allow_duplicate=True),
+             Output('file-dropdown', 'value', allow_duplicate=True),
+             Output('dropdown-container', 'hidden', allow_duplicate=True),
+             Output(gpt_so_vits_tab.input_ids[1], 'options', allow_duplicate=True),
+             Output(gpt_so_vits_tab.input_ids[1], 'value', allow_duplicate=True)],
+            Input('confirm-delete-inputs', 'submit_n_clicks'),
+            State('session', 'data'),
+            prevent_initial_call=True
+        )
+        def delete_all_raw_through_output(_, session_data):
+            # We must write to the cache of each stage first, to guarantee the Stage exits before deleting all its contents.
+            # todo: fix the hay_say_common method so we can call delete_all_files_at_stage by itself.
+            cache.write_metadata(Stage.RAW, session_data['id'], dict())
+            cache.write_metadata(Stage.PREPROCESSED, session_data['id'], dict())
+            cache.write_metadata(Stage.OUTPUT, session_data['id'], dict())
+            cache.delete_all_files_at_stage(Stage.RAW, session_data['id'])
+            cache.delete_all_files_at_stage(Stage.PREPROCESSED, session_data['id'])
+            cache.delete_all_files_at_stage(Stage.OUTPUT, session_data['id'])
+            return [], None, True, [], None
+
+        @callback(
+            [Output('file-dropdown', 'options'),
+             Output('file-dropdown', 'value'),
+             Output('dropdown-container', 'hidden'),
+             Output('file-picker', 'contents'),
+             Output(gpt_so_vits_tab.input_ids[1], 'options'),
+             Output(gpt_so_vits_tab.input_ids[1], 'value')],
+            # work around for issue #816 (https://github.com/plotly/dash-core-components/issues/816)
+            Input('file-picker', 'contents'),
+            State('file-picker', 'filename'),
+            State('session', 'data'),
+            State(gpt_so_vits_tab.input_ids[1], 'value')
+        )
+        def upload_file(file_contents_list, filename_list, session_data, current_gpt_file):
+            if file_contents_list is None:  # initial load of page
+                filenames, currently_selected_file, hidden = update_dropdown(cache, None, session_data)
+                return filenames, currently_selected_file, hidden, None, filenames, currently_selected_file
+            else:
+                for file_contents, filename in zip(file_contents_list, filename_list):
+                    filename = append_index_if_needed(filename, session_data)
+                    raw_array, raw_samplerate = hsc.get_audio_from_src_attribute(file_contents, 'utf-8')
+                    save_raw_audio_to_cache(filename, raw_array, raw_samplerate, session_data)
+                filenames, currently_selected_file, hidden = update_dropdown(cache, filename_list[0], session_data)
+                selected_gptsovits_file = current_gpt_file if current_gpt_file in filenames else currently_selected_file
+                return filenames, currently_selected_file, hidden, None, filenames, selected_gptsovits_file
+    else:
+        @callback(
+            [Output('file-dropdown', 'options', allow_duplicate=True),
+             Output('file-dropdown', 'value', allow_duplicate=True),
+             Output('dropdown-container', 'hidden', allow_duplicate=True)],
+            Input('confirm-delete-inputs', 'submit_n_clicks'),
+            State('session', 'data'),
+            prevent_initial_call=True
+        )
+        def delete_all_raw_through_output(_, session_data):
+            # We must write to the cache of each stage first, to guarantee the Stage exits before deleting all its contents.
+            # todo: fix the hay_say_common method so we can call delete_all_files_at_stage by itself.
+            cache.write_metadata(Stage.RAW, session_data['id'], dict())
+            cache.write_metadata(Stage.PREPROCESSED, session_data['id'], dict())
+            cache.write_metadata(Stage.OUTPUT, session_data['id'], dict())
+            cache.delete_all_files_at_stage(Stage.RAW, session_data['id'])
+            cache.delete_all_files_at_stage(Stage.PREPROCESSED, session_data['id'])
+            cache.delete_all_files_at_stage(Stage.OUTPUT, session_data['id'])
+            return [], None, True
+
+        @callback(
+            [Output('file-dropdown', 'options'),
+             Output('file-dropdown', 'value'),
+             Output('dropdown-container', 'hidden'),
+             Output('file-picker', 'contents')],  # work around for issue #816 (https://github.com/plotly/dash-core-components/issues/816)
+            Input('file-picker', 'contents'),
+            State('file-picker', 'filename'),
+            State('session', 'data'),
+        )
+        def upload_file(file_contents_list, filename_list, session_data):
+            if file_contents_list is None:  # initial load of page
+                return *update_dropdown(cache, None, session_data), None
+            else:
+                for file_contents, filename in zip(file_contents_list, filename_list):
+                    filename = append_index_if_needed(filename, session_data)
+                    raw_array, raw_samplerate = hsc.get_audio_from_src_attribute(file_contents, 'utf-8')
+                    save_raw_audio_to_cache(filename, raw_array, raw_samplerate, session_data)
+                return *update_dropdown(cache, filename_list[0], session_data), None
 
     @callback(
         Output('confirm-delete-inputs', 'displayed'),
@@ -373,25 +442,6 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
     def show_preprocessing_options(value):
         return SHOW_INPUT_OPTIONS_LABEL not in value
 
-    @callback(
-        [Output('file-dropdown', 'options'),
-         Output('file-dropdown', 'value'),
-         Output('dropdown-container', 'hidden'),
-         Output('file-picker', 'contents')],  # work around for issue #816 (https://github.com/plotly/dash-core-components/issues/816)
-        Input('file-picker', 'contents'),
-        State('file-picker', 'filename'),
-        State('session', 'data'),
-    )
-    def upload_file(file_contents_list, filename_list, session_data):
-        if file_contents_list is None:  # initial load of page
-            return *update_dropdown(None, session_data), None
-        else:
-            for file_contents, filename in zip(file_contents_list, filename_list):
-                filename = append_index_if_needed(filename, session_data)
-                raw_array, raw_samplerate = hsc.get_audio_from_src_attribute(file_contents, 'utf-8')
-                save_raw_audio_to_cache(filename, raw_array, raw_samplerate, session_data)
-            return *update_dropdown(filename_list[0], session_data), None
-
     def append_index_if_needed(filename, session_data):
         # Appends an index to the end of the filename, like 'my file.wav (2)', if the file already exists.
         # todo: I think putting something after the extension might break stuff. Do this instead: 'my file (2).wav'
@@ -423,13 +473,6 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
             'Time of Creation': datetime.datetime.now().strftime(hsc.cache.TIMESTAMP_FORMAT)
         }
         cache.write_metadata(Stage.RAW, session_data['id'], raw_metadata)
-
-    def update_dropdown(filename, session_data):
-        raw_metadata = cache.read_metadata(Stage.RAW, session_data['id'])
-        filenames = [value['User File'] for value in raw_metadata.values()]
-        currently_selected_file = filename if filename else filenames[0] if filenames else None
-        hidden = currently_selected_file is None
-        return filenames, currently_selected_file, hidden
 
     @callback(
         [Output('input-playback', 'src'),
@@ -522,6 +565,22 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         else:
             return None
 
+    def update_dropdown(cache, filename, session_data):
+        raw_metadata = cache.read_metadata(Stage.RAW, session_data['id'])
+        filenames = [value['User File'] for value in raw_metadata.values()]
+        currently_selected_file = filename if filename else filenames[0] if filenames else None
+        hidden = currently_selected_file is None
+        return filenames, currently_selected_file, hidden
+
+        # raw_metadata = cache.read_metadata(Stage.RAW, session_data['id']) if ctx.triggered_id == 'confirm-delete-inputs' else dict()
+        # filenames = [value['User File'] for value in raw_metadata.values()]
+        # filenames = filenames + uploaded_filename_list if uploaded_filename_list is not None else filenames
+        # currently_selected_file = currently_selected_file if currently_selected_file in filenames \
+        #     else uploaded_filename_list[0] if uploaded_filename_list is not None and len(uploaded_filename_list) > 0 \
+        #     else filenames[0] if len(filenames) > 0 \
+        #     else None
+        # return filenames, currently_selected_file
+
 
 def construct_tab_buttons(available_tabs):
     return [html.Td(
@@ -530,8 +589,8 @@ def construct_tab_buttons(available_tabs):
         for tab in available_tabs]
 
 
-def construct_tabs_interface(architectures, enable_model_management):
-    available_tabs = pcc.select_architecture_tabs(architectures)
+def construct_tabs_interface(architectures, enable_model_management, cache_type):
+    available_tabs = pcc.construct_architecture_tabs(architectures, cache_type)
     tab_buttons = construct_tab_buttons(available_tabs)
     tabs_contents = [tab.tab_contents(enable_model_management) for tab in available_tabs]
     return tab_buttons, tabs_contents
@@ -550,13 +609,14 @@ def parse_arguments(arguments):
     parser.add_argument('--enable_session_caches', action='store_true', default=False, help='Maintain separate caches for each session. If not enabled, a single cache is used for all sessions.')
     parser.add_argument('--cache_implementation', default='file', choices=hsc.cache_implementation_map.keys(), help='Selects an implementation for the audio cache, e.g. saving them to files or to a database.')
     parser.add_argument('--migrate_models', action='store_true', default=False, help='Automatically move models from the model pack directories and custom model directory to the new models directory when Hay Say starts.')
-    parser.add_argument('--architectures', nargs='*', choices=pcc.architecture_map.keys(), default=pcc.architecture_map.keys(), help='Selects which architectures are shown in the Hay Say UI')
+    # todo: this is hardcoded. fix it.
+    parser.add_argument('--architectures', nargs='*', choices=['ControllableTalkNet', 'SoVitsSvc3', 'SoVitsSvc4', 'SoVitsSvc5', 'Rvc', 'StyleTTS2', 'GPTSoVITS'], default=['ControllableTalkNet', 'SoVitsSvc3', 'SoVitsSvc4', 'SoVitsSvc5', 'Rvc', 'StyleTTS2', 'GPTSoVITS'], help='Selects which architectures are shown in the Hay Say UI')
     return parser.parse_args(arguments)
 
 
 def construct_app_layout(enable_model_management, cache_type, architectures, enable_session_caches):
     app = Dash(__name__, external_stylesheets=[dbc.themes.SLATE])
-    tab_buttons, tabs_contents = construct_tabs_interface(architectures, enable_model_management)
+    tab_buttons, tabs_contents = construct_tabs_interface(architectures, enable_model_management, cache_type)
     app.layout = html.Div(construct_main_interface(tab_buttons, tabs_contents, enable_session_caches))
     app.title = 'Hay Say'
     return app
@@ -568,12 +628,12 @@ def register_app_callbacks(architectures, enable_model_management, enable_sessio
     register_generate_callbacks(cache_type, architectures)
 
 
-def register_download_callbacks(architectures):
+def register_download_callbacks(cache_type, architectures):
     # The import statement is located here, to make sure that the download callbacks are not loaded at all unless this
     # method is called.
     from celery_download import ArchitectureSelection
     # Instantiate ArchitectureSelection to instantiate the download callbacks.
-    ArchitectureSelection(None, architectures)
+    ArchitectureSelection(None, cache_type, architectures)
 
 
 def add_model_manager_page(app, available_tabs):
@@ -592,14 +652,14 @@ def add_toolbar(app):
     register_toolbar_callbacks()
 
 
-def add_model_management_components_if_needed(enable_model_management, architectures, app):
+def add_model_management_components_if_needed(cache_type, enable_model_management, architectures, app):
     if enable_model_management:
         available_tabs = pcc.select_architecture_tabs(architectures)
-        add_model_management_components(architectures, app, available_tabs)
+        add_model_management_components(cache_type, architectures, app, available_tabs)
 
 
-def add_model_management_components(architectures, app, available_tabs):
-    register_download_callbacks(architectures)
+def add_model_management_components(cache_type, architectures, app, available_tabs):
+    register_download_callbacks(cache_type, architectures)
     add_model_manager_page(app, available_tabs)
     add_toolbar(app)
 
@@ -609,11 +669,11 @@ def register_cache_cleanup_callback_if_needed(enable_session_caches, cache_type)
         register_cache_cleanup_callback(cache_type)
 
 
-def build_app(update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=False,
-              cache_type='file', migrate_models=False, architectures=pcc.architecture_map.keys()):
+def build_app(architectures, update_model_lists_on_startup=False, enable_model_management=False, enable_session_caches=False,
+              cache_type='file', migrate_models=False):
     app = construct_app_layout(enable_model_management, cache_type, architectures, enable_session_caches)
     register_app_callbacks(architectures, enable_model_management, enable_session_caches, cache_type)
-    add_model_management_components_if_needed(enable_model_management, architectures, app)
+    add_model_management_components_if_needed(cache_type, enable_model_management, architectures, app)
     register_cache_cleanup_callback_if_needed(enable_session_caches, cache_type)
 
     # Save some of the command-line options to the server object so that the server hook methods can get to them:

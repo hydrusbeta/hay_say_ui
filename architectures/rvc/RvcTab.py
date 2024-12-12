@@ -186,7 +186,7 @@ class RvcTab(AbstractTab):
                 self.id+'-voiceless-consonants-protection-ratio',
                 ]
 
-    def construct_input_dict(self, *args):
+    def construct_input_dict(self, session_data, *args):
         input_dict = {
             'Architecture': self.id,
             'Character': args[0],

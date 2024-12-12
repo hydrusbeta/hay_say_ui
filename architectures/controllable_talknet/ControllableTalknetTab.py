@@ -89,7 +89,7 @@ class ControllableTalknetTab(AbstractTab):
                 self.id + '-auto-tune',
                 self.id + '-reduce-metallic-sound']
 
-    def construct_input_dict(self, *args):
+    def construct_input_dict(self, session_data, *args):
         return {
             'Architecture': self.id,
             'Character': args[0],

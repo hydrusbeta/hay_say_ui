@@ -1,8 +1,10 @@
 from billiard.process import current_process
 from celery import Celery, bootsteps
+import click
 from click import Option
 from dash import Input, Output, State, CeleryManager, callback
 
+import hay_say_common as hsc
 import download.Downloader as Downloader
 import plotly_celery_common as pcc
 import util
@@ -12,17 +14,23 @@ REDIS_URL = 'redis://redis:6379/0'
 celery_app = Celery(__name__, broker=REDIS_URL, backend=REDIS_URL)
 background_callback_manager = CeleryManager(celery_app)
 
+# Add a command-line argument for selecting the cache implementation
+celery_app.user_options['worker'].add(
+    Option(('--cache_implementation',), default='file', show_default=True,
+           type=click.Choice(hsc.cache.cache_implementation_map.keys(), case_sensitive=False),
+           help='Selects an implementation for the audio cache, e.g. saving them to files or to a database.'))
+
 # Add a command-line argument that lets the user select specific architectures to register with the celery worker
 celery_app.user_options['worker'].add(
-    Option(('--include_architecture',), multiple=True, default=pcc.architecture_map.keys(), show_default=True,
+    Option(('--include_architecture',), multiple=True, default=[], show_default=True,
            help='Add an architecture for which the download callback will be registered'))
 
 
 # Add a boot step to use the command-line argument
 class ArchitectureSelection(bootsteps.Step):
-    def __init__(self, parent, include_architecture, **options):
+    def __init__(self, parent, cache_implementation, include_architecture, **options):
         super().__init__(parent, **options)
-        selected_architectures = pcc.select_architecture_tabs(include_architecture)
+        selected_architectures = pcc.construct_architecture_tabs(include_architecture, cache_implementation)
 
         # Create background callbacks for the "Download Selected Models" button in each Tab. First, define a generator
         # for the callback:
