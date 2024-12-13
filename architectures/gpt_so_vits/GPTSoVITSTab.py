@@ -36,10 +36,10 @@ class GPTSoVITSTab(AbstractTab):
     @property
     def requirements(self):
         return html.P(
-            html.Em("This architecture requires a text input. You must also provide at least one reference audio of "
-                    "the character speaking. You may optionally provide a transcription of that reference audio and "
-                    "additional reference audio files; the character's \"tone\" in all the files will be averaged "
-                    "together and be mimicked in the generated output.")
+            html.Em("This architecture requires a text input. You must also do one of the following: 1. Select a trait/"
+                    "emotion from a dropdown list or 2. provide at least one reference audio of the character "
+                    "speaking. If you provide a reference audio, the character's \"tone\" in that file will be "
+                    "mimicked in the generated output. you may optionally provide a transcription of that reference.")
         )
 
     def meets_requirements(self, user_text, user_audio, selected_character):
@@ -236,14 +236,14 @@ class GPTSoVITSTab(AbstractTab):
             [Input(self.input_ids[0], 'value'),
              State(self.input_ids[12], 'value')]
         )
-        def determine_style_options(model, current_value):
+        def determine_trait_options(model, current_value):
             if model is None:  # Initial call
                 return [], None
             disabled_options = []
-            if model is None or not self.available_precomputed_traits(model):
+            if not self.available_precomputed_traits(model):
                 disabled_options.append(USE_PRECOMPUTED_EMBEDDING)
             # USE_REFERENCE_AUDIO is a "safe" fallback because it will never be disabled
-            new_value = current_value if current_value not in disabled_options else USE_REFERENCE_AUDIO
+            new_value = current_value if current_value is not None and current_value not in disabled_options else USE_REFERENCE_AUDIO
             return self.construct_trait_options(disabled_options), new_value
 
         @callback(
