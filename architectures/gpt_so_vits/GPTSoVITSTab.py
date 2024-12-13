@@ -101,7 +101,7 @@ class GPTSoVITSTab(AbstractTab):
             ),
             html.Tr([
                 html.Td(html.Label('Desired language of generated audio', htmlFor=self.input_ids[5]), className='option-label'),
-                html.Td(dbc.Select(className='option-dropdown', id=self.input_ids[5], options=['Chinese (Mandarin)', 'English', 'Japanese', 'Chinese (Cantonese)', 'Korean', 'Mandarin-English Mix', 'Japanese-English Mix', 'Cantonese-English Mix', 'Korean-English Mix', 'Auto Multilingual', 'Auto Multilingual (Cantonese)'], value='English'))], title="The desired language of the generated audio."
+                html.Td(dbc.Select(className='option-dropdown', id=self.input_ids[5], options=['Chinese (Mandarin)', 'English', 'Japanese', 'Chinese (Cantonese)', 'Korean', 'Mandarin-English Mix', 'Japanese-English Mix', 'Cantonese-English Mix', 'Korean-English Mix', 'Auto Multilingual', 'Auto Multilingual (Cantonese)'], value='English'))], title="The desired language of the generated audio. Please note that Hay Say will not auto-translate your text. The input text you put at the top of this page must be written in the target language."
             ),
             html.Tr([
                 html.Td(html.Label('Cutting Strategy', htmlFor=self.input_ids[6]), className='option-label'),
