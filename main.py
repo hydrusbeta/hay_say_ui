@@ -25,15 +25,6 @@ TAB_BUTTON_PREFIX = '-tab-button'
 TAB_CELL_SUFFIX = '-tab-cell'
 ANNOUNCEMENT_CHECK_INTERVAL = 60000  # milliseconds
 
-output_filetypes = {
-    # {label : [soundfile_format_string, filename_extension]}
-    'flac': ['FLAC', '.flac'],
-    'mp3': ['MP3', '.mp3'],
-    'ogg': ['OGG', '.ogg'],
-    'wav': ['WAV', '.wav']
-}
-
-
 def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
     return [
         html.Div([
@@ -217,7 +208,7 @@ def construct_main_interface(tab_buttons, tabs_contents, enable_session_caches):
                     html.Td(
                         html.Tr([
                             html.Td(html.Label("Download file format:", htmlFor='output-file-format')),
-                            html.Td(dbc.Select(options=['mp3', 'flac'], value='flac', id='output-file-format',
+                            html.Td(dbc.Select(options=sorted([item.lower() for item in soundfile.available_formats().keys() if item.lower() != 'raw']), value='flac', id='output-file-format',
                                                className='file-format-dropdown')),
                         ]),
                         style={"text-align": "right"}
@@ -553,14 +544,13 @@ def register_main_callbacks(enable_session_caches, cache_type, architectures):
         prevent_initial_call=True
     )
     def download_postprocessed_audio(session_data, output_file_format, n_clicks):
-        format_string, filename_extension = output_filetypes[output_file_format]
         if n_clicks:
             # A download button was actually clicked, so return a download.
             hash_postprocessed = ctx.triggered_id['index']
             with tempfile.TemporaryDirectory() as tempdir:
-                path = os.path.join(tempdir, hash_postprocessed + filename_extension)
+                path = os.path.join(tempdir, hash_postprocessed + '.' + output_file_format)
                 data, sr = cache.read_audio_from_cache(Stage.POSTPROCESSED, session_data['id'], hash_postprocessed)
-                soundfile.write(path, data, sr, format=format_string)
+                soundfile.write(path, data, sr)
                 return dcc.send_file(path)
         else:
             return None

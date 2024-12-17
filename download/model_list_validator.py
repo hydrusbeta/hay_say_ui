@@ -118,15 +118,17 @@ def instantiate_tabs_for_testing():
     from architectures.so_vits_svc_5.SoVitsSvc5Tab import SoVitsSvc5Tab
     from architectures.rvc.RvcTab import RvcTab
     from architectures.styletts_2.StyleTTS2Tab import StyleTTS2Tab
+    from architectures.gpt_so_vits.GPTSoVITSTab import GPTSoVITSTab
     from architectures.sample_architecture.SampleArchitectureTab import SampleTab
     return [
-        ControllableTalknetTab(),
-        SoVitsSvc3Tab(),
-        SoVitsSvc4Tab(),
-        SoVitsSvc5Tab(),
-        RvcTab(),
-        StyleTTS2Tab(),
-        SampleTab()
+        ControllableTalknetTab(None),
+        SoVitsSvc3Tab(None),
+        SoVitsSvc4Tab(None),
+        SoVitsSvc5Tab(None),
+        RvcTab(None),
+        StyleTTS2Tab(None),
+        GPTSoVITSTab(None),
+        SampleTab(None)
     ]
 
 
