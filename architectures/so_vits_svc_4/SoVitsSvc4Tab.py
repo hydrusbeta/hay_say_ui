@@ -1,7 +1,7 @@
 import os
 
 import hay_say_common as hsc
-from dash import html, dcc, Input, Output, State, callback
+from dash import html, dcc, Input, Output, State, callback, ctx
 from dash.exceptions import PreventUpdate
 
 from architectures.AbstractTab import AbstractTab
@@ -65,30 +65,30 @@ class SoVitsSvc4Tab(AbstractTab):
             html.Tr([
                 html.Td(html.Label('Noise Scale', htmlFor=self.input_ids[8]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(type='range', min=0, max=5, value="0.4", id=self.input_ids[8], step='0.01')),
-                    html.Td(html.Div('0', id='noise-scale-number')),
+                    html.Td(dcc.Input(id=self.input_ids[8], type='range', min=0, max=5, value="0.4", step='0.01')),
+                    html.Td(dcc.Input(id=self.id+'-noise-scale-number', type='number', min=0, max=5, value="0.4", step='0.01')),
                 ])
             ], title='Scales the generated noise added at the "TextEncoder" step.'),
             html.Tr([
                 html.Td(html.Label('Slice Length (seconds)', htmlFor=self.input_ids[3]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(type='range', min=0, max=20, value="0", id=self.input_ids[3], step='0.01')),
-                    html.Td(html.Div('0', id='slice-length-number')),
+                    html.Td(dcc.Input(id=self.input_ids[3], type='range', min=0, max=20, value="0", step='0.01')),
+                    html.Td(dcc.Input(id=self.id+'-slice-length-number', type='number', min=0, max=20, value="0", step='0.01')),
                 ])
             ], title="Slice the voice into segments of this length and convert each slice. A value of 0 turns this "
                      "feature off."),
             html.Tr([
                 html.Td(html.Label('Cross-Fade Length (seconds)', htmlFor=self.input_ids[4]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(type='range', min=0, max=20, value="0", id=self.input_ids[4], step='0.01')),
-                    html.Td(html.Div('0', id='cross-fade-number')),
+                    html.Td(dcc.Input(id=self.input_ids[4], type='range', min=0, max=20, value="0", step='0.01')),
+                    html.Td(dcc.Input(id=self.id+'-cross-fade-number', type='number', min=0, max=20, value="0", step='0.01')),
                 ])
             ], title="The cross fade overlap between voice slices, in seconds."),
             html.Tr([
                 html.Td(html.Label('Character Similarity', htmlFor=self.input_ids[5]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(type='range', min=0, max=1, value="0", id=self.input_ids[5], step='0.01')),
-                    html.Td(html.Div('0', id='character-likeness-number')),
+                    html.Td(dcc.Input(id=self.input_ids[5], type='range', min=0, max=1, value="0", step='0.01')),
+                    html.Td(dcc.Input(id=self.id+'-character-likeness-number', type='number', min=0, max=1, value="0", step='0.01')),
                 ])
             ], title="Also called \"cluster ratio\". Values closer to 1 will cause the output audio to mimic the "
                      "character's timbre more closely, but at the cost of reduced clarity/intelligibility. In general, "
@@ -111,38 +111,49 @@ class SoVitsSvc4Tab(AbstractTab):
     def register_callbacks(self, enable_model_management):
         super().register_callbacks(enable_model_management)
 
-        @callback(
-            Output('slice-length-number', 'children'),
-            Input(self.input_ids[3], 'value')
-        )
-        def adjust_slice_length(adjustment):
+        def do_adjustment(adjustment):
             if adjustment is None:
                 raise PreventUpdate
             # cast to float first, then round to 2 decimal places
             return "{:3.2f}".format(float(adjustment))
 
         @callback(
-            Output('cross-fade-number', 'children'),
-            Input(self.input_ids[4], 'value')
+            Output(self.input_ids[3], 'value'),
+            Output(self.id + '-slice-length-number', 'value'),
+            Input(self.input_ids[3], 'value'),
+            Input(self.id + '-slice-length-number', 'value')
         )
-        def adjust_crossfade_length(adjustment):
-            if adjustment is None:
-                raise PreventUpdate
-            # cast to float first, then round to 2 decimal places
-            return "{:3.2f}".format(float(adjustment))
+        def adjust_slice_length(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[3] else input_value)
+            return value, value
 
         @callback(
-            Output('character-likeness-number', 'children'),
-            Input(self.input_ids[5], 'value')
+            Output(self.input_ids[4], 'value'),
+            Output(self.id + '-cross-fade-number', 'value'),
+            Input(self.input_ids[4], 'value'),
+            Input(self.id + '-cross-fade-number', 'value')
         )
-        def adjust_character_likeness(adjustment):
-            if adjustment is None:
-                raise PreventUpdate
-            # cast to float first, then round to 2 decimal places
-            return "{:3.2f}".format(float(adjustment))
+        def adjust_crossfade_length(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[4] else input_value)
+            return value, value
+
+        @callback(
+            Output(self.input_ids[5], 'value', allow_duplicate=True),
+            Output(self.id + '-character-likeness-number', 'value'),
+            Input(self.input_ids[5], 'value'),
+            Input(self.id + '-character-likeness-number', 'value'),
+            prevent_initial_call=True
+        )
+        def adjust_character_likeness(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[5] else input_value)
+            return value, value
 
         @callback(
             [Output(self.input_ids[5], 'disabled'),
+             Output(self.id + '-character-likeness-number', 'disabled'),
              Output(self.input_ids[5], 'value')],
             Input(self.input_ids[0], 'value'),
             State(self.input_ids[5], 'value')
@@ -154,28 +165,31 @@ class SoVitsSvc4Tab(AbstractTab):
             character_dir = hsc.character_dir(self.id, character)
             potential_names = [file for file in os.listdir(character_dir) if file.startswith('kmeans')]
             if len(potential_names) == 0:
-                return True, 0
+                return True, True, 0
             else:
-                return False, current_character_likeness
+                return False, False, current_character_likeness
 
         @callback(
             Output(self.input_ids[4], 'disabled'),
+            Output(self.id + '-cross-fade-number', 'disabled'),
             Input(self.input_ids[3], 'value')
         )
         def disable_crossfade_length(slice_length):
             if slice_length is None:
                 raise PreventUpdate
-            return float(slice_length) < 0.01
+            disabled = float(slice_length) < 0.01
+            return disabled, disabled
 
         @callback(
-            Output('noise-scale-number', 'children'),
-            Input(self.input_ids[8], 'value')
+            Output(self.input_ids[8], 'value'),
+            Output(self.id + '-noise-scale-number', 'value'),
+            Input(self.input_ids[8], 'value'),
+            Input(self.id + '-noise-scale-number', 'value')
         )
-        def adjust_noise_scale(adjustment):
-            if adjustment is None:
-                raise PreventUpdate
-            # cast to float first, then round to 2 decimal places
-            return "{:3.2f}".format(float(adjustment))
+        def adjust_noise_scale(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[8] else input_value)
+            return value, value
 
     @property
     def input_ids(self):

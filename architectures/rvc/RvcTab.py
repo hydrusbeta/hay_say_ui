@@ -2,7 +2,7 @@ import os
 
 import dash_bootstrap_components as dbc
 import hay_say_common as hsc
-from dash import html, dcc, Input, Output, callback
+from dash import html, dcc, Input, Output, callback, ctx
 from dash.exceptions import PreventUpdate
 
 import model_licenses
@@ -65,8 +65,8 @@ class RvcTab(AbstractTab):
             html.Tr([
                 html.Td(html.Label('Filter Radius', htmlFor=self.input_ids[3]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(type='range', min=0, max=20, value="3", id=self.input_ids[3], step='1')),
-                    html.Td(html.Div('0', id='filter-radius-number')),
+                    html.Td(dcc.Input(id=self.input_ids[3], type='range', min=0, max=20, value="3", step='1')),
+                    html.Td(dcc.Input(id=self.id + '-filter-radius-number', type='number', min=0, max=20, value="3", step='1')),
                 ])
             ], title='The degree to which median filtering is applied, which can help reduce metallic/raspy artifacts. '
                      'A value of 2 or less disables this feature. This feature is only available if the f0 Extraction '
@@ -74,8 +74,8 @@ class RvcTab(AbstractTab):
             html.Tr([
                 html.Td(html.Label('Character Similarity', htmlFor=self.input_ids[4]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(type='range', min=0, max=1, value="0.88", id=self.input_ids[4], step='0.01')),
-                    html.Td(html.Div('0', id='rvc-character-likeness-number')),
+                    html.Td(dcc.Input(id=self.input_ids[4], type='range', min=0, max=1, value="0.88", step='0.01')),
+                    html.Td(dcc.Input(id=self.id + '-character-likeness-number', type='number', min=0, max=1, value="0.88", step='0.01')),
                 ])
             ], title='Also called the "Index Rate." Values closer to 1 will cause the output to mimic the timbre of '
                      'the character more closely, by adjusting the extracted audio features towards patterns that were '
@@ -84,16 +84,16 @@ class RvcTab(AbstractTab):
             html.Tr([
                 html.Td(html.Label('Voice Envelope Mix Ratio', htmlFor=self.input_ids[5]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(type='range', min=0, max=1, value="1", id=self.input_ids[5], step='0.01')),
-                    html.Td(html.Div('0', id='voice-envelope-mix-ratio-number')),
+                    html.Td(dcc.Input(id=self.input_ids[5], type='range', min=0, max=1, value="1", step='0.01')),
+                    html.Td(dcc.Input(id=self.id + '-voice-envelope-mix-ratio-number', type='number', min=0, max=1, value="1", step='0.01')),
                 ])
             ], title="Values closer to 0 will reshape the volume envelope of the output to more closely match the "
                      "volume envelope of the input. A value of 1 will leave the output's volume envelope alone."),
             html.Tr([
                 html.Td(html.Label('Voiceless Consonants Protection Ratio', htmlFor=self.input_ids[6]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(type='range', min=0, max=0.5, value="0.33", id=self.input_ids[6], step='0.01')),
-                    html.Td(html.Div('0', id='voiceless-consonants-protection-ratio-number')),
+                    html.Td(dcc.Input(id=self.input_ids[6], type='range', min=0, max=0.5, value="0.33", step='0.01')),
+                    html.Td(dcc.Input(id=self.id + '-voiceless-consonants-protection-ratio-number', type='number', min=0, max=0.5, value="0.33", step='0.01')),
                 ])
             ], title="Protects voiceless speech to prevent certain artifacts. Lower values add more protection. A "
                      "value of 0.5 disables this feature."),
@@ -102,59 +102,81 @@ class RvcTab(AbstractTab):
     def register_callbacks(self, enable_model_management):
         super().register_callbacks(enable_model_management)
 
-        @callback(
-            Output('filter-radius-number', 'children'),
-            Input(self.input_ids[3], 'value')
-        )
-        def adjust_filter_radius(adjustment):
+        def do_adjustment(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            # cast to float first, then round to 2 decimal places
+            return "{:3.2f}".format(float(adjustment))
+
+        def do_adjustment_int(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
             return adjustment
 
         @callback(
-            Output('rvc-character-likeness-number', 'children'),
-            Input(self.input_ids[4], 'value')
+            Output(self.input_ids[3], 'value'),
+            Output(self.id + '-filter-radius-number', 'value'),
+            Input(self.input_ids[3], 'value'),
+            Input(self.id + '-filter-radius-number', 'value')
         )
-        def adjust_character_likeness(adjustment):
-            if adjustment is None:
-                raise PreventUpdate
-            # cast to float first, then round to 2 decimal places
-            return "{:3.2f}".format(float(adjustment))
+        def adjust_filter_radius(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment_int(slider_value if trigger_id == self.input_ids[3] else input_value)
+            return value, value
 
         @callback(
-            Output('voice-envelope-mix-ratio-number', 'children'),
-            Input(self.input_ids[5], 'value')
+            Output(self.input_ids[4], 'value'),
+            Output(self.id + '-character-likeness-number', 'value'),
+            Input(self.input_ids[4], 'value'),
+            Input(self.id + '-character-likeness-number', 'value')
         )
-        def adjust_voice_envelope_mix_ratio(adjustment):
-            if adjustment is None:
-                raise PreventUpdate
-            # cast to float first, then round to 2 decimal places
-            return "{:3.2f}".format(float(adjustment))
+        def adjust_character_likeness(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[4] else input_value)
+            return value, value
 
         @callback(
-            Output('voiceless-consonants-protection-ratio-number', 'children'),
-            Input(self.input_ids[6], 'value')
+            Output(self.input_ids[5], 'value'),
+            Output(self.id + '-voice-envelope-mix-ratio-number', 'value'),
+            Input(self.input_ids[5], 'value'),
+            Input(self.id + '-voice-envelope-mix-ratio-number', 'value')
         )
-        def adjust_voiceless_consonants_protection_ratio(adjustment):
-            if adjustment is None:
-                raise PreventUpdate
-            # cast to float first, then round to 2 decimal places
-            return "{:3.2f}".format(float(adjustment))
+        def adjust_voice_envelope_mix_ratio(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[5] else input_value)
+            return value, value
+
+        @callback(
+            Output(self.input_ids[6], 'value'),
+            Output(self.id + '-voiceless-consonants-protection-ratio-number', 'value'),
+            Input(self.input_ids[6], 'value'),
+            Input(self.id + '-voiceless-consonants-protection-ratio-number', 'value')
+        )
+        def adjust_voiceless_consonants_protection_ratio(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[6] else input_value)
+            return value, value
 
         @callback(
             Output(self.input_ids[3], 'disabled'),
+            Output(self.id + '-filter-radius-number', 'disabled'),
             Input(self.input_ids[2], 'value')
         )
         def disable_filter_radius(f0_extraction_method):
-            return not f0_extraction_method == 'harvest'
+            disabled = not f0_extraction_method == 'harvest'
+            return disabled, disabled
 
         @callback(
             Output(self.input_ids[4], 'disabled'),
+            Output(self.id + '-character-likeness-number', 'disabled'),
             Input(self.input_ids[0], 'value')
         )
         def disable_character_likeness(character):
             if character is None:
                 raise PreventUpdate
             index_paths = self.get_index_paths(character)
-            return len(index_paths) == 0
+            disabled = len(index_paths) == 0
+            return disabled, disabled
 
         @callback(
             [Output(self.id + '-license-note', 'children'),

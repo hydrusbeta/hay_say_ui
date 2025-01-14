@@ -111,29 +111,29 @@ class GPTSoVITSTab(AbstractTab):
                 html.Td(html.Label('Top K', htmlFor=self.input_ids[7]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(id=self.input_ids[7], type='range', min=1, max=90, step=1, value=15)),
-                    html.Td(html.Div('0', id=self.id + '-top_k-number')),
+                    html.Td(dcc.Input(id=self.id + '-top_k-number', type='number', min=1, max=90, step=1, value=15)),
                 ])
             ], title='Keeps only the top K logits with the highest probability in a strategy called "top-k filtering".'),
             html.Tr([
                 html.Td(html.Label('Top P', htmlFor=self.input_ids[8]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(id=self.input_ids[8], type='range', min=0, max=1, step=0.01, value=1)),
-                    html.Td(html.Div('0', id=self.id + '-top_p-number')),
+                    html.Td(dcc.Input(id=self.id + '-top_p-number', type='number', min=0, max=1, step=0.01, value=1)),
                 ])
             ], title='Prunes logits whose cumulative probabilities are higher than this value, a general strategy '
                      'called "nucleus filtering".'),
             html.Tr([
                 html.Td(html.Label('Temperature', htmlFor=self.input_ids[9]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[9], type='range', min=1e-5, max=1, step=0.01, value=1)),
-                    html.Td(html.Div('0', id=self.id + '-temperature-number')),
+                    html.Td(dcc.Input(id=self.input_ids[9], type='range', min=0, max=1.00, step=0.01, value=1.00)),
+                    html.Td(dcc.Input(id=self.id + '-temperature-number', type='number', min=0, max=1.00, step=0.01, value=1.00)),
                 ])
             ], title='Logits are multiplied by 1/Temperature. This is applied after "Top P" but *before* "Top K"'),
             html.Tr([
                 html.Td(html.Label('Speed', htmlFor=self.input_ids[10]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[10], type='range', min=0.1, max=5.0, step=0.1, value=1.0)),
-                    html.Td(html.Div('0', id=self.id + '-speed-number')),
+                    html.Td(dcc.Input(id=self.input_ids[10], type='range', min=0.01, max=5.00, step=0.01, value=1.00)),
+                    html.Td(dcc.Input(id=self.id + '-speed-number', type='number', min=0.01, max=5.00, step=0.01, value=1.00))
                 ])
             ], title='Modifies the speed of the generated audio, without affecting pitch. Higher number = faster.')
         ], className='spaced-table')
@@ -178,33 +178,54 @@ class GPTSoVITSTab(AbstractTab):
             # cast to float first, then round to 2 decimal places
             return "{:3.2f}".format(float(adjustment))
 
-        @callback(
-            Output(self.id + '-top_k-number', 'children'),
-            Input(self.input_ids[7], 'value')
-        )
-        def adjust_top_k(adjustment):
-            return do_adjustment(adjustment)
+        def do_adjustment_int(adjustment):
+            if adjustment is None:
+                raise PreventUpdate
+            return adjustment
 
         @callback(
-            Output(self.id + '-top_p-number', 'children'),
-            Input(self.input_ids[8], 'value')
+            Output(self.input_ids[7], 'value'),
+            Output(self.id + '-top_k-number', 'value'),
+            Input(self.input_ids[7], 'value'),
+            Input(self.id + '-top_k-number', 'value')
         )
-        def adjust_top_p(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_top_k(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment_int(slider_value if trigger_id == self.input_ids[7] else input_value)
+            return value, value
 
         @callback(
-            Output(self.id + '-temperature-number', 'children'),
-            Input(self.input_ids[9], 'value')
+            Output(self.input_ids[8], 'value'),
+            Output(self.id + '-top_p-number', 'value'),
+            Input(self.input_ids[8], 'value'),
+            Input(self.id + '-top_p-number', 'value')
         )
-        def adjust_temperature(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_top_p(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[8] else input_value)
+            return value, value
 
         @callback(
-            Output(self.id + '-speed-number', 'children'),
-            Input(self.input_ids[10], 'value')
+            Output(self.input_ids[9], 'value'),
+            Output(self.id + '-temperature-number', 'value'),
+            Input(self.input_ids[9], 'value'),
+            Input(self.id + '-temperature-number', 'value')
         )
-        def adjust_speed(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_temperature(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[9] else input_value)
+            return value, value
+
+        @callback(
+            Output(self.input_ids[10], 'value'),
+            Output(self.id + '-speed-number', 'value'),
+            Input(self.input_ids[10], 'value'),
+            Input(self.id + '-speed-number', 'value')
+        )
+        def adjust_speed(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[10] else input_value)
+            return value, value
 
         @callback(
             [Output(self.id + '-license-note', 'children'),

@@ -3,7 +3,7 @@ import os
 
 import dash_bootstrap_components as dbc
 import hay_say_common as hsc
-from dash import html, dcc, Input, Output, State, callback
+from dash import html, dcc, Input, Output, State, callback, ctx
 from dash.exceptions import PreventUpdate
 
 import architectures
@@ -105,7 +105,7 @@ class StyleTTS2Tab(AbstractTab):
                 html.Td(html.Label('Blend with Reference Timbre', htmlFor=self.input_ids[7]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(id=self.input_ids[7], type='range', min=0, max=1, step=0.1, value=0.9)),
-                    html.Td(html.Div('0', id=self.id + '-timbre-blend-number')),
+                    html.Td(dcc.Input(id=self.id + '-timbre-blend-number', type='number', min=0, max=1, step=0.1, value=0.9)),
                 ])
             ], title="The degree to which the generated audio mimics the timbre of the reference audio. Use higher "
                      "numbers to make the voice of the generated output sound more like the character in the reference "
@@ -115,7 +115,7 @@ class StyleTTS2Tab(AbstractTab):
                         className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(id=self.input_ids[8], type='range', min=0, max=1, step=0.1, value=0.9)),
-                    html.Td(html.Div('0', id=self.id + '-prosody-blend-number')),
+                    html.Td(dcc.Input(id=self.id + '-prosody-blend-number', type='number', min=0, max=1, step=0.1, value=0.9)),
                 ])
             ], title="The degree to which the generated audio mimics the prosody of the reference audio. Use higher "
                      "numbers to make the intonation, stress, rhythm, and speaking pace of the generated output sound "
@@ -125,7 +125,7 @@ class StyleTTS2Tab(AbstractTab):
                 html.Td(html.Label('Noise', htmlFor=self.input_ids[1]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(id=self.input_ids[1], type='range', min=0, max=3, step=0.1, value=0.3)),
-                    html.Td(html.Div('0', id=self.id + '-noise-number')),
+                    html.Td(dcc.Input(id=self.id + '-noise-number', type='number', min=0, max=3, step=0.1, value=0.3)),
                 ])
             ], title='Randomness applied to the style predictor. "Style" refers to various vocal qualities such as '
                      'prosody, lexical stress, formant transitions, and speaking rate.'),
@@ -141,7 +141,7 @@ class StyleTTS2Tab(AbstractTab):
                 html.Td(html.Label('Embedding Scale', htmlFor=self.input_ids[3]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(id=self.input_ids[3], type='range', min=0, max=5, step=0.1, value=1.5)),
-                    html.Td(html.Div('0', id=self.id + '-embedding-scale-number')),
+                    html.Td(dcc.Input(id=self.id + '-embedding-scale-number', type='number', min=0, max=5, step=0.1, value=1.5)),
                 ])
             ], title='Also called the "Classifier-free guidance (CFG) scale". Increasing this value causes the style '
                      'prediction to adhere more closely to the input text, causing it to sound more expressive/'
@@ -157,15 +157,15 @@ class StyleTTS2Tab(AbstractTab):
                 html.Td(html.Label('Style Blend', htmlFor=self.input_ids[5]), className='option-label'),
                 html.Tr([
                     html.Td(dcc.Input(id=self.input_ids[5], type='range', min=0, max=1, step=0.1, value=0.5)),
-                    html.Td(html.Div('0', id=self.id + '-style-blend-number')),
+                    html.Td(dcc.Input(id=self.id + '-style-blend-number', type='number', min=0, max=1, step=0.1, value=0.5)),
                 ])
             ], title='The degree to which the style of one sentence affects the style of the next sentence. This has '
                      'no effect if "Split Into Sentences" is disabled.'),
             html.Tr([
                 html.Td(html.Label('Speed', htmlFor=self.input_ids[11]), className='option-label'),
                 html.Tr([
-                    html.Td(dcc.Input(id=self.input_ids[11], type='range', min=0.1, max=5.0, step=0.1, value=1.0)),
-                    html.Td(html.Div('0', id=self.id + '-speed-number')),
+                    html.Td(dcc.Input(id=self.input_ids[11], type='range', min=0.1, max=5.0, step=0.01, value=1.0)),
+                    html.Td(dcc.Input(id=self.id + '-speed-number', type='number', min=0.1, max=5.0, step=0.01, value=1.0)),
                 ])
             ], title='Modifies the speed of the generated audio, without affecting pitch. Higher number = faster.'),
         ], className='spaced-table')
@@ -200,46 +200,70 @@ class StyleTTS2Tab(AbstractTab):
             return "{:3.2f}".format(float(adjustment))
 
         @callback(
-            Output(self.id + '-noise-number', 'children'),
-            Input(self.input_ids[1], 'value')
+            Output(self.input_ids[1], 'value'),
+            Output(self.id + '-noise-number', 'value'),
+            Input(self.input_ids[1], 'value'),
+            Input(self.id + '-noise-number', 'value')
         )
-        def adjust_noise(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_noise(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[1] else input_value)
+            return value, value
 
         @callback(
-            Output(self.id + '-embedding-scale-number', 'children'),
-            Input(self.input_ids[3], 'value')
+            Output(self.input_ids[3], 'value'),
+            Output(self.id + '-embedding-scale-number', 'value'),
+            Input(self.input_ids[3], 'value'),
+            Input(self.id + '-embedding-scale-number', 'value')
         )
-        def adjust_embedding_scale(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_embedding_scale(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[3] else input_value)
+            return value, value
 
         @callback(
-            Output(self.id + '-style-blend-number', 'children'),
-            Input(self.input_ids[5], 'value')
+            Output(self.input_ids[5], 'value'),
+            Output(self.id + '-style-blend-number', 'value'),
+            Input(self.input_ids[5], 'value'),
+            Input(self.id + '-style-blend-number', 'value')
         )
-        def adjust_style_blend(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_style_blend(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[5] else input_value)
+            return value, value
 
         @callback(
-            Output(self.id + '-timbre-blend-number', 'children'),
-            Input(self.input_ids[7], 'value')
+            Output(self.input_ids[7], 'value'),
+            Output(self.id + '-timbre-blend-number', 'value'),
+            Input(self.input_ids[7], 'value'),
+            Input(self.id + '-timbre-blend-number', 'value')
         )
-        def adjust_timbre_blend(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_timbre_blend(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[7] else input_value)
+            return value, value
 
         @callback(
-            Output(self.id + '-prosody-blend-number', 'children'),
-            Input(self.input_ids[8], 'value')
+            Output(self.input_ids[8], 'value'),
+            Output(self.id + '-prosody-blend-number', 'value'),
+            Input(self.input_ids[8], 'value'),
+            Input(self.id + '-prosody-blend-number', 'value')
         )
-        def adjust_prosody_blend(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_prosody_blend(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[8] else input_value)
+            return value, value
 
         @callback(
-            Output(self.id + '-speed-number', 'children'),
-            Input(self.input_ids[11], 'value')
+            Output(self.input_ids[11], 'value'),
+            Output(self.id + '-speed-number', 'value'),
+            Input(self.input_ids[11], 'value'),
+            Input(self.id + '-speed-number', 'value')
         )
-        def adjust_speed(adjustment):
-            return do_adjustment(adjustment)
+        def adjust_speed(slider_value, input_value):
+            trigger_id = ctx.triggered[0]["prop_id"].split(".")[0]
+            value = do_adjustment(slider_value if trigger_id == self.input_ids[11] else input_value)
+            return value, value
 
         @callback(
             Output(self.input_ids[5], 'disabled'),
@@ -250,17 +274,21 @@ class StyleTTS2Tab(AbstractTab):
 
         @callback(
             Output(self.input_ids[7], 'disabled'),
+            Output(self.id + '-timbre-blend-number', 'disabled'),
             Input(self.input_ids[6], 'value')
         )
         def disable_timbre_blend(reference_style_source):
-            return reference_style_source == DISABLE
+            disabled = reference_style_source == DISABLE
+            return disabled, disabled
 
         @callback(
             Output(self.input_ids[8], 'disabled'),
+            Output(self.id + '-prosody-blend-number', 'disabled'),
             Input(self.input_ids[6], 'value')
         )
         def disable_prosody_blend(reference_style_source):
-            return reference_style_source == DISABLE
+            disabled = reference_style_source == DISABLE
+            return disabled, disabled
 
         @callback(
             [Output(self.id+'-precomputed-style-dropdowns-1', 'is_open'),
