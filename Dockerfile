@@ -1,16 +1,16 @@
-# Use Nvidia Cuda container base, sync the timezone to GMT, and install necessary package dependencies.
-FROM python:3.10
+# Use python 3.10 container base, sync the timezone to GMT, and install necessary package dependencies.
+FROM python:3.10.16-bullseye
 ENV TZ=Etc/GMT
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# Install git
-RUN apt update && apt install --no-install-recommends -y git
+# Install git and vim (vim is useful for updating the announcements.json file in a live server setting)
+RUN apt update && apt install --no-install-recommends -y  \
+    git \
+    vim
 
 # Install the official Mega command line, for downloading models stored on the Mega service.
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
-    dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
-    wget https://mega.nz/linux/repo/Debian_11/amd64/megacmd-Debian_11_amd64.deb && \
-    apt install -y libc-ares2 libpcrecpp0v5 && \
+RUN wget https://mega.nz/linux/repo/Debian_11/amd64/megacmd-Debian_11_amd64.deb && \
+    apt install -y libc-ares2 libpcrecpp0v5 libicu67 libmediainfo0v5 libzen0v5 libmms0 libtinyxml2-8 libssl1.1 && \
     dpkg -i megacmd-Debian_11_amd64.deb
 
 # Create a limited user
