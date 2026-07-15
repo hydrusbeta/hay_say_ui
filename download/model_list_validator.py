@@ -119,6 +119,7 @@ def instantiate_tabs_for_testing():
     from architectures.rvc.RvcTab import RvcTab
     from architectures.styletts_2.StyleTTS2Tab import StyleTTS2Tab
     from architectures.gpt_so_vits.GPTSoVITSTab import GPTSoVITSTab
+    from architectures.moss_tts.MossTTSTab import MossTTSTab
     from architectures.sample_architecture.SampleArchitectureTab import SampleTab
     return [
         ControllableTalknetTab(None),
@@ -128,6 +129,7 @@ def instantiate_tabs_for_testing():
         RvcTab(None),
         StyleTTS2Tab(None),
         GPTSoVITSTab(None),
+        MossTTSTab(None),
         SampleTab(None)
     ]
 

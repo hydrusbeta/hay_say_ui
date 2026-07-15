@@ -600,7 +600,7 @@ def parse_arguments(arguments):
     parser.add_argument('--cache_implementation', default='file', choices=hsc.cache_implementation_map.keys(), help='Selects an implementation for the audio cache, e.g. saving them to files or to a database.')
     parser.add_argument('--migrate_models', action='store_true', default=False, help='Automatically move models from the model pack directories and custom model directory to the new models directory when Hay Say starts.')
     # todo: this is hardcoded. fix it.
-    parser.add_argument('--architectures', nargs='*', choices=['ControllableTalkNet', 'SoVitsSvc3', 'SoVitsSvc4', 'SoVitsSvc5', 'Rvc', 'StyleTTS2', 'GPTSoVITS'], default=['ControllableTalkNet', 'SoVitsSvc3', 'SoVitsSvc4', 'SoVitsSvc5', 'Rvc', 'StyleTTS2', 'GPTSoVITS'], help='Selects which architectures are shown in the Hay Say UI')
+    parser.add_argument('--architectures', nargs='*', choices=['ControllableTalkNet', 'SoVitsSvc3', 'SoVitsSvc4', 'SoVitsSvc5', 'Rvc', 'StyleTTS2', 'GPTSoVITS', 'MossTTS'], default=['ControllableTalkNet', 'SoVitsSvc3', 'SoVitsSvc4', 'SoVitsSvc5', 'Rvc', 'StyleTTS2', 'GPTSoVITS', 'MossTTS'], help='Selects which architectures are shown in the Hay Say UI')
     return parser.parse_args(arguments)
 
 

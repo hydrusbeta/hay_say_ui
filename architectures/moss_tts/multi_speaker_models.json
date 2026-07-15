@@ -1,0 +1,91 @@
+[
+    {
+        "Model Name": "ZDisket-1",
+        "Files": [
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/pytorch_model-00001-of-00002.bin",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/pytorch_model-00001-of-00002.bin",
+                "Size (bytes)": 4976699544
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/pytorch_model-00002-of-00002.bin",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/pytorch_model-00002-of-00002.bin",
+                "Size (bytes)": 987075671
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/moss_tts/ZDisket-1/embedded_styles.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/embedded_styles.json",
+                "Size (bytes)": 172
+            },
+            {
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/moss_tts/ZDisket-1/embedded_characters.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/embedded_characters.json",
+                "Size (bytes)": 707
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/config.json",
+                "Size (bytes)": 3796
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/configuration_moss_tts.py",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/configuration_moss_tts.py",
+                "Size (bytes)": 11494
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/processing_moss_tts.py",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/processing_moss_tts.py",
+                "Size (bytes)": 39225
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/audio_decoders.py",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/audio_decoders.py",
+                "Size (bytes)": 7269
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/tokenizer_config.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/tokenizer_config.json",
+                "Size (bytes)": 5501
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/tokenizer.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/tokenizer.json",
+                "Size (bytes)": 11422691
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/modeling_moss_tts.py",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/modeling_moss_tts.py",
+                "Size (bytes)": 76503
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/inference_utils.py",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/inference_utils.py",
+                "Size (bytes)": 5092
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/pytorch_model.bin.index.json",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/pytorch_model.bin.index.json",
+                "Size (bytes)": 61269
+            },
+            {
+                "URL": "https://huggingface.co/ZDisket/MOSS-TTS-PNY/resolve/main/moss_tts_local_clipper_checkpoint/chat_template.jinja",
+                "Download With": "HUGGINGFACE_HUB",
+                "Download As": "moss_tts_local_clipper_checkpoint/chat_template.jinja",
+                "Size (bytes)": 352
+            }
+        ]
+    }
+]

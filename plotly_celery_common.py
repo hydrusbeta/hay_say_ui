@@ -6,6 +6,7 @@ from hay_say_common.cache import Stage
 
 import hay_say_common as hsc
 from architectures.controllable_talknet.ControllableTalknetTab import ControllableTalknetTab
+from architectures.moss_tts.MossTTSTab import MossTTSTab
 from architectures.rvc.RvcTab import RvcTab
 from architectures.so_vits_svc_3.SoVitsSvc3Tab import SoVitsSvc3Tab
 from architectures.so_vits_svc_4.SoVitsSvc4Tab import SoVitsSvc4Tab
@@ -40,6 +41,8 @@ def architecture_map(cache=None, choices=None):
             _memoized_architecture_map['StyleTTS2'] = StyleTTS2Tab(cache)
         if 'GPTSoVITS' in choices:
             _memoized_architecture_map['GPTSoVITS'] = GPTSoVITSTab(cache)
+        if 'MossTTS' in choices:
+            _memoized_architecture_map['MossTTS'] = MossTTSTab(cache)
     return _memoized_architecture_map
 
 
