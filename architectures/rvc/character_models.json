@@ -1741,16 +1741,16 @@
         "Model Name": "Maud Pie",
         "Files": [
             {
-                "URL": "https://huggingface.co/KenDoStudio/MLP_Maud_Pie/resolve/main/MLP_Maud_Pie_Dataset.zip_e570_s9120.pth",
+                "URL": "https://huggingface.co/hydrusbeta/hay_say_reuploaded_models/resolve/main/rvc/Maud%20Pie/MLP_Maud_Pie_Dataset.zip_e570_s9120.pth",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "MLP_Maud_Pie_Dataset.zip_e570_s9120.pth",
                 "Size (bytes)": 55236748
             },
             {
-                "URL": "https://huggingface.co/KenDoStudio/MLP_Maud_Pie/resolve/main/README.md",
+                "URL": "https://huggingface.co/api/resolve-cache/models/hydrusbeta/hay_say_reuploaded_models/9f0f3e330dda2ab7175307cbf986cefe1503661b/rvc%2FMaud%20Pie%2FREADME.txt",
                 "Download With": "HUGGINGFACE_HUB",
                 "Download As": "README.md",
-                "Size (bytes)": 21
+                "Size (bytes)": 303
             }
         ],
         "License": "MIT"

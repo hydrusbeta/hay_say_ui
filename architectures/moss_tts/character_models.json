@@ -1,0 +1,561 @@
+[
+    {
+        "Model Name": "Apple Bloom",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Applejack",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Autumn Blaze",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Big McIntosh",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cadance",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Celestia",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cheerilee",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Chrysalis",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Cozy Glow",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Diamond Tiara",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Discord",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Fluttershy",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Goldie Delicious",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Granny Smith",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Luna",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Maud Pie",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Mrs. Cake",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pinkie Pie",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rainbow Dash",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Rarity",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scootaloo",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Shining Armor",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Spike",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Spitfire",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Starlight Glimmer",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sunburst",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sunset Shimmer",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sweetie Belle",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Thorax",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Tirek",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Trixie Lulamoon",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Twilight Sparkle",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Zecora",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Demo (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Engineer (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Heavy (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Medic (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Merasmus (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Pauling (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Scout (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Sniper (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Soldier (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    },
+    {
+        "Model Name": "Spy (TF2)",
+        "Multi-speaker Model Dependency": "ZDisket-1",
+        "Files": [
+        ],
+        "Symlinks": [
+            {
+                "As": "moss_tts_local_clipper_checkpoint",
+                "Target": "moss_tts_local_clipper_checkpoint"
+            }
+        ],
+        "License": "UNSPECIFIED"
+    }
+]
