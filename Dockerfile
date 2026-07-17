@@ -6,6 +6,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Install git and vim (vim is useful for updating the announcements.json file in a live server setting)
 RUN apt update && apt install --no-install-recommends -y  \
     git \
+    libfuse2 \
+    fuse \
     vim
 
 # Install the official Mega command line, for downloading models stored on the Mega service.
