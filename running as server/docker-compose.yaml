@@ -307,7 +307,7 @@ services:
     volumes:
       - models:/home/luna/hay_say/models
       - audio_cache:/home/luna/hay_say/audio_cache
-    command: ["/bin/sh", "-c", "/home/luna/hay_say/.venvs/moss_tts_server/bin/python /home/luna/hay_say/moss_tts/main.py --cache_implementation file --max-new-tokens 250"]
+    command: ["/bin/sh", "-c", "/home/luna/hay_say/.venvs/moss_tts_server/bin/python /home/luna/hay_say/moss_tts_server/main.py --cache_implementation file --max-new-tokens 250"]
     # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
     # Uncomment the lines below to enable it for Moss TTS if you wish.
     deploy:
