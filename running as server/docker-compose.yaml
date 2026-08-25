@@ -297,29 +297,64 @@ services:
 #              count: all
 #              capabilities: [gpu]
 
-# This container provides a web service interface to Moss TTS.
+# This container provides a web service interface to MossTTS. The model is not loaded until  an inference request is made, and the memory is released whenever inference is complete.
+#  moss_tts_server:
+#    depends_on:
+#      redis:
+#        condition: service_healthy
+#    image: hydrusbeta/hay_say:moss_tts_server
+#    working_dir: /home/luna/hay_say/moss_tts
+#    volumes:
+#      - models:/home/luna/hay_say/models
+#      - audio_cache:/home/luna/hay_say/audio_cache
+#    command: ["/bin/sh", "-c", "/home/luna/hay_say/.venvs/moss_tts_server/bin/python /home/luna/hay_say/moss_tts_server/main.py --cache_implementation file --max-new-tokens 250"]
+#    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
+#    # Uncomment the lines below to enable it for Moss TTS if you wish.
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        window: 30s
+##      resources:
+##        reservations:
+##          devices:
+##            - driver: nvidia
+##              count: all
+##              capabilities: [gpu]
+
+# This container provides a web service interface to Moss TTS and is meant to be used with moss_tts_triton, a Triton Inference Server backend to prevent memory usage from exploding with many, concurrent inference requests. It may also have better performance.
+# The downside to using this version of moss_tts_server is that the model is always loaded, so it will take a lot of memory and won't release it until Hay Say is terminated.
   moss_tts_server:
     depends_on:
       redis:
         condition: service_healthy
-    image: hydrusbeta/hay_say:moss_tts_server
-    working_dir: /home/luna/hay_say/moss_tts
+    image: hydrusbeta/hay_say:moss_tts_triton_client
+    working_dir: /home/luna/hay_say/moss_tts_server
     volumes:
       - models:/home/luna/hay_say/models
       - audio_cache:/home/luna/hay_say/audio_cache
-    command: ["/bin/sh", "-c", "/home/luna/hay_say/.venvs/moss_tts_server/bin/python /home/luna/hay_say/moss_tts_server/main.py --cache_implementation file --max-new-tokens 250"]
-    # GPU integration is disabled by default to prevent an error on machines that do not have a Cuda-capable GPU.
-    # Uncomment the lines below to enable it for Moss TTS if you wish.
+    command: ["python3", "/home/luna/hay_say/moss_tts_server/main.py", "--cache_implementation", "file", "--max-new-tokens", "250"]
+    networks:
+      - internal
     deploy:
       restart_policy:
         condition: on-failure
         window: 30s
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              count: all
-#              capabilities: [gpu]
+
+# This container contains the Moss TTS model, served with the Triton Inference Server.
+  moss_tts_triton:
+    depends_on:
+      redis:
+        condition: service_healthy
+    image: hydrusbeta/hay_say:moss_tts_triton_server
+    working_dir: /home/luna/hay_say/tritonserver
+    command: ["tritonserver", "--model-repository=/home/luna/hay_say/tritonserver/model_repository/"]
+    networks:
+      - internal
+    deploy:
+      restart_policy:
+        condition: on-failure
+        window: 30s
+
 
 volumes:
   models:
